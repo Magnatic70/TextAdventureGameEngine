@@ -5,7 +5,7 @@ Exits:north:Lobby,south:Garden
 Room:Lobby
 Locks:mansion_key
 Description:You are in a grand lobby with marble floors.
-Exits:south:Entrance,east:Library,west:Study,north:Kitchen
+Exits:south:Entrance,east:Library,west:Study,north:Kitchen,up:Landing
 
 Room:Library
 Description:The library is filled with dusty books.
@@ -36,6 +36,22 @@ Room:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
+
+Room:Landing
+Description:The landing gives access to a lot of doors.
+Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom
+
+Room:Master bedroom
+Description:A luxurious master bedroom with a large four poster bed
+Exits:south:Landing
+
+Room:Nursery
+Description:A creepy nursery full of spider webs
+Exits:west:Landing
+
+Room:Bathroom
+Description:A cozy bathroom with a bath filled with steaming water
+Exits:east:Landing
 
 FinalDestination:Cellar
 
