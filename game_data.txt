@@ -1,20 +1,29 @@
 Room:Entrance
 Description:You are at the entrance of an old mansion.
-Exits:north:Lobby,south:Study
+Exits:north:Lobby,south:Garden
 
 Room:Lobby
 Description:You are in a grand lobby with marble floors.
-Exits:south:Entrance,east:Library,west:Study
+Exits:south:Entrance,east:Library,west:Study,north:Kitchen
 
 Room:Library
 Description:The library is filled with dusty books.
 Exits:east:Study,west:Lobby
-Locks:Key
+Locks:key
 Puzzle:Solve the riddle to get the book.
 Riddle:What has keys but can't open locks?
 Answer:piano
 
 Room:Study
 Description:This small room contains a desk and a chair.
-Items:notebook
+Items:key
 Exits:north:Entrance,west:Lobby
+
+Room:Garden
+Description:A beautiful garden.
+Exits:north:Entrance
+
+Room:Kitchen
+Description:A large kitchen. A large cauldron is bubbling.
+Locks:book
+Exits:south:Lobby
