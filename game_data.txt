@@ -3,6 +3,7 @@ Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
 
 Room:Lobby
+Locks:mansion_key
 Description:You are in a grand lobby with marble floors.
 Exits:south:Entrance,east:Library,west:Study,north:Kitchen
 
@@ -22,6 +23,7 @@ Exits:east:Lobby
 Room:Garden
 Description:A beautiful garden.
 Exits:north:Entrance
+Items:purse
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
@@ -32,3 +34,6 @@ FinalDestination:Kitchen
 
 Item:book
 Contains:kitchen_key
+
+Item:purse
+Contains:mansion_key
