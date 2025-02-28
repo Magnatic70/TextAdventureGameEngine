@@ -50,7 +50,7 @@ Description:A creepy nursery full of spider webs
 Exits:west:Landing
 
 Room:Bathroom
-Description:A cozy bathroom with a bath filled with steaming water
+Description:A cozy bathroom. The bath is filled with steaming water
 Exits:east:Landing
 
 FinalDestination:Cellar
