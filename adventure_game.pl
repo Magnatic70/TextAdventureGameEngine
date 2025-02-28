@@ -104,7 +104,18 @@ sub start_game {
             # Check if the room is locked
             if ($game_data{$next_room}{locks}) {
                 my %inventory_items = map { $_ => 1 } @inventory;
-                unless (grep { $inventory_items{$_} } @{$game_data{$next_room}{locks}}) {
+                my $unlocked = 0;
+
+                foreach my $lock (@{ $game_data{$next_room}{locks} }) {
+                    if (exists $inventory_items{$lock}) {
+                        print "You used the $lock to unlock the door.\n";
+                        @inventory = grep { $_ ne $lock } @inventory; # Remove item from inventory
+                        $unlocked = 1;
+                        last;
+                    }
+                }
+
+                unless ($unlocked) {
                     print "The door to the $next_room is locked. You need a specific item.\n";
                     next; # Skip this exit
                 }
