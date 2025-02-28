@@ -48,4 +48,4 @@ Contains:mansion_key
 Item:cup_of_letter_soup
 Contains:some_letters
 
-Combine:some_digits,some_letters = keycode
+Combine:some_digits,some_letters=keycode
