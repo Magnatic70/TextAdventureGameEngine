@@ -115,6 +115,12 @@ sub start_game {
             my $enemy = $room_data->{enemy};
             print "You encounter a $enemy->{name}! You must fight it with the correct item to survive.\n";
 
+            # If inventory is empty, player loses immediately
+            if (!@inventory) {
+                print "You have no items in your inventory. The $enemy->{name} defeats you!\n";
+                last;  # End game loop
+            }
+
             chomp(my $action = <STDIN>);
             if ($action =~ /^fight (\w+) with (.*)$/) {
                 my ($verb, $item) = ($1, $2);
