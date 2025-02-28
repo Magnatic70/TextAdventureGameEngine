@@ -48,6 +48,10 @@ sub load_game_data {
         } elsif ($line =~ /^Contains:(.*)$/) {
             my @contains_items = split /,/, $1;
             $game_data{$current_item}{contains} = \@contains_items if @contains_items;
+        } elsif ($line =~ /^Combine:(.*)$/) {
+            my ($combine_from, $combine_to) = split /=/, $1;
+            my ($item1, $item2) = split /,/, $combine_from;
+            $game_data{combine}{$item1}{$item2} = $combine_to;
         }
     }
 
@@ -150,10 +154,22 @@ sub start_game {
             } else {
                 print "You don't have a $item in your inventory.\n";
             }
+        } elsif ($action =~ /^combine (.*) and (.*)$/) {
+            my ($item1, $item2) = ($1, $2);
+            if (grep { $_ eq $item1 || $_ eq $item2 } @inventory) {
+                if (exists $game_data{combine}{$item1}{$item2}) {
+                    push @inventory, $game_data{combine}{$item1}{$item2};
+                    print "You combined the $item1 and $item2 to create a new item: $game_data{combine}{$item1}{$item2}.\n";
+                } else {
+                    print "These items cannot be combined.\n";
+                }
+            } else {
+                print "You don't have both items in your inventory.\n";
+            }
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action. Try moving, taking an item, or examining something.\n";
+            print "I don't understand that action. Try moving, taking an item, examining something, or combining items.\n";
         }
 
         # Simple inventory display
