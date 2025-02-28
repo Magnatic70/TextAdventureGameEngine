@@ -51,7 +51,6 @@ Exits:west:Landing
 
 Room:Bathroom
 Description:A cozy bathroom. The bath is filled with steaming water
-Items:bath
 SearchableItems:bath:rubber_duck
 Exits:east:Landing
 
