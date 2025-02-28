@@ -82,6 +82,7 @@ sub load_game_data {
 sub start_game {
     my($gameFile)=$ARGV[0].'.txt';
     if(!(-e $gameFile)){
+        print "Game not found, using default\n";
         $gameFile='game_data.txt';
     }
     my %game_data = load_game_data($gameFile);
