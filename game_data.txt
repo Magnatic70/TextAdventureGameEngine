@@ -1,14 +1,17 @@
-Room:Entrance
+RoomID:Entrance
+Name:Entrance Hall
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
 Items:sword
 
-Room:Lobby
+RoomID:Lobby
+Name:Lobby
 Locks:mansion_key
 Description:You are in a grand lobby with marble floors.
 Exits:south:Entrance,east:Library,west:Study,north:Kitchen,up:Landing
 
-Room:Library
+RoomID:Library
+Name:Library
 Description:The library is filled with dusty books.
 Exits:west:Lobby
 Locks:key
@@ -17,67 +20,80 @@ Riddle:What has keys but can't open locks?
 Answer:piano
 RewardItem:book
 
-Room:Study
+RoomID:Study
+Name:Study
 Description:This small room contains a desk and a chair.
 Items:key
 Exits:east:Lobby
 
-Room:Garden
+RoomID:Garden
+Name:Garden
 Description:A beautiful peaceful garden.
 Exits:north:Entrance
 Items:purse
 Enemy:Knight:sword
 DefeatDescription:You violently swing the sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
 
-Room:Kitchen
+RoomID:Kitchen
+Name:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
 Items:cup_of_letter_soup
 Locks:kitchen_key
 Exits:north:Cellar,south:Lobby
 
-Room:Cellar
+RoomID:Cellar
+Name:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
 Enemy:Troll:rubber_duck_filled_with_hot_soup
 DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the Trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
 
-Room:Landing
+RoomID:Landing
+Name:Landing
 Description:The landing gives access to a lot of closed doors.
 Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 
-Room:Master bedroom
+RoomID:Master bedroom
+Name:Master Bedroom
 Description:A luxurious master bedroom with a large four poster bed
 Exits:south:Landing
 
-Room:Nursery
+RoomID:Nursery
+Name:Nursery
 Description:A creepy nursery full of spider webs
 Exits:west:Landing
 
-Room:Bathroom
+RoomID:Bathroom
+Name:Bathroom
 Description:A cozy bathroom. The bath is filled with steaming water and a thick layer of bubbles
 SearchableItems:bath:rubber_duck
 Exits:east:Landing,bathe:Bath
 
-Room:Bath
+RoomID:Bath
+Name:Bath
 Description:You undress and soak in the hot water and feel yourself relax while you play with a rubber duck.
 Items:rubber_duck
 Exits:stand_up:Bathroom2
 
-Room:Bathroom2
+RoomID:Bathroom2
+Name:Bathroom 2
 Description:You get out of the bath, but you can't find a towel. To your dismay, your clothes have vanished.
 Exits:east:Landing2
 
-Room:Landing2
+RoomID:Landing2
+Name:Landing 2
 Description:You now realize that it is freezing cold while your skin is slowly drying. The door to the master bedroom is slightly ajar.
 Exits:down:Lobby,north:Master bedroom2,east:Nursery,west:Bathroom,up:Attic
 
-Room:Master bedroom2
+RoomID:Master bedroom2
+Name:Master Bedroom 2
 Description:A luxurious master bedroom with a large four poster bed. Your clothes lie neatly folded on the bed.
 Items:your_clothes
 Exits:south:Landing
 
-Room:Attic
+RoomID:Attic
+Name:Attic
 Description:The attic is cluttered with a lot of items.
 SearchableItems:attic:large_trunk
 Exits:down:Landing

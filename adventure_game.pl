@@ -9,17 +9,19 @@ sub load_game_data {
     open my $fh, '<', $filename or die "Cannot open '$filename': $!";
     
     my %game_data;
-    my ($current_room, $current_item);  # Temporary variables to hold the current room and item names
+    my ($current_room_id, $current_item);  # Temporary variables to hold the current room ID and item names
 
     while (my $line = <$fh>) {
         chomp($line);
         next if $line =~ /^\s*$/;  # Skip empty lines
 
-        if ($line =~ /^Room:(.*)$/) {
-            $current_room = $1;
-            $game_data{$current_room} = {};
+        if ($line =~ /^RoomID:(.*)$/) {
+            $current_room_id = $1;
+            $game_data{$current_room_id} = {};
+        } elsif ($line =~ /^Name:(.*)$/) {
+            $game_data{$current_room_id}{name} = $1;
         } elsif ($line =~ /^Description:(.*)$/) {
-            $game_data{$current_room}{description} = $1;
+            $game_data{$current_room_id}{description} = $1;
         } elsif ($line =~ /^Exits:(.*)$/) {
             my @exits = split /,/, $1;
             my %exit_map;
@@ -28,18 +30,18 @@ sub load_game_data {
                     $exit_map{$1} = $2;
                 }
             }
-            $game_data{$current_room}{exits} = \%exit_map;
+            $game_data{$current_room_id}{exits} = \%exit_map;
         } elsif ($line =~ /^Items:(.*)$/) {
             my @items = split /,/, $1;
-            $game_data{$current_room}{items} = \@items if @items;
+            $game_data{$current_room_id}{items} = \@items if @items;
         } elsif ($line =~ /^Locks:(.*)$/) {
-            $game_data{$current_room}{locks} = [split /,/, $1];
+            $game_data{$current_room_id}{locks} = [split /,/, $1];
         } elsif ($line =~ /^Puzzle:(.*)$/) {
-            $game_data{$current_room}{puzzle} = $1;
+            $game_data{$current_room_id}{puzzle} = $1;
         } elsif ($line =~ /^Riddle:(.*)$/) {
-            $game_data{$current_room}{riddle} = $1;
+            $game_data{$current_room_id}{riddle} = $1;
         } elsif ($line =~ /^Answer:(.*)$/) {
-            $game_data{$current_room}{answer} = $1;
+            $game_data{$current_room_id}{answer} = $1;
         } elsif ($line =~ /^FinalDestination:(.*)$/) {
             $game_data{final_destination} = $1;
         } elsif ($line =~ /^Item:(.*)$/) {
@@ -60,12 +62,12 @@ sub load_game_data {
                     $searchable_map{$1} = $2;
                 }
             }
-            $game_data{$current_room}{searchable_items} = \%searchable_map;
+            $game_data{$current_room_id}{searchable_items} = \%searchable_map;
         } elsif ($line =~ /^Enemy:(.*)$/) {
             my ($enemy, $required_item) = split /:/, $1;
-            $game_data{$current_room}{enemy} = { name => $enemy, required_item => $required_item };
+            $game_data{$current_room_id}{enemy} = { name => $enemy, required_item => $required_item };
         } elsif ($line =~ /^DefeatDescription:(.*)$/) {
-            $game_data{$current_room}{defeat_description} = $1 if exists $game_data{$current_room}{enemy};
+            $game_data{$current_room_id}{defeat_description} = $1 if exists $game_data{$current_room_id}{enemy};
         }
     }
 
@@ -78,16 +80,16 @@ sub start_game {
     my %game_data = load_game_data('game_data.txt');
 
     # Initial setup
-    my $current_room = 'Entrance';
+    my $current_room_id = 'Entrance';
     my @inventory;
 
     print "Welcome to the Adventure Game!\n";
     
     while (1) {
-        my $room_data = $game_data{$current_room};
+        my $room_data = $game_data{$current_room_id};
         
-        # Display room description and available actions
-        print "\n--- Location: $current_room ---\n";
+        # Display room name and description
+        print "\n--- Location: ", $room_data->{name}, " ---\n";
         print "$room_data->{description}\n";
 
         if ($room_data->{exits}) {
@@ -102,7 +104,7 @@ sub start_game {
         if (exists $room_data->{puzzle}) {
             print "$room_data->{riddle}\n";
             chomp(my $answer = <STDIN>);
-            if ($answer eq $game_data{$current_room}{answer}) {
+            if ($answer eq $game_data{$current_room_id}{answer}) {
                 push @inventory, 'book';
                 print "You solved the puzzle and found a book!\n";
                 delete $room_data->{puzzle};  # Remove puzzle after solving
@@ -147,9 +149,9 @@ sub start_game {
         }
 
         # Check if current room is the final destination
-        if ($current_room eq $game_data{final_destination}) {
-            print "\nCongratulations! You've reached the final destination: $current_room!\n";
-            last;  # Exit the game loop
+        if ($current_room_id eq $game_data{final_destination}) {
+            print "\nCongratulations! You've reached the final destination: ", $room_data->{name}, "!\n";
+            last;  # Exit game loop
         }
 
         # Prompt for user action
@@ -157,14 +159,14 @@ sub start_game {
         chomp(my $action = <STDIN>);
         
         if (exists $room_data->{exits} && exists $room_data->{exits}{$action}) {
-            my $next_room = $room_data->{exits}{$action};
+            my $next_room_id = $room_data->{exits}{$action};
             
             # Check if the room is locked
-            if ($game_data{$next_room}{locks}) {
+            if ($game_data{$next_room_id}{locks}) {
                 my %inventory_items = map { $_ => 1 } @inventory;
                 my $unlocked = 0;
 
-                foreach my $lock (@{ $game_data{$next_room}{locks} }) {
+                foreach my $lock (@{ $game_data{$next_room_id}{locks} }) {
                     if (exists $inventory_items{$lock}) {
                         print "You used the $lock to unlock the door.\n";
                         $unlocked = 1;
@@ -173,12 +175,12 @@ sub start_game {
                 }
 
                 unless ($unlocked) {
-                    print "The door to the $next_room is locked. You need a specific item.\n";
+                    print "The door to ", $game_data{$next_room_id}{name}, " is locked. You need a specific item.\n";
                     next; # Skip this exit
                 }
             }
             
-            $current_room = $next_room;
+            $current_room_id = $next_room_id;
         } elsif ($action =~ /^take (.*)$/) {
             my $item = $1;
             if (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
@@ -206,7 +208,7 @@ sub start_game {
             my $target = $1;
             if (exists $room_data->{searchable_items} && exists $room_data->{searchable_items}{$target}) {
                 push @inventory, $room_data->{searchable_items}{$target};
-                print "You found a $room_data->{searchable_items}{$target} in the $target.\n";
+                print "You found a ", $room_data->{searchable_items}{$target}, " in the $target.\n";
             } else {
                 print "There is nothing to find here.\n";
             }
@@ -216,11 +218,11 @@ sub start_game {
                 if (exists $game_data{combine}{$item1}{$item2} || exists $game_data{combine}{$item2}{$item1}) {
                     if(exists $game_data{combine}{$item1}{$item2}){
                         push @inventory, $game_data{combine}{$item1}{$item2};
-                        print "You combined the $item1 and $item2 to create a new item: $game_data{combine}{$item1}{$item2}.\n";
+                        print "You combined the $item1 and $item2 to create a new item: ", $game_data{combine}{$item1}{$item2}, ".\n";
                     }
                     else{
                         push @inventory, $game_data{combine}{$item2}{$item1};
-                    print "You combined the $item2 and $item1 to create a new item: $game_data{combine}{$item2}{$item1}.\n";
+                        print "You combined the $item2 and $item1 to create a new item: ", $game_data{combine}{$item2}{$item1}, ".\n";
                     }
                     # Remove the original items from inventory                                        
                     @inventory = grep { $_ ne $item1 && $_ ne $item2 } @inventory;    
