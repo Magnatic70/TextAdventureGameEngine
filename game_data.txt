@@ -1,7 +1,6 @@
 Room:Entrance
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
-Items:sword
 
 Room:Lobby
 Locks:mansion_key
@@ -9,7 +8,6 @@ Description:You are in a grand lobby with marble floors.
 Exits:south:Entrance,east:Library,west:Study,north:Kitchen,up:Landing
 
 Room:Library
-Enemy:goblin:sword
 Description:The library is filled with dusty books.
 Exits:west:Lobby
 Locks:key
@@ -27,7 +25,6 @@ Room:Garden
 Description:A beautiful garden.
 Exits:north:Entrance
 Items:purse
-Enemy:Knight:sword
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
@@ -39,7 +36,7 @@ Room:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
-Enemy:Troll:rubber_duck_with_soup
+Enemy:Troll:rubber_duck_filled_with_soup
 
 Room:Landing
 Description:The landing gives access to a lot of doors.
@@ -75,6 +72,7 @@ Item:purse
 Contains:mansion_key
 
 Item:cup_of_letter_soup
-Contains:some_letters,cup_of_soup
+Contains:some_letters,cup_of_hot_soup
 
 Combine:some_digits,some_letters=keycode
+Combine:rubber_duck,cup_of_hot_soup=rubber_duck_filled_with_hot_soup
