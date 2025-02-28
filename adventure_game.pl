@@ -61,6 +61,9 @@ sub load_game_data {
                 }
             }
             $game_data{$current_room}{searchable_items} = \%searchable_map;
+        } elsif ($line =~ /^Enemy:(.*)$/) {
+            my ($enemy, $required_item) = split /:/, $1;
+            $game_data{$current_room}{enemy} = { name => $enemy, required_item => $required_item };
         }
     }
 
@@ -105,6 +108,31 @@ sub start_game {
                 print "That is not correct. Try again.\n";
                 next;
             }
+        }
+
+        # Check for enemies
+        if (exists $room_data->{enemy}) {
+            my $enemy = $room_data->{enemy};
+            print "You encounter a $enemy->{name}! You must fight it with the correct item to survive.\n";
+
+            chomp(my $action = <STDIN>);
+            if ($action =~ /^fight (\w+) with (.*)$/) {
+                my ($verb, $item) = ($1, $2);
+                if (grep { $_ eq $item } @inventory) {
+                    if ($item eq $enemy->{required_item}) {
+                        print "You defeated the $enemy->{name}!\n";
+                        delete $room_data->{enemy};  # Remove enemy after defeating
+                    } else {
+                        print "That item is not effective against the $enemy->{name}. You have died.\n";
+                        last;  # End game loop
+                    }
+                } else {
+                    print "You don't have a $item in your inventory.\n";
+                }
+            } else {
+                print "I don't understand that action. Try fighting with an item from your inventory.\n";
+            }
+            next;
         }
 
         # Check if current room is the final destination

@@ -8,6 +8,7 @@ Description:You are in a grand lobby with marble floors.
 Exits:south:Entrance,east:Library,west:Study,north:Kitchen,up:Landing
 
 Room:Library
+Enemy:goblin:sword
 Description:The library is filled with dusty books.
 Exits:west:Lobby
 Locks:key
