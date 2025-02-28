@@ -1,6 +1,7 @@
 Room:Entrance
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
+Items:sword
 
 Room:Lobby
 Locks:mansion_key
@@ -26,6 +27,7 @@ Room:Garden
 Description:A beautiful garden.
 Exits:north:Entrance
 Items:purse
+Enemy:Knight:sword
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
@@ -37,6 +39,7 @@ Room:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
+Enemy:Troll:rubber_duck_with_soup
 
 Room:Landing
 Description:The landing gives access to a lot of doors.
