@@ -39,7 +39,7 @@ Locks:keycode
 
 Room:Landing
 Description:The landing gives access to a lot of doors.
-Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom
+Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 
 Room:Master bedroom
 Description:A luxurious master bedroom with a large four poster bed
@@ -53,6 +53,14 @@ Room:Bathroom
 Description:A cozy bathroom. The bath is filled with steaming water and a thick layer of bubbles
 SearchableItems:bath:rubber_duck
 Exits:east:Landing
+
+Room:Attic
+Description:The attic is cluttered with a lot of items.
+SearchableItems:attic:large_trunk
+Exits:down:Landing
+
+Item:large_trunk
+Contains:axe,sword
 
 FinalDestination:Cellar
 
