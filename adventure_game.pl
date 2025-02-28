@@ -21,7 +21,14 @@ sub load_game_data {
         } elsif ($line =~ /^Description:(.*)$/) {
             $game_data{$current_room}{description} = $1;
         } elsif ($line =~ /^Exits:(.*)$/) {
-            $game_data{$current_room}{exits} = [split /,/, $1];
+            my @exits = split /,/, $1;
+            my %exit_map;
+            foreach my $exit (@exits) {
+                if ($exit =~ /^(.*):(.*)$/) {
+                    $exit_map{$1} = $2;
+                }
+            }
+            $game_data{$current_room}{exits} = \%exit_map;
         } elsif ($line =~ /^Items:(.*)$/) {
             my @items = split /,/, $1;
             $game_data{$current_room}{items} = \@items if @items;
@@ -55,8 +62,8 @@ sub start_game {
         print "$room_data->{description}\n";
 
         # Display available exits and items
-        if (@{ $room_data->{exits} }) {
-            print "Exits: ", join(", ", @{ $room_data->{exits} }), "\n";
+        if ($room_data->{exits}) {
+            print "Exits: ", join(", ", keys %{$room_data->{exits}}), "\n";
         }
         
         if (exists $room_data->{items}) {
@@ -80,30 +87,19 @@ sub start_game {
         # Handle user input for movement or interaction
         chomp(my $action = <STDIN>);
         
-        if ($action =~ /^(north|south|east|west)$/) {
-            my @valid_exits = @{ $room_data->{exits} };
-            if (grep { $_ eq $action } @valid_exits) {
-                # Determine the new room dynamically based on exits
-                foreach my $exit_dir (@{$room_data->{exits}}) {
-                    for my $room_name (keys %game_data) {
-                        if (exists $game_data{$room_name}{exits} && grep { $_ eq $exit_dir } @{$game_data{$room_name}{exits}}) {
-                            # Check if the room is locked
-                            my $next_room = $room_name;
-                            if ($game_data{$next_room}{locks}) {
-                                my %inventory_items = map { $_ => 1 } @inventory;
-                                unless (grep { $inventory_items{$_} } @{$game_data{$next_room}{locks}}) {
-                                    print "The door to the $next_room is locked. You need a specific item.\n";
-                                    next; # Skip this exit
-                                }
-                            }
-                            
-                            $current_room = $next_room;
-                        }
-                    }
+        if (exists $room_data->{exits} && exists $room_data->{exits}{$action}) {
+            my $next_room = $room_data->{exits}{$action};
+            
+            # Check if the room is locked
+            if ($game_data{$next_room}{locks}) {
+                my %inventory_items = map { $_ => 1 } @inventory;
+                unless (grep { $inventory_items{$_} } @{$game_data{$next_room}{locks}}) {
+                    print "The door to the $next_room is locked. You need a specific item.\n";
+                    next; # Skip this exit
                 }
-            } else {
-                print "You can't move in that direction.\n";
             }
+            
+            $current_room = $next_room;
         } elsif ($action =~ /^take (.*)$/) {
             my $item = $1;
             if (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
