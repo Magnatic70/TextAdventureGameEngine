@@ -61,9 +61,11 @@ sub start_game {
     
     while (1) {
         my $room_data = $game_data{$current_room};
+        
+        # Display room description and available actions
+        print "\n--- Room: $current_room ---\n";
         print "$room_data->{description}\n";
 
-        # Display available exits and items
         if ($room_data->{exits}) {
             print "Exits: ", join(", ", keys %{$room_data->{exits}}), "\n";
         }
@@ -88,11 +90,12 @@ sub start_game {
 
         # Check if current room is the final destination
         if ($current_room eq $game_data{final_destination}) {
-            print "Congratulations! You've reached the final destination: $current_room!\n";
+            print "\nCongratulations! You've reached the final destination: $current_room!\n";
             last;  # Exit the game loop
         }
 
-        # Handle user input for movement or interaction
+        # Prompt for user action
+        print "\nWhat do you want to do? ";
         chomp(my $action = <STDIN>);
         
         if (exists $room_data->{exits} && exists $room_data->{exits}{$action}) {
@@ -125,11 +128,11 @@ sub start_game {
 
         # Simple inventory display
         if (@inventory) {
-            print "Inventory: ", join(", ", @inventory), "\n";
+            print "\nInventory: ", join(", ", @inventory), "\n";
         }
     }
 
-    print "Thanks for playing!\n";
+    print "\nThanks for playing!\n";
 }
 
 # Start the game
