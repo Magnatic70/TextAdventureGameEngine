@@ -36,7 +36,8 @@ Room:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
-Enemy:Troll:rubber_duck_filled_with_soup
+Enemy:Troll:rubber_duck_filled_with_hot_soup
+DefeatDescription:The rubber duck filled with hot soup scalds the Troll, causing it to flee in pain.
 
 Room:Landing
 Description:The landing gives access to a lot of doors.
