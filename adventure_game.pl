@@ -64,6 +64,8 @@ sub load_game_data {
         } elsif ($line =~ /^Enemy:(.*)$/) {
             my ($enemy, $required_item) = split /:/, $1;
             $game_data{$current_room}{enemy} = { name => $enemy, required_item => $required_item };
+        } elsif ($line =~ /^DefeatDescription:(.*)$/) {
+            $game_data{$current_room}{defeat_description} = $1 if exists $game_data{$current_room}{enemy};
         }
     }
 
@@ -127,6 +129,9 @@ sub start_game {
                 if (grep { $_ eq $item } @inventory) {
                     if ($item eq $enemy->{required_item}) {
                         print "You defeated the $enemy->{name}!\n";
+                        if (exists $room_data->{defeat_description}) {
+                            print "$room_data->{defeat_description}\n";
+                        }
                         delete $room_data->{enemy};  # Remove enemy after defeating
                     } else {
                         print "That item is not effective against the $enemy->{name}. You have died.\n";
