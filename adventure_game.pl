@@ -84,6 +84,12 @@ sub start_game {
             }
         }
 
+        # Check if current room is the final destination
+        if ($current_room eq 'Kitchen') {
+            print "Congratulations! You've reached the final destination: Kitchen!\n";
+            last;  # Exit the game loop
+        }
+
         # Handle user input for movement or interaction
         chomp(my $action = <STDIN>);
         
