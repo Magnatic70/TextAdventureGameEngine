@@ -111,7 +111,7 @@ Name:Bell tower
 Description:A large bell is hanging from the ceiling.
 SearchableItems:bell:feather
 Items:fly_swatter
-Exits:down:Attic 
+Exits:down:Attic
 
 Item:large_trunk
 Contains:axe
