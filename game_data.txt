@@ -1,6 +1,7 @@
 Room:Entrance
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
+Items:sword
 
 Room:Lobby
 Locks:mansion_key
@@ -25,6 +26,8 @@ Room:Garden
 Description:A beautiful garden.
 Exits:north:Entrance
 Items:purse
+Enemy:Knight:sword
+DefeatDescription:You violently swing the sword and decaptitate the knight. The head rolls onto the floor and the body slowly sinks to the floor with blood squirting from its neck.
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
@@ -37,7 +40,7 @@ Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
 Enemy:Troll:rubber_duck_filled_with_hot_soup
-DefeatDescription:The rubber duck filled with hot soup scalds the Troll, causing it to flee in pain.
+DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and scalds the Troll, causing it to flee in pain.
 
 Room:Landing
 Description:The landing gives access to a lot of doors.
