@@ -27,3 +27,5 @@ Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
 Locks:book
 Exits:south:Lobby
+
+FinalDestination:Kitchen
