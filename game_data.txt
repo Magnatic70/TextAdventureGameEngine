@@ -23,11 +23,11 @@ Items:key
 Exits:east:Lobby
 
 Room:Garden
-Description:A beautiful garden.
+Description:A beautiful peaceful garden.
 Exits:north:Entrance
 Items:purse
 Enemy:Knight:sword
-DefeatDescription:You violently swing the sword and decaptitate the knight. The head rolls onto the floor and the body slowly sinks to the floor while blood squirts from its neck.
+DefeatDescription:You violently swing the sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
@@ -40,7 +40,7 @@ Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
 Enemy:Troll:rubber_duck_filled_with_hot_soup
-DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and scalds the Troll, causing it to flee in pain.
+DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the Trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
 
 Room:Landing
 Description:The landing gives access to a lot of doors.
