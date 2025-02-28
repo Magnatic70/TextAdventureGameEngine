@@ -65,7 +65,7 @@ SearchableItems:attic:large_trunk
 Exits:down:Landing
 
 Item:large_trunk
-Contains:axe,sword
+Contains:axe
 
 FinalDestination:Cellar
 

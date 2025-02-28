@@ -87,7 +87,7 @@ sub start_game {
         my $room_data = $game_data{$current_room};
         
         # Display room description and available actions
-        print "\n--- Room: $current_room ---\n";
+        print "\n--- Location: $current_room ---\n";
         print "$room_data->{description}\n";
 
         if ($room_data->{exits}) {
