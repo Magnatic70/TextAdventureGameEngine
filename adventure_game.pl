@@ -17,6 +17,9 @@ sub load_game_data {
 
         if ($line =~ /^RoomID:(.*)$/) {
             $current_room_id = $1;
+            if(!$game_data{first_room_id}){
+                $game_data{first_room_id}=$current_room_id;
+            }
             $game_data{$current_room_id} = {};
         } elsif ($line =~ /^Name:(.*)$/) {
             $game_data{$current_room_id}{name} = $1;
@@ -77,10 +80,14 @@ sub load_game_data {
 
 # Main game loop
 sub start_game {
-    my %game_data = load_game_data('game_data.txt');
+    my($gameFile)=$ARGV[0].'.txt';
+    if(!(-e $gameFile)){
+        $gameFile='game_data.txt';
+    }
+    my %game_data = load_game_data($gameFile);
 
     # Initial setup
-    my $current_room_id = 'Entrance';
+    my $current_room_id = $game_data{first_room_id};
     my @inventory;
 
     print "Welcome to the Adventure Game!\n";
