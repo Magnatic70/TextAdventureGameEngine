@@ -77,18 +77,18 @@ Items:rubber_duck
 Exits:stand_up:Bathroom2
 
 RoomID:Bathroom2
-Name:Bathroom 2
+Name:Bathroom
 Description:You get out of the bath, but you can't find a towel. To your dismay, your clothes have vanished.
 Exits:east:Landing2
 
 RoomID:Landing2
-Name:Landing 2
+Name:Landing
 Description:You now realize that it is freezing cold while your skin is slowly drying. The door to the master bedroom is slightly ajar.
 Exits:down:Lobby,north:Master bedroom2,east:Nursery,west:Bathroom,up:Attic
 
 RoomID:Master bedroom2
-Name:Master Bedroom 2
-Description:A luxurious master bedroom with a large four poster bed. Your clothes lie neatly folded on the bed.
+Name:Master Bedroom
+Description:A luxurious master bedroom with a large four poster bed.
 Items:your_clothes
 Exits:south:Landing
 
