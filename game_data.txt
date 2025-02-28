@@ -35,6 +35,7 @@ Exits:north:Cellar,south:Lobby
 Room:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
+Locks:keycode
 
 FinalDestination:Cellar
 
