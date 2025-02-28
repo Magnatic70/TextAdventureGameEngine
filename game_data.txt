@@ -63,7 +63,7 @@ RoomID:Nursery
 Name:Nursery
 Description:A creepy nursery full of spider webs
 Enemy:Spider:fly_swatter
-DefeatDescription:You whack the spider with the fly swatter and the spider desintegrates into large chunks. One chunck flies out the door.
+DefeatDescription:You whack the spider with the fly swatter and the spider desintegrates into large chunks. One chunck flies right past you out the door.
 Exits:west:Landing3
 
 RoomID:Landing3
