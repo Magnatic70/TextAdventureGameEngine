@@ -166,6 +166,8 @@ sub start_game {
                         push @inventory, $game_data{combine}{$item2}{$item1};
                     print "You combined the $item2 and $item1 to create a new item: $game_data{combine}{$item2}{$item1}.\n";
                     }
+                    # Remove the original items from inventory                                        
+                    @inventory = grep { $_ ne $item1 && $_ ne $item2 } @inventory;    
                 } else {
                     print "These items cannot be combined.\n";
                 }
