@@ -8,7 +8,7 @@ Exits:south:Entrance,east:Library,west:Study,north:Kitchen
 
 Room:Library
 Description:The library is filled with dusty books.
-Exits:east:Study,west:Lobby
+Exits:west:Lobby
 Locks:key
 Puzzle:Solve the riddle to get the book.
 Riddle:What has keys but can't open locks?
@@ -17,7 +17,7 @@ Answer:piano
 Room:Study
 Description:This small room contains a desk and a chair.
 Items:key
-Exits:north:Entrance,west:Lobby
+Exits:west:Lobby
 
 Room:Garden
 Description:A beautiful garden.
