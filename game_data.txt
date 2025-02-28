@@ -50,7 +50,7 @@ Description:A creepy nursery full of spider webs
 Exits:west:Landing
 
 Room:Bathroom
-Description:A cozy bathroom. The bath is filled with steaming water
+Description:A cozy bathroom. The bath is filled with steaming water and a thick layer of bubbles
 SearchableItems:bath:rubber_duck
 Exits:east:Landing
 
@@ -63,6 +63,6 @@ Item:purse
 Contains:mansion_key
 
 Item:cup_of_letter_soup
-Contains:some_letters
+Contains:some_letters,cup_of_soup
 
 Combine:some_digits,some_letters=keycode
