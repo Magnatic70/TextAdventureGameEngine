@@ -38,3 +38,5 @@ Contains:kitchen_key
 
 Item:purse
 Contains:mansion_key
+
+Combine:key,book = keyring
