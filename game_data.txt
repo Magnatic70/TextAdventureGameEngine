@@ -27,7 +27,7 @@ Description:A beautiful garden.
 Exits:north:Entrance
 Items:purse
 Enemy:Knight:sword
-DefeatDescription:You violently swing the sword and decaptitate the knight. The head rolls onto the floor and the body slowly sinks to the floor with blood squirting from its neck.
+DefeatDescription:You violently swing the sword and decaptitate the knight. The head rolls onto the floor and the body slowly sinks to the floor while blood squirts from its neck.
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
