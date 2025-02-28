@@ -40,8 +40,6 @@ sub load_game_data {
             $game_data{$current_room}{riddle} = $1;
         } elsif ($line =~ /^Answer:(.*)$/) {
             $game_data{$current_room}{answer} = $1;
-        } elsif ($line =~ /^RewardItem:(.*)$/) {
-            $game_data{$current_room}{reward_item} = $1;
         } elsif ($line =~ /^FinalDestination:(.*)$/) {
             $game_data{final_destination} = $1;
         } elsif ($line =~ /^Item:(.*)$/) {
@@ -50,10 +48,6 @@ sub load_game_data {
         } elsif ($line =~ /^Contains:(.*)$/) {
             my @contains_items = split /,/, $1;
             $game_data{$current_item}{contains} = \@contains_items if @contains_items;
-        } elsif ($line =~ /^Combine:(.*) = (.*)$/) {
-            my ($combine_key, $result) = ($1, $2);
-            my @items_to_combine = split /,/, $combine_key;
-            $game_data{combine}{$combine_key} = { result => $result, items => \@items_to_combine };
         }
     }
 
@@ -91,9 +85,8 @@ sub start_game {
             print "$room_data->{riddle}\n";
             chomp(my $answer = <STDIN>);
             if ($answer eq $game_data{$current_room}{answer}) {
-                my $reward_item = $room_data->{reward_item} // 'book';  # Default to 'book' if not specified
-                push @inventory, $reward_item;
-                print "You solved the puzzle and found a $reward_item!\n";
+                push @inventory, 'book';
+                print "You solved the puzzle and found a book!\n";
                 delete $room_data->{puzzle};  # Remove puzzle after solving
             } else {
                 print "That is not correct. Try again.\n";
@@ -158,30 +151,10 @@ sub start_game {
             } else {
                 print "You don't have a $item in your inventory.\n";
             }
-        } elsif ($action =~ /^combine (.*)$/) {
-            my @items_to_combine = split /,/, $1;
-            if (exists $game_data{combine}{$1}) {
-                my %inventory_items = map { $_ => 1 } @inventory;
-                foreach my $item (@items_to_combine) {
-                    unless (exists $inventory_items{$item}) {
-                        print "You don't have a $item in your inventory.\n";
-                        next;
-                    }
-                }
-
-                # Remove the items from inventory
-                @inventory = grep { $_ !~ /^(?:$|,){join('|', @items_to_combine)}(?:$|,)$/ } @inventory;
-
-                my $result_item = $game_data{combine}{$1}{result};
-                push @inventory, $result_item;
-                print "You combined the items and created a $result_item!\n";
-            } else {
-                print "These items cannot be combined.\n";
-            }
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action. Try moving, taking an item, examining something, or combining items.\n";
+            print "I don't understand that action. Try moving, taking an item, or examining something.\n";
         }
 
         # Simple inventory display

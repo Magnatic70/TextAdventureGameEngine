@@ -28,15 +28,23 @@ Items:purse
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
+Items:cup_of_letter_soup
 Locks:kitchen_key
-Exits:south:Lobby
+Exits:north:Cellar,south:Lobby
 
-FinalDestination:Kitchen
+Room:Cellar
+Description:A dark cellar.
+Exits:south:Kitchen
+
+FinalDestination:Cellar
 
 Item:book
-Contains:kitchen_key
+Contains:kitchen_key,some_digits
 
 Item:purse
 Contains:mansion_key
 
-Combine:key,book = keyring
+Item:cup_of_letter_soup
+Contains:some_letters
+
+Combine:some_digits,some_letters = keycode
