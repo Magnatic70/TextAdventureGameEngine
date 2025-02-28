@@ -62,7 +62,15 @@ Exits:south:Landing
 RoomID:Nursery
 Name:Nursery
 Description:A creepy nursery full of spider webs
-Exits:west:Landing
+Enemy:Spider:fly_swatter
+DefeatDescription:You whack the spider with the fly swatter and the spider desintegrates into large chunks. One chunck flies out the door.
+Exits:west:Landing3
+
+RoomID:Landing3
+Name:Landing
+Description:The landing gives access to a lot of closed doors.
+Items:spider_chunck
+Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 
 RoomID:Bathroom
 Name:Bathroom
@@ -96,7 +104,14 @@ RoomID:Attic
 Name:Attic
 Description:The attic is cluttered with a lot of items.
 SearchableItems:attic:large_trunk
-Exits:down:Landing
+Exits:down:Landing,up:Belltower
+
+RoomID:Belltower
+Name:Bell tower
+Description:A large bell is hanging from the ceiling.
+SearchableItems:bell:feather
+Items:fly_swatter
+Exits:down:Attic 
 
 Item:large_trunk
 Contains:axe
