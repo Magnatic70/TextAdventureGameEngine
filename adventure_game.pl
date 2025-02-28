@@ -115,7 +115,6 @@ sub start_game {
                 foreach my $lock (@{ $game_data{$next_room}{locks} }) {
                     if (exists $inventory_items{$lock}) {
                         print "You used the $lock to unlock the door.\n";
-                        @inventory = grep { $_ ne $lock } @inventory; # Remove item from inventory
                         $unlocked = 1;
                         last;
                     }
