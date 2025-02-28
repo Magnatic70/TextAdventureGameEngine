@@ -43,7 +43,7 @@ Enemy:Troll:rubber_duck_filled_with_hot_soup
 DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the Trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
 
 Room:Landing
-Description:The landing gives access to a lot of doors.
+Description:The landing gives access to a lot of closed doors.
 Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 
 Room:Master bedroom
@@ -57,7 +57,25 @@ Exits:west:Landing
 Room:Bathroom
 Description:A cozy bathroom. The bath is filled with steaming water and a thick layer of bubbles
 SearchableItems:bath:rubber_duck
-Exits:east:Landing
+Exits:east:Landing,bathe:Bath
+
+Room:Bath
+Description:You undress and soak in the hot water and feel yourself relax while you play with a rubber duck.
+Items:rubber_duck
+Exits:stand_up:Bathroom2
+
+Room:Bathroom2
+Description:You get out of the bath, but you can't find a towel. To your dismay, your clothes have vanished.
+Exits:east:Landing2
+
+Room:Landing2
+Description:You now realize that it is freezing cold while your skin is slowly drying. The door to the master bedroom is slightly ajar.
+Exits:down:Lobby,north:Master bedroom2,east:Nursery,west:Bathroom,up:Attic
+
+Room:Master bedroom2
+Description:A luxurious master bedroom with a large four poster bed. Your clothes lie neatly folded on the bed.
+Items:your_clothes
+Exits:south:Landing
 
 Room:Attic
 Description:The attic is cluttered with a lot of items.
