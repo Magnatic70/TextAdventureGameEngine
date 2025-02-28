@@ -25,7 +25,7 @@ Exits:north:Entrance
 
 Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
-Locks:book
+Locks:kitchen_key
 Exits:south:Lobby
 
 FinalDestination:Kitchen
