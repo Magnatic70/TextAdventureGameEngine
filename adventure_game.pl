@@ -93,7 +93,7 @@ sub start_game {
         print "$room_data->{description}\n";
 
         if ($room_data->{exits}) {
-            print "Exits: ", join(", ", keys %{$room_data->{exits}}), "\n";
+            print "Options: ", join(", ", keys %{$room_data->{exits}}), "\n";
         }
         
         if (exists $room_data->{items}) {
