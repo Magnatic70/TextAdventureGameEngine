@@ -158,8 +158,14 @@ sub start_game {
             my ($item1, $item2) = ($1, $2);
             if (grep { $_ eq $item1 || $_ eq $item2 } @inventory) {
                 if (exists $game_data{combine}{$item1}{$item2} || exists $game_data{combine}{$item2}{$item1}) {
-                    push @inventory, $game_data{combine}{$item1}{$item2};
-                    print "You combined the $item1 and $item2 to create a new item: $game_data{combine}{$item1}{$item2}.\n";
+                    if(exists $game_data{combine}{$item1}{$item2}){
+                        push @inventory, $game_data{combine}{$item1}{$item2};
+                        print "You combined the $item1 and $item2 to create a new item: $game_data{combine}{$item1}{$item2}.\n";
+                    }
+                    else{
+                        push @inventory, $game_data{combine}{$item2}{$item1};
+                    print "You combined the $item2 and $item1 to create a new item: $game_data{combine}{$item2}{$item1}.\n";
+                    }
                 } else {
                     print "These items cannot be combined.\n";
                 }
