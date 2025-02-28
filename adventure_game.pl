@@ -9,7 +9,7 @@ sub load_game_data {
     open my $fh, '<', $filename or die "Cannot open '$filename': $!";
     
     my %game_data;
-    my $current_room;  # Temporary variable to hold the current room name
+    my ($current_room, $current_item);  # Temporary variables to hold the current room and item names
 
     while (my $line = <$fh>) {
         chomp($line);
@@ -42,6 +42,12 @@ sub load_game_data {
             $game_data{$current_room}{answer} = $1;
         } elsif ($line =~ /^FinalDestination:(.*)$/) {
             $game_data{final_destination} = $1;
+        } elsif ($line =~ /^Item:(.*)$/) {
+            $current_item = $1;
+            $game_data{$current_item} = {};
+        } elsif ($line =~ /^Contains:(.*)$/) {
+            my @contains_items = split /,/, $1;
+            $game_data{$current_item}{contains} = \@contains_items if @contains_items;
         }
     }
 
@@ -131,10 +137,24 @@ sub start_game {
             } else {
                 print "There is no such item here.\n";
             }
+        } elsif ($action =~ /^examine (.*)$/) {
+            my $item = $1;
+            if (grep { $_ eq $item } @inventory) {
+                if (exists $game_data{$item}{contains}) {
+                    foreach my $contained_item (@{ $game_data{$item}{contains} }) {
+                        push @inventory, $contained_item;
+                        print "You found a $contained_item inside the $item.\n";
+                    }
+                } else {
+                    print "The $item doesn't seem to contain anything special.\n";
+                }
+            } else {
+                print "You don't have a $item in your inventory.\n";
+            }
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action. Try moving or taking an item.\n";
+            print "I don't understand that action. Try moving, taking an item, or examining something.\n";
         }
 
         # Simple inventory display

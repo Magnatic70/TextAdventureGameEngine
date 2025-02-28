@@ -29,3 +29,8 @@ Locks:book
 Exits:south:Lobby
 
 FinalDestination:Kitchen
+
+Item:book
+Contains:kitchen_key
+
+Item:kitchen_key
