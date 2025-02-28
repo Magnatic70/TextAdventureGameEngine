@@ -40,6 +40,8 @@ sub load_game_data {
             $game_data{$current_room}{riddle} = $1;
         } elsif ($line =~ /^Answer:(.*)$/) {
             $game_data{$current_room}{answer} = $1;
+        } elsif ($line =~ /^FinalDestination:(.*)$/) {
+            $game_data{final_destination} = $1;
         }
     }
 
@@ -85,8 +87,8 @@ sub start_game {
         }
 
         # Check if current room is the final destination
-        if ($current_room eq 'Kitchen') {
-            print "Congratulations! You've reached the final destination: Kitchen!\n";
+        if ($current_room eq $game_data{final_destination}) {
+            print "Congratulations! You've reached the final destination: $current_room!\n";
             last;  # Exit the game loop
         }
 
