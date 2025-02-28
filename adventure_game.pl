@@ -9,28 +9,30 @@ sub load_game_data {
     open my $fh, '<', $filename or die "Cannot open '$filename': $!";
     
     my %game_data;
+    my $current_room;  # Temporary variable to hold the current room name
+
     while (my $line = <$fh>) {
         chomp($line);
         next if $line =~ /^\s*$/;  # Skip empty lines
 
         if ($line =~ /^Room:(.*)$/) {
-            my $room_name = $1;
-            $game_data{$room_name} = {};
+            $current_room = $1;
+            $game_data{$current_room} = {};
         } elsif ($line =~ /^Description:(.*)$/) {
-            $game_data{$_}{description} = $1;
+            $game_data{$current_room}{description} = $1;
         } elsif ($line =~ /^Exits:(.*)$/) {
-            $game_data{$_}{exits} = [split /,/, $1];
+            $game_data{$current_room}{exits} = [split /,/, $1];
         } elsif ($line =~ /^Items:(.*)$/) {
             my @items = split /,/, $1;
-            $game_data{$_}{items} = \@items if @items;
+            $game_data{$current_room}{items} = \@items if @items;
         } elsif ($line =~ /^Locks:(.*)$/) {
-            $game_data{$_}{locks} = [split /,/, $1];
+            $game_data{$current_room}{locks} = [split /,/, $1];
         } elsif ($line =~ /^Puzzle:(.*)$/) {
-            $game_data{$_}{puzzle} = $1;
+            $game_data{$current_room}{puzzle} = $1;
         } elsif ($line =~ /^Riddle:(.*)$/) {
-            $game_data{$_}{riddle} = $1;
+            $game_data{$current_room}{riddle} = $1;
         } elsif ($line =~ /^Answer:(.*)$/) {
-            $game_data{$_}{answer} = $1;
+            $game_data{$current_room}{answer} = $1;
         }
     }
 
