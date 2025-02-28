@@ -1,0 +1,20 @@
+Room:Entrance
+Description:You are at the entrance of an old mansion.
+Exits:north:Lobby,south:Study
+
+Room:Lobby
+Description:You are in a grand lobby with marble floors.
+Exits:south:Entrance,east:Library,west:Study
+
+Room:Library
+Description:The library is filled with dusty books.
+Exits:east:Study,west:Lobby
+Locks:Key
+Puzzle:Solve the riddle to get the book.
+Riddle:What has keys but can't open locks?
+Answer:piano
+
+Room:Study
+Description:This small room contains a desk and a chair.
+Items:notebook
+Exits:north:Entrance,west:Lobby
