@@ -52,6 +52,15 @@ sub load_game_data {
             my ($combine_from, $combine_to) = split /=/, $1;
             my ($item1, $item2) = split /,/, $combine_from;
             $game_data{combine}{$item1}{$item2} = $combine_to;
+        } elsif ($line =~ /^SearchableItems:(.*)$/) {
+            my @searchables = split /,/, $1;
+            my %searchable_map;
+            foreach my $searchable (@searchables) {
+                if ($searchable =~ /^(.*):(.*)$/) {
+                    $searchable_map{$1} = $2;
+                }
+            }
+            $game_data{$current_room}{searchable_items} = \%searchable_map;
         }
     }
 
@@ -154,6 +163,14 @@ sub start_game {
             } else {
                 print "You don't have a $item in your inventory.\n";
             }
+        } elsif ($action =~ /^search (.*)$/) {
+            my $target = $1;
+            if (exists $room_data->{searchable_items} && exists $room_data->{searchable_items}{$target}) {
+                push @inventory, $room_data->{searchable_items}{$target};
+                print "You found a $room_data->{searchable_items}{$target} in the $target.\n";
+            } else {
+                print "There is nothing to find here.\n";
+            }
         } elsif ($action =~ /^combine (.*) and (.*)$/) {
             my ($item1, $item2) = ($1, $2);
             if (grep { $_ eq $item1 || $_ eq $item2 } @inventory) {
@@ -177,7 +194,7 @@ sub start_game {
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action. Try moving, taking an item, examining something, or combining items.\n";
+            print "I don't understand that action. Try moving, taking an item, examining something, searching, or combining items.\n";
         }
 
         # Simple inventory display
