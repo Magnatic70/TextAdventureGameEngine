@@ -17,7 +17,7 @@ Answer:piano
 Room:Study
 Description:This small room contains a desk and a chair.
 Items:key
-Exits:west:Lobby
+Exits:east:Lobby
 
 Room:Garden
 Description:A beautiful garden.
@@ -27,5 +27,3 @@ Room:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
 Locks:book
 Exits:south:Lobby
-
-FinalDestination:Kitchen
