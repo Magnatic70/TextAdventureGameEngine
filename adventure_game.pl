@@ -40,6 +40,8 @@ sub load_game_data {
             $game_data{$current_room}{riddle} = $1;
         } elsif ($line =~ /^Answer:(.*)$/) {
             $game_data{$current_room}{answer} = $1;
+        } elsif ($line =~ /^RewardItem:(.*)$/) {
+            $game_data{$current_room}{reward_item} = $1;
         } elsif ($line =~ /^FinalDestination:(.*)$/) {
             $game_data{final_destination} = $1;
         } elsif ($line =~ /^Item:(.*)$/) {
@@ -85,8 +87,9 @@ sub start_game {
             print "$room_data->{riddle}\n";
             chomp(my $answer = <STDIN>);
             if ($answer eq $game_data{$current_room}{answer}) {
-                push @inventory, 'book';
-                print "You solved the puzzle and found a book!\n";
+                my $reward_item = $room_data->{reward_item} // 'book';  # Default to 'book' if not specified
+                push @inventory, $reward_item;
+                print "You solved the puzzle and found a $reward_item!\n";
                 delete $room_data->{puzzle};  # Remove puzzle after solving
             } else {
                 print "That is not correct. Try again.\n";
