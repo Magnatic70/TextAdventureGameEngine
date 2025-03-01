@@ -4,17 +4,17 @@ RoomID:Entrance
 Name:Entrance
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
-Items:rusty_sword,shiny_sword
+Items:rusty sword,shiny sword
 
-Item:rusty_sword
+Item:rusty sword
 ItemDescription:A large sword. It's really rusty.
 
-Item:shiny_sword
+Item:shiny sword
 ItemDescription:A large shiny new sword. Nice!
 
 RoomID:Lobby
 Name:Lobby
-Locks:mansion_key
+Locks:mansion key
 Description:You are in a grand lobby with marble floors.
 Exits:south:Entrance,east:Library,west:Study,north:Kitchen,up:Landing
 Items:slippers
@@ -26,62 +26,62 @@ RoomID:Library
 Name:Library
 Description:The library is filled with dusty books.
 Exits:west:Lobby
-Locks:library_key
+Locks:library key
 Puzzle:Solve the riddle to get the book.
 Riddle:What has keys but can't open locks?
 Answer:piano
 RewardItem:book
 
 Item:book
-Contains:kitchen_key,some_digits
+Contains:kitchen key,some digits
 ItemDescription:A book. Nothing special about it?
 
-Item:kitchen_key
+Item:kitchen key
 ItemDescription:Another key, how many keys are there?
 
-Item:some_digits
+Item:some digits
 ItemDescription:Some random digits. What could they mean?
 
 RoomID:Study
 Name:Study
 Description:This small room contains a desk and a chair.
-Items:library_key
+Items:library key
 Exits:east:Lobby
 
-Item:library_key
+Item:library key
 ItemDescription:Another key, how many would there be?
 
 RoomID:Garden
 Name:Garden
 Description:A beautiful peaceful garden.
 Exits:north:Entrance
-Enemy:Knight:rusty_sword
+Enemy:Knight:rusty sword
 RewardItem:purse
 DefeatDescription:You violently swing the rusty sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
 DiedDescription:You violenty swing the shiny sword, but when it hits the knight it shatters in small pieces. Darn these newfangled swords! The knight then swings his sword and decaptites you. Ouch! This is not merely a scratch.
 
 Item:purse
-Contains:mansion_key
+Contains:mansion key
 ItemDescription:You took the purse from the knight's body. It wasn't of use to him anymore.
 
-Item:mansion_key
+Item:mansion key
 ItemDescription:This will be useful.
 
 RoomID:Kitchen
 Name:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
-Items:cup_of_letter_soup
-Locks:kitchen_key
+Items:cup of letter soup
+Locks:kitchen key
 Exits:north:Cellar,south:Lobby
 
-Item:cup_of_letter_soup
-Contains:some_letters,cup_of_hot_soup
+Item:cup of letter soup
+Contains:some letters,cup of hot soup
 ItemDescription:A steaming hot cup of soup with some letters in it
 
-Item:cup_of_hot_soup
+Item:cup of hot soup
 ItemDescription:Without the letters it's just hot soup.
 
-Item:some_letters
+Item:some letters
 ItemDescription:Some random letters. What could they mean?
 
 RoomID:Cellar
@@ -89,12 +89,12 @@ Name:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
-Enemy:troll:rubber_duck_filled_with_hot_soup
-RewardItem:troll_trophy
+Enemy:troll:rubber duck filled with hot soup
+RewardItem:troll trophy
 DefeatDescription:You squeeze the rubber duck with all your might and the hot soup squirts out of its bottom and right into the trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
 DiedDescription:The troll swings his large club and hits you on the head. After the initial fireworks everything turns to black.
 
-Item:troll_trophy
+Item:troll trophy
 ItemDescription:It's a shiny goblet with the text "You've defeated the troll!"
 
 RoomID:Landing
@@ -110,7 +110,7 @@ Exits:south:Landing,bed:Bed
 RoomID:Bed
 Name:Bed
 Description:You can't resist the urge to lay down on the bed and you quickly fall asleep.
-Exits:wake_up:Master bedroom3
+Exits:wake up:Master bedroom3
 
 RoomID:Master bedroom3
 Name:Master bedroom
@@ -121,40 +121,40 @@ RoomID:Nursery
 Name:Nursery
 Description:A creepy nursery full of spider webs
 Enemy:Spider:slippers
-RewardItem:spider_leg
+RewardItem:spider leg
 DefeatDescription:You stomp the spider with your slippers and chunks of spider fly everywhere. One chunk flies right past you out the door.
 DiedDescription:The spider crawl up your legs, your body and then bites you in the neck. It hurts really bad, but not for long as you slowly lose consciousness and fall to the floor.
 Exits:west:Landing3
 
-Item:spider_leg
+Item:spider leg
 ItemDescription:Yuk! A spider leg! Gross!
 
 RoomID:Landing3
 Name:Landing
 Description:The landing gives access to a lot of closed doors.
-Items:spider_chunk
+Items:spider chunk
 Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 
-Item:spider_chunk
+Item:spider chunk
 ItemDescription:Although it's even grosser than the spider leg, you pick up the goopy chunck.
 
 RoomID:Bathroom
 Name:Bathroom
 Description:A cozy bathroom with some very realistic statues. The bath is filled with steaming water and covered with a thick layer of bubbles
-SearchableItems:bath:rubber_duck
+SearchableItems:bath:rubber duck
 Enemy:leprechaun:feather
 DefeatDescription:You mercilessly tickle the leprechaun with the feather. It starts to giggle maniacally, but you keep on tickling. The leprechaun starts convulsing and finally stops moving altogether.
 DiedDescription:The leprechaun curses you and you slowly turn to stone.
 Exits:east:Landing,bathe:Bath
 
-Item:rubber_duck
+Item:rubber duck
 ItemDescription:It's a duck. Made of rubber. It squeeks when you squeeze it.
 
 RoomID:Bath
 Name:Bath
 Description:You undress and soak in the hot water and feel yourself relax while you play with a rubber duck.
-Items:rubber_duck
-Exits:stand_up:Bathroom2
+Items:rubber duck
+Exits:stand up:Bathroom2
 
 RoomID:Bathroom2
 Name:Bathroom
@@ -169,19 +169,19 @@ Exits:down:Lobby,north:Master bedroom2,east:Nursery,west:Bathroom,up:Attic
 RoomID:Master bedroom2
 Name:Master Bedroom
 Description:A luxurious master bedroom with a large four poster bed.
-Items:your_clothes
+Items:your clothes
 Exits:south:Landing
 
-Item:your_clothes
+Item:your clothes
 ItemDescription:You quickly redress while you wonder how your clothes got here.
 
 RoomID:Attic
 Name:Attic
 Description:The attic is cluttered with a lot of items.
-SearchableItems:attic:large_trunk
+SearchableItems:attic:large trunk
 Exits:down:Landing,up:Belltower
 
-Item:large_trunk
+Item:large trunk
 Contains:axe
 ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
 
@@ -189,7 +189,7 @@ RoomID:Belltower
 Name:Bell tower
 Description:A large bell is hanging from the ceiling. It is covered in bird droppings and feathers.
 SearchableItems:bell:feather
-Items:fly_swatter
+Items:fly swatter
 Exits:down:Attic,west:Entrance2,east:Entrance3
 
 RoomID:Entrance2
@@ -205,20 +205,20 @@ Exits:north:Lobby,south:Garden
 Item:feather
 ItemDescription:A feather, it's grey, possibly from a pigeon.
 
-Item:bird_droppings
+Item:bird droppings
 Description:At least they have dried!
 
-Item:fly_swatter
+Item:fly swatter
 ItemDescription:What's this doing in the bell tower?
 
 FinalDestination:Cellar
 
-Combine:some_digits,some_letters=keycode
+Combine:some digits,some letters=keycode
 
 Item:keycode
 ItemDescription:This looks like a code you can use to enter a locked door.
 
-Combine:rubber_duck,cup_of_hot_soup=rubber_duck_filled_with_hot_soup
+Combine:rubber duck,cup of hot soup=rubber duck filled with hot soup
 
-Item:rubber_duck_filled_with_hot_soup
+Item:rubber duck filled with hot soup
 ItemDescription:You remove the squeeker and pour the soup into the hole. It feels very hot, almost scalding your hands.
