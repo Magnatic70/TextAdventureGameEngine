@@ -145,6 +145,11 @@ sub start_game {
                         if (exists $room_data->{reward_item}) {
                             push @inventory, $room_data->{reward_item};
                             print "You received a $room_data->{reward_item} as a reward!\n";
+
+                            # Display contained item description
+                            if (exists $game_data{$$room_data->{reward_item}}{description}) {
+                                print "$game_data{$$room_data->{reward_item}}{description}\n";
+                            }
                         }
                         delete $room_data->{enemy};  # Remove enemy after defeating
                     } else {
