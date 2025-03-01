@@ -87,7 +87,7 @@ Name:Cellar
 Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
-Enemy:Troll:rubber_duck_filled_with_hot_soup
+Enemy:troll:rubber_duck_filled_with_hot_soup
 RewardItem:troll_trophy
 DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
 DiedDescription:The troll swings his large club and hits you on the head. After the initial fireworks everything turns to black.
