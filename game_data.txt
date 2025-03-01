@@ -1,5 +1,5 @@
 RoomID:Entrance
-Name:Entrance Hall
+Name:Entrance
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
 Items:rusty_sword,shiny_sword
@@ -111,6 +111,7 @@ Description:A creepy nursery full of spider webs
 Enemy:Spider:slippers
 RewardItem:spider_leg
 DefeatDescription:You stomp the spider with your slippers and chunks of spider fly everywhere. One chunk flies right past you out the door.
+DiedDescription:The spider crawl up your legs, your body and then bites you in the neck. It hurts really bad, but not for long as you slowly lose consciousness and fall to the floor.
 Exits:west:Landing3
 
 Item:spider_leg
@@ -151,7 +152,7 @@ Description:You now realize that it is freezing cold while your skin is slowly d
 Exits:down:Lobby,north:Master bedroom2,east:Nursery,west:Bathroom,up:Attic
 
 RoomID:Master bedroom2
-Name:Master Bedroom
+Name:Master Bedroomlose consciousness
 Description:A luxurious master bedroom with a large four poster bed.
 Items:your_clothes
 Exits:south:Landing
@@ -174,7 +175,17 @@ Name:Bell tower
 Description:A large bell is hanging from the ceiling.
 SearchableItems:bell:feather
 Items:fly_swatter
-Exits:down:Attic
+Exits:down:Attic,west:Entrance2,east:Entrance3
+
+RoomID:Entrance2
+Description:Oh no! You stepped out of an open window! You fall down, bounching on the slanted roof of the bathroom, then slide of it to the ground into some lush bushes. Several roof tiles land next to you. You're bruised and battered, but you're still alive. Phew! You look around and find yourself at the entrance.
+Name:Entrance
+Exits:north:Lobby,south:Garden
+
+RoomID:Entrance3
+Description:You stepped into a magic portal. A flash of light and then you find yourself at the entrance of the mansion.
+Name:Entrance
+Exits:north:Lobby,south:Garden
 
 Item:feather
 ItemDescription:A feather, it's grey, possibly from a pigeon.
