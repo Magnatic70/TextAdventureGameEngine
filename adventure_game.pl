@@ -179,8 +179,9 @@ sub start_game {
                 my ($verb, $item) = ($1, $2);
                 if (grep { $_ eq $item } @inventory) {
                     if ($item eq $enemy->{required_item}) {
+                        # Display defeat description in yellow
                         if (exists $room_data->{defeat_description}) {
-                            print "$room_data->{defeat_description}\n";
+                            print "\033[43m$room_data->{defeat_description}\033[0m\n";
                         }
                         print "You defeated the $enemy->{name}!\n";
                         # Add reward item to inventory
@@ -197,9 +198,9 @@ sub start_game {
                     } else {
                         print "That item is not effective against the $enemy->{name}.\n";
                         
-                        # Display DiedDescription if it exists
+                        # Display DiedDescription in red if it exists
                         if (exists $room_data->{died_description}) {
-                            print "$room_data->{died_description}\n";
+                            print "\033[41m$room_data->{died_description}\033[0m\n";
                             print "You have died!\n";
                         }
                         
