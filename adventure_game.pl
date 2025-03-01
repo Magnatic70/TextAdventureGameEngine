@@ -3,6 +3,12 @@
 use strict;
 use warnings;
 
+my $debug=0;
+
+if(-p STDIN) {
+  $debug=1;
+}
+
 # Load game data from file into a hash structure
 sub load_game_data {
     my $filename = shift;
@@ -128,7 +134,15 @@ sub start_game {
         # Check for puzzles
         if (exists $room_data->{puzzle}) {
             print "\033[32m$room_data->{riddle}\033[0m\n";
-            chomp(my $answer = <STDIN>);
+
+            my $answer = <STDIN>;
+            if(!$answer){
+                die "No more input!\n";
+            }
+            else{
+                chomp($answer);
+            }
+            
             if ($answer eq $game_data{$current_room_id}{answer}) {
                 push @inventory, $room_data->{reward_item};
                 print "You solved the puzzle and found a $room_data->{reward_item}!\n";
@@ -148,7 +162,14 @@ sub start_game {
             my $enemy = $room_data->{enemy};
             print "You encounter a $enemy->{name}! \033[32mYou must fight it with the correct item to survive or retreat.\033[0m\n";
 
-            chomp(my $action = <STDIN>);
+            my $action = <STDIN>;
+            if(!$action){
+                die "No more input!\n";
+            }
+            else{
+                chomp($action);
+            }
+            
             if ($action =~ /^fight (\w+) with (.*)$/) {
                 my ($verb, $item) = ($1, $2);
                 if (grep { $_ eq $item } @inventory) {
@@ -191,7 +212,8 @@ sub start_game {
                     print "There is no previous room to retreat to!\n";
                 }
             } else {
-                print "I don't understand that action. Try fighting with an item from your inventory or retreating.\n";
+                print "I don't understand that action ($action). Try fighting with an item from your inventory or retreating.\n";
+                if($debug){die;}
             }
             next;
         }
@@ -204,7 +226,13 @@ sub start_game {
 
         # Prompt for user action with green text
         print "\033[32mWhat do you want to do? \033[0m";  # Green text followed by reset
-        chomp(my $action = <STDIN>);
+        my $action = <STDIN>;
+        if(!$action){
+            die "No more input!\n";
+        }
+        else{
+            chomp($action);
+        }
         
         if (exists $room_data->{exits} && exists $room_data->{exits}{$action}) {
             my $next_room_id = $room_data->{exits}{$action};
@@ -319,7 +347,8 @@ sub start_game {
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action. Try moving, taking an item, examining something, searching, combining items, or dropping an item.\n";
+            print "I don't understand that action ($action). Try moving, taking an item, examining something, searching, combining items, or dropping an item.\n";
+            if($debug){die;}
         }
 
         # Simple inventory display
