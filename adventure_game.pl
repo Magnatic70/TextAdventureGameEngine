@@ -73,6 +73,8 @@ sub load_game_data {
             $game_data{$current_room_id}{reward_item} = $1 if exists $game_data{$current_room_id}{enemy};
         } elsif ($line =~ /^DefeatDescription:(.*)$/) {
             $game_data{$current_room_id}{defeat_description} = $1 if exists $game_data{$current_room_id}{enemy};
+        } elsif ($line =~ /^ItemDescription:(.*)$/) {
+            $game_data{$current_item}{description} = $1;
         }
     }
 
@@ -205,6 +207,12 @@ sub start_game {
             if (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
                 push @inventory, $item;
                 print "You took the $item.\n";
+                
+                # Display item description
+                if (exists $game_data{$item}{description}) {
+                    print "$game_data{$item}{description}\n";
+                }
+                
                 @{$room_data->{items}} = grep { $_ ne $item } @{ $room_data->{items} };
             } else {
                 print "There is no such item here.\n";
@@ -216,6 +224,11 @@ sub start_game {
                     foreach my $contained_item (@{ $game_data{$item}{contains} }) {
                         push @inventory, $contained_item;
                         print "You found a $contained_item inside the $item.\n";
+                        
+                        # Display contained item description
+                        if (exists $game_data{$contained_item}{description}) {
+                            print "$game_data{$contained_item}{description}\n";
+                        }
                     }
                 } else {
                     print "The $item doesn't seem to contain anything special.\n";
@@ -228,6 +241,11 @@ sub start_game {
             if (exists $room_data->{searchable_items} && exists $room_data->{searchable_items}{$target}) {
                 push @inventory, $room_data->{searchable_items}{$target};
                 print "You found a ", $room_data->{searchable_items}{$target}, " in the $target.\n";
+                
+                # Display searched item description
+                if (exists $game_data{$room_data->{searchable_items}{$target}}{description}) {
+                    print "$game_data{$room_data->{searchable_items}{$target}}{description}\n";
+                }
             } else {
                 print "There is nothing to find here.\n";
             }
@@ -235,14 +253,22 @@ sub start_game {
             my ($item1, $item2) = ($1, $2);
             if (grep { $_ eq $item1 || $_ eq $item2 } @inventory) {
                 if (exists $game_data{combine}{$item1}{$item2} || exists $game_data{combine}{$item2}{$item1}) {
+                    my $new_item;
                     if(exists $game_data{combine}{$item1}{$item2}){
-                        push @inventory, $game_data{combine}{$item1}{$item2};
-                        print "You combined the $item1 and $item2 to create a new item: ", $game_data{combine}{$item1}{$item2}, ".\n";
+                        $new_item = $game_data{combine}{$item1}{$item2};
                     }
                     else{
-                        push @inventory, $game_data{combine}{$item2}{$item1};
-                        print "You combined the $item2 and $item1 to create a new item: ", $game_data{combine}{$item2}{$item1}, ".\n";
+                        $new_item = $game_data{combine}{$item2}{$item1};
                     }
+                    
+                    push @inventory, $new_item;
+                    print "You combined the $item1 and $item2 to create a new item: ", $new_item, ".\n";
+                    
+                    # Display new item description
+                    if (exists $game_data{$new_item}{description}) {
+                        print "$game_data{$new_item}{description}\n";
+                    }
+                    
                     # Remove the original items from inventory                                        
                     @inventory = grep { $_ ne $item1 && $_ ne $item2 } @inventory;    
                 } else {
