@@ -73,6 +73,8 @@ sub load_game_data {
             $game_data{$current_room_id}{enemy} = { name => $enemy, required_item => $required_item };
         } elsif ($line =~ /^DefeatDescription:(.*)$/) {
             $game_data{$current_room_id}{defeat_description} = $1 if exists $game_data{$current_room_id}{enemy};
+        } elsif ($line =~ /^DiedDescription:(.*)$/) {
+            $game_data{$current_room_id}{died_description} = $1 if exists $game_data{$current_room_id}{enemy};
         } elsif ($line =~ /^ItemDescription:(.*)$/) {
             $game_data{$current_item}{description} = $1;
         }
@@ -168,6 +170,12 @@ sub start_game {
                         delete $room_data->{enemy};  # Remove enemy after defeating
                     } else {
                         print "That item is not effective against the $enemy->{name}. You have died.\n";
+                        
+                        # Display DiedDescription if it exists
+                        if (exists $room_data->{died_description}) {
+                            print "$room_data->{died_description}\n";
+                        }
+                        
                         last;  # End game loop
                     }
                 } else {
