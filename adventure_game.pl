@@ -353,9 +353,9 @@ sub start_game {
             if($debug){die;}
         }
 
-        # Simple inventory display
+        # Simple inventory display in cyan
         if (@inventory) {
-            print "\nInventory: ", join(", ", @inventory), "\n";
+            print "\033[36mInventory: ", join(", ", @inventory), "\033[0m\n";  # Cyan text followed by reset
         }
     }
 
