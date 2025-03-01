@@ -180,7 +180,7 @@ Exits:south:VisitorRoom2,north:Street,east:WardensOffice
 Combine:newspaper,contraption=burning newspaper
 
 Item:burning newspaper
-ItemDescription:You're now walking around with a piece of burning newspaper. It sets off the fire alarm everywhere. You hope that that is not a problem!
+ItemDescription:You're now walking around with a piece of burning newspaper. It triggers the fire alarm in every room you go. You hope that that is not a problem!
 
 RoomID:Street
 Name:Street
