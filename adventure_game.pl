@@ -316,7 +316,6 @@ sub start_game {
                 }
             } else {
                 print "There is nothing to find here.\n";
-                if($debug){die;}
             }
         } elsif ($action =~ /^combine (.*) and (.*)$/) {
             my ($item1, $item2) = ($1, $2);
