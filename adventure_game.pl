@@ -279,7 +279,7 @@ sub start_game {
             }
         } elsif ($action =~ /^combine (.*) and (.*)$/) {
             my ($item1, $item2) = ($1, $2);
-            if (grep { $_ eq $item1 || $_ eq $item2 } @inventory) {
+            if ((grep { $_ eq $item1 } @inventory) && (grep { $_ eq $item2 } @inventory)) {
                 if (exists $game_data{combine}{$item1}{$item2} || exists $game_data{combine}{$item2}{$item1}) {
                     my $new_item;
                     if(exists $game_data{combine}{$item1}{$item2}){
