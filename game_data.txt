@@ -143,7 +143,7 @@ Name:Bathroom
 Description:A cozy bathroom with some very realistic statues. The bath is filled with steaming water and covered with a thick layer of bubbles
 SearchableItems:bath:rubber_duck
 Enemy:leprechaun:feather
-DefeatDescription:You merciously tickle the leprechaun with the feather. It starts to giggle maniacally, but you keep on tickling. The leprechaun starts convulsing and finally stops moving altogether.
+DefeatDescription:You mercilessly tickle the leprechaun with the feather. It starts to giggle maniacally, but you keep on tickling. The leprechaun starts convulsing and finally stops moving altogether.
 DiedDescription:The leprechaun curses you and you slowly turn to stone.
 Exits:east:Landing,bathe:Bath
 
