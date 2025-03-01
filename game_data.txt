@@ -9,6 +9,7 @@ Name:Lobby
 Locks:mansion_key
 Description:You are in a grand lobby with marble floors.
 Exits:south:Entrance,east:Library,west:Study,north:Kitchen,up:Landing
+Items:slippers
 
 RoomID:Library
 Name:Library
@@ -120,6 +121,9 @@ Contains:axe
 ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
 
 FinalDestination:Cellar
+
+Item:slippers
+ItemDescription:The good guest you are, you remove your dirty and slightly bloody shoes and put on the slippers.
 
 Item:book
 Contains:kitchen_key,some_digits
