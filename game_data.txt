@@ -186,7 +186,7 @@ ItemDescription:It's really large and heavy. Now you'll have to carry it for the
 RoomID:Belltower
 Name:Bell tower
 Description:A large bell is hanging from the ceiling. It is covered in bird droppings and feathers.
-SearchableItems:bell:feather,bird_droppings
+SearchableItems:bell:feather
 Items:fly_swatter
 Exits:down:Attic,west:Entrance2,east:Entrance3
 
