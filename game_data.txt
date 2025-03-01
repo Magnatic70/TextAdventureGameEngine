@@ -127,7 +127,7 @@ ItemDescription:A book. Nothing special about it.
 
 Item:purse
 Contains:mansion_key
-ItemDescription:You take the purse from the knight's body.
+ItemDescription:You took the purse from the knight's body. It isn't of use to him anymore.
 
 Item:cup_of_letter_soup
 Contains:some_letters,cup_of_hot_soup
