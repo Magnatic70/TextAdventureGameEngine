@@ -117,32 +117,27 @@ Exits:down:Attic
 
 Item:large_trunk
 Contains:axe
+ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
 
 FinalDestination:Cellar
 
 Item:book
 Contains:kitchen_key,some_digits
+ItemDescription:A book. Nothing special about it.
 
 Item:purse
 Contains:mansion_key
+ItemDescription:You take the purse from the knight's body.
 
 Item:cup_of_letter_soup
 Contains:some_letters,cup_of_hot_soup
+ItemDescription:A steaming hot cup of soup with some letters in it
 
 Item:sword
 ItemDescription:A large sword. It's a bit rusty, but it is still usable.
 
-Item:book
-ItemDescription:A book. Nothing special about it.
-
 Item:key
 ItemDescription:A key. What would it unlock?
-
-Item:purse
-ItemDescription:You take the purse from the knight's body.
-
-Item:cup_of_letter_soup
-ItemDescription:A steaming hot cup of soup with some letters in it
 
 Item:troll_trophy
 ItemDescription:A shiny goblet with the text "You've defeated the troll!"
@@ -158,9 +153,6 @@ ItemDescription:It's a duck. Made of rubber. It squeeks when you squeeze it.
 
 Item:your_clothes
 ItemDescription:You quickly redress while you wonder how your clothes got here.
-
-Item:large_trunk
-ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
 
 Item:feather
 ItemDescription:A feather, it's grey, possibly from a pigeon.
