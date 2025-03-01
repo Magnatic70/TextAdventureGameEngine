@@ -2,10 +2,13 @@ RoomID:Entrance
 Name:Entrance Hall
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
-Items:sword
+Items:rusty_sword,shiny_sword
 
-Item:sword
-ItemDescription:A large sword. It's a bit rusty, but it is still usable.
+Item:rusty_sword
+ItemDescription:A large sword. It's really rusty.
+
+Item:shiny_sword
+ItemDescription:A large shiny new sword. Nice!
 
 RoomID:Lobby
 Name:Lobby
@@ -50,9 +53,9 @@ RoomID:Garden
 Name:Garden
 Description:A beautiful peaceful garden.
 Exits:north:Entrance
-Enemy:Knight:sword
+Enemy:Knight:rusty_sword
 RewardItem:purse
-DefeatDescription:You violently swing the sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
+DefeatDescription:You violently swing the rusty sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
 
 Item:purse
 Contains:mansion_key
