@@ -43,6 +43,8 @@ sub load_game_data {
             $game_data{$current_room_id}{puzzle} = $1;
         } elsif ($line =~ /^Riddle:(.*)$/) {
             $game_data{$current_room_id}{riddle} = $1;
+        } elsif ($line =~ /^RewardItem:(.*)$/) {
+            $game_data{$current_room_id}{reward_item} = $1 if (exists $game_data{$current_room_id}{riddle} || exists $game_data{$current_room_id}{enemy});
         } elsif ($line =~ /^Answer:(.*)$/) {
             $game_data{$current_room_id}{answer} = $1;
         } elsif ($line =~ /^FinalDestination:(.*)$/) {
@@ -69,8 +71,6 @@ sub load_game_data {
         } elsif ($line =~ /^Enemy:(.*)$/) {
             my ($enemy, $required_item) = split /:/, $1;
             $game_data{$current_room_id}{enemy} = { name => $enemy, required_item => $required_item };
-        } elsif ($line =~ /^RewardItem:(.*)$/) {
-            $game_data{$current_room_id}{reward_item} = $1 if exists $game_data{$current_room_id}{enemy};
         } elsif ($line =~ /^DefeatDescription:(.*)$/) {
             $game_data{$current_room_id}{defeat_description} = $1 if exists $game_data{$current_room_id}{enemy};
         } elsif ($line =~ /^ItemDescription:(.*)$/) {
@@ -128,8 +128,12 @@ sub start_game {
             print "\033[32m$room_data->{riddle}\033[0m\n";
             chomp(my $answer = <STDIN>);
             if ($answer eq $game_data{$current_room_id}{answer}) {
-                push @inventory, 'book';
-                print "You solved the puzzle and found a book!\n";
+                push @inventory, $room_data->{reward_item};
+                print "You solved the puzzle and found a $room_data->{reward_item}!\n";
+                # Display contained item description
+                if (exists $game_data{$room_data->{reward_item}}{description}) {
+                    print "$game_data{$room_data->{reward_item}}{description}\n";
+                }
                 delete $room_data->{puzzle};  # Remove puzzle after solving
             } else {
                 print "That is not correct. Try again.\n";
