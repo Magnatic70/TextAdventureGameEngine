@@ -56,7 +56,7 @@ Exits:north:Entrance
 Enemy:Knight:rusty_sword
 RewardItem:purse
 DefeatDescription:You violently swing the rusty sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
-DiedDescription:You violenty swing the shiny sword, but when it hits the knight it shatters in small pieces. The knight then swings his sword and decaptites you. Ouch! This is not merely a scratch.
+DiedDescription:You violenty swing the shiny sword, but when it hits the knight it shatters in small pieces. Darn these newfangled swords! The knight then swings his sword and decaptites you. Ouch! This is not merely a scratch.
 
 Item:purse
 Contains:mansion_key

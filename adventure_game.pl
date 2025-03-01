@@ -181,7 +181,7 @@ sub start_game {
                     if ($item eq $enemy->{required_item}) {
                         # Display defeat description in yellow
                         if (exists $room_data->{defeat_description}) {
-                            print "\033[43m$room_data->{defeat_description}\033[0m\n";
+                            print "\033[93m$room_data->{defeat_description}\033[0m\n";
                         }
                         print "You defeated the $enemy->{name}!\n";
                         # Add reward item to inventory
@@ -200,7 +200,7 @@ sub start_game {
                         
                         # Display DiedDescription in red if it exists
                         if (exists $room_data->{died_description}) {
-                            print "\033[41m$room_data->{died_description}\033[0m\n";
+                            print "\033[31m$room_data->{died_description}\033[0m\n";
                             print "You have died!\n";
                         }
                         
