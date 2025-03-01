@@ -1,3 +1,5 @@
+Title:The haunted mansion
+
 RoomID:Entrance
 Name:Entrance
 Description:You are at the entrance of an old mansion.

@@ -27,6 +27,8 @@ sub load_game_data {
                 $game_data{first_room_id}=$current_room_id;
             }
             $game_data{$current_room_id} = {};
+        } elsif ($line =~ /^Title:(.*)$/) {
+            $game_data{title} = $1;
         } elsif ($line =~ /^Name:(.*)$/) {
             $game_data{$current_room_id}{name} = $1;
         } elsif ($line =~ /^Description:(.*)$/) {
@@ -113,7 +115,7 @@ sub start_game {
     my @inventory;
     my @room_history;  # Stack to track room history
 
-    print "Welcome to the Adventure Game!\n";
+    print "\n\033[97;1;4m$game_data{title}\033[0m\n";
     
     while (1) {
         my $room_data = $game_data{$current_room_id};
