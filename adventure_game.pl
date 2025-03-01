@@ -203,8 +203,8 @@ sub start_game {
                         # Display DiedDescription in red if it exists
                         if (exists $room_data->{died_description}) {
                             print "\033[31m$room_data->{died_description}\033[0m\n";
-                            print "You have died!\n";
                         }
+                        print "You have died!\n";
                         
                         last;  # End game loop
                     }
