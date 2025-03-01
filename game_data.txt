@@ -129,5 +129,59 @@ Contains:mansion_key
 Item:cup_of_letter_soup
 Contains:some_letters,cup_of_hot_soup
 
+Item:sword
+ItemDescription:A large sword. It's a bit rusty, but it is still usable.
+
+Item:book
+ItemDescription:A book. Nothing special about it.
+
+Item:key
+ItemDescription:A key. What would it unlock?
+
+Item:purse
+ItemDescription:You take the purse from the knight's body.
+
+Item:cup_of_letter_soup
+ItemDescription:A steaming hot cup of soup with some letters in it
+
+Item:troll_trophy
+ItemDescription:A shiny goblet with the text "You've defeated the troll!"
+
+Item:spider_leg
+ItemDescription:Yuk! A spider leg! Gross!
+
+Item:spider_chunk
+ItemDescription:Although it's even grosser than the spider leg, you pick up the goopy chunck.
+
+Item:rubber_duck
+ItemDescription:It's a duck. Made of rubber. It squeeks when you squeeze it.
+
+Item:your_clothes
+ItemDescription:You quickly redress while you wonder how your clothes got here.
+
+Item:large_trunk
+ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
+
+Item:feather
+ItemDescription:A feather, it's grey, possibly from a pigeon.
+
+Item:fly_swatter
+ItemDescription:What's this doing in the bell tower?
+
+Item:keycode
+ItemDescription:This looks like a code you can use to enter a locked door.
+
+Item:rubber_duck_filled_with_hot_soup
+ItemDescription:You remove the squeeker and poor the soup into the hole. It feels very hot, almost scalding your hands.
+
+Item:cup_of_hot_soup
+ItemDescription:Without the letters it's just hot soup.
+
+Item:some_digits
+ItemDescription:Some random digits. What could they mean?
+
+Item:some_letters
+ItemDescription:Some random letters. What could they mean?
+
 Combine:some_digits,some_letters=keycode
 Combine:rubber_duck,cup_of_hot_soup=rubber_duck_filled_with_hot_soup
