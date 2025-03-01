@@ -282,10 +282,21 @@ sub start_game {
             } else {
                 print "You don't have both items in your inventory.\n";
             }
+        } elsif ($action =~ /^drop (.*)$/) {  # New command to drop an item
+            my $item = $1;
+            if (grep { $_ eq $item } @inventory) {
+                push @{ $room_data->{items} }, $item;  # Add the dropped item back to the room's items
+                print "You dropped the $item.\n";
+                
+                # Remove the item from inventory
+                @inventory = grep { $_ ne $item } @inventory;
+            } else {
+                print "You don't have a $item in your inventory.\n";
+            }
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action. Try moving, taking an item, examining something, searching, or combining items.\n";
+            print "I don't understand that action. Try moving, taking an item, examining something, searching, combining items, or dropping an item.\n";
         }
 
         # Simple inventory display
