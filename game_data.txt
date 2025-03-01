@@ -103,7 +103,17 @@ Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 RoomID:Master bedroom
 Name:Master Bedroom
 Description:A luxurious master bedroom with a large four poster bed
-Exits:south:Landing
+Exits:south:Landing,bed:Bed
+
+RoomID:Bed
+Name:Bed
+Description:You can't resist the urge to lay down on the bed and you quickly fall asleep.
+Exits:wake_up:Master bedroom2
+
+RoomID:Master bedroom2
+Name:Master bedroom
+Description:You wake up fully refreshed and ready for the remainder of your adventure.
+Exits:south:Landing,bed:Bed
 
 RoomID:Nursery
 Name:Nursery
