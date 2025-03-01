@@ -160,7 +160,7 @@ sub start_game {
         # Check for enemies
         if (exists $room_data->{enemy}) {
             my $enemy = $room_data->{enemy};
-            print "You encounter a $enemy->{name}! \033[32mYou must fight it with the correct item to survive or retreat.\033[0m\n";
+            print "You encounter a $enemy->{name}!\n\033[32mYou must fight it with the correct item to survive or retreat.\033[0m\n";
 
             my $action = <STDIN>;
             if(!$action){
