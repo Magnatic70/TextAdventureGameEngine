@@ -177,7 +177,7 @@ sub start_game {
                 chomp($action);
             }
             
-            if ($action =~ /^fight (\w+) with (.*)$/) {
+            if ($action =~ /^fight (.*?) with (.*)$/) {
                 my ($verb, $item) = ($1, $2);
                 if (grep { $_ eq $item } @inventory) {
                     if ($item eq $enemy->{required_item}) {
@@ -280,6 +280,7 @@ sub start_game {
                 @{$room_data->{items}} = grep { $_ ne $item } @{ $room_data->{items} };
             } else {
                 print "There is no such item here.\n";
+                if($debug){die;}
             }
         } elsif ($action =~ /^examine (.*)$/) {
             my $item = $1;
@@ -299,6 +300,7 @@ sub start_game {
                 }
             } else {
                 print "You don't have a $item in your inventory.\n";
+                if($debug){die;}
             }
         } elsif ($action =~ /^search (.*)$/) {
             my $target = $1;
@@ -314,6 +316,7 @@ sub start_game {
                 }
             } else {
                 print "There is nothing to find here.\n";
+                if($debug){die;}
             }
         } elsif ($action =~ /^combine (.*) and (.*)$/) {
             my ($item1, $item2) = ($1, $2);
@@ -339,9 +342,11 @@ sub start_game {
                     @inventory = grep { $_ ne $item1 && $_ ne $item2 } @inventory;    
                 } else {
                     print "These items cannot be combined.\n";
+                    if($debug){die;}
                 }
             } else {
                 print "You don't have both items in your inventory.\n";
+                if($debug){die;}
             }
         } elsif ($action =~ /^drop (.*)$/) {  # New command to drop an item
             my $item = $1;
@@ -353,6 +358,7 @@ sub start_game {
                 @inventory = grep { $_ ne $item } @inventory;
             } else {
                 print "You don't have a $item in your inventory.\n";
+                if($debug){die;}
             }
         } elsif ($action eq 'quit') {
             last;
