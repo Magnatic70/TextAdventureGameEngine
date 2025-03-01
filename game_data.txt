@@ -108,9 +108,9 @@ Exits:south:Landing,bed:Bed
 RoomID:Bed
 Name:Bed
 Description:You can't resist the urge to lay down on the bed and you quickly fall asleep.
-Exits:wake_up:Master bedroom2
+Exits:wake_up:Master bedroom3
 
-RoomID:Master bedroom2
+RoomID:Master bedroom3
 Name:Master bedroom
 Description:You wake up fully refreshed and ready for the remainder of your adventure.
 Exits:south:Landing,bed:Bed
@@ -153,7 +153,7 @@ Exits:stand_up:Bathroom2
 
 RoomID:Bathroom2
 Name:Bathroom
-Description:You get out of the bath, but you can't find a towel. To your dismay, your clothes have vanished.
+Description:You get out of the bath, but you can't find a towel. To your great dismay, your clothes have vanished.
 Exits:east:Landing2
 
 RoomID:Landing2
