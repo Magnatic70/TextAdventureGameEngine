@@ -69,6 +69,8 @@ sub load_game_data {
         } elsif ($line =~ /^Enemy:(.*)$/) {
             my ($enemy, $required_item) = split /:/, $1;
             $game_data{$current_room_id}{enemy} = { name => $enemy, required_item => $required_item };
+        } elsif ($line =~ /^RewardItem:(.*)$/) {
+            $game_data{$current_room_id}{reward_item} = $1 if exists $game_data{$current_room_id}{enemy};
         } elsif ($line =~ /^DefeatDescription:(.*)$/) {
             $game_data{$current_room_id}{defeat_description} = $1 if exists $game_data{$current_room_id}{enemy};
         }
@@ -136,6 +138,11 @@ sub start_game {
                         print "You defeated the $enemy->{name}!\n";
                         if (exists $room_data->{defeat_description}) {
                             print "$room_data->{defeat_description}\n";
+                        }
+                        # Add reward item to inventory
+                        if (exists $room_data->{reward_item}) {
+                            push @inventory, $room_data->{reward_item};
+                            print "You received a $room_data->{reward_item} as a reward!\n";
                         }
                         delete $room_data->{enemy};  # Remove enemy after defeating
                     } else {

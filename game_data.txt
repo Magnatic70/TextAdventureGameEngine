@@ -32,6 +32,7 @@ Description:A beautiful peaceful garden.
 Exits:north:Entrance
 Items:purse
 Enemy:Knight:sword
+RewardItem:knight_sword_piece
 DefeatDescription:You violently swing the sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
 
 RoomID:Kitchen
@@ -47,6 +48,7 @@ Description:A dark cellar.
 Exits:south:Kitchen
 Locks:keycode
 Enemy:Troll:rubber_duck_filled_with_hot_soup
+RewardItem:troll_trophy
 DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the Trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
 
 RoomID:Landing
@@ -63,6 +65,7 @@ RoomID:Nursery
 Name:Nursery
 Description:A creepy nursery full of spider webs
 Enemy:Spider:fly_swatter
+RewardItem:spider_leg
 DefeatDescription:You whack the spider with the fly swatter and the spider desintegrates into large chunks. One chunck flies right past you out the door.
 Exits:west:Landing3
 
