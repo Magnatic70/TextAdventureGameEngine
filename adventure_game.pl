@@ -125,7 +125,7 @@ sub start_game {
 
         # Check for puzzles
         if (exists $room_data->{puzzle}) {
-            print "$room_data->{riddle}\n";
+            print "\033[32m$room_data->{riddle}\033[0m\n";
             chomp(my $answer = <STDIN>);
             if ($answer eq $game_data{$current_room_id}{answer}) {
                 push @inventory, 'book';
