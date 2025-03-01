@@ -225,7 +225,7 @@ sub start_game {
         }
 
         # Prompt for user action with green text
-        print "\033[32mWhat do you want to do? \033[0m";  # Green text followed by reset
+        print "\033[32mWhat do you want to do? \033[0m\n";  # Green text followed by reset
         my $action = <STDIN>;
         if(!$action){
             die "No more input!\n";
