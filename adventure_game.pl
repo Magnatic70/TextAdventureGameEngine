@@ -90,6 +90,7 @@ sub start_game {
     # Initial setup
     my $current_room_id = $game_data{first_room_id};
     my @inventory;
+    my @room_history;  # Stack to track room history
 
     print "Welcome to the Adventure Game!\n";
     
@@ -145,18 +146,12 @@ sub start_game {
                     print "You don't have a $item in your inventory.\n";
                 }
             } elsif ($action =~ /^retreat$/) {
-                if (keys %{$room_data->{exits}}) {
-                    my @possible_exits = keys %{$room_data->{exits}};
-                    print "Possible exits: ", join(", ", @possible_exits), "\n";
-                    chomp(my $exit_choice = <STDIN>);
-                    if (exists $room_data->{exits}{$exit_choice}) {
-                        $current_room_id = $room_data->{exits}{$exit_choice};
-                        print "You retreat to the $game_data{$current_room_id}{name}.\n";
-                    } else {
-                        print "That is not a valid exit. You cannot retreat this way.\n";
-                    }
+                if (@room_history) {
+                    my $previous_room_id = pop @room_history;
+                    $current_room_id = $previous_room_id;
+                    print "You retreat to the $game_data{$current_room_id}{name}.\n";
                 } else {
-                    print "There are no exits available for retreat!\n";
+                    print "There is no previous room to retreat to!\n";
                 }
             } else {
                 print "I don't understand that action. Try fighting with an item from your inventory or retreating.\n";
@@ -196,6 +191,7 @@ sub start_game {
                 }
             }
             
+            push @room_history, $current_room_id;  # Save current room before moving
             $current_room_id = $next_room_id;
         } elsif ($action =~ /^take (.*)$/) {
             my $item = $1;
