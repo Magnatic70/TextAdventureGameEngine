@@ -216,7 +216,7 @@ FinalDestination:Cellar
 Combine:some digits,some letters=keycode
 
 Item:keycode
-ItemDescription:This looks like a code you can use to enter a locked door.
+ItemDescription:This looks like a code you could use to enter a locked door.
 
 Combine:rubber duck,cup of hot soup=rubber duck filled with hot soup
 
