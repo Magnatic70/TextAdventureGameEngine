@@ -56,6 +56,7 @@ Exits:north:Entrance
 Enemy:Knight:rusty_sword
 RewardItem:purse
 DefeatDescription:You violently swing the rusty sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
+DiedDescription:You violenty swing the shiny sword, but when it hits the knight it shatters in small pieces. The knight then swings his sword and decaptites you. Ouch! This is not merely a scratch.
 
 Item:purse
 Contains:mansion_key
@@ -88,7 +89,8 @@ Exits:south:Kitchen
 Locks:keycode
 Enemy:Troll:rubber_duck_filled_with_hot_soup
 RewardItem:troll_trophy
-DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the Trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
+DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
+DiedDescription:The troll swings his large club and hits you on the head. After the initial fireworks everything turns to black.
 
 Item:troll_trophy
 ItemDescription:A shiny goblet with the text "You've defeated the troll!"
