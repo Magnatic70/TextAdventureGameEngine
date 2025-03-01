@@ -180,8 +180,8 @@ sub start_game {
             last;  # Exit game loop
         }
 
-        # Prompt for user action
-        print "\nWhat do you want to do? ";
+        # Prompt for user action with green text
+        print "\033[32mWhat do you want to do? \033[0m";  # Green text followed by reset
         chomp(my $action = <STDIN>);
         
         if (exists $room_data->{exits} && exists $room_data->{exits}{$action}) {
