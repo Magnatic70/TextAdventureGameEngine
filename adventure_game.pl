@@ -169,11 +169,12 @@ sub start_game {
                         }
                         delete $room_data->{enemy};  # Remove enemy after defeating
                     } else {
-                        print "That item is not effective against the $enemy->{name}. You have died.\n";
+                        print "That item is not effective against the $enemy->{name}.\n";
                         
                         # Display DiedDescription if it exists
                         if (exists $room_data->{died_description}) {
                             print "$room_data->{died_description}\n";
+                            print "You have died!\n";
                         }
                         
                         last;  # End game loop
