@@ -168,7 +168,7 @@ Item:keycode
 ItemDescription:This looks like a code you can use to enter a locked door.
 
 Item:rubber_duck_filled_with_hot_soup
-ItemDescription:You remove the squeeker and poor the soup into the hole. It feels very hot, almost scalding your hands.
+ItemDescription:You remove the squeeker and pour the soup into the hole. It feels very hot, almost scalding your hands.
 
 Item:cup_of_hot_soup
 ItemDescription:Without the letters it's just hot soup.
@@ -180,4 +180,5 @@ Item:some_letters
 ItemDescription:Some random letters. What could they mean?
 
 Combine:some_digits,some_letters=keycode
+
 Combine:rubber_duck,cup_of_hot_soup=rubber_duck_filled_with_hot_soup
