@@ -119,8 +119,13 @@ sub start_game {
         my $room_data = $game_data{$current_room_id};
         
         # Display room name and description with black text on white background
-        print "\033[47m\033[30m--- Location: ", $room_data->{name}, " ---\033[0m\n";
+        print "\n\n\033[47m\033[30m--- Location: ", $room_data->{name}, " ---\033[0m\n";
         print "$room_data->{description}\n";
+
+        # Simple inventory display in cyan
+        if (@inventory) {
+            print "\033[36mInventory: ", join(", ", @inventory), "\033[0m\n";  # Cyan text followed by reset
+        }
 
         if ($room_data->{exits}) {
             print "Options: ", join(", ", keys %{$room_data->{exits}}), "\n";
@@ -351,11 +356,6 @@ sub start_game {
         } else {
             print "I don't understand that action ($action). Try moving, taking an item, examining something, searching, combining items, or dropping an item.\n";
             if($debug){die;}
-        }
-
-        # Simple inventory display in cyan
-        if (@inventory) {
-            print "\033[36mInventory: ", join(", ", @inventory), "\033[0m\n";  # Cyan text followed by reset
         }
     }
 
