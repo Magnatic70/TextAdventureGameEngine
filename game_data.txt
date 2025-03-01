@@ -4,6 +4,9 @@ Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
 Items:sword
 
+Item:sword
+ItemDescription:A large sword. It's a bit rusty, but it is still usable.
+
 RoomID:Lobby
 Name:Lobby
 Locks:mansion_key
@@ -11,21 +14,37 @@ Description:You are in a grand lobby with marble floors.
 Exits:south:Entrance,east:Library,west:Study,north:Kitchen,up:Landing
 Items:slippers
 
+Item:slippers
+ItemDescription:The good guest you are, you remove your dirty and slightly bloody shoes and put on the slippers.
+
 RoomID:Library
 Name:Library
 Description:The library is filled with dusty books.
 Exits:west:Lobby
-Locks:key
+Locks:library_key
 Puzzle:Solve the riddle to get the book.
 Riddle:What has keys but can't open locks?
 Answer:piano
 RewardItem:book
 
+Item:book
+Contains:kitchen_key,some_digits
+ItemDescription:A book. Nothing special about it?
+
+Item:kitchen_key
+ItemDescription:Another key, how many keys are there?
+
+Item:some_digits
+ItemDescription:Some random digits. What could they mean?
+
 RoomID:Study
 Name:Study
 Description:This small room contains a desk and a chair.
-Items:key
+Items:library_key
 Exits:east:Lobby
+
+Item:library_key
+ItemDescription:Another key, how many would there be?
 
 RoomID:Garden
 Name:Garden
@@ -35,12 +54,29 @@ Enemy:Knight:sword
 RewardItem:purse
 DefeatDescription:You violently swing the sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
 
+Item:purse
+Contains:mansion_key
+ItemDescription:You took the purse from the knight's body. It isn't of use to him anymore.
+
+Item:mansion_key
+ItemDescription:This will be useful.
+
 RoomID:Kitchen
 Name:Kitchen
 Description:A large kitchen. A large cauldron is bubbling.
 Items:cup_of_letter_soup
 Locks:kitchen_key
 Exits:north:Cellar,south:Lobby
+
+Item:cup_of_letter_soup
+Contains:some_letters,cup_of_hot_soup
+ItemDescription:A steaming hot cup of soup with some letters in it
+
+Item:cup_of_hot_soup
+ItemDescription:Without the letters it's just hot soup.
+
+Item:some_letters
+ItemDescription:Some random letters. What could they mean?
 
 RoomID:Cellar
 Name:Cellar
@@ -50,6 +86,9 @@ Locks:keycode
 Enemy:Troll:rubber_duck_filled_with_hot_soup
 RewardItem:troll_trophy
 DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoots out the bottom and right into the Trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
+
+Item:troll_trophy
+ItemDescription:A shiny goblet with the text "You've defeated the troll!"
 
 RoomID:Landing
 Name:Landing
@@ -69,17 +108,26 @@ RewardItem:spider_leg
 DefeatDescription:You stomp the spider with your slippers and chunks of spider fly everywhere. One chunk flies right past you out the door.
 Exits:west:Landing3
 
+Item:spider_leg
+ItemDescription:Yuk! A spider leg! Gross!
+
 RoomID:Landing3
 Name:Landing
 Description:The landing gives access to a lot of closed doors.
 Items:spider_chunk
 Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 
+Item:spider_chunk
+ItemDescription:Although it's even grosser than the spider leg, you pick up the goopy chunck.
+
 RoomID:Bathroom
 Name:Bathroom
 Description:A cozy bathroom. The bath is filled with steaming water and a thick layer of bubbles
 SearchableItems:bath:rubber_duck
 Exits:east:Landing,bathe:Bath
+
+Item:rubber_duck
+ItemDescription:It's a duck. Made of rubber. It squeeks when you squeeze it.
 
 RoomID:Bath
 Name:Bath
@@ -103,11 +151,18 @@ Description:A luxurious master bedroom with a large four poster bed.
 Items:your_clothes
 Exits:south:Landing
 
+Item:your_clothes
+ItemDescription:You quickly redress while you wonder how your clothes got here.
+
 RoomID:Attic
 Name:Attic
 Description:The attic is cluttered with a lot of items.
 SearchableItems:attic:large_trunk
 Exits:down:Landing,up:Belltower
+
+Item:large_trunk
+Contains:axe
+ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
 
 RoomID:Belltower
 Name:Bell tower
@@ -116,69 +171,20 @@ SearchableItems:bell:feather
 Items:fly_swatter
 Exits:down:Attic
 
-Item:large_trunk
-Contains:axe
-ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
-
-FinalDestination:Cellar
-
-Item:slippers
-ItemDescription:The good guest you are, you remove your dirty and slightly bloody shoes and put on the slippers.
-
-Item:book
-Contains:kitchen_key,some_digits
-ItemDescription:A book. Nothing special about it.
-
-Item:purse
-Contains:mansion_key
-ItemDescription:You took the purse from the knight's body. It isn't of use to him anymore.
-
-Item:cup_of_letter_soup
-Contains:some_letters,cup_of_hot_soup
-ItemDescription:A steaming hot cup of soup with some letters in it
-
-Item:sword
-ItemDescription:A large sword. It's a bit rusty, but it is still usable.
-
-Item:key
-ItemDescription:A key. What would it unlock?
-
-Item:troll_trophy
-ItemDescription:A shiny goblet with the text "You've defeated the troll!"
-
-Item:spider_leg
-ItemDescription:Yuk! A spider leg! Gross!
-
-Item:spider_chunk
-ItemDescription:Although it's even grosser than the spider leg, you pick up the goopy chunck.
-
-Item:rubber_duck
-ItemDescription:It's a duck. Made of rubber. It squeeks when you squeeze it.
-
-Item:your_clothes
-ItemDescription:You quickly redress while you wonder how your clothes got here.
-
 Item:feather
 ItemDescription:A feather, it's grey, possibly from a pigeon.
 
 Item:fly_swatter
 ItemDescription:What's this doing in the bell tower?
 
-Item:keycode
-ItemDescription:This looks like a code you can use to enter a locked door.
-
-Item:rubber_duck_filled_with_hot_soup
-ItemDescription:You remove the squeeker and pour the soup into the hole. It feels very hot, almost scalding your hands.
-
-Item:cup_of_hot_soup
-ItemDescription:Without the letters it's just hot soup.
-
-Item:some_digits
-ItemDescription:Some random digits. What could they mean?
-
-Item:some_letters
-ItemDescription:Some random letters. What could they mean?
+FinalDestination:Cellar
 
 Combine:some_digits,some_letters=keycode
 
+Item:keycode
+ItemDescription:This looks like a code you can use to enter a locked door.
+
 Combine:rubber_duck,cup_of_hot_soup=rubber_duck_filled_with_hot_soup
+
+Item:rubber_duck_filled_with_hot_soup
+ItemDescription:You remove the squeeker and pour the soup into the hole. It feels very hot, almost scalding your hands.
