@@ -1,0 +1,264 @@
+Title:The prison escape
+
+RoomID:Cell
+Name:Cell
+Description:You've been locked in your cell for a long time now. The prison is eerily quiet. Your are out of food and fresh water and your bed needs clean sheets. You have to escape.
+Exits:north:CorridorJustEscaped
+SearchableItems:bed:bed spring,sheets:long thread
+
+Item:bed spring
+ItemDescription:A small piece of a bed spring has been poking you for too long, you pry it loose.
+
+Item:long thread
+ItemDescription:A long thread comes loose from the worn sheets.
+
+Combine:bed spring,long thread=fishing line
+
+Item:fishing line
+ItemDescription:A long line with a hook at the end.
+
+RoomID:CellEscaped
+Name:Cell
+Description:Your own cell. This was your home for far too long.
+Items:key chain
+Exits:north:Corridor
+
+Item:key chain
+ItemDescription:It contains two keys
+Contains:cell key,guards room key
+
+RoomID:CorridorJustEscaped
+Name:Corridor
+Locks:fishing line
+Description:After dozens of attempts and hours of frustraion you finally manage to hook the fishing line to the key chain. You carefully haul in the keys and unlock your cell door. Free at last! You are in a corridor with multiple cells.
+Exits:south:CellEscaped,west:CorridorWest 
+
+RoomID:Corridor
+Name:Corridor
+Description:A corridor with multiple cells
+Exits:south:CellEscaped,west:CorridorWest,east:CorridorEast
+
+RoomID:CorridorWest
+Name:Corridor
+Description:A corridor with multiple cells
+Exits:south:CellWest,east:Corridor,north:GuardsRoom
+
+RoomID:CellWest
+Name:Cell
+Description:This looks just like your cell. Or is it your cell?
+Locks:cell key
+SearchableItems:bed:bar of chocolate,sheets:photo of a woman,toilet:toilet water
+Exits:north:CorridorWest
+
+Item:bar of chocolate
+ItemDescription:Yummy! A bar of chocolate! You're really hungry.
+
+Item:photo of a woman
+ItemDescription:It's good that you're not at work. This is definitely NSFW!
+
+Item:toilet water
+ItemDescription:You're thirsty, but not that thirsty!
+
+RoomID:GuardsRoom
+Name:Guards room
+Description:The guards room. You passed through this room many times, but never alone.
+Locks:guards room key
+Enemy:very hungry cat:dead rat
+DefeatDescription:You throw the dead rat at the cat. It hisses at you and then takes the dead rat under the desk and starts to eat.
+DiedDescription:The hungry cat hisses at you. Before you can react it jumps on your shoulder and bites you in the neck, slashing your artery. Blood gushes from your neck while you start feeling woozy. You slowly sink on the floor and the last thing you feel is the cat starting to gnaw at your throat.
+Exits:south:CorridorWest,north:RecArea,east:Solitary
+SearchableItems:desk:drawer
+
+Item:empty wine glass
+ItemDescription:If you just had something to pour into it.
+
+Item:drawer
+ItemDescription:A drawer full of stuff and a few pieces of paper
+Contains:paper with 12,paper with 34,gum,gun,stapler
+
+Item:gum
+ItemDescription:That would taste good!
+
+Item:gun
+ItemDescription:You wished you had this when encountering the cat. Then you see it isn't loaded.
+
+Item:stapler
+ItemDescription:A stapler
+
+Item:paper with 12
+ItemDescription:A piece of paper with the numbers 1 and 2 scribbled on it
+
+Item:paper with 34
+ItemDescription:A piece of paper with the numbers 3 and 4 scribbled on it
+
+Combine:paper with 12,paper with 34=key code
+
+Item:key code
+ItemDescription:The key code for solitary
+
+Combine:empty wine glass,toilet water=full wine glass
+
+Item:full wine glass
+ItemDescription:It looks almost drinkable.
+ 
+RoomID:CorridorEast
+Name:Corridor
+Description:A corridor with multiple cells
+Exits:south:CellEast,west:Corridor,east:CorridorEastEast
+
+RoomID:CellEast
+Name:Cell
+Description:This looks just like your cell. Or is it your cell?
+Locks:cell key
+SearchableItems:bed:shiv
+Exits:north:CorridorEast
+
+Item:shiv
+ItemDescription:An improvised sharp object
+
+RoomID:CorridorEastEast
+Name:Corridor
+Description:A corridor with multiple cells
+Exits:south:CellEastEast,west:CorridorEast
+
+RoomID:CellEastEast
+Name:Cell
+Description:This looks just like your cell. Or is it your cell?
+Locks:cell key
+SearchableItems:toilet:dead rat,bed:file
+Exits:north:CorridorEastEast
+
+Item:dead rat
+ItemDescription:It seems a rat got into the toilet and drowned when it didn't manage to climb out.
+
+RoomID:Solitary
+Name:Solitary
+Description:You get the shivers in this room. Even now when you can leave whenever you like.
+Locks:key code
+Exits:west:GuardsRoom
+
+RoomID:RecArea
+Name:The recreational area.
+Description:Through the bars you can see the sky for the first time in a long time. You can see the visitor room through the glass door, but the lock is at the other side of the door.
+Exits:south:GuardsRoom,north:VisitorRoom
+
+Combine:shiv,file=sharpened shiv
+
+Item:sharpened shiv
+ItemDescription:The shiv is even sharper than it was.
+
+RoomID:VisitorRoom
+Name:The visitor room
+Description:The shiv is sharp enough to score the glass of the door. You manage to cut out a piece of glass just big enough for you hand. You fondly remember the visits of your family and chatting with them at many of these tables.
+Exits:south:RecArea2
+Locks:sharpened shiv
+
+RoomID:RecArea2
+Name:The recreational area.
+Description:Through the bars you can see the sky for the first time in a long time.
+Exits:south:GuardsRoom,north:VisitorRoom2
+
+RoomID:VisitorRoom2
+Name:The visitor room
+Description:You fondly remember the visits of your family and chatting with them at many of these tables.
+Exits:south:RecArea2,north:Reception
+SearchableItems:table:bullits,another table:newspaper
+
+Item:bullits
+ItemDescription:You can't believe your eyes. Why would there be bullits hidden under a table in the visitor room?
+
+Combine:gun,bullits=loaded gun
+
+Item:loaded gun
+ItemDescription:Now it is actually useful!
+
+RoomID:Reception
+Name:Reception
+Description:It was years ago that you where checked in right here for a crime you didn't commit.
+Exits:south:VisitorRoom2,north:Street,east:WardensOffice
+
+Combine:newspaper,contraption=burning newspaper
+
+Item:burning newspaper
+ItemDescription:You're now walking around with a piece of burning newspaper. It sets off the fire alarm everywhere. You hope that that is not a problem!
+
+RoomID:Street
+Name:Street
+Description:By setting the newspaper on fire you triggered the fire alarm in the reception. The door to the street was automatically unlocked. Freedom at last!
+Locks:burning newspaper
+
+RoomID:WardensOffice
+Name:Wardens office
+Items:empty wine glass
+Description:You never entered this room before. It's luxurious! He even had his own private bathroom!
+Exits:west:Reception,east:PrivateBathroom
+
+RoomID:PrivateBathroom
+Name:The wardens private bathroom
+Description:The high-tech Japanse toilet is the centerpiece of the room
+Exits:west:WardensOffice,up:AD1
+
+RoomID:AD1
+Name:Airduct
+Description:Shiny metal all around
+Exits:down:PrivateBathroom,east:AD2
+
+RoomID:AD2
+Name:Airduct
+Description:Shiny metal all around
+Exits:east:AD3
+
+RoomID:AD3
+Name:Airduct
+Description:Shiny metal all around
+Exits:south:AD4,down:sewer3
+
+RoomID:sewer3
+Name:You fall down into the sewer
+Description:Gross! You needed a bath, but this doesn't make you cleaner.
+Enemy:Crocodile:loaded gun
+DefeatDescription:You shoot the crocodile in the head and it dies immediately.
+DiedDescription:The crocodile eats you alive. You don't like the feeling. It doesn't last long.
+Exits:up:AD3
+
+RoomID:AD4
+Name:Airduct
+Description:Shiny metal all around
+Exits:south:AD5
+
+RoomID:AD5
+Name:Airduct
+Description:Shiny metal all around
+Exits:west:AD6,down:sewer5
+
+RoomID:sewer5
+Name:You fall down into the sewer
+Description:Gross! You needed a bath, but this doesn't make you cleaner.
+Enemy:rabid dog:bar of chocolate
+DefeatDescription:You feed the dog the bar of chocolate. It must be very sick already, because it dies almost instantly from the poisonous chocolate.
+DiedDescription:The rabid dog eats you alive. You don't like the feeling. It doesn't last long.
+Items:monocle
+Exits:up:AD5
+
+Combine:monocle,full wine glass=contraption
+
+Item:contraption
+ItemDescription:This weird contraption really focuses the light
+
+RoomID:AD6
+Name:Airduct
+Description:Shiny metal all around
+Exits:west:AD7
+
+RoomID:AD7
+Name:Airduct
+Description:Shiny metal all around
+Exits:north:AD8
+
+RoomID:AD8
+Name:Airduct
+Description:Shiny metal all around
+Exits:north:AD1
+
+FinalDestination:Street
+
