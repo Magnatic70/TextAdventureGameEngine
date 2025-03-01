@@ -70,7 +70,7 @@ sub load_game_data {
             my %searchable_map;
             foreach my $searchable (@searchables) {
                 if ($searchable =~ /^(.*):(.*)$/) {
-                    $searchable_map{$1} = $2;
+                    push @{$searchable_map{$1}}, $2;  # Allow multiple items per searchable target
                 }
             }
             $game_data{$current_room_id}{searchable_items} = \%searchable_map;
@@ -118,8 +118,8 @@ sub start_game {
     while (1) {
         my $room_data = $game_data{$current_room_id};
         
-        # Display room name and description
-        print "\n--- Location: ", $room_data->{name}, " ---\n";
+        # Display room name and description with black text on white background
+        print "\033[47m\033[30m--- Location: ", $room_data->{name}, " ---\033[0m\n";
         print "$room_data->{description}\n";
 
         if ($room_data->{exits}) {
@@ -295,12 +295,14 @@ sub start_game {
         } elsif ($action =~ /^search (.*)$/) {
             my $target = $1;
             if (exists $room_data->{searchable_items} && exists $room_data->{searchable_items}{$target}) {
-                push @inventory, $room_data->{searchable_items}{$target};
-                print "You found a ", $room_data->{searchable_items}{$target}, " in the $target.\n";
-                
-                # Display searched item description
-                if (exists $game_data{$room_data->{searchable_items}{$target}}{description}) {
-                    print "$game_data{$room_data->{searchable_items}{$target}}{description}\n";
+                foreach my $item (@{$room_data->{searchable_items}{$target}}) {
+                    push @inventory, $item;
+                    print "You found a ", $item, " in the $target.\n";
+                    
+                    # Display searched item description
+                    if (exists $game_data{$item}{description}) {
+                        print "$game_data{$item}{description}\n";
+                    }
                 }
             } else {
                 print "There is nothing to find here.\n";
