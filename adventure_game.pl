@@ -125,7 +125,7 @@ sub start_game {
         # Check for enemies
         if (exists $room_data->{enemy}) {
             my $enemy = $room_data->{enemy};
-            print "You encounter a $enemy->{name}! You must fight it with the correct item to survive.\n";
+            print "You encounter a $enemy->{name}! You must fight it with the correct item to survive or retreat.\n";
 
             # If inventory is empty, player loses immediately
             if (!@inventory) {
@@ -150,8 +150,22 @@ sub start_game {
                 } else {
                     print "You don't have a $item in your inventory.\n";
                 }
+            } elsif ($action =~ /^retreat$/) {
+                if (keys %{$room_data->{exits}}) {
+                    my @possible_exits = keys %{$room_data->{exits}};
+                    print "Possible exits: ", join(", ", @possible_exits), "\n";
+                    chomp(my $exit_choice = <STDIN>);
+                    if (exists $room_data->{exits}{$exit_choice}) {
+                        $current_room_id = $room_data->{exits}{$exit_choice};
+                        print "You retreat to the $game_data{$current_room_id}{name}.\n";
+                    } else {
+                        print "That is not a valid exit. You cannot retreat this way.\n";
+                    }
+                } else {
+                    print "There are no exits available for retreat!\n";
+                }
             } else {
-                print "I don't understand that action. Try fighting with an item from your inventory.\n";
+                print "I don't understand that action. Try fighting with an item from your inventory or retreating.\n";
             }
             next;
         }
