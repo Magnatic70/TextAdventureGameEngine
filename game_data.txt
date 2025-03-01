@@ -62,7 +62,7 @@ DiedDescription:You violenty swing the shiny sword, but when it hits the knight 
 
 Item:purse
 Contains:mansion_key
-ItemDescription:You took the purse from the knight's body. It isn't of use to him anymore.
+ItemDescription:You took the purse from the knight's body. It wasn't of use to him anymore.
 
 Item:mansion_key
 ItemDescription:This will be useful.
@@ -95,7 +95,7 @@ DefeatDescription:You squeeze the rubber duck really hard and the hot soup shoot
 DiedDescription:The troll swings his large club and hits you on the head. After the initial fireworks everything turns to black.
 
 Item:troll_trophy
-ItemDescription:A shiny goblet with the text "You've defeated the troll!"
+ItemDescription:It's a shiny goblet with the text "You've defeated the troll!"
 
 RoomID:Landing
 Name:Landing
