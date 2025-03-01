@@ -84,11 +84,20 @@ sub load_game_data {
 
 # Main game loop
 sub start_game {
-    my($gameFile)=$ARGV[0].'.txt';
+    my($gameFile);
+    if($ARGV[0]){
+        $gameFile=$ARGV[0].'.txt';
+    }
+    else{
+        print "Game not found, using default\n";
+        $gameFile='game_data.txt';
+    }
+        
     if(!(-e $gameFile)){
         print "Game not found, using default\n";
         $gameFile='game_data.txt';
     }
+
     my %game_data = load_game_data($gameFile);
 
     # Initial setup
@@ -131,7 +140,7 @@ sub start_game {
         # Check for enemies
         if (exists $room_data->{enemy}) {
             my $enemy = $room_data->{enemy};
-            print "You encounter a $enemy->{name}! You must fight it with the correct item to survive or retreat.\n";
+            print "You encounter a $enemy->{name}! \033[32mYou must fight it with the correct item to survive or retreat.\033[0m\n";
 
             chomp(my $action = <STDIN>);
             if ($action =~ /^fight (\w+) with (.*)$/) {
