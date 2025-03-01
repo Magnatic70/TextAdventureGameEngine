@@ -147,8 +147,8 @@ sub start_game {
                             print "You received a $room_data->{reward_item} as a reward!\n";
 
                             # Display contained item description
-                            if (exists $game_data{$$room_data->{reward_item}}{description}) {
-                                print "$game_data{$$room_data->{reward_item}}{description}\n";
+                            if (exists $game_data{$room_data->{reward_item}}{description}) {
+                                print "$game_data{$room_data->{reward_item}}{description}\n";
                             }
                         }
                         delete $room_data->{enemy};  # Remove enemy after defeating
