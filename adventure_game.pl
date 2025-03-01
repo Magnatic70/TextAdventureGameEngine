@@ -109,7 +109,8 @@ sub start_game {
             print "Options: ", join(", ", keys %{$room_data->{exits}}), "\n";
         }
         
-        if (exists $room_data->{items}) {
+        # Only display items in room if there are any
+        if (exists $room_data->{items} && @{$room_data->{items}}) {
             print "Items in room: ", join(", ", @{ $room_data->{items} }), "\n";
         }
 
