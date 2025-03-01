@@ -66,13 +66,13 @@ Name:Nursery
 Description:A creepy nursery full of spider webs
 Enemy:Spider:slippers
 RewardItem:spider_leg
-DefeatDescription:You stomp the spider with your slippers and chunks of spider fly everywhere. One chunck flies right past you out the door.
+DefeatDescription:You stomp the spider with your slippers and chunks of spider fly everywhere. One chunk flies right past you out the door.
 Exits:west:Landing3
 
 RoomID:Landing3
 Name:Landing
 Description:The landing gives access to a lot of closed doors.
-Items:spider_chunck
+Items:spider_chunk
 Exits:down:Lobby,north:Master bedroom,east:Nursery,west:Bathroom,up:Attic
 
 RoomID:Bathroom
