@@ -153,10 +153,10 @@ sub start_game {
                 my ($verb, $item) = ($1, $2);
                 if (grep { $_ eq $item } @inventory) {
                     if ($item eq $enemy->{required_item}) {
-                        print "You defeated the $enemy->{name}!\n";
                         if (exists $room_data->{defeat_description}) {
                             print "$room_data->{defeat_description}\n";
                         }
+                        print "You defeated the $enemy->{name}!\n";
                         # Add reward item to inventory
                         if (exists $room_data->{reward_item}) {
                             push @inventory, $room_data->{reward_item};
