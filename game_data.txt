@@ -152,7 +152,7 @@ Description:You now realize that it is freezing cold while your skin is slowly d
 Exits:down:Lobby,north:Master bedroom2,east:Nursery,west:Bathroom,up:Attic
 
 RoomID:Master bedroom2
-Name:Master Bedroomlose consciousness
+Name:Master Bedroom
 Description:A luxurious master bedroom with a large four poster bed.
 Items:your_clothes
 Exits:south:Landing
