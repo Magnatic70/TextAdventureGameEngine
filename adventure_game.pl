@@ -30,6 +30,8 @@ sub load_game_data {
             $game_data{$current_room_id} = {};
         } elsif ($line =~ /^Title:(.*)$/) {
             $game_data{title} = $1;
+        } elsif ($line =~ /^Objective:(.*)$/) {
+            $game_data{objective} = $1;
         } elsif ($line =~ /^Name:(.*)$/) {
             $game_data{$current_room_id}{name} = $1;
         } elsif ($line =~ /^Description:(.*)$/) {
@@ -131,6 +133,9 @@ sub start_game {
     my @room_history;  # Stack to track room history
 
     print "\n\033[97;1;4m$game_data{title}\033[0m\n";
+    if($game_data{objective}){
+        print "$game_data{objective}\n";
+    }
     
     # Explain all possible actions
     print "\nYou can perform the following actions:\n";
