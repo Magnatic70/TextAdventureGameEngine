@@ -132,6 +132,19 @@ sub start_game {
 
     print "\n\033[97;1;4m$game_data{title}\033[0m\n";
     
+    # Explain all possible actions
+    print "\nYou can perform the following actions:\n";
+    print "- Move: Use directions like 'north', 'south', etc., to move between rooms.\n";
+    print "- Take: Pick up items using 'take [item]'.\n";
+    print "- Examine: Look at items or puzzles with 'examine [item]'.\n";
+    print "- Search: Find hidden items with 'search [target]'.\n";
+    print "- Combine: Create new items by combining two, e.g., 'combine item1 and item2'.\n";
+    print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
+    print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
+    print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
+    print "- Retreat: Move back to the previous room with 'retreat'.\n";
+    print "- Quit: Exit the game by typing 'quit'.\n";
+
     while (1) {
         my $room_data = $game_data{$current_room_id};
         
