@@ -5,12 +5,6 @@ Name:Entrance
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
 Items:rusty sword,shiny sword
-Persons:guardian
-
-Person:guardian
-Questions:What is your name?,Where am I?
-Keywords:name:mansion key,mansion:mansion key
-Rewards:
 
 Item:rusty sword
 ItemDescription:A large sword. It's really rusty.
