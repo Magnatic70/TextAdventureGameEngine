@@ -37,5 +37,5 @@ ItemDescription:An ornate dagger.
 Item:hammer
 ItemDescription:A sturdy, well used hammer.
 
-Item:town hall key
+Item:town hall keyy
 ItemDescription:The key to town hall.

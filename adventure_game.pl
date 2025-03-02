@@ -9,9 +9,6 @@ my $debug = 0;
 # 0=don't die when you are defeated by an enemy, 1=die when you are defeated
 my $die = 0;
 
-# 1=show warnings when rooms, items or persons have no description, 0=don't show warnings
-my $warn = 1;
-
 if (-p STDIN) {
     $debug = 1;
 }
@@ -31,6 +28,9 @@ sub load_game_data {
         if ($line =~ /^RoomID:(.*)$/) {
             $current_room_id = $1;
             $game_data{rooms}{$current_room_id} = {};
+            if(!exists $game_data{first_room_id}){
+                $game_data{first_room_id}=$current_room_id;
+            }
         } elsif ($line =~ /^Title:(.*)$/) {
             $game_data{title} = $1;
         } elsif ($line =~ /^Objective:(.*)$/) {
