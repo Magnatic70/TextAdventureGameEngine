@@ -2,7 +2,7 @@ Title:The prison escape
 
 RoomID:Cell
 Name:Cell
-Description:You've been locked in your cell for a long time now. The prison is eerily quiet. Your are out of food and fresh water and your bed needs clean sheets. You have to escape.
+Description:You've been locked in your cell for a long time now. The prison is eerily quiet. Your are out of food and fresh water and your bed needs clean sheets. You have to escape. Looking through the bars of the cell door you can see a key chain hanging on the opposite wall in the corridor.
 Exits:north:CorridorJustEscaped
 SearchableItems:bed:bed spring,sheets:long thread
 
