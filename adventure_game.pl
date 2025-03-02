@@ -4,10 +4,10 @@ use strict;
 use warnings;
 
 my $debug=0;
-my $die=0;
+my $die=0; # 0=don't die when you are defeated by an enemy
 
 if(-p STDIN) {
-  $debug=1;
+  $debug=1; # Stops when a action results in a failure. Handy during automated testing.
 }
 
 # Load game data from file into a hash structure
