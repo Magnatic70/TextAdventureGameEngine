@@ -156,6 +156,49 @@ sub validate_game_data {
             warn "Item '$item_id' is missing a description.\n";
         }
     }
+
+    # Validate reward items, trade items, and answer items
+    foreach my $room_id (keys %{ $game_data{rooms} }) {
+        if (exists $game_data{rooms}{$room_id}{reward_item}) {
+            unless (exists $game_data{items}{$game_data{rooms}{$room_id}{reward_item}}) {
+                warn "Reward item '$game_data{rooms}{$room_id}{reward_item}' in room '$room_id' is not defined.\n";
+            }
+        }
+
+        if (exists $game_data{rooms}{$room_id}{enemy}) {
+            my $required_item = $game_data{rooms}{$room_id}{enemy}{required_item};
+            unless (exists $game_data{items}{$required_item}) {
+                warn "Required item '$required_item' for enemy in room '$room_id' is not defined.\n";
+            }
+        }
+
+        if (exists $game_data{rooms}{$room_id}{answer}) {
+            my $answer = $game_data{rooms}{$room_id}{answer};
+            unless (exists $game_data{items}{$answer}) {
+                warn "Answer item '$answer' in room '$room_id' is not defined.\n";
+            }
+        }
+    }
+
+    foreach my $person_id (keys %{ $game_data{persons} }) {
+        if (exists $game_data{persons}{$person_id}{keywords}) {
+            foreach my $keyword (keys %{ $game_data{persons}{$person_id}{keywords} }) {
+                my $reward_item = $game_data{persons}{$person_id}{answers}{$keyword};
+                unless (exists $game_data{items}{$reward_item}) {
+                    warn "Reward item '$reward_item' for keyword '$keyword' in person '$person_id' is not defined.\n";
+                }
+            }
+        }
+
+        if (exists $game_data{persons}{$person_id}{trades}) {
+            foreach my $trade (keys %{ $game_data{persons}{$person_id}{trades} }) {
+                my $reward_item = $game_data{persons}{$person_id}{answers}{$trade};
+                unless (exists $game_data{items}{$reward_item}) {
+                    warn "Reward item '$reward_item' for trade '$trade' in person '$person_id' is not defined.\n";
+                }
+            }
+        }
+    }
 }
 
 # Main game loop
@@ -380,7 +423,7 @@ sub start_game {
                         push @inventory, $contained_item;
                         print "You found a ", $contained_item, " in the $item.\n";
 
-                        # Display contained item description
+                        # Display searched item description
                         if (exists $game_data{items}{$contained_item}{description}) {
                             print "$game_data{items}{$contained_item}{description}\n";
                         }
@@ -502,7 +545,6 @@ sub start_game {
                         push @inventory, $reward;
                         print "The $person responds: $game_data{persons}{$person}{answers}{$item}\n";
                         print "The $person gives you $reward.\n";
-                        $traded = 1;
 
                         # Remove the item from inventory
                         @inventory = grep { $_ ne $item } @inventory;
@@ -511,6 +553,7 @@ sub start_game {
                         if (exists $game_data{items}{$reward}{description}) {
                             print "$game_data{items}{$reward}{description}\n";
                         }
+                        $traded = 1;
                     }
                 }
                 if (!$traded) {
