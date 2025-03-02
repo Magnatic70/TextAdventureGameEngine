@@ -61,7 +61,7 @@ ItemDescription:You're thirsty, but not that thirsty!
 
 RoomID:GuardsRoom
 Name:Guards room
-Description:The guards room. You passed through this room many times, but never alone.
+Description:The guards room. You passed through this room many times, but never alone. It's a small room almost completely filled by a large desk and a small chair.
 Locks:guards room key
 Enemy:very hungry cat:dead rat
 DefeatDescription:You throw the dead rat at the cat. It hisses at you and then takes the dead rat under the desk and starts to eat.
@@ -150,7 +150,8 @@ ItemDescription:The shiv is even sharper than it was.
 RoomID:VisitorRoom
 Name:The visitor room
 Description:The shiv is sharp enough to score the glass of the door. You manage to cut out a piece of glass just big enough for you hand. You fondly remember the visits of your family and chatting with them at many of these tables.
-Exits:south:RecArea2
+Exits:south:RecArea2,north:Reception
+SearchableItems:table:bullits,another table:newspaper
 Locks:sharpened shiv
 
 RoomID:RecArea2
