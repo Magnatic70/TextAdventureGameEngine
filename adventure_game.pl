@@ -92,9 +92,6 @@ sub load_game_data {
         } elsif ($line =~ /^Person:(.*)$/) {
             $current_person = $1;
             $game_data{$current_person} = {};
-        } elsif ($line =~ /^Questions:(.*)$/) {
-            my @questions = split /,/, $1;
-            $game_data{$current_person}{questions} = \@questions if @questions;
         } elsif ($line =~ /^Keywords:(.*)$/) {
             my %keywords_map;
             foreach my $keyword_pair (split /,/, $1) {
@@ -103,9 +100,6 @@ sub load_game_data {
                 }
             }
             $game_data{$current_person}{keywords} = \%keywords_map;
-        } elsif ($line =~ /^Rewards:(.*)$/) {
-            my @rewards = split /,/, $1;
-            $game_data{$current_person}{rewards} = \@rewards if @rewards;
         }
     }
 
@@ -393,14 +387,13 @@ sub start_game {
                 # Check for keywords in the question
                 foreach my $keyword (keys %{$game_data{$person}{keywords}}) {
                     if ($question =~ /\b$keyword\b/) {
-                        foreach my $reward (@{$game_data{$person}{rewards}}) {
-                            push @inventory, $reward;
-                            print "The $person gives you a $reward.\n";
-                            
-                            # Display reward item description
-                            if (exists $game_data{$reward}{description}) {
-                                print "$game_data{$reward}{description}\n";
-                            }
+                        my $reward=$game_data{$person}{keywords}{$keyword};
+                        push @inventory, $reward;
+                        print "The $person answers by giving you $reward.\n";
+                        
+                        # Display reward item description
+                        if (exists $game_data{$reward}{description}) {
+                            print "$game_data{$reward}{description}\n";
                         }
                     }
                 }
