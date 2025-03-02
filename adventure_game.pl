@@ -128,7 +128,7 @@ sub load_game_data {
 
 # Validate game data for missing descriptions and undefined exits
 sub validate_game_data {
-    my ($game_data) = @_;
+    my (%game_data) = @_;
 
     # Check rooms for missing names or descriptions
     foreach my $room_id (keys %{ $game_data{rooms} }) {
@@ -156,13 +156,6 @@ sub validate_game_data {
             warn "Item '$item_id' is missing a description.\n";
         }
     }
-
-    # Check persons for missing names or keywords
-    foreach my $person_id (keys %{ $game_data{persons} }) {
-        if (!exists $game_data{persons}{$person_id}{keywords}) {
-            warn "Person '$person_id' is missing keywords.\n";
-        }
-    }
 }
 
 # Main game loop
@@ -183,7 +176,7 @@ sub start_game {
     my %game_data = load_game_data($gameFile);
 
     # Validate game data
-    validate_game_data(\%game_data);
+    validate_game_data(%game_data);
 
     # Initial setup
     my $current_room_id = $game_data{first_room_id};
