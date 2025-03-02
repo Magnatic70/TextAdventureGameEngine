@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-# 1=Stops when a action results in a failure. Handy during automated testing. 0=Normal behaviour.
+# 1=Stops when an action results in a failure. Handy during automated testing. 0=Normal behaviour.
 my $debug = 0;
 
 # 0=don't die when you are defeated by an enemy, 1=die when you are defeated
