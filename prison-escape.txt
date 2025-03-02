@@ -31,7 +31,7 @@ RoomID:CorridorJustEscaped
 Name:Corridor
 Locks:fishing line
 Description:After dozens of attempts and hours of frustraion you finally manage to hook the fishing line to the key chain. You carefully haul in the keys and unlock your cell door. Free at last! You are in a corridor with multiple cells.
-Exits:south:CellEscaped,west:CorridorWest 
+Exits:south:CellEscaped,west:CorridorWest
 
 RoomID:Corridor
 Name:Corridor

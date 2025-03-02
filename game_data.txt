@@ -205,9 +205,6 @@ Exits:north:Lobby,south:Garden
 Item:feather
 ItemDescription:A feather, it's grey, possibly from a pigeon.
 
-Item:bird droppings
-Description:At least they have dried!
-
 Item:fly swatter
 ItemDescription:What's this doing in the bell tower?
 
