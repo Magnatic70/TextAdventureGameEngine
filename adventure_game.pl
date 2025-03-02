@@ -96,8 +96,13 @@ sub load_game_data {
             my @questions = split /,/, $1;
             $game_data{$current_person}{questions} = \@questions if @questions;
         } elsif ($line =~ /^Keywords:(.*)$/) {
-            my @keywords = split /,/, $1;
-            $game_data{$current_person}{keywords} = \@keywords if @keywords;
+            my %keywords_map;
+            foreach my $keyword_pair (split /,/, $1) {
+                if ($keyword_pair =~ /^(.*):(.*)$/) {
+                    $keywords_map{$1} = $2;
+                }
+            }
+            $game_data{$current_person}{keywords} = \%keywords_map;
         } elsif ($line =~ /^Rewards:(.*)$/) {
             my @rewards = split /,/, $1;
             $game_data{$current_person}{rewards} = \@rewards if @rewards;
@@ -386,7 +391,7 @@ sub start_game {
                 print "You ask the $person: '$question'\n";
                 
                 # Check for keywords in the question
-                foreach my $keyword (@{$game_data{$person}{keywords}}) {
+                foreach my $keyword (keys %{$game_data{$person}{keywords}}) {
                     if ($question =~ /\b$keyword\b/) {
                         foreach my $reward (@{$game_data{$person}{rewards}}) {
                             push @inventory, $reward;
