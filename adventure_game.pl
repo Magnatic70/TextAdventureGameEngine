@@ -126,6 +126,45 @@ sub load_game_data {
     return %game_data;
 }
 
+# Validate game data for missing descriptions and undefined exits
+sub validate_game_data {
+    my ($game_data) = @_;
+
+    # Check rooms for missing names or descriptions
+    foreach my $room_id (keys %{ $game_data{rooms} }) {
+        if (!exists $game_data{rooms}{$room_id}{name}) {
+            warn "Room ID '$room_id' is missing a name.\n";
+        }
+        if (!exists $game_data{rooms}{$room_id}{description}) {
+            warn "Room ID '$room_id' is missing a description.\n";
+        }
+
+        # Check exits for undefined room IDs
+        if (exists $game_data{rooms}{$room_id}{exits}) {
+            foreach my $exit_dir (keys %{ $game_data{rooms}{$room_id}{exits} }) {
+                my $target_room_id = $game_data{rooms}{$room_id}{exits}{$exit_dir};
+                unless (exists $game_data{rooms}{$target_room_id}) {
+                    warn "Exit from room '$room_id' via '$exit_dir' leads to undefined room ID '$target_room_id'.\n";
+                }
+            }
+        }
+    }
+
+    # Check items for missing descriptions
+    foreach my $item_id (keys %{ $game_data{items} }) {
+        if (!exists $game_data{items}{$item_id}{description}) {
+            warn "Item '$item_id' is missing a description.\n";
+        }
+    }
+
+    # Check persons for missing names or keywords
+    foreach my $person_id (keys %{ $game_data{persons} }) {
+        if (!exists $game_data{persons}{$person_id}{keywords}) {
+            warn "Person '$person_id' is missing keywords.\n";
+        }
+    }
+}
+
 # Main game loop
 sub start_game {
     my ($gameFile);
@@ -142,6 +181,9 @@ sub start_game {
     }
 
     my %game_data = load_game_data($gameFile);
+
+    # Validate game data
+    validate_game_data(\%game_data);
 
     # Initial setup
     my $current_room_id = $game_data{first_room_id};
@@ -343,7 +385,7 @@ sub start_game {
                 if (exists $game_data{items}{$item}{contains}) {
                     foreach my $contained_item (@{ $game_data{items}{$item}{contains} }) {
                         push @inventory, $contained_item;
-                        print "You found a $contained_item inside the $item.\n";
+                        print "You found a ", $contained_item, " in the $item.\n";
 
                         # Display contained item description
                         if (exists $game_data{items}{$contained_item}{description}) {
