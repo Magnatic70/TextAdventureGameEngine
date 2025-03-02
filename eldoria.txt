@@ -2,12 +2,14 @@ Title:The Lost Chronicles of Eldoria
 FinalDestination:MagicGrotto
 Objective:You have to find your way from the marketplace of Eldergrove through the Eldorian forest into the magic grotto.
 
+[Marketplace]
 RoomID:Marketplace
 Name:Marketplace
 Description:You are in the center of Eldergrove. It's a busy marketplace.
 Persons:butcher,beggar,villager,mayor,baker,blacksmith
 Exits:north:TownHall,east:VillageEast,south:VillageSouth,west:VillageWest
 Items:hammer
+SearchableItems:stand:apple
 
 Person:butcher
 Keywords:meat:meat:I've got excellent meat, here try this!;pork:pulled pork:This pulled pork is the best in all of Eldoria.
@@ -34,8 +36,21 @@ ItemDescription:The forest is located far north-east of the marketplace
 Item:dagger
 ItemDescription:An ornate dagger.
 
-Item:hammerr
+Item:hammer
 ItemDescription:A sturdy, well used hammer.
 
-Item:town hall keyy
-ItemDescriptioon:The key to town hall.
+Item:town hall key
+ItemDescription:The key to town hall.
+
+Item:apple
+ItemDescription:A shiny apple
+
+Item:pulled pork
+ItemDescription:Delicious pulled pork.
+[/Marketplace]
+
+[TownHall]
+RoomID:TownHall
+Name:Town hall
+Description:An impressive building for such a small village
+[/TownHall]

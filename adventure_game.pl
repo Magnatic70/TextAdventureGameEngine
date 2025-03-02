@@ -148,12 +148,25 @@ sub validate_game_data {
                 }
             }
         }
+        else{
+            warn "Room '$room_id' has no exits.\n";
+        }
     }
 
     # Check items for missing descriptions
     foreach my $item_id (keys %{ $game_data{items} }) {
         if (!exists $game_data{items}{$item_id}{description}) {
             warn "Item '$item_id' is missing a description.\n";
+        }
+        
+        if (exists $game_data{items}{$item_id}{contains}){
+            foreach my $contain_items ($game_data{items}{$item_id}{contains}){
+                foreach my $contain_item (@{$contain_items}){
+                    unless (exists $game_data{items}{$contain_item}){
+                        warn "Contains item '$contain_item' in item '$item_id' is not defined.\n";
+                    }
+                }
+            }
         }
     }
 
@@ -176,6 +189,24 @@ sub validate_game_data {
             my $answer = $game_data{rooms}{$room_id}{answer};
             unless (exists $game_data{items}{$answer}) {
                 warn "Answer item '$answer' in room '$room_id' is not defined.\n";
+            }
+        }
+        
+        if (exists $game_data{rooms}{$room_id}{items}){
+            foreach my $room_item (@{$game_data{rooms}{$room_id}{items}}){
+                unless (exists $game_data{items}{$room_item}){
+                    warn "Item '$room_item' in room '$room_id' is not defined.\n";
+                }
+            }
+        }
+        
+        if(exists $game_data{rooms}{$room_id}{searchable_items}){
+            foreach my $search_items (values %{$game_data{rooms}{$room_id}{searchable_items}}){
+                foreach my $search_item (@{$search_items}){
+                    unless (exists $game_data{items}{$search_item}){
+                        warn "Searchable item '$search_item' in room '$room_id' is not defined.\n";
+                    }
+                }
             }
         }
     }
