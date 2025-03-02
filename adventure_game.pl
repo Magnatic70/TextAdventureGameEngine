@@ -134,7 +134,7 @@ sub start_game {
     
     # Explain all possible actions
     print "\nYou can perform the following actions:\n";
-    print "- Move: Use directions like 'north', 'south', etc., to move between rooms.\n";
+    print "- Move: Use directions like 'north', 'south', etc., to move between locations.\n";
     print "- Take: Pick up items using 'take [item]'.\n";
     print "- Examine: Look at items or puzzles with 'examine [item]'.\n";
     print "- Search: Find hidden items with 'search [target]'.\n";

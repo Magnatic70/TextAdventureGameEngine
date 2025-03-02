@@ -1,0 +1,17 @@
+Title:The Lost Chronicles of Eldoria
+FinalDestination:MagicGrotto
+
+RoomID:Marketplace
+Name:Marketplace
+Description:You are in the center of the village. It's a busy marketplace.
+Persons:butcher
+Exits:north:TownHall,east:VillageEast,south:VillageSouth,west:VillageWest
+
+Person:butcher
+Keywords:meat:meat,forest:chronicle
+
+Item:meat
+ItemDescription:A piece of meat of very high quality
+
+Item:chronicle
+ItemDescription:A scroll with a story about the forest
