@@ -1,5 +1,6 @@
 Title:The Lost Chronicles of Eldoria
 FinalDestination:MagicGrotto
+Objective:You have to find your way from the marketplace of Eldoria through the forest to the magic grotto.
 
 RoomID:Marketplace
 Name:Marketplace
