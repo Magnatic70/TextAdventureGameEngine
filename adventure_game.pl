@@ -383,25 +383,21 @@ sub start_game {
         } elsif ($action =~ /^ask (.*) about (.*)$/) {  # New command to ask persons questions
             my ($person, $question) = ($1, $2);
             if (grep { $_ eq $person } @{$room_data->{persons}}) {
-                if (exists $game_data{$person}{questions} && grep { $_ eq $question } @{$game_data{$person}{questions}}) {
-                    print "You ask the $person: '$question'\n";
-                    
-                    # Check for keywords in the question
-                    foreach my $keyword (@{$game_data{$person}{keywords}}) {
-                        if ($question =~ /\b$keyword\b/) {
-                            foreach my $reward (@{$game_data{$person}{rewards}}) {
-                                push @inventory, $reward;
-                                print "The $person gives you a $reward.\n";
-                                
-                                # Display reward item description
-                                if (exists $game_data{$reward}{description}) {
-                                    print "$game_data{$reward}{description}\n";
-                                }
+                print "You ask the $person: '$question'\n";
+                
+                # Check for keywords in the question
+                foreach my $keyword (@{$game_data{$person}{keywords}}) {
+                    if ($question =~ /\b$keyword\b/) {
+                        foreach my $reward (@{$game_data{$person}{rewards}}) {
+                            push @inventory, $reward;
+                            print "The $person gives you a $reward.\n";
+                            
+                            # Display reward item description
+                            if (exists $game_data{$reward}{description}) {
+                                print "$game_data{$reward}{description}\n";
                             }
                         }
                     }
-                } else {
-                    print "You can't ask that question to the $person.\n";
                 }
             } else {
                 print "There is no such person here.\n";
