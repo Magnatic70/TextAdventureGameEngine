@@ -5,6 +5,7 @@ use warnings;
 
 my $debug=0;
 my $die=0; # 0=don't die when you are defeated by an enemy
+my $warn=1; # 1=show warnings when rooms, items or persons have no description
 
 if(-p STDIN) {
   $debug=1; # Stops when a action results in a failure. Handy during automated testing.
