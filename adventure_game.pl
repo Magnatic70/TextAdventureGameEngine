@@ -102,6 +102,14 @@ sub load_game_data {
                 }
             }
             $game_data{$current_person}{keywords} = \%keywords_map;
+        } elsif ($line =~ /^Trades:(.*)$/) {
+            my %trades_map;
+            foreach my $trade_pair (split /,/, $1) {
+                if ($trade_pair =~ /^(.*):(.*)$/) {
+                    $trades_map{$1} = $2;
+                }
+            }
+            $game_data{$current_person}{trades} = \%trades_map;
         }
     }
 
@@ -146,6 +154,7 @@ sub start_game {
     print "- Combine: Create new items by combining two, e.g., 'combine item1 and item2'.\n";
     print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
     print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
+    print "- Trade: Exchange items with persons using 'trade [item] with [person]'.\n";
     print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
     print "- Retreat: Move back to the previous room with 'retreat'.\n";
     print "- Quit: Exit the game by typing 'quit'.\n";
@@ -408,6 +417,30 @@ sub start_game {
                         my $reward=$game_data{$person}{keywords}{$keyword};
                         push @inventory, $reward;
                         print "The $person answers by giving you $reward.\n";
+                        
+                        # Display reward item description
+                        if (exists $game_data{$reward}{description}) {
+                            print "$game_data{$reward}{description}\n";
+                        }
+                    }
+                }
+            } else {
+                print "There is no such person here.\n";
+            }
+        } elsif ($action =~ /^trade (.*) with (.*)$/) {  # New command to ask persons questions
+            my ($item, $person) = ($1, $2);
+            if (grep { $_ eq $person } @{$room_data->{persons}}) {
+                print "You offer the $person: '$item'\n";
+                
+                # Check for items
+                foreach my $trade (keys %{$game_data{$person}{trades}}) {
+                    if ($item eq $trade) {
+                        my $reward=$game_data{$person}{trades}{$item};
+                        push @inventory, $reward;
+                        print "The $person gives you $reward.\n";
+                        
+                        # Remove the item from inventory
+                        @inventory = grep { $_ ne $item } @inventory;                       
                         
                         # Display reward item description
                         if (exists $game_data{$reward}{description}) {

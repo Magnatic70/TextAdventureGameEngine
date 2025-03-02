@@ -5,11 +5,14 @@ Objective:You have to find your way from the marketplace of Eldoria through the 
 RoomID:Marketplace
 Name:Marketplace
 Description:You are in the center of the village. It's a busy marketplace.
-Persons:butcher
+Persons:butcher,peasant
 Exits:north:TownHall,east:VillageEast,south:VillageSouth,west:VillageWest
 
 Person:butcher
 Keywords:meat:meat,forest:chronicle
+
+Person:peasant
+Trades:meat:money
 
 Item:meat
 ItemDescription:A piece of meat of very high quality
