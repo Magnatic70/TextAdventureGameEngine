@@ -53,4 +53,6 @@ ItemDescription:Delicious pulled pork.
 RoomID:TownHall
 Name:Town hall
 Description:An impressive building for such a small village
+Locks:town hall key
+Exits:south:Marketplace
 [/TownHall]
