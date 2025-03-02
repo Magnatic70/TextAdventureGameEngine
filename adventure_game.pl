@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 my $debug=0;
+my $die=0;
 
 if(-p STDIN) {
   $debug=1;
@@ -206,7 +207,7 @@ sub start_game {
                         }
                         print "You have died!\n";
                         
-                        last;  # End game loop
+                        if($die){last;}  # End game loop
                     }
                 } else {
                     print "You don't have a $item in your inventory.\n";
