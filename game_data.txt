@@ -123,7 +123,7 @@ Description:A creepy nursery full of spider webs
 Enemy:Spider:slippers
 RewardItem:spider leg
 DefeatDescription:You stomp the spider with your slippers and chunks of spider fly everywhere. One chunk flies right past you out the door.
-DiedDescription:The spider crawl up your legs, your body and then bites you in the neck. It hurts really bad, but not for long as you slowly lose consciousness and fall to the floor.
+DiedDescription:The spider crawl up your legs, along your spine and then bites you in the neck. It hurts really bad, but not for long as you slowly lose consciousness and fall to the floor.
 Exits:west:Landing3
 
 Item:spider leg
