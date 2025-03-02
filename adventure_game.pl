@@ -156,6 +156,7 @@ sub start_game {
     print "- Move: Use directions like 'north', 'south', etc., to move between locations.\n";
     print "- Take: Pick up items using 'take [item]'.\n";
     print "- Examine: Look at items with 'examine [item]'.\n";
+    print "- Describe: Get a description of an item using 'describe [item]'.\n";
     print "- Search: Find hidden items with 'search [target]'.\n";
     print "- Combine: Create new items by combining two, e.g., 'combine [item1] and [item2]'.\n";
     print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
@@ -355,6 +356,23 @@ sub start_game {
                 print "You don't have a $item in your inventory.\n";
                 if($debug){die;}
             }
+        } elsif ($action =~ /^describe (.*)$/) {  # New command to describe an item
+            my $item = $1;
+            if (grep { $_ eq $item } @inventory) {
+                if (exists $game_data{$item}{description}) {
+                    print "$game_data{$item}{description}\n";
+                } else {
+                    print "You don't have a description for the $item.\n";
+                }
+            } elsif (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
+                if (exists $game_data{$item}{description}) {
+                    print "$game_data{$item}{description}\n";
+                } else {
+                    print "You don't have a description for the $item.\n";
+                }
+            } else {
+                print "There is no such item here or in your inventory.\n";
+            }
         } elsif ($action =~ /^search (.*)$/) {
             my $target = $1;
             if (exists $room_data->{searchable_items} && exists $room_data->{searchable_items}{$target}) {
@@ -468,7 +486,7 @@ sub start_game {
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action ($action). Try moving, taking an item, examining something, searching, combining items, dropping an item, or asking a person a question.\n";
+            print "I don't understand that action ($action). Try moving, taking an item, examining something, describing an item, searching, combining items, dropping an item, or asking a person a question.\n";
             if($debug){die;}
         }
     }
