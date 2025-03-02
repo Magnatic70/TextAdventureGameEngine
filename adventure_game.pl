@@ -96,20 +96,26 @@ sub load_game_data {
             $game_data{$current_person} = {};
         } elsif ($line =~ /^Keywords:(.*)$/) {
             my %keywords_map;
-            foreach my $keyword_pair (split /,/, $1) {
-                if ($keyword_pair =~ /^(.*):(.*)$/) {
+            my %answers_map;
+            foreach my $keyword_tripple (split /;/, $1) {
+                if ($keyword_tripple =~ /^(.*?):(.*?):(.*?)$/) {
                     $keywords_map{$1} = $2;
+                    $answers_map{$1}=$3;
                 }
             }
             $game_data{$current_person}{keywords} = \%keywords_map;
+            $game_data{$current_person}{answers}= \%answers_map;
         } elsif ($line =~ /^Trades:(.*)$/) {
             my %trades_map;
-            foreach my $trade_pair (split /,/, $1) {
-                if ($trade_pair =~ /^(.*):(.*)$/) {
+            my %answers_map;
+            foreach my $trade_tripple (split /,/, $1) {
+                if ($trade_tripple =~ /^(.*?):(.*?):(.*?)$/) {
                     $trades_map{$1} = $2;
+                    $answers_map{$1}=$3;
                 }
             }
             $game_data{$current_person}{trades} = \%trades_map;
+            $game_data{$current_person}{answers} = \%answers_map;
         }
     }
 
@@ -415,7 +421,8 @@ sub start_game {
                     if ($question =~ /\b$keyword\b/) {
                         my $reward=$game_data{$person}{keywords}{$keyword};
                         push @inventory, $reward;
-                        print "The $person answers by giving you $reward.\n";
+                        print "The $person answers: $game_data{$person}{answers}{$keyword}\n";
+                        print "The $person gives you $reward.\n";
                         $answered=1;
                         # Display reward item description
                         if (exists $game_data{$reward}{description}) {
@@ -432,7 +439,6 @@ sub start_game {
         } elsif ($action =~ /^trade (.*) with (.*)$/) {  # New command to ask persons questions
             my ($item, $person) = ($1, $2);
             if (grep { $_ eq $person } @{$room_data->{persons}}) {
-                print "You offer the $person: '$item'\n";
                 my $traded=0;
                 
                 # Check for items
@@ -440,6 +446,7 @@ sub start_game {
                     if ($item eq $trade) {
                         my $reward=$game_data{$person}{trades}{$item};
                         push @inventory, $reward;
+                        print "The $person responds: $game_data{$person}{answers}{$item}\n";
                         print "The $person gives you $reward.\n";
                         $traded=1;
                         

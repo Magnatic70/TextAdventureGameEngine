@@ -5,14 +5,21 @@ Objective:You have to find your way from the marketplace of Eldergrove through t
 RoomID:Marketplace
 Name:Marketplace
 Description:You are in the center of Eldergrove. It's a busy marketplace.
-Persons:butcher,peasant,villager,mayor,baker,blacksmith
+Persons:butcher,beggar,villager,mayor,baker,blacksmith
 Exits:north:TownHall,east:VillageEast,south:VillageSouth,west:VillageWest
+Items:hammer
 
 Person:butcher
-Keywords:meat:meat,forest:chronicle
+Keywords:meat:meat:I've got excellent meat, here try this!;pork:pulled pork:This pulled pork is the best in all of Eldoria.
 
-Person:peasant
-Trades:meat:money
+Person:beggar
+Trades:meat:chronicle:Thank you dear! I've got nothing of any worth, but this might be useful.
+
+Person:mayor
+Keywords:town hall:town hall key:I'm busy for the rest of the day, but here's the key. Help yourself.
+
+Person:blacksmith
+Trades:hammer:dagger:Thank you! I've been searching for it all day. Here take this dagger as a small token of my gratitude.
 
 Item:meat
 ItemDescription:A piece of meat of very high quality
@@ -23,3 +30,6 @@ Contains:forest-north-east
 
 Item:forest-north-east
 ItemDescription:The forest is located north-east of the marketplace
+
+Item:dagger
+ItemDescription:An ornate dagger.
