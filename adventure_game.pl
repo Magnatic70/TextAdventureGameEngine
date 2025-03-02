@@ -259,7 +259,7 @@ sub start_game {
                 }
 
                 unless ($unlocked) {
-                    print "The door to ", $game_data{$next_room_id}{name}, " is locked. You need a specific item.\n";
+                    print "\033[31mThe door to ", $game_data{$next_room_id}{name}, " is locked. You need a specific item.\033[0m\n";
                     next; # Skip this exit
                 }
             }
