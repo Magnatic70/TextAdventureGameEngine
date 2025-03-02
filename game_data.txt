@@ -5,6 +5,12 @@ Name:Entrance
 Description:You are at the entrance of an old mansion.
 Exits:north:Lobby,south:Garden
 Items:rusty sword,shiny sword
+Persons:guardian
+
+Person:guardian
+Questions:What is your name?,Where am I?
+Keywords:name,mansion
+Rewards:mansion key
 
 Item:rusty sword
 ItemDescription:A large sword. It's really rusty.
@@ -58,7 +64,7 @@ Exits:north:Entrance
 Enemy:Knight:rusty sword
 RewardItem:purse
 DefeatDescription:You violently swing the rusty sword and decapitate the knight. His head bounces on the floor with a surprised look in his eyes and the body slowly slumps to the floor while blood squirts from its neck.
-DiedDescription:You violenty swing the shiny sword, but when it hits the knight it shatters in small pieces. Darn these newfangled swords! The knight then swings his sword and decaptites you. Ouch! This is not merely a scratch.
+DiedDescription:You violently swing the shiny sword, but when it hits the knight it shatters in small pieces. Darn these newfangled swords! The knight then swings his sword and decapitates you. Ouch! This is not merely a scratch.
 
 Item:purse
 Contains:mansion key
@@ -91,7 +97,7 @@ Exits:south:Kitchen
 Locks:keycode
 Enemy:troll:rubber duck filled with hot soup
 RewardItem:troll trophy
-DefeatDescription:You squeeze the rubber duck with all your might and the hot soup squirts out of its bottom and right into the trolls eyes, causing it to shreek in a high pitched scream and flee in pain.
+DefeatDescription:You squeeze the rubber duck with all your might and the hot soup squirts out of its bottom and right into the trolls eyes, causing it to shriek in a high pitched scream and flee in pain.
 DiedDescription:The troll swings his large club and hits you on the head. After the initial fireworks everything turns to black.
 
 Item:troll trophy
@@ -123,7 +129,7 @@ Description:A creepy nursery full of spider webs
 Enemy:Spider:slippers
 RewardItem:spider leg
 DefeatDescription:You stomp the spider with your slippers and chunks of spider fly everywhere. One chunk flies right past you out the door.
-DiedDescription:The spider crawl up your legs, along your spine and then bites you in the neck. It hurts really bad, but not for long as you slowly lose consciousness and fall to the floor.
+DiedDescription:The spider crawls up your legs, along your spine and then bites you in the neck. It hurts really bad, but not for long as you slowly lose consciousness and fall to the floor.
 Exits:west:Landing3
 
 Item:spider leg
@@ -183,7 +189,7 @@ Exits:down:Landing,up:Belltower
 
 Item:large trunk
 Contains:axe
-ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the  game!
+ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the game!
 
 RoomID:Belltower
 Name:Bell tower
@@ -193,7 +199,7 @@ Items:fly swatter
 Exits:down:Attic,west:Entrance2,east:Entrance3
 
 RoomID:Entrance2
-Description:Oh no! You stepped out of an open window! You fall down, bounching on the slanted roof of the bathroom, then slide of it to the ground into some lush bushes. Several roof tiles land next to you. You're bruised and battered, but you're still alive. Phew! You look around and find yourself at the entrance.
+Description:Oh no! You stepped out of an open window! You fall down, bouncing on the slanted roof of the bathroom, then slide off it to the ground into some lush bushes. Several roof tiles land next to you. You're bruised and battered, but you're still alive. Phew! You look around and find yourself at the entrance.
 Name:Entrance
 Exits:north:Lobby,south:Garden
 

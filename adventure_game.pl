@@ -16,7 +16,7 @@ sub load_game_data {
     open my $fh, '<', $filename or die "Cannot open '$filename': $!";
     
     my %game_data;
-    my ($current_room_id, $current_item);  # Temporary variables to hold the current room ID and item names
+    my ($current_room_id, $current_item, $current_person);  # Temporary variables to hold the current room ID and item/person names
 
     while (my $line = <$fh>) {
         chomp($line);
@@ -46,6 +46,9 @@ sub load_game_data {
         } elsif ($line =~ /^Items:(.*)$/) {
             my @items = split /,/, $1;
             $game_data{$current_room_id}{items} = \@items if @items;
+        } elsif ($line =~ /^Persons:(.*)$/) {
+            my @persons = split /,/, $1;
+            $game_data{$current_room_id}{persons} = \@persons if @persons;
         } elsif ($line =~ /^Locks:(.*)$/) {
             $game_data{$current_room_id}{locks} = [split /,/, $1];
         } elsif ($line =~ /^Puzzle:(.*)$/) {
@@ -86,6 +89,18 @@ sub load_game_data {
             $game_data{$current_room_id}{died_description} = $1 if exists $game_data{$current_room_id}{enemy};
         } elsif ($line =~ /^ItemDescription:(.*)$/) {
             $game_data{$current_item}{description} = $1;
+        } elsif ($line =~ /^Person:(.*)$/) {
+            $current_person = $1;
+            $game_data{$current_person} = {};
+        } elsif ($line =~ /^Questions:(.*)$/) {
+            my @questions = split /,/, $1;
+            $game_data{$current_person}{questions} = \@questions if @questions;
+        } elsif ($line =~ /^Keywords:(.*)$/) {
+            my @keywords = split /,/, $1;
+            $game_data{$current_person}{keywords} = \@keywords if @keywords;
+        } elsif ($line =~ /^Rewards:(.*)$/) {
+            my @rewards = split /,/, $1;
+            $game_data{$current_person}{rewards} = \@rewards if @rewards;
         }
     }
 
@@ -137,6 +152,11 @@ sub start_game {
         # Only display items in room if there are any
         if (exists $room_data->{items} && @{$room_data->{items}}) {
             print "Items in room: ", join(", ", @{ $room_data->{items} }), "\n";
+        }
+
+        # Display persons in the room if any
+        if ($room_data->{persons}) {
+            print "Persons here: ", join(", ", @{$room_data->{persons}}), "\n";
         }
 
         # Check for puzzles
@@ -360,10 +380,36 @@ sub start_game {
                 print "You don't have a $item in your inventory.\n";
                 if($debug){die;}
             }
+        } elsif ($action =~ /^ask (.*) about (.*)$/) {  # New command to ask persons questions
+            my ($person, $question) = ($1, $2);
+            if (grep { $_ eq $person } @{$room_data->{persons}}) {
+                if (exists $game_data{$person}{questions} && grep { $_ eq $question } @{$game_data{$person}{questions}}) {
+                    print "You ask the $person: '$question'\n";
+                    
+                    # Check for keywords in the question
+                    foreach my $keyword (@{$game_data{$person}{keywords}}) {
+                        if ($question =~ /\b$keyword\b/) {
+                            foreach my $reward (@{$game_data{$person}{rewards}}) {
+                                push @inventory, $reward;
+                                print "The $person gives you a $reward.\n";
+                                
+                                # Display reward item description
+                                if (exists $game_data{$reward}{description}) {
+                                    print "$game_data{$reward}{description}\n";
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print "You can't ask that question to the $person.\n";
+                }
+            } else {
+                print "There is no such person here.\n";
+            }
         } elsif ($action eq 'quit') {
             last;
         } else {
-            print "I don't understand that action ($action). Try moving, taking an item, examining something, searching, combining items, or dropping an item.\n";
+            print "I don't understand that action ($action). Try moving, taking an item, examining something, searching, combining items, dropping an item, or asking a person a question.\n";
             if($debug){die;}
         }
     }
