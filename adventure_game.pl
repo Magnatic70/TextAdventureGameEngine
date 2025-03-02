@@ -3,12 +3,17 @@
 use strict;
 use warnings;
 
+# 1=Stops when a action results in a failure. Handy during automated testing. 0=Normal behaviour.
 my $debug=0;
-my $die=0; # 0=don't die when you are defeated by an enemy
-my $warn=1; # 1=show warnings when rooms, items or persons have no description
+
+# 0=don't die when you are defeated by an enemy, 1=die when you are defeated
+my $die=0;
+
+# 1=show warnings when rooms, items or persons have no description, 0=don't show warnings
+my $warn=1;
 
 if(-p STDIN) {
-  $debug=1; # Stops when a action results in a failure. Handy during automated testing.
+    $debug=1; 
 }
 
 # Load game data from file into a hash structure
