@@ -19,3 +19,7 @@ ItemDescription:A piece of meat of very high quality
 
 Item:chronicle
 ItemDescription:A scroll with a story about the forest
+Contains:forestNorthEast
+
+Item:forestNorthEast
+ItemDescription:The forest is located north-east of the marketplace
