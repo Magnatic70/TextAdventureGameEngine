@@ -9,8 +9,8 @@ Persons:guardian
 
 Person:guardian
 Questions:What is your name?,Where am I?
-Keywords:name,mansion
-Rewards:mansion key
+Keywords:name:mansion key,mansion:mansion key
+Rewards:
 
 Item:rusty sword
 ItemDescription:A large sword. It's really rusty.
