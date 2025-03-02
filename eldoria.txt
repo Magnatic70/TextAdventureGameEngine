@@ -19,7 +19,7 @@ Person:mayor
 Keywords:town hall:town hall key:I'm busy for the rest of the day, but here's the key. Help yourself.
 
 Person:blacksmith
-Trades:hammer:dagger:Thank you! I've been searching for it all day. Here take this dagger as a small token of my gratitude.
+Trades:hammer:dagger:Thank you! I've been searching for it all day. Here, take this dagger as a small token of my gratitude.
 
 Item:meat
 ItemDescription:A piece of meat of very high quality
@@ -29,7 +29,8 @@ ItemDescription:A scroll with a story about the forest
 Contains:forest-north-east
 
 Item:forest-north-east
-ItemDescription:The forest is located north-east of the marketplace
+ItemDescription:The forest is located far north-east of the marketplace
 
 Item:dagger
 ItemDescription:An ornate dagger.
+
