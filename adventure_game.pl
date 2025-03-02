@@ -183,7 +183,7 @@ sub validate_game_data {
     foreach my $person_id (keys %{ $game_data{persons} }) {
         if (exists $game_data{persons}{$person_id}{keywords}) {
             foreach my $keyword (keys %{ $game_data{persons}{$person_id}{keywords} }) {
-                my $reward_item = $game_data{persons}{$person_id}{answers}{$keyword};
+                my $reward_item = $game_data{persons}{$person_id}{keywords}{$keyword};
                 unless (exists $game_data{items}{$reward_item}) {
                     warn "Reward item '$reward_item' for keyword '$keyword' in person '$person_id' is not defined.\n";
                 }
@@ -192,7 +192,7 @@ sub validate_game_data {
 
         if (exists $game_data{persons}{$person_id}{trades}) {
             foreach my $trade (keys %{ $game_data{persons}{$person_id}{trades} }) {
-                my $reward_item = $game_data{persons}{$person_id}{answers}{$trade};
+                my $reward_item = $game_data{persons}{$person_id}{trades}{$trade};
                 unless (exists $game_data{items}{$reward_item}) {
                     warn "Reward item '$reward_item' for trade '$trade' in person '$person_id' is not defined.\n";
                 }

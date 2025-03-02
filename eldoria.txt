@@ -34,8 +34,8 @@ ItemDescription:The forest is located far north-east of the marketplace
 Item:dagger
 ItemDescription:An ornate dagger.
 
-Item:hammer
+Item:hammerr
 ItemDescription:A sturdy, well used hammer.
 
 Item:town hall keyy
-ItemDescription:The key to town hall.
+ItemDescriptioon:The key to town hall.
