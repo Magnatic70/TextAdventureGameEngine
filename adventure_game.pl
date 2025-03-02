@@ -409,20 +409,22 @@ sub start_game {
         } elsif ($action =~ /^ask (.*) about (.*)$/) {  # New command to ask persons questions
             my ($person, $question) = ($1, $2);
             if (grep { $_ eq $person } @{$room_data->{persons}}) {
-                print "You ask the $person: '$question'\n";
-                
+                my $answered=0;
                 # Check for keywords in the question
                 foreach my $keyword (keys %{$game_data{$person}{keywords}}) {
                     if ($question =~ /\b$keyword\b/) {
                         my $reward=$game_data{$person}{keywords}{$keyword};
                         push @inventory, $reward;
                         print "The $person answers by giving you $reward.\n";
-                        
+                        $answered=1;
                         # Display reward item description
                         if (exists $game_data{$reward}{description}) {
                             print "$game_data{$reward}{description}\n";
                         }
                     }
+                }
+                if(!$answered){
+                    print "The $person doesn't know the answer to this question.\n";
                 }
             } else {
                 print "There is no such person here.\n";
@@ -431,6 +433,7 @@ sub start_game {
             my ($item, $person) = ($1, $2);
             if (grep { $_ eq $person } @{$room_data->{persons}}) {
                 print "You offer the $person: '$item'\n";
+                my $traded=0;
                 
                 # Check for items
                 foreach my $trade (keys %{$game_data{$person}{trades}}) {
@@ -438,6 +441,7 @@ sub start_game {
                         my $reward=$game_data{$person}{trades}{$item};
                         push @inventory, $reward;
                         print "The $person gives you $reward.\n";
+                        $traded=1;
                         
                         # Remove the item from inventory
                         @inventory = grep { $_ ne $item } @inventory;                       
@@ -447,6 +451,9 @@ sub start_game {
                             print "$game_data{$reward}{description}\n";
                         }
                     }
+                }
+                if(!$traded){
+                    print "The $person doesn't want to trade for $item.\n";
                 }
             } else {
                 print "There is no such person here.\n";
