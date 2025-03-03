@@ -303,7 +303,7 @@ sub start_game {
 
         # Only display items in room if there are any
         if (exists $room_data->{items} && @{$room_data->{items}}) {
-            print "Items in room: ", join(", ", @{ $room_data->{items} }), "\n";
+            print "Visible items: ", join(", ", @{ $room_data->{items} }), "\n";
         }
 
         # Display persons in the room if any
