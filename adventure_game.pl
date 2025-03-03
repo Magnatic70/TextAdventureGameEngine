@@ -185,12 +185,12 @@ sub validate_game_data {
             }
         }
 
-        if (exists $game_data{rooms}{$room_id}{answer}) {
-            my $answer = $game_data{rooms}{$room_id}{answer};
-            unless (exists $game_data{items}{$answer}) {
-                warn "Answer item '$answer' in room '$room_id' is not defined.\n";
-            }
-        }
+        #if (exists $game_data{rooms}{$room_id}{answer}) {
+        #    my $answer = $game_data{rooms}{$room_id}{answer};
+        #    unless (exists $game_data{items}{$answer}) {
+        #        warn "Answer item '$answer' in room '$room_id' is not defined.\n";
+        #    }
+        #}
         
         if (exists $game_data{rooms}{$room_id}{items}){
             foreach my $room_item (@{$game_data{rooms}{$room_id}{items}}){

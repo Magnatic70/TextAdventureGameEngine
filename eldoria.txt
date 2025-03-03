@@ -1,6 +1,6 @@
 Title:The Lost Chronicles of Eldoria
 FinalDestination:MagicGrotto
-Objective:You have to find your way from the marketplace of Eldergrove through the Eldorian forest into the magic grotto.
+Objective:You have to find your way from the marketplace of Eldergrove through the Eldorian forest into the Magic Grotto.
 
 [Marketplace]
 RoomID:Marketplace
@@ -15,7 +15,7 @@ Person:butcher
 Keywords:meat:meat:I've got excellent meat, here try this!;pork:pulled pork:This pulled pork is the best in all of Eldoria.
 
 Person:beggar
-Trades:meat:chronicle:Thank you dear! I've got nothing of any worth, but this might be useful.
+Trades:meat:chronicle1:Thank you dear! I've got nothing of any worth, but this might be useful.
 
 Person:mayor
 Keywords:town hall:town hall key:I'm busy for the rest of the day, but here's the key. Help yourself.
@@ -26,8 +26,8 @@ Trades:hammer:dagger:Thank you! I've been searching for it all day. Here, take t
 Item:meat
 ItemDescription:A piece of meat of very high quality
 
-Item:chronicle
-ItemDescription:A scroll with a story about the forest
+Item:chronicle1
+ItemDescription:A scroll with a story about the forest. It looks like there is a piece missing.
 Contains:forest-north-east
 
 Item:forest-north-east
@@ -53,6 +53,11 @@ ItemDescription:Delicious pulled pork.
 RoomID:TownHall
 Name:Town hall
 Description:An impressive building for such a small village
+Exits:enter:TownHallLobby,south:Marketplace
+
+RoomID:TownHallLobby
+Name:Town hall lobby
+Description:A lavish marble floored lobby with doors all around
 Locks:town hall key
-Exits:south:Marketplace
+Exits:exit:TownHall,north:Archives,east:MayorsOffice,west:ClerksOffice
 [/TownHall]
