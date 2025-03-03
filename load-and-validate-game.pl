@@ -155,7 +155,7 @@ sub validate_game_data {
         }
     }
 
-    # Validate reward items, trade items, and answer items
+    # Validate room items, search items, unlock items, puzzle or fight reward items, ask items, fight items and trade items
     foreach my $room_id (keys %{ $game_data{rooms} }) {
         if (exists $game_data{rooms}{$room_id}{reward_item}) {
             unless (exists $game_data{items}{$game_data{rooms}{$room_id}{reward_item}}) {
