@@ -15,31 +15,31 @@ if (-p STDIN) {
     $debug = 1;
 }
 
+my ($gameFile);
+if ($ARGV[0]) {
+    $gameFile = $ARGV[0] . '.txt';
+} else {
+    print "Game not found, using default\n";
+    $gameFile = 'game_data.txt';
+}
+
+if (!(-e $gameFile)) {
+    print "Game not found, using default\n";
+    $gameFile = 'game_data.txt';
+}
+
+my %game_data = load_game_data($gameFile);
+
+# Validate game data
+validate_game_data(%game_data);
+
+# Initial setup
+my $current_room_id = $game_data{first_room_id};
+my @inventory;
+my @room_history;  # Stack to track room history
+
 # Main game loop
 sub start_game {
-    my ($gameFile);
-    if ($ARGV[0]) {
-        $gameFile = $ARGV[0] . '.txt';
-    } else {
-        print "Game not found, using default\n";
-        $gameFile = 'game_data.txt';
-    }
-
-    if (!(-e $gameFile)) {
-        print "Game not found, using default\n";
-        $gameFile = 'game_data.txt';
-    }
-
-    my %game_data = load_game_data($gameFile);
-
-    # Validate game data
-    validate_game_data(%game_data);
-
-    # Initial setup
-    my $current_room_id = $game_data{first_room_id};
-    my @inventory;
-    my @room_history;  # Stack to track room history
-
     print "\n\033[97;1;4m$game_data{title}\033[0m\n";
     if ($game_data{objective}) {
         print "$game_data{objective}\n";
@@ -88,12 +88,12 @@ sub start_game {
 
         # Check for puzzles
         if (exists $room_data->{puzzle}) {
-            handle_puzzle($game_data, $current_room_id);
+            handle_puzzle();
         }
 
         # Check for enemies
         if (exists $room_data->{enemy}) {
-            handle_enemy($game_data, $current_room_id, \@inventory, $die);
+            handle_enemy();
         }
 
         # Check if current room is the final destination
@@ -111,7 +111,7 @@ sub start_game {
             chomp($action);
         }
 
-        handle_action($game_data, $current_room_id, \@inventory, \@room_history, $action);
+        handle_action($action);
 
     }
 
@@ -119,7 +119,6 @@ sub start_game {
 }
 
 sub handle_puzzle {
-    my ($game_data, $current_room_id) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     # Display puzzle riddle in green
@@ -147,7 +146,6 @@ sub handle_puzzle {
 }
 
 sub handle_enemy {
-    my ($game_data, $current_room_id, $inventory_ref, $die) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
     my $enemy = $room_data->{enemy};
 
@@ -161,9 +159,9 @@ sub handle_enemy {
     }
 
     if ($action =~ /^fight (.*?) with (.*)$/) {
-        handle_fight($game_data, $current_room_id, $inventory_ref, $enemy, $die);
+        handle_fight($2);
     } elsif ($action =~ /^retreat$/) {
-        handle_retreat(\@room_history, \@inventory, $game_data, $current_room_id);
+        handle_retreat();
     } else {
         print "I don't understand that action ($action). Try fighting with an item from your inventory or retreating.\n";
         if ($debug) { die; }
@@ -171,10 +169,9 @@ sub handle_enemy {
 }
 
 sub handle_fight {
-    my ($game_data, $current_room_id, $inventory_ref, $enemy, $die) = @_;
-    my @inventory = @{$inventory_ref};
-    my $verb = shift;
     my $item = shift;
+    my $room_data = $game_data{rooms}{$current_room_id};
+    my $enemy = $room_data->{enemy};
 
     if (grep { $_ eq $item } @inventory) {
         if ($item eq $enemy->{required_item}) {
@@ -212,9 +209,8 @@ sub handle_fight {
 }
 
 sub handle_retreat {
-    my ($room_history_ref, $inventory_ref, $game_data, $current_room_id) = @_;
-    if (@{$room_history_ref}) {
-        my $previous_room_id = pop @{$room_history_ref};
+    if (@room_history) {
+        my $previous_room_id = pop @room_history;
         $current_room_id = $previous_room_id;
         print "You retreat to the $game_data{rooms}{$current_room_id}{name}.\n";
     } else {
@@ -223,28 +219,27 @@ sub handle_retreat {
 }
 
 sub handle_action {
-    my ($game_data, $current_room_id, $inventory_ref, $room_history_ref, $action) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($action) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (exists $room_data->{exits} && exists $room_data->{exits}{$action}) {
-        handle_move($game_data, $current_room_id, $room_history_ref, $action);
+        handle_move($action);
     } elsif ($action =~ /^take (.*)$/) {
-        handle_take($game_data, $current_room_id, \@inventory, $1);
+        handle_take($1);
     } elsif ($action =~ /^examine (.*)$/) {
-        handle_examine($game_data, $current_room_id, \@inventory, $1);
+        handle_examine($1);
     } elsif ($action =~ /^describe (.*)$/) {  # New command to describe an item
-        handle_describe($game_data, $current_room_id, \@inventory, $1);
+        handle_describe($1);
     } elsif ($action =~ /^search (.*)$/) {
-        handle_search($game_data, $current_room_id, \@inventory, $1);
+        handle_search($1);
     } elsif ($action =~ /^combine (.*) and (.*)$/) {
-        handle_combine($game_data, $current_room_id, \@inventory, $1, $2);
+        handle_combine($1, $2);
     } elsif ($action =~ /^drop (.*)$/) {  # New command to drop an item
-        handle_drop($game_data, $current_room_id, \@inventory, $1);
+        handle_drop($1);
     } elsif ($action =~ /^ask (.*) about (.*)$/) {  # New command to ask persons questions
-        handle_ask($game_data, $current_room_id, \@inventory, $1, $2);
+        handle_ask($1, $2);
     } elsif ($action =~ /^trade (.*) with (.*)$/) {  # New command to trade items with persons
-        handle_trade($game_data, $current_room_id, \@inventory, $1, $2);
+        handle_trade($1, $2);
     } elsif ($action eq 'quit') {
         exit;
     } else {
@@ -254,7 +249,7 @@ sub handle_action {
 }
 
 sub handle_move {
-    my ($game_data, $current_room_id, $room_history_ref, $action) = @_;
+    my ($action) = @_;
     my $next_room_id = $game_data{rooms}{$current_room_id}{exits}{$action};
 
     # Check if the room is locked
@@ -276,13 +271,12 @@ sub handle_move {
         }
     }
 
-    push @{$room_history_ref}, $current_room_id;  # Save current room before moving
+    push @room_history, $current_room_id;  # Save current room before moving
     $current_room_id = $next_room_id;
 }
 
 sub handle_take {
-    my ($game_data, $current_room_id, $inventory_ref, $item) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($item) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
@@ -302,8 +296,7 @@ sub handle_take {
 }
 
 sub handle_examine {
-    my ($game_data, $current_room_id, $inventory_ref, $item) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($item) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (grep { $_ eq $item } @inventory) {
@@ -327,8 +320,7 @@ sub handle_examine {
 }
 
 sub handle_describe {
-    my ($game_data, $current_room_id, $inventory_ref, $item) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($item) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (grep { $_ eq $item } @inventory) {
@@ -349,8 +341,7 @@ sub handle_describe {
 }
 
 sub handle_search {
-    my ($game_data, $current_room_id, $inventory_ref, $target) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($target) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (exists $room_data->{searchable_items} && exists $room_data->{searchable_items}{$target}) {
@@ -369,8 +360,7 @@ sub handle_search {
 }
 
 sub handle_combine {
-    my ($game_data, $current_room_id, $inventory_ref, $item1, $item2) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($item1, $item2) = @_;
 
     if ((grep { $_ eq $item1 } @inventory) && (grep { $_ eq $item2 } @inventory)) {
         if (exists $game_data{combine}{$item1}{$item2} || exists $game_data{combine}{$item2}{$item1}) {
@@ -402,8 +392,7 @@ sub handle_combine {
 }
 
 sub handle_drop {
-    my ($game_data, $current_room_id, $inventory_ref, $item) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($item) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (grep { $_ eq $item } @inventory) {
@@ -419,8 +408,7 @@ sub handle_drop {
 }
 
 sub handle_ask {
-    my ($game_data, $current_room_id, $inventory_ref, $person, $question) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($person, $question) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (grep { $_ eq $person } @{$room_data->{persons}}) {
@@ -449,8 +437,7 @@ sub handle_ask {
 }
 
 sub handle_trade {
-    my ($game_data, $current_room_id, $inventory_ref, $item, $person) = @_;
-    my @inventory = @{$inventory_ref};
+    my ($item, $person) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (grep { $_ eq $person } @{$room_data->{persons}}) {
