@@ -96,7 +96,7 @@ sub load_game_data {
         } elsif ($line =~ /^Trades:(.*)$/) {
             my %trades_map;
             my %answers_map;
-            foreach my $trade_tripple (split /,/, $1) {
+            foreach my $trade_tripple (split /;/, $1) {
                 if ($trade_tripple =~ /^(.*?):(.*?):(.*?)$/) {
                     $trades_map{$1} = $2;
                     $answers_map{$1} = $3;
