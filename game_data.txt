@@ -185,6 +185,9 @@ Item:large trunk
 Contains:axe
 ItemDescription:It's really large and heavy. Now you'll have to carry it for the rest of the game!
 
+Item:axe
+ItemDescription:An impressive battle-axe. This feels like an effective weapon.
+
 RoomID:Belltower
 Name:Bell tower
 Description:A large bell is hanging from the ceiling. It is covered in bird droppings and feathers.
