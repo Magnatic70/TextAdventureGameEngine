@@ -5,7 +5,7 @@ Objective:You have to find your way from the marketplace of Eldergrove through t
 [Marketplace]
 RoomID:Marketplace
 Name:Marketplace
-Description:You are in the center of Eldergrove. It's a busy marketplace.
+Description:You are in the center of Eldergrove. It's a busy marketplace, with lots of stalls and people all around.
 Persons:butcher,beggar,villager,mayor,baker,blacksmith
 Exits:north:TownHall,east:VillageEast,south:VillageSouth,west:VillageWest
 Items:hammer
