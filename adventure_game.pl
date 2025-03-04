@@ -17,7 +17,7 @@ if (-p STDIN) {
 
 my ($gameFile);
 if ($ARGV[0]) {
-    $gameFile = $ARGV[0] . '.txt';
+    $gameFile = $ARGV[0];
 } else {
     print "Game not found, using default\n";
     $gameFile = 'game_data.txt';
