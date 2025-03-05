@@ -133,7 +133,7 @@ sub handle_puzzle {
 
     if ($answer eq $game_data{rooms}{$current_room_id}{answer}) {
         push @inventory, $room_data->{reward_item};
-        print "You solved the puzzle and found a $room_data->{reward_item}!\n";
+        print "You've given the correct answer and now have access to this location. As a reward you get a $room_data->{reward_item}!\n";
 
         # Display contained item description
         if (exists $game_data{items}{$room_data->{reward_item}}{description}) {
