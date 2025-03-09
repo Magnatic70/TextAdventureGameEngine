@@ -273,7 +273,7 @@ sub handle_move {
             return; # Skip this exit
         } else {
             if (!$unlocked_rooms{$next_room_id}) {
-                print "\033[92mYou have unlocked the door to ", $game_data{rooms}{$next_room_id}{name}, " for the first time!\033[0m\n";
+                print "\033[92m$game_data{rooms}{$next_room_id}{unlock_texts}[0]\033[0m\n";
                 $unlocked_rooms{$next_room_id} = 1;
             }
         }
