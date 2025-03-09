@@ -256,13 +256,12 @@ sub handle_move {
     my $next_room_id = $game_data{rooms}{$current_room_id}{exits}{$action};
 
     # Check if the room is locked
-    if (exists $game_data{rooms}{$next_room_id}{locks}) {
+    if (exists $game_data{rooms}{$next_room_id}{locks} && !(exists $unlocked_rooms{$next_room_id})) {
         my %inventory_items = map { $_ => 1 } @inventory;
         my $unlocked = 0;
 
         foreach my $lock (@{ $game_data{rooms}{$next_room_id}{locks} }) {
             if (exists $inventory_items{$lock}) {
-                print "You used the $lock to unlock the door.\n";
                 $unlocked = 1;
                 last;
             }
@@ -273,7 +272,12 @@ sub handle_move {
             return; # Skip this exit
         } else {
             if (!$unlocked_rooms{$next_room_id}) {
-                print "\033[92m$game_data{rooms}{$next_room_id}{unlock_texts}[0]\033[0m\n";
+                if($game_data{rooms}{$next_room_id}{unlock_texts}[0]){
+                    print "\033[92m$game_data{rooms}{$next_room_id}{unlock_texts}[0]\033[0m\n";
+                }
+                else{
+                    print "You used the $game_data{rooms}{$next_room_id}{locks}[0] to unlock the door.\n";
+                }
                 $unlocked_rooms{$next_room_id} = 1;
             }
         }

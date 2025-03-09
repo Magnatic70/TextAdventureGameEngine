@@ -9,10 +9,10 @@ Description:You are in Eldergrove's bustling marketplace. The air is filled with
 Persons:butcher,beggar,villager,mayor,baker,blacksmith
 Exits:north:TownHall,east:VillageEast,south:VillageSouth,west:VillageWest
 Items:hammer
-SearchableItems:stand:apple
+SearchableItems:stall:apple
 
 Person:butcher
-Keywords:meat:meat:I've got excellent meat, here try this!;pork:pulled pork:This pulled pork is the best in all of Eldoria.
+Keywords:meat:meat:I've got excellent meat, here try this! I've got excellent pork as well.;pork:pulled pork:This pulled pork is the best in all of Eldoria.
 
 Person:beggar
 Trades:meat:chronicle1:Thank you dear! I've got nothing of any worth, but this might be useful.
