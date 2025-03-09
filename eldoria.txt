@@ -27,11 +27,7 @@ Item:meat
 ItemDescription:A piece of meat of very high quality
 
 Item:chronicle1
-ItemDescription:A scroll with a story about the forest. It looks like there is a piece missing.
-Contains:forest-north-east
-
-Item:forest-north-east
-ItemDescription:The forest is located far north-east of the marketplace
+ItemDescription:A scroll with a story about the forest. It seems the forest is located north-east of the marketplace. It looks like there is a piece missing.
 
 Item:dagger
 ItemDescription:An ornate dagger.
@@ -59,6 +55,6 @@ RoomID:TownHallLobby
 Name:Town hall lobby
 Description:A lavish marble floored lobby with doors all around
 Locks:town hall key
-UnlockTexts:You take the key and unlock the massive town hall door. It is earily quiet inside.
+UnlockTexts:You take the key and unlock the massive town hall door. You enter the lobby and close the door. It is earily quiet inside.
 Exits:exit:TownHall,north:Archives,east:MayorsOffice,west:ClerksOffice
 [/TownHall]
