@@ -38,6 +38,9 @@ my $current_room_id = $game_data{first_room_id};
 my @inventory;
 my @room_history;  # Stack to track room history
 
+# Track unlocked rooms
+my %unlocked_rooms;
+
 # Main game loop
 sub start_game {
     print "\n\033[97;1;4m$game_data{title}\033[0m\n";
@@ -268,6 +271,11 @@ sub handle_move {
         unless ($unlocked) {
             print "\033[31mThe door to ", $game_data{rooms}{$next_room_id}{name}, " is locked. You need a specific item.\033[0m\n";
             return; # Skip this exit
+        } else {
+            if (!$unlocked_rooms{$next_room_id}) {
+                print "\033[92mYou have unlocked the door to ", $game_data{rooms}{$next_room_id}{name}, " for the first time!\033[0m\n";
+                $unlocked_rooms{$next_room_id} = 1;
+            }
         }
     }
 
