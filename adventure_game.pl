@@ -76,7 +76,11 @@ sub start_game {
         }
 
         if ($room_data->{exits}) {
-            print "Options: ", join(", ", keys %{$room_data->{exits}}), "\n";
+            my $options = [];
+            foreach my $direction (keys %{$room_data->{exits}}) {
+                push @$options, "$direction: " . $game_data{rooms}{$room_data->{exits}{$direction}}{name};
+            }
+            print "Options: ", join(", ", @$options), "\n";
         }
 
         # Only display items in room if there are any
