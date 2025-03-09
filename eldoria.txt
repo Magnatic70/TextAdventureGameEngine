@@ -59,5 +59,6 @@ RoomID:TownHallLobby
 Name:Town hall lobby
 Description:A lavish marble floored lobby with doors all around
 Locks:town hall key
+UnlockTexts:You take the key and unlock the massive town hall door. It is earily quiet inside.
 Exits:exit:TownHall,north:Archives,east:MayorsOffice,west:ClerksOffice
 [/TownHall]

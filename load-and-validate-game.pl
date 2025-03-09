@@ -41,6 +41,8 @@ sub load_game_data {
             $game_data{rooms}{$current_room_id}{persons} = \@persons if @persons;
         } elsif ($line =~ /^Locks:(.*)$/) {
             $game_data{rooms}{$current_room_id}{locks} = [split /,/, $1];
+        } elsif ($line =~ /^UnlockTexts:(.*)$/) {
+            $game_data{rooms}{$current_room_id}{unlock_texts} = [split /;/, $1];
         } elsif ($line =~ /^Puzzle:(.*)$/) {
             $game_data{rooms}{$current_room_id}{puzzle} = $1;
         } elsif ($line =~ /^Riddle:(.*)$/) {
@@ -182,6 +184,9 @@ sub validate_game_data {
             foreach my $lock_item (@{$game_data{rooms}{$room_id}{locks}}){
                 unless (exists $game_data{items}{$lock_item}){
                     warn "Unlock item '$lock_item' in room '$room_id' is not defined.\n";
+                }
+                unless (exists $game_data{rooms}{$room_id}{unlock_texts}){
+                    warn "Unlock text for '$lock_item' in room '$room_id' is not defined.\n";
                 }
             }
         }
