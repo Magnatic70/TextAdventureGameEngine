@@ -1,0 +1,11 @@
+@app.route('/get_room_data')
+def get_room_data():
+    room_id = request.args.get('room_id')
+    room_data = game_data['rooms'].get(room_id, {})
+    
+    return jsonify(
+        title=game_data['title'],
+        description=room_data.get('description', ''),
+        inventory=inventory,
+        options=list(room_data.get('exits', {}).keys())
+    )
