@@ -47,7 +47,7 @@ ItemDescription:Delicious pulled pork.
 
 [TownHall]
 RoomID:TownHall
-Name:Town hall
+Name:Town hall entrance
 Description:An impressive building for such a small village
 Exits:enter:TownHallLobby,south:Marketplace
 
@@ -55,6 +55,6 @@ RoomID:TownHallLobby
 Name:Town hall lobby
 Description:A lavish marble floored lobby with doors all around
 Locks:town hall key
-UnlockTexts:You take the key and unlock the massive town hall door. You enter the lobby and close the door. It is earily quiet inside.
+UnlockTexts:You take the key and unlock the massive town hall door. You enter the lobby and close the door. It suddenly becomes earily quiet inside.
 Exits:exit:TownHall,north:Archives,east:MayorsOffice,west:ClerksOffice
 [/TownHall]
