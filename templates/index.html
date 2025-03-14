@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #game-output { white-space: pre-wrap; background-color: #f4f4f9; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Adventure Game</h1>
+    <button onclick="playGame()">Start Game</button>
+    <div id="game-output"></div>
+
+    <script>
+        function playGame() {
+            fetch('/play', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('game-output').innerText = `Error: ${data.error}`;
+                    } else {
+                        document.getElementById('game-output').innerText = data.output;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('game-output').innerText = 'Failed to start the game.';
+                });
+        }
+    </script>
+</body>
+</html>
