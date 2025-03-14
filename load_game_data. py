@@ -1,0 +1,8 @@
+import json
+
+def load_game_data(filename):
+    with open(filename, 'r') as file:
+        game_data = json.load(file)
+    
+    # Validate and process game data here (similar to Perl version)
+    return game_data

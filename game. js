@@ -1,0 +1,148 @@
+let currentRoom = null;
+let inventory = [];
+let roomHistory = [];
+
+const gameData = {
+  // Game data loaded from load_game_data function (similar to Perl version)
+};
+
+function startGame() {
+  const title = gameData.title;
+  const objective = gameData.objective;
+
+  document.getElementById("description").textContent = `Welcome to ${title}!`;
+  if (objective) {
+    document.getElementById("description").textContent += `\n${objective}`;
+  }
+
+  // Initialize current room and generate options
+  currentRoom = gameData.first_room_id;
+  const room = gameData.rooms[currentRoom];
+  const exits = Object.keys(room.exits);
+  const items = room.items || [];
+  const persons = room.persons || [];
+
+  document.getElementById("options").innerHTML = "";
+  if (exits.length > 0) {
+    exits.forEach((exit) => {
+      const option = document.createElement("li");
+      option.textContent = `${exit} (${gameData.rooms[room.exits[exit]].name})`;
+      option.addEventListener("click", () => move(exit));
+      document.getElementById("options").appendChild(option);
+    });
+  }
+
+  if (items.length > 0) {
+    items.forEach((item) => {
+      const option = document.createElement("li");
+      option.textContent = item;
+      option.addEventListener("click", () => takeItem(item));
+      document.getElementById("options").appendChild(option);
+    });
+  }
+
+  if (persons.length > 0) {
+    persons.forEach((person) => {
+      const option = document.createElement("li");
+      option.textContent = person;
+      option.addEventListener("click", () => interactWithPerson(person));
+      document.getElementById("options").appendChild(option);
+    });
+  }
+}
+
+function move(direction) {
+  const nextRoomId = gameData.rooms[currentRoom].exits[direction];
+  roomHistory.push(currentRoom);
+  currentRoom = nextRoomId;
+
+  // Validate exits
+  if (!gameData.rooms[nextRoomId]) {
+    console.error(`Invalid exit: ${nextRoomId}`);
+    return;
+  }
+
+  const newRoom = gameData.rooms[currentRoom];
+  document.getElementById("description").textContent = `You are in the ${newRoom.name}.`;
+  document.getElementById("options").innerHTML = "";
+
+  if (newRoom.exits) {
+    Object.keys(newRoom.exits).forEach((exit) => {
+      const option = document.createElement("li");
+      option.textContent = `${exit} (${gameData.rooms[newRoom.exits[exit]].name})`;
+      option.addEventListener("click", () => move(exit));
+      document.getElementById("options").appendChild(option);
+    });
+  }
+
+  if (newRoom.items) {
+    newRoom.items.forEach((item) => {
+      const option = document.createElement("li");
+      option.textContent = item;
+      option.addEventListener("click", () => takeItem(item));
+      document.getElementById("options").appendChild(option);
+    });
+  }
+
+  if (newRoom.persons) {
+    newRoom.persons.forEach((person) => {
+      const option = document.createElement("li");
+      option.textContent = person;
+      option.addEventListener("click", () => interactWithPerson(person));
+      document.getElementById("options").appendChild(option);
+    });
+  }
+}
+
+function takeItem(item) {
+  if (gameData.items[item]) {
+    inventory.push(item);
+    console.log(`You took the ${item}.`);
+    // Add item description to description element
+    const description = gameData.items[item].description;
+    if (description) {
+      document.getElementById("description").textContent += `\n${description}`;
+    }
+  } else {
+    console.error(`Item not found: ${item}`);
+  }
+}
+
+function interactWithPerson(person) {
+  // Implement person interaction logic here
+  // For example:
+  const personData = gameData.persons[person];
+  if (personData.keywords) {
+    Object.keys(personData.keywords).forEach((keyword) => {
+      const option = document.createElement("li");
+      option.textContent = `${keyword} (${personData.keywords[keyword]})`;
+      option.addEventListener("click", () => askPersonAbout(keyword));
+      document.getElementById("options").appendChild(option);
+    });
+  }
+}
+
+function askPersonAbout(keyword) {
+  // Implement asking person about a keyword logic here
+  const answer = gameData.persons[currentRoom].answers[keyword];
+  console.log(`The ${currentRoom} answers: ${answer}`);
+  // Add answer to description element
+  document.getElementById("description").textContent += `\n${answer}`;
+}
+
+function submitAction() {
+  const action = document.getElementById("action").value.trim();
+  if (action) {
+    // Implement action handling logic here
+    // For example:
+    if (action === "quit") {
+      console.log("Game ended.");
+      return;
+    }
+    // Handle other actions like fight, combine items, etc.
+  } else {
+    console.error("No action provided");
+  }
+}
+
+startGame();
