@@ -50,11 +50,55 @@ RoomID:TownHall
 Name:Town hall entrance
 Description:An impressive building for such a small village
 Exits:enter:TownHallLobby,south:Marketplace
+[/TownHall]
 
+[TownHallLobby]
 RoomID:TownHallLobby
 Name:Town hall lobby
 Description:A lavish marble floored lobby with doors all around
 Locks:town hall key
 UnlockTexts:You take the key and unlock the massive town hall door. You enter the lobby and close the door. It suddenly becomes earily quiet inside.
 Exits:exit:TownHall,north:Archives,east:MayorsOffice,west:ClerksOffice
-[/TownHall]
+[/TownHallLobby]
+
+[Archives]
+RoomID:Archives
+Name:Eldoria archives
+Description:The room is filled with rows and rows of cabinets.
+Locks:612397
+UnlockTexts:You enter the keycode and the door unlocks. When you enter the room you are stunned: How will you ever find the information you need?
+Exits:south:TownHallLobby
+[/Archives]
+
+[MayorsOffice]
+RoomID:MayorsOffice
+Name:Mayors Office
+Description:A large sturdy desk and a lavish chair are the main attractions in this room. The official portrait of the mayor shows him sitting behind the desk.
+SearchableItems:desk:612,portrait:354
+Exits:west:TownHallLobby
+[/MayorsOffice]
+
+[ClerksOffice]
+RoomID:ClerksOffice
+Name:Clerks Office
+Description:A simple desk with a uncomfortable looking chair are in the center of the room. A cabinet is tucked in the corner behind the door.
+SearchableItems:desk:234,cabinet:397
+Exits:east:TownHallLobby
+[/ClerksOffice]
+
+Item:612
+ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+
+Item:397
+ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+
+Item:354
+ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+
+Item:234
+ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+
+Combine:612,397=612397
+
+Item:612397
+ItemDescription:The pieces of paper align perfectly. But what do these digits mean?

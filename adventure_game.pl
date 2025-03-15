@@ -122,6 +122,9 @@ sub start_game {
         } else {
             chomp($action);
         }
+        if($debug){
+            print $action."\n";
+        }
 
         handle_action($action);
 
@@ -141,6 +144,9 @@ sub handle_puzzle {
         die "No more input!\n";
     } else {
         chomp($answer);
+    }
+    if($debug){
+        print $answer."\n";
     }
 
     if ($answer eq $game_data{rooms}{$current_room_id}{answer}) {
@@ -168,6 +174,9 @@ sub handle_enemy {
         die "No more input!\n";
     } else {
         chomp($action);
+    }
+    if($debug){
+        print $action."\n";
     }
 
     if ($action =~ /^fight (.*?) with (.*)$/) {
