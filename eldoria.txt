@@ -50,41 +50,28 @@ RoomID:TownHall
 Name:Town hall entrance
 Description:An impressive building for such a small village
 Exits:enter:TownHallLobby,south:Marketplace
-[/TownHall]
 
-[TownHallLobby]
 RoomID:TownHallLobby
 Name:Town hall lobby
 Description:A lavish marble floored lobby with doors all around
 Locks:town hall key
 UnlockTexts:You take the key and unlock the massive town hall door. You enter the lobby and close the door. It suddenly becomes earily quiet inside.
 Exits:exit:TownHall,north:Archives,east:MayorsOffice,west:ClerksOffice
-[/TownHallLobby]
 
-[Archives]
-RoomID:Archives
-Name:Eldoria archives
-Description:The room is filled with rows and rows of cabinets.
-Locks:612397
-UnlockTexts:You enter the keycode and the door unlocks. When you enter the room you are stunned: How will you ever find the information you need?
-Exits:south:TownHallLobby
-[/Archives]
-
-[MayorsOffice]
 RoomID:MayorsOffice
 Name:Mayors Office
 Description:A large sturdy desk and a lavish chair are the main attractions in this room. The official portrait of the mayor shows him sitting behind the desk.
 SearchableItems:desk:612,portrait:354
 Exits:west:TownHallLobby
-[/MayorsOffice]
 
-[ClerksOffice]
 RoomID:ClerksOffice
 Name:Clerks Office
 Description:A simple desk with a uncomfortable looking chair are in the center of the room. A cabinet is tucked in the corner behind the door.
-SearchableItems:desk:234,cabinet:397
+SearchableItems:desk:232,cabinet:397,chair:NES
 Exits:east:TownHallLobby
-[/ClerksOffice]
+
+Item:NES
+ItemDescription:A piece of paper with the letters NES.
 
 Item:612
 ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
@@ -95,10 +82,130 @@ ItemDescription:A piece of paper that seems to be turn in half with some digits 
 Item:354
 ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
 
-Item:234
+Item:232
 ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
 
 Combine:612,397=612397
 
 Item:612397
 ItemDescription:The pieces of paper align perfectly. But what do these digits mean?
+
+RoomID:Archives
+Name:Eldoria archives
+Description:The room is filled with rows and rows of cabinets.
+Locks:612397
+UnlockTexts:You enter the keycode and the door unlocks. When you enter the room you are stunned by what you see. How will you ever find the information you need?
+Exits:south:TownHallLobby,north:cab1
+
+[/TownHall]
+
+[CabinetMaze]
+RoomID:cab1
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:Archives,west:cab16,north:cab2,east:cab4
+SearchableItems:cabinet:chronicle2
+
+Item:chronicle2
+ItemDescription:A scroll with a story about the forest. It contains a warning about a dangerous animal.
+
+RoomID:cab2
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab1,west:cab15,north:cab3,east:cab5
+SearchableItems:cabinet:news article 1
+
+Item:news article 1
+ItemDescription:A news article from 14 years ago about the mayor's inauguration.
+
+RoomID:cab3
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab2,west:cab14,east:cab6
+SearchableItems:cabinet:news article 2
+
+Item:news article 2
+ItemDescription:A news article from a few months ago about a man found dead in the woods with bite marks all over his body.
+
+RoomID:cab4
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:west:cab1,north:cab5,east:cab7
+
+RoomID:cab5
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab4,west:cab2,north:cab6,east:cab8
+SearchableItems:cabinet:news article 3
+
+Item:news article 3
+ItemDescription:A news article from a few days ago about a strange beast with glowing eyes roaming the streets of Eldergrove at night.
+
+RoomID:cab6
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab5,west:cab3,east:cab9
+
+RoomID:cab7
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:west:cab4,north:cab8,east:cab10
+SearchableItems:cabinet:news article 4
+
+Item:news article 4
+ItemDescription:A news article from 50 years ago about a strange beast with glowing eyes roaming the streets of Eldergrove at night.
+
+RoomID:cab8
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab7,west:cab5,north:cab9,east:cab11
+
+RoomID:cab9
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab8,west:cab5,east:cab12
+
+RoomID:cab10
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab13,west:cab7,north:cab11
+
+RoomID:cab11
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab10,west:cab8,north:cab12
+SearchableItems:cabinet:news article 5
+
+Item:news article 5
+ItemDescription:An old scroll telling a tale about immortal werewolves.
+
+RoomID:cab12
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab11,west:cab9
+
+RoomID:cab13
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:north:cab10
+SearchableItems:cabinet:potion
+
+Item:potion
+ItemDescription:A vial with a purplish potion. The label has faded over time and isn't readable anymore.
+
+RoomID:cab14
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab15,east:cab3
+
+RoomID:cab15
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:south:cab16,north:cab14,east:cab2
+
+RoomID:cab16
+Name:Cabinet
+Description:You find yourself at one of many cabinets
+Exits:north:cab15,east:cab1
+[/CabinetMaze]
+
