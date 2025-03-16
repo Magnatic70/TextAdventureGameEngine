@@ -7,7 +7,7 @@ RoomID:Marketplace
 Name:Marketplace
 Description:You are in Eldergrove's bustling marketplace. The air is filled with a mix of spices and laughter from merchants and buyers alike.
 Persons:butcher,beggar,villager,mayor,baker,blacksmith
-Exits:north:TownHall,east:VillageEast,south:VillageSouth,west:VillageWest
+Exits:north:TownHall,east:ChurchSquare,south:VillageSouth,west:VillageWest
 Items:hammer
 SearchableItems:stall:apple
 
@@ -15,7 +15,7 @@ Person:butcher
 Keywords:meat:meat:I've got excellent meat, here try this! I've got excellent pork as well.;pork:pulled pork:This pulled pork is the best in all of Eldoria.
 
 Person:beggar
-Trades:meat:chronicle1:Thank you dear! I've got nothing of any worth, but this might be useful.
+Trades:meat:chronicle 1:Thank you dear! I've got nothing of any worth, but this might be useful.
 
 Person:mayor
 Keywords:town hall:town hall key:I'm busy for the rest of the day, but here's the key. Help yourself.
@@ -26,8 +26,8 @@ Trades:hammer:dagger:Thank you! I've been searching for it all day. Here, take t
 Item:meat
 ItemDescription:A piece of meat of very high quality
 
-Item:chronicle1
-ItemDescription:A scroll with a story about the forest. It seems the forest is located north-east of the marketplace. It looks like there is a piece missing.
+Item:chronicle 1
+ItemDescription:A scroll with a story about the forest. It seems the forest is located north-east of the marketplace. It looks like there is a piece of the scroll missing.
 
 Item:dagger
 ItemDescription:An ornate dagger.
@@ -104,9 +104,9 @@ RoomID:cab1
 Name:Cabinet
 Description:You find yourself at one of many cabinets
 Exits:south:Archives,west:cab16,north:cab2,east:cab4
-SearchableItems:cabinet:chronicle2
+SearchableItems:cabinet:chronicle 2
 
-Item:chronicle2
+Item:chronicle 2
 ItemDescription:A scroll with a story about the forest. It contains a warning about a dangerous animal.
 
 RoomID:cab2
@@ -211,6 +211,29 @@ Exits:north:cab15,east:cab1
 Combine:dagger,potion=purple dagger
 
 Item:purple dagger
-ItemDescription:A dagger coated with a purple potion
+ItemDescription:A dagger coated in a thick purple potion
 [/CabinetMaze]
 
+[VillageEast]
+RoomID:ChurchSquare
+Name:Church Square
+Description:A large church with a tall bell tower and large stained glass windows domineers the west village.
+Exits:west:Marketplace,enter:ChurchNave
+
+RoomID:ChurchNave
+Name:Church nave
+Description:You enter the church through the large door. As it closes behind you, the sound of the closing door echoes through the nave. In the distance the altar shines in the afternoon light.
+Exits:leave:ChurchSquare,east:Chancel
+
+RoomID:Chancel
+Name:Chancel
+Description:As you approach the altar, more detail become visible. It's a stunning piece of art. To your surprise one of the depicted scene shows a knight fighting a werewolf. 
+Persons:priest
+Exits:west:ChurchNave
+
+Person:priest
+Keywords:werewolf:chronicle 3:For travellers heading to the Magic Grotto I have this copy of chronicle. Please read it carefully. 
+
+Item:chronicle 3
+ItemDescription:This part of the chronicle shows an image of a werewolf: Shimmering eyes, long teeth and large claws. Shivers go down your spine. You don't want to meet this creature in the dark forest.
+[/VillageEast]
