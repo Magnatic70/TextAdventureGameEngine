@@ -188,10 +188,10 @@ RoomID:cab13
 Name:Cabinet
 Description:You find yourself at one of many cabinets
 Exits:north:cab10
-SearchableItems:cabinet:potion
+SearchableItems:cabinet:blue potion
 
-Item:potion
-ItemDescription:A vial with a purplish potion. The label has faded over time and isn't readable anymore.
+Item:blue potion
+ItemDescription:A vial with a blueish potion. The label has faded over time and isn't readable anymore.
 
 RoomID:cab14
 Name:Cabinet
@@ -208,10 +208,8 @@ Name:Cabinet
 Description:You find yourself at one of many cabinets
 Exits:north:cab15,east:cab1
 
-Combine:dagger,potion=purple dagger
-
-Item:purple dagger
-ItemDescription:A dagger coated in a thick purple potion
+Item:blue dagger
+ItemDescription:A dagger coated in a thick blue potion
 [/CabinetMaze]
 
 [VillageEast]
@@ -227,13 +225,21 @@ Exits:leave:ChurchSquare,east:Chancel
 
 RoomID:Chancel
 Name:Chancel
-Description:As you approach the altar, more detail become visible. It's a stunning piece of art. To your surprise one of the depicted scene shows a knight fighting a werewolf. 
+Description:As you approach the altar, more detail become visible. It's a stunning piece of art. To your surprise one of the depicted scene shows a knight fighting a werewolf with an intricately decorated sword. 
 Persons:priest
 Exits:west:ChurchNave
 
+SearchableItems:altar:sword imprint
+
+Item:sword imprint
+ItemDescription:You've made an imprint of the sword. You now distinguish the words written on the blade: Balance and harmony.
+
 Person:priest
-Keywords:werewolf:chronicle 3:For travellers heading to the Magic Grotto I have this copy of chronicle. Please read it carefully. 
+Keywords:werewolf:chronicle 3:For travellers heading to the Magic Grotto I have this copy of chronicle. Please read it carefully.;altar:altar pamphlet:This pamphlet explains all scenes depicted on the altar.
 
 Item:chronicle 3
-ItemDescription:This part of the chronicle shows an image of a werewolf: Shimmering eyes, long teeth and large claws. Shivers go down your spine. You don't want to meet this creature in the dark forest.
+ItemDescription:This part of the chronicle shows an image of a werewolf: Shimmering eyes, long teeth and large claws. It describes their mood as unbalanced and not in harmony with the rest of the world. Shivers go down your spine. You don't want to meet this creature in the dark forest.
+
+Item:altar pamphlet
+ItemDescription:The scene of the knight fighting the werewolf is based on a historic fact. 500 years ago a knight was able to defeat a werewolf using his sword.
 [/VillageEast]

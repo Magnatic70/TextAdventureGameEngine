@@ -52,9 +52,9 @@ sub start_game {
     print "\nYou can perform the following actions:\n";
     print "- Move: Use directions like 'north', 'south', etc., to move between locations.\n";
     print "- Take: Pick up items using 'take [item]'.\n";
-    print "- Examine: Look at items with 'examine [item]'.\n";
-    print "- Describe: Get a description of an item using 'describe [item]'.\n";
-    print "- Search: Find hidden items with 'search [target]'.\n";
+    print "- Examine: Check if items in your inventory contain other items with 'examine [item]'.\n";
+    print "- Describe: Get a description of an item in your inventory using 'describe [item]'.\n";
+    print "- Search: Find hidden items in a location with 'search [target]'.\n";
     print "- Combine: Create new items by combining two, e.g., 'combine [item1] and [item2]'.\n";
     print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
     print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
