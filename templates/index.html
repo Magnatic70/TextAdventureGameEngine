@@ -112,7 +112,7 @@ function sendAction() {
     const action = document.getElementById('actionInput').value;
     const sessionID = localStorage.getItem('sessionID');
 
-    fetch('/send-action', {
+    fetch('send-action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ gameName, sessionID, action })
