@@ -27,7 +27,7 @@ Item:meat
 ItemDescription:A piece of meat of very high quality
 
 Item:chronicle 1
-ItemDescription:A scroll with a story about the forest. It seems the forest is located north-east of the marketplace. It looks like there is a piece of the scroll missing.
+ItemDescription:A scroll with a story about the forest. It seems the forest is located north-west of Eldergrove. It looks like there is a piece of the scroll missing.
 
 Item:dagger
 ItemDescription:An ornate dagger.
@@ -234,7 +234,7 @@ Exits:west:ChurchNave
 SearchableItems:altar:sword imprint
 
 Item:sword imprint
-ItemDescription:You've made an imprint of the sword. You now distinguish the words written on the blade: Balance and harmony.
+ItemDescription:You've made an imprint of the sword depicted on the altar. You now distinguish the words written on the blade: Balance and harmony.
 
 Person:priest
 Keywords:werewolf:chronicle 3:For travellers heading to the Magic Grotto I have this copy of chronicle. Please read it carefully.;altar:altar pamphlet:This pamphlet explains all scenes depicted on the altar.
