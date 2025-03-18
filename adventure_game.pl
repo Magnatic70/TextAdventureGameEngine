@@ -68,6 +68,7 @@ validate_game_data(%game_data);
 my $current_room_id = $game_data{first_room_id};
 my @inventory;
 my @room_history;  # Stack to track room history
+my $room_data;
 
 # Track unlocked rooms
 my %unlocked_rooms;
@@ -94,30 +95,8 @@ sub readInput{
     }
 }
 
-# Main game loop
-sub start_game {
-    print "\n\033[97;1;4m$game_data{title}\033[0m\n";
-    if ($game_data{objective}) {
-        print "$game_data{objective}\n";
-    }
-
-    # Explain all possible actions
-    print "\nYou can perform the following actions:\n";
-    print "- Move: Use directions like 'north', 'south', etc., to move between locations.\n";
-    print "- Take: Pick up items using 'take [item]'.\n";
-    print "- Examine: Check if items in your inventory contain other items with 'examine [item]'.\n";
-    print "- Describe: Get a description of an item in your inventory using 'describe [item]'.\n";
-    print "- Search: Find hidden items in a location with 'search [target]'.\n";
-    print "- Combine: Create new items by combining two, e.g., 'combine [item1] and [item2]'.\n";
-    print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
-    print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
-    print "- Trade: Exchange items with persons using 'trade [item] with [person]'.\n";
-    print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
-    print "- Retreat: Move back to the previous room with 'retreat'.\n";
-    print "- Quit: Exit the game by typing 'quit'.\n";
-
-    while (1) {
-        my $room_data = $game_data{rooms}{$current_room_id};
+sub showRoomInfo{
+        $room_data = $game_data{rooms}{$current_room_id};
 
         # Display room name and description with black text on white background
         print "\n\n\033[47m\033[30m--- Location: ", $room_data->{name}, " ---\033[0m\n";
@@ -149,8 +128,33 @@ sub start_game {
         # Display persons in the room if any
         if ($room_data->{persons}) {
             print "Persons here: ", join(", ", @{$room_data->{persons}}), "\n";
-        }
+        }    
+}
 
+# Main game loop
+sub start_game {
+    print "\n\033[97;1;4m$game_data{title}\033[0m\n";
+    if ($game_data{objective}) {
+        print "$game_data{objective}\n";
+    }
+
+    # Explain all possible actions
+    print "\nYou can perform the following actions:\n";
+    print "- Move: Use directions like 'north', 'south', etc., to move between locations.\n";
+    print "- Take: Pick up items using 'take [item]'.\n";
+    print "- Examine: Check if items in your inventory contain other items with 'examine [item]'.\n";
+    print "- Describe: Get a description of an item in your inventory using 'describe [item]'.\n";
+    print "- Search: Find hidden items in a location with 'search [target]'.\n";
+    print "- Combine: Create new items by combining two, e.g., 'combine [item1] and [item2]'.\n";
+    print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
+    print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
+    print "- Trade: Exchange items with persons using 'trade [item] with [person]'.\n";
+    print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
+    print "- Retreat: Move back to the previous room with 'retreat'.\n";
+    print "- Quit: Exit the game by typing 'quit'.\n";
+
+    while (1) {
+        showRoomInfo();
         # Check for puzzles
         if (exists $room_data->{puzzle}) {
             handle_puzzle();
@@ -296,6 +300,7 @@ sub handle_retreat {
         my $previous_room_id = pop @room_history;
         $current_room_id = $previous_room_id;
         print "You retreat to the $game_data{rooms}{$current_room_id}{name}.\n";
+        showRoomInfo();
     } else {
         print "There is no previous room to retreat to!\n";
     }
