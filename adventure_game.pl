@@ -24,16 +24,21 @@ if (-p STDIN) {
     $debug = 1;
 }
 
-my ($gameFile)=$ARGV[0];
+my ($gameFile)='empty';
+my $prefix='empty';
+my $inputFile;
 
-if($gameFile eq 'Eldoria'){
+if($ARGV[0] eq 'Eldoria'){
     $gameFile='eldoria.txt';
+    $prefix='eldoria-';
 }
-if($gameFile eq 'PrisonEscape'){
+if($ARGV[0] eq 'PrisonEscape'){
     $gameFile='prison-escape.txt';
+    $prefix='prison-escape-';
 }
-if($gameFile eq 'HauntedMansion'){
+if($ARGV[0] eq 'HauntedMansion'){
     $gameFile='game_data.txt';
+    $prefix='haunted-mansion-';
 }
 
 if (!(-e $gameFile)) {
@@ -45,8 +50,9 @@ if($inputType ne 'file'){
     $inputType='stdin';
 }
 else{
-    if(-e $ARGV[2]){
-        open($INPUT,$ARGV[2]);
+    $inputFile=$prefix.$ARGV[2];
+    if(-e $inputFile){
+        open($INPUT,$inputFile);
     }
     else{
         $inputType='argv';
@@ -199,6 +205,9 @@ sub handle_puzzle {
     if ($answer eq $game_data{rooms}{$current_room_id}{answer}) {
         push @inventory, $room_data->{reward_item};
         print "You've given the correct answer and now have access to this location. As a reward you get a $room_data->{reward_item}!\n";
+        if($inputType eq 'done'){
+            saveNewAction($answer);
+        }
 
         # Display contained item description
         if (exists $game_data{items}{$room_data->{reward_item}}{description}) {
@@ -228,8 +237,14 @@ sub handle_enemy {
 
     if ($action =~ /^fight (.*?) with (.*)$/) {
         handle_fight($2);
+        if($inputType eq 'done'){
+            saveNewAction($action);
+        }
     } elsif ($action =~ /^retreat$/) {
         handle_retreat();
+        if($inputType eq 'done'){
+            saveNewAction($action);
+        }
     } else {
         print "I don't understand that action ($action). Try fighting with an item from your inventory or retreating.\n";
         if ($debug) { die; }
@@ -286,6 +301,16 @@ sub handle_retreat {
     }
 }
 
+sub saveNewAction{
+    my($action)=@_;
+    if(-e $inputFile){
+        close($INPUT);
+    }
+    open($INPUT,'>>'.$inputFile);
+    print $INPUT $action."\n";
+    close($INPUT);
+}
+
 sub handle_action {
     my ($action) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
@@ -317,12 +342,7 @@ sub handle_action {
         if ($debug) { die; }
     }
     if($inputType eq 'done' && $validAction){
-        if(-e $ARGV[2]){
-            close($INPUT);
-        }
-        open($INPUT,'>>'.$ARGV[2]);
-        print $INPUT $action."\n";
-        close($INPUT);
+        saveNewAction($action);
     }
 }
 

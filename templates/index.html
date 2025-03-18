@@ -28,7 +28,7 @@
 <body>
     <pre id="response"></pre>
     <div class="fixed-bottom">
-        <select id="gameName">
+        <select id="gameName" onchange="storeGame()">
             <option value="HauntedMansion">Haunted Mansion</option>
             <option value="PrisonEscape">Prison Escape</option>
             <option value="Eldoria">Eldoria</option>
@@ -58,6 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setSessionID(){
     localStorage.setItem('sessionID', document.getElementById('sessionID').value);
+}
+
+function storeGame(){
+    localStorage.setItem('gameName',document.getElementById('gameName').value);
+    sendAction();
 }
     
 function sendAction() {
