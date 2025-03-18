@@ -158,7 +158,7 @@ function decodeANSItoHTML(ansiString) {
     ansiString=ansiString.replaceAll(/\\u001b\[34m/g,'<font color="Blue">');
     
     ansiString=ansiString.replaceAll(/\\u001b\[92;6m/g,'<font color="Red" style="font-size:24pt;background-color: yellow">');
-    return ansiString.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+    return ansiString;
 }
     </script>
 </body>
