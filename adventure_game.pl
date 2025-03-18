@@ -202,8 +202,9 @@ sub handle_puzzle {
     } else {
         chomp($answer);
     }
-    if($debug){
-        print $answer."\n";
+
+    if($debug || $inputType ne 'stdin'){
+        print "\033[34m".$answer."\033[0m\n\n";
     }
 
     if ($answer eq $game_data{rooms}{$current_room_id}{answer}) {
@@ -235,8 +236,8 @@ sub handle_enemy {
     } else {
         chomp($action);
     }
-    if($debug){
-        print $action."\n";
+    if($debug || $inputType ne 'stdin'){
+        print "\033[34m".$action."\033[0m\n\n";
     }
 
     if ($action =~ /^fight (.*?) with (.*)$/) {
@@ -287,6 +288,9 @@ sub handle_fight {
                 print "\033[31m$game_data{rooms}{$current_room_id}{died_description}\033[0m\n";
             }
             print "You have died!\n";
+            my $previous_room_id = pop @room_history;
+            $current_room_id = $previous_room_id;
+            showRoomInfo();
 
             if ($die) { exit; }  # End game loop
         }

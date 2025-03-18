@@ -74,16 +74,16 @@ Item:NES
 ItemDescription:A piece of paper with the letters NES.
 
 Item:612
-ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+ItemDescription:A piece of paper that seems to be torn in half with some digits on it.
 
 Item:397
-ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+ItemDescription:A piece of paper that seems to be torn in half with some digits on it.
 
 Item:354
-ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+ItemDescription:A piece of paper that seems to be torn in half with some digits on it.
 
 Item:232
-ItemDescription:A piece of paper that seems to be turn in half with some digits on it.
+ItemDescription:A piece of paper that seems to be torn in half with some digits on it.
 
 Combine:612,397=612397
 
