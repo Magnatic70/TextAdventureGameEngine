@@ -139,7 +139,7 @@ Exits:west:GuardsRoom
 
 RoomID:RecArea
 Name:The recreational area.
-Description:Through the bars you can see the sky for the first time in a long time. You can see the visitor room through the glass door, but the lock is at the other side of the door.
+Description:Through the bars you can see the sky for the first time in a long time. You can see the visitor room through the badly scratched glass door, but the lock is at the other side of the door.
 Exits:south:GuardsRoom,north:VisitorRoom
 
 Combine:shiv,file=sharpened shiv
@@ -175,7 +175,7 @@ ItemDescription:Now it is actually useful!
 
 RoomID:Reception
 Name:Reception
-Description:It was years ago that you where checked in right here for a crime you didn't commit. You can see the street through the glass door.
+Description:It was years ago that you where checked in right here for a crime you didn't commit. You can see the street through the glass door. You scan the ceiling, but there's nothing special there, just some fluorescent tube lights, a damaged ceiling tile, a motion detector and a fire detector.
 Exits:south:VisitorRoom2,north:Street,east:WardensOffice
 
 Combine:newspaper,contraption=burning newspaper
@@ -196,7 +196,7 @@ Exits:west:Reception,east:PrivateBathroom
 
 RoomID:PrivateBathroom
 Name:The wardens private bathroom
-Description:The high-tech Japanse toilet is the centerpiece of the room
+Description:A high-tech Japanse toilet is the centerpiece of the room
 Exits:west:WardensOffice,up:AD1
 
 RoomID:AD1
