@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sessionID = localStorage.getItem('sessionID') || generateSessionID();
     document.getElementById('sessionID').value=sessionID;
-    //localStorage.setItem('sessionID', sessionID);
+    localStorage.setItem('sessionID', sessionID);
     sendAction();
 
     const actionInput = document.getElementById('actionInput');
