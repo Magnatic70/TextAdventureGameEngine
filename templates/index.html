@@ -147,7 +147,7 @@ function decodeANSItoHTML(ansiString) {
     ansiString=ansiString.replaceAll(/\\u001b\[0m/g,'</u></font>');
     ansiString=ansiString.replaceAll(/\\u001b\[47m\\u001b\[30m/g,'<font color="White" style="background-color: black">');
     ansiString=ansiString.replaceAll(/\\u001b\[32m/g,'<font color="Green">');
-    ansiString=ansiString.replaceAll(/\\u001b\[36m/g,'<font color="Cyan">');
+    ansiString=ansiString.replaceAll(/\\u001b\[36m/g,'<font color="Turquoise">');
     ansiString=ansiString.replaceAll(/\\u001b\[93m/g,'<font color="Orange">');
     ansiString=ansiString.replaceAll(/\\u001b\[31m/g,'<font color="Red">');
     ansiString=ansiString.replaceAll(/\\u001b\[92m/g,'<font color="Lime">');
