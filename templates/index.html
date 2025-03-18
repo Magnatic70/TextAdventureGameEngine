@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Action Sender</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #response {
+            flex-grow: 1;
+            overflow-y: auto; /* Ensure the response area is scrollable */
+        }
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: white; /* Optional: to ensure visibility */
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: for a slight shadow effect */
+        }
+    </style>
+</head>
+<body>
+    <pre id="response"></pre>
+    <div class="fixed-bottom">
+        <select id="gameName">
+            <option value="HauntedMansion">Haunted Mansion</option>
+            <option value="PrisonEscape">Prison Escape</option>
+            <option value="Eldoria">Eldoria</option>
+            <!-- Add more games as needed -->
+        </select>
+        <input type="text" id="actionInput" placeholder="Enter action here" size="50">
+        <button onclick="sendAction()">Send Action</button>
+        <button onclick="generateNewSessionID()">Generate New Session ID</button>
+        <input type="text" id="sessionID" size="32" onblur="setSessionID()">
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const gameNameSelect = document.getElementById('gameName');
+    const storedGame = localStorage.getItem('gameName');
+
+    if (storedGame) {
+        gameNameSelect.value = storedGame;
+    }
+    
+
+    const sessionID = localStorage.getItem('sessionID') || generateSessionID();
+    document.getElementById('sessionID').value=sessionID;
+    //localStorage.setItem('sessionID', sessionID);
+    sendAction();
+});
+
+function setSessionID(){
+    localStorage.setItem('sessionID', document.getElementById('sessionID').value);
+}
+    
+function sendAction() {
+    const gameName = document.getElementById('gameName').value;
+    const action = document.getElementById('actionInput').value;
+    const sessionID = localStorage.getItem('sessionID');
+
+    fetch('/send-action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gameName, sessionID, action })
+    })
+    .then(response => response.text())
+    .then(data => {
+        const decodedData = decodeANSItoHTML(data);
+        //const newDiv = document.createElement('pre');
+        //newDiv.innerHTML = decodedData+"<br><br><br>";
+        document.getElementById('response').innerHTML=decodedData+"<br><br><br>";
+        document.getElementById('response').scrollTo(0, document.getElementById('response').scrollHeight);
+        document.getElementById('actionInput').value='';
+    });
+}
+
+function generateSessionID() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 32; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+
+function generateNewSessionID() {
+    const newSessionID = generateSessionID();
+    //localStorage.setItem('sessionID', newSessionID);
+    document.getElementById('sessionID').value=newSessionID;
+    localStorage.setItem('sessionID', document.getElementById('sessionID').value);
+    sendAction();
+}
+
+function decodeANSItoHTML(ansiString) {
+    // Implement ANSI to HTML conversion logic here
+    // This is a placeholder function
+    ansiString=ansiString.replaceAll(/\\n/g,'<br>');
+    ansiString=ansiString.replaceAll(/"/g,'');
+    ansiString=ansiString.replaceAll(/\\u001b\[97;1;4m/g,'<u>');
+    ansiString=ansiString.replaceAll(/\\u001b\[0m/g,'</u></font>');
+    ansiString=ansiString.replaceAll(/\\u001b\[47m\\u001b\[30m/g,'<font color="White" style="background-color: black">');
+    ansiString=ansiString.replaceAll(/\\u001b\[32m/g,'<font color="Green">');
+    ansiString=ansiString.replaceAll(/\\u001b\[36m/g,'<font color="Cyan">');
+    ansiString=ansiString.replaceAll(/\\u001b\[93m/g,'<font color="Orange">');
+    ansiString=ansiString.replaceAll(/\\u001b\[31m/g,'<font color="Red">');
+    ansiString=ansiString.replaceAll(/\\u001b\[92m/g,'<font color="Lime">');
+    ansiString=ansiString.replaceAll(/\\u001b\[34m/g,'<font color="Blue">');
+    return ansiString.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+}
+    </script>
+</body>
+</html>

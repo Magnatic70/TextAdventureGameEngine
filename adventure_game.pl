@@ -3,6 +3,11 @@
 use strict;
 use warnings;
 
+# $ARGV[0]=filename of game
+# $ARGV[1]=input type (file or stdin)
+# $ARGV[2]=input file (only when $ARGV[1] eq 'file')
+# $ARGV[3]=action (only when $ARGV[1] eq 'file')
+
 require './load-and-validate-game.pl';
 
 # 1=Stops when an action results in a failure. Handy during automated testing. 0=Normal behaviour.
@@ -11,21 +16,41 @@ my $debug = 0;
 # 0=don't die when you are defeated by an enemy, 1=die when you are defeated
 my $die = 0;
 
+my $inputType=$ARGV[1];
+
+my $INPUT;
+
 if (-p STDIN) {
     $debug = 1;
 }
 
-my ($gameFile);
-if ($ARGV[0]) {
-    $gameFile = $ARGV[0];
-} else {
-    print "Game not found, using default\n";
-    $gameFile = 'game_data.txt';
+my ($gameFile)=$ARGV[0];
+
+if($gameFile eq 'Eldoria'){
+    $gameFile='eldoria.txt';
+}
+if($gameFile eq 'PrisonEscape'){
+    $gameFile='prison-escape.txt';
+}
+if($gameFile eq 'HauntedMansion'){
+    $gameFile='game_data.txt';
 }
 
 if (!(-e $gameFile)) {
-    print "Game not found, using default\n";
-    $gameFile = 'game_data.txt';
+    print "Game $gameFile not found";
+    die "Game $gameFile not found\n";
+}
+
+if($inputType ne 'file'){
+    $inputType='stdin';
+}
+else{
+    if(-e $ARGV[2]){
+        open($INPUT,$ARGV[2]);
+    }
+    else{
+        $inputType='argv';
+    }
 }
 
 my %game_data = load_game_data($gameFile);
@@ -40,6 +65,28 @@ my @room_history;  # Stack to track room history
 
 # Track unlocked rooms
 my %unlocked_rooms;
+
+sub readInput{
+    if($inputType eq 'stdin'){
+        return <STDIN>;
+    }
+    elsif($inputType eq 'file'){
+        if(!eof($INPUT)){
+            return readline($INPUT);
+        }
+        else{
+            $inputType='done';
+            return $ARGV[3];
+        }
+    }
+    elsif($inputType eq 'argv'){
+        $inputType='done';
+        return $ARGV[3];
+    }
+    else{
+        exit;
+    }
+}
 
 # Main game loop
 sub start_game {
@@ -77,7 +124,7 @@ sub start_game {
 
         if ($room_data->{exits}) {
             my $options = [];
-            foreach my $direction (keys %{$room_data->{exits}}) {
+            foreach my $direction (sort keys %{$room_data->{exits}}) {
                 if(exists $game_data{rooms}{$room_data->{exits}{$direction}}{name}){
                     push @$options, "$direction (" . $game_data{rooms}{$room_data->{exits}{$direction}}{name}.')';
                 }
@@ -116,14 +163,14 @@ sub start_game {
 
         # Prompt for user action with green text
         print "\033[32mWhat do you want to do? \033[0m\n";  # Green text followed by reset
-        my $action = <STDIN>;
+        my $action = readInput();
         if (!$action) {
             die "No more input!\n";
         } else {
             chomp($action);
         }
-        if($debug){
-            print $action."\n";
+        if($debug || $inputType ne 'stdin'){
+            print "\033[34m".$action."\033[0m\n\n";
         }
 
         handle_action($action);
@@ -139,7 +186,7 @@ sub handle_puzzle {
     # Display puzzle riddle in green
     print "\033[32m$room_data->{riddle}\033[0m\n";
 
-    my $answer = <STDIN>;
+    my $answer = readInput();
     if (!$answer) {
         die "No more input!\n";
     } else {
@@ -169,7 +216,7 @@ sub handle_enemy {
 
     print "You encounter a $enemy->{name}!\n\033[32mYou must fight it with the correct item to survive or retreat.\033[0m\n";
 
-    my $action = <STDIN>;
+    my $action = readInput();
     if (!$action) {
         die "No more input!\n";
     } else {
@@ -242,6 +289,7 @@ sub handle_retreat {
 sub handle_action {
     my ($action) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
+    my $validAction=1;
 
     if (exists $room_data->{exits} && exists $room_data->{exits}{$action}) {
         handle_move($action);
@@ -264,8 +312,17 @@ sub handle_action {
     } elsif ($action eq 'quit') {
         exit;
     } else {
+        $validAction=0;
         print "I don't understand that action ($action). Try moving, taking an item, examining something, describing an item, searching, combining items, dropping an item, or asking a person a question.\n";
         if ($debug) { die; }
+    }
+    if($inputType eq 'done' && $validAction){
+        if(-e $ARGV[2]){
+            close($INPUT);
+        }
+        open($INPUT,'>>'.$ARGV[2]);
+        print $INPUT $action."\n";
+        close($INPUT);
     }
 }
 

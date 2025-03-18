@@ -12,7 +12,7 @@ Items:hammer
 SearchableItems:stall:apple
 
 Person:butcher
-Keywords:meat:meat:I've got excellent meat, here try this! I've got excellent pork as well.;pork:pulled pork:This pulled pork is the best in all of Eldoria.
+Keywords:meat:meat:I've got excellent meat, here try this! I've got excellent pork as well.;pork:pulled pork:This pulled pork is the best in all of Eldoria. I've got excellent meat as well.
 
 Person:beggar
 Trades:meat:chronicle 1:Thank you dear! I've got nothing of any worth, but this might be useful.
@@ -207,6 +207,8 @@ RoomID:cab16
 Name:Cabinet
 Description:You find yourself at one of many cabinets
 Exits:north:cab15,east:cab1
+
+Combine:dagger,blue potion=blue dagger
 
 Item:blue dagger
 ItemDescription:A dagger coated in a thick blue potion
