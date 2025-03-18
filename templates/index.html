@@ -10,18 +10,47 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
         }
         #response {
             flex-grow: 1;
             overflow-y: auto; /* Ensure the response area is scrollable */
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            background-color: white;
         }
         .fixed-bottom {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: white; /* Optional: to ensure visibility */
-            padding: 10px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: for a slight shadow effect */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        select, input[type="text"] {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -86,8 +115,6 @@ function sendAction() {
     .then(response => response.text())
     .then(data => {
         const decodedData = decodeANSItoHTML(data);
-        //const newDiv = document.createElement('pre');
-        //newDiv.innerHTML = decodedData+"<br><br><br>";
         document.getElementById('response').innerHTML=decodedData+"<br><br><br>";
         document.getElementById('response').scrollTo(0, document.getElementById('response').scrollHeight);
         document.getElementById('actionInput').value='';
@@ -105,15 +132,12 @@ function generateSessionID() {
 
 function generateNewSessionID() {
     const newSessionID = generateSessionID();
-    //localStorage.setItem('sessionID', newSessionID);
     document.getElementById('sessionID').value=newSessionID;
     localStorage.setItem('sessionID', document.getElementById('sessionID').value);
     sendAction();
 }
 
 function decodeANSItoHTML(ansiString) {
-    // Implement ANSI to HTML conversion logic here
-    // This is a placeholder function
     ansiString=ansiString.replaceAll(/\\n/g,'<br>');
     ansiString=ansiString.replaceAll(/"/g,'');
     ansiString=ansiString.replaceAll(/\\u001b\[97;1;4m/g,'<u>');
