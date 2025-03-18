@@ -25,7 +25,6 @@
             width: 60%;
             margin: 0 auto; /* Center the pre tag */
             font-size: 16px; /* Slightly increase the font size */
-            white-space: pre-wrap; /* Allow text to wrap naturally */
         }
         .fixed-bottom {
             position: fixed;
@@ -144,7 +143,9 @@ function generateNewSessionID() {
 
 function decodeANSItoHTML(ansiString) {
     ansiString=ansiString.replaceAll(/\\n/g,'<br>');
+    ansiString=ansiString.replaceAll(/\\"/g,'##');
     ansiString=ansiString.replaceAll(/"/g,'');
+    ansiString=ansiString.replaceAll(/##/g,'"');
     ansiString=ansiString.replaceAll(/\\u001b\[97;1;4m/g,'<u>');
     ansiString=ansiString.replaceAll(/\\u001b\[0m/g,'</u></font>');
     ansiString=ansiString.replaceAll(/\\u001b\[47m\\u001b\[30m/g,'<font color="White" style="background-color: black">');
@@ -154,6 +155,8 @@ function decodeANSItoHTML(ansiString) {
     ansiString=ansiString.replaceAll(/\\u001b\[31m/g,'<font color="Red">');
     ansiString=ansiString.replaceAll(/\\u001b\[92m/g,'<font color="Lime">');
     ansiString=ansiString.replaceAll(/\\u001b\[34m/g,'<font color="Blue">');
+    
+    ansiString=ansiString.replaceAll(/\\u001b\[92;6m/g,'<font color="Red" style="font-size:24pt;background-color: yellow">');
     return ansiString.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
 }
     </script>
