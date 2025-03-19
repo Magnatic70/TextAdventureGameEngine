@@ -150,7 +150,7 @@ sub start_game {
     print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
     print "- Trade: Exchange items with persons using 'trade [item] with [person]'.\n";
     print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
-    print "- Retreat: Move back to the previous room with 'retreat'.\n";
+    print "- Retreat (Only when in fight): Move back to the previous room with 'retreat'.\n";
     print "- Quit: Exit the game by typing 'quit'.\n";
 
     while (1) {
