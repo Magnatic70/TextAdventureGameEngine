@@ -75,20 +75,20 @@ my %unlocked_rooms;
 
 sub readInput{
     if($inputType eq 'stdin'){
-        return <STDIN>;
+        return lc(<STDIN>);
     }
     elsif($inputType eq 'file'){
         if(!eof($INPUT)){
-            return readline($INPUT);
+            return lc(readline($INPUT));
         }
         else{
             $inputType='done';
-            return $ARGV[3];
+            return lc($ARGV[3]);
         }
     }
     elsif($inputType eq 'argv'){
         $inputType='done';
-        return $ARGV[3];
+        return lc($ARGV[3]);
     }
     else{
         exit;
