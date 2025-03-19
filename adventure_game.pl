@@ -296,6 +296,9 @@ sub handle_fight {
         }
     } else {
         print "You don't have a $item in your inventory.\n";
+		my $previous_room_id = pop @room_history;
+		$current_room_id = $previous_room_id;
+		showRoomInfo();
     }
 }
 
