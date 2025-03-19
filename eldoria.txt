@@ -5,7 +5,7 @@ Objective:You have to find your way from the marketplace of Eldergrove through t
 [Marketplace]
 RoomID:Marketplace
 Name:Marketplace
-Description:You are in Eldergrove's bustling marketplace. The air is filled with a mix of spices and laughter from merchants and buyers alike.
+Description:You are in Eldergrove's bustling marketplace. The air is filled with a mix of spices and laughter from merchants and buyers alike. Stalls display their wares in abundance.
 Persons:butcher,beggar,villager,mayor,baker,blacksmith
 Exits:north:TownHall,east:ChurchSquare,south:VillageSouth,west:VillageWest
 Items:hammer
