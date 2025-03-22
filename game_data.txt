@@ -1,4 +1,5 @@
 Title:The haunted mansion
+Objective:You have to find and defeat the troll
 
 RoomID:Entrance
 Name:Entrance
@@ -79,7 +80,7 @@ Contains:some letters,cup of hot soup
 ItemDescription:A steaming hot cup of soup with some letters in it
 
 Item:cup of hot soup
-ItemDescription:Without the letters it's just hot soup.
+ItemDescription:Without the letters it's just scalding hot soup.
 
 Item:some letters
 ItemDescription:Some random letters. What could they mean?
