@@ -148,7 +148,7 @@ DiedDescription:The leprechaun curses you and you slowly turn to stone.
 Exits:east:Landing,bathe:Bath
 
 Item:rubber duck
-ItemDescription:It's a duck. Made of rubber. It squeeks when you squeeze it.
+ItemDescription:It's a duck. Made of rubber. It squeeks when you squeeze it and a little bit of trapped water spurts out.
 
 RoomID:Bath
 Name:Bath
@@ -206,7 +206,7 @@ Name:Entrance
 Exits:north:Lobby,south:Garden
 
 Item:feather
-ItemDescription:A feather, it's grey, possibly from a pigeon.
+ItemDescription:A feather, it's grey, possibly from a pigeon. It's good you're not ticklish, because the feeling of it against your skin would drive you crazy.
 
 Item:fly swatter
 ItemDescription:What's this doing in the bell tower?
