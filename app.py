@@ -25,15 +25,12 @@ def send_action():
         return jsonify({'error': 'Invalid session ID format'}), 400
 
     # Create a temporary file for the game output
-    output_file = f"game_output_{session_id}.txt"
+    output_file = f"{session_id}"
     
     # Call the Perl script with parameters
     result = subprocess.run(
         ['perl', 'adventure_game.pl', game_name, 'file', session_id, action],
-        capture_output=True,
-        text=True
     )
-    print(result.stderr)
     
     # Read the output from file instead of STDOUT
     with open(output_file, 'r') as f:
@@ -42,7 +39,7 @@ def send_action():
     # Clean up temporary file
     os.remove(output_file)
     
-    return jsonify({'output': game_output})
+    return jsonify(game_output)
 
 if __name__ == '__main__':
     app.run(debug=True, port=4546, host='0.0.0.0')

@@ -64,6 +64,13 @@ my %game_data = load_game_data($gameFile);
 # Validate game data
 validate_game_data(%game_data);
 
+if($inputType eq 'file' || $inputType eq 'argv'){
+    # Output game output to session file
+    my($GAMEOUT);
+    open($GAMEOUT,'>'.$ARGV[2]);
+    select $GAMEOUT;
+}
+
 # Initial setup
 my $current_room_id = $game_data{first_room_id};
 my @inventory;

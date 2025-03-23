@@ -1,5 +1,5 @@
 Title:The haunted mansion
-Objective:You have to find and defeat the troll
+Objective:Find and defeat the troll
 
 RoomID:Entrance
 Name:Entrance
