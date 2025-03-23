@@ -597,7 +597,7 @@ sub handle_trade {
 sub handle_inventory {
     print "\033[36mInventory:\033[0m\n";  # Cyan text followed by reset
     foreach my $item (sort @inventory) {
-        print "\033[36m$item: \033[0m";
+        print "\033[1m$item: \033[0m";
         if (exists $game_data{items}{$item}{description}) {
             print "$game_data{items}{$item}{description}\n";
         } else {

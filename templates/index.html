@@ -148,7 +148,7 @@ function decodeANSItoHTML(ansiString) {
     ansiString=ansiString.replaceAll(/"/g,'');
     ansiString=ansiString.replaceAll(/##/g,'"');
     ansiString=ansiString.replaceAll(/\\u001b\[97;1;4m/g,'<u>');
-    ansiString=ansiString.replaceAll(/\\u001b\[0m/g,'</u></font>');
+    ansiString=ansiString.replaceAll(/\\u001b\[0m/g,'</u></font></b>');
     ansiString=ansiString.replaceAll(/\\u001b\[47m\\u001b\[30m/g,'<font color="White" style="background-color: black">');
     ansiString=ansiString.replaceAll(/\\u001b\[32m/g,'<font color="Green">');
     ansiString=ansiString.replaceAll(/\\u001b\[36m/g,'<font color="DarkTurquoise">');
@@ -156,6 +156,7 @@ function decodeANSItoHTML(ansiString) {
     ansiString=ansiString.replaceAll(/\\u001b\[31m/g,'<font color="Red">');
     ansiString=ansiString.replaceAll(/\\u001b\[92m/g,'<font color="Lime">');
     ansiString=ansiString.replaceAll(/\\u001b\[34m/g,'<font color="Blue">');
+    ansiString=ansiString.replaceAll(/\\u001b\[1m/g,'<b>');
     
     ansiString=ansiString.replaceAll(/\\u001b\[92;6m/g,'<font color="Red" style="font-size:24pt;background-color: yellow">');
     return ansiString;
