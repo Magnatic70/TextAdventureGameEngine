@@ -152,6 +152,7 @@ sub start_game {
     print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
     print "- Retreat (Only when in fight): Move back to the previous room with 'retreat'.\n";
     print "- Inventory: View all items and their descriptions using 'inventory'.\n";  # New command description
+    print "- Hint: Ask for hints on a subject using 'hint [subject]'.\n";  # New hint command description
     print "- Quit: Exit the game by typing 'quit'.\n";
 
     while (1) {
@@ -348,6 +349,8 @@ sub handle_action {
         handle_trade($1, $2);
     } elsif ($action eq 'inventory') {
         handle_inventory();  # Handle inventory command
+    } elsif ($action =~ /^hint (.*)$/) {  # New hint command
+        handle_hint($1);
     } elsif ($action eq 'quit') {
         exit;
     } else {
@@ -541,12 +544,12 @@ sub handle_ask {
                 push @inventory, $reward;
                 print "The $person answers: $game_data{persons}{$person}{answers}{$keyword}\n";
                 print "The $person gives you $reward.\n";
-                $answered = 1;
 
                 # Display reward item description
                 if (exists $game_data{items}{$reward}{description}) {
                     print "$game_data{items}{$reward}{description}\n";
                 }
+                $answered = 1;
             }
         }
         if (!$answered) {
@@ -600,6 +603,16 @@ sub handle_inventory {
         } else {
             print "No description available.\n";
         }
+    }
+}
+
+# New subroutine to handle the hint command
+sub handle_hint {
+    my ($subject) = @_;
+    if (exists $game_data{hints}{$subject}) {
+        print "\033[35mHint for '$subject':\033[0m\n$game_data{hints}{$subject}\n";
+    } else {
+        print "No hints available for '$subject'.\n";
     }
 }
 

@@ -106,6 +106,9 @@ sub load_game_data {
             }
             $game_data{persons}{$current_person}{trades} = \%trades_map;
             $game_data{persons}{$current_person}{answers} = \%answers_map;
+        } elsif ($line =~ /^Hint:(.*)$/) {
+            my ($subject, $hint_text) = split /:/, $1, 2;
+            $game_data{hints}{$subject} = $hint_text;
         }
     }
 
@@ -144,13 +147,13 @@ sub validate_game_data {
     foreach my $item_id (keys %{ $game_data{items} }) {
         if (!exists $game_data{items}{$item_id}{description}) {
             warn "Item '$item_id' is missing a description.\n";
-        }
-        
-        if (exists $game_data{items}{$item_id}{contains}){
-            foreach my $contain_items ($game_data{items}{$item_id}{contains}){
-                foreach my $contain_item (@{$contain_items}){
-                    unless (exists $game_data{items}{$contain_item}){
-                        warn "Contains item '$contain_item' in item '$item_id' is not defined.\n";
+            
+            if (exists $game_data{items}{$item_id}{contains}){
+                foreach my $contain_items ($game_data{items}{$item_id}{contains}){
+                    foreach my $contain_item (@{$contain_items}){
+                        unless (exists $game_data{items}{$contain_item}){
+                            warn "Contains item '$contain_item' in item '$item_id' is not defined.\n";
+                        }
                     }
                 }
             }
@@ -207,7 +210,7 @@ sub validate_game_data {
             foreach my $keyword (keys %{ $game_data{persons}{$person_id}{keywords} }) {
                 my $reward_item = $game_data{persons}{$person_id}{keywords}{$keyword};
                 unless (exists $game_data{items}{$reward_item}) {
-                    warn "Reward item '$reward_item' for keyword '$keyword' in person '$person_id' is not defined.\n";
+                    warn "Keyword reward item '$reward_item' for person '$person_id' is not defined.\n";
                 }
             }
         }
@@ -216,11 +219,11 @@ sub validate_game_data {
             foreach my $trade (keys %{ $game_data{persons}{$person_id}{trades} }) {
                 my $reward_item = $game_data{persons}{$person_id}{trades}{$trade};
                 unless (exists $game_data{items}{$reward_item}) {
-                    warn "Reward item '$reward_item' for trade '$trade' in person '$person_id' is not defined.\n";
+                    warn "Trade reward item '$reward_item' for person '$person_id' is not defined.\n";
                 }
             }
         }
     }
 }
 
-return 1;
+1;
