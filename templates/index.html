@@ -34,7 +34,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px;
+            padding: 10px 5px;
             background-color: #fff;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -98,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.getElementById('actionInput').focus();
+
 function setSessionID(){
     localStorage.setItem('sessionID', document.getElementById('sessionID').value);
 }
@@ -112,6 +114,9 @@ function sendAction() {
     const action = document.getElementById('actionInput').value;
     const sessionID = localStorage.getItem('sessionID');
 
+    document.body.style.cursor = 'wait';
+    document.getElementById('actionInput').disabled=true;
+
     fetch('send-action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -119,10 +124,14 @@ function sendAction() {
     })
     .then(response => response.text())
     .then(data => {
+        document.body.style.cursor = 'default';
+        document.getElementById('actionInput').disabled=false;
+        
         const decodedData = decodeANSItoHTML(data);
         document.getElementById('response').innerHTML=decodedData+"<br><br><br>";
         document.getElementById('response').scrollTo(0, document.getElementById('response').scrollHeight);
         document.getElementById('actionInput').value='';
+        document.getElementById('actionInput').focus();
     });
 }
 
