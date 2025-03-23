@@ -593,7 +593,7 @@ sub handle_trade {
 # New subroutine to handle the inventory command
 sub handle_inventory {
     print "\033[36mInventory:\033[0m\n";  # Cyan text followed by reset
-    foreach my $item (@inventory) {
+    foreach my $item (sort @inventory) {
         if (exists $game_data{items}{$item}{description}) {
             print "$item: $game_data{items}{$item}{description}\n";
         } else {
