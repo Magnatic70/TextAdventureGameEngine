@@ -103,39 +103,39 @@ sub readInput{
 }
 
 sub showRoomInfo{
-        $room_data = $game_data{rooms}{$current_room_id};
+    $room_data = $game_data{rooms}{$current_room_id};
 
-        # Display room name and description with black text on white background
-        print "\n\n\033[47m\033[30m--- Location: ", $room_data->{name}, " ---\033[0m\n";
-        print "$room_data->{description}\n";
+    # Display room name and description with black text on white background
+    print "\n\033[47m\033[30m--- Location: ", $room_data->{name}, " ---\033[0m\n";
+    print "$room_data->{description}\n";
 
-        # Simple inventory display in cyan
-        if (@inventory) {
-            print "\033[36mInventory: ", join(", ", @inventory), "\033[0m\n";  # Cyan text followed by reset
-        }
+    # Simple inventory display in cyan
+    if (@inventory) {
+        print "\033[36mInventory: ", join(", ", @inventory), "\033[0m\n";  # Cyan text followed by reset
+    }
 
-        if ($room_data->{exits}) {
-            my $options = [];
-            foreach my $direction (sort keys %{$room_data->{exits}}) {
-                if(exists $game_data{rooms}{$room_data->{exits}{$direction}}{name}){
-                    push @$options, "$direction (" . $game_data{rooms}{$room_data->{exits}{$direction}}{name}.')';
-                }
-                else{
-                    push @$options, $direction;
-                }
+    if ($room_data->{exits}) {
+        my $options = [];
+        foreach my $direction (sort keys %{$room_data->{exits}}) {
+            if(exists $game_data{rooms}{$room_data->{exits}{$direction}}{name}){
+                push @$options, "$direction (" . $game_data{rooms}{$room_data->{exits}{$direction}}{name}.')';
             }
-            print "Options: ", join(", ", @$options), "\n";
+            else{
+                push @$options, $direction;
+            }
         }
+        print "Options: ", join(", ", @$options), "\n";
+    }
 
-        # Only display items in room if there are any
-        if (exists $room_data->{items} && @{$room_data->{items}}) {
-            print "Visible items: ", join(", ", @{ $room_data->{items} }), "\n";
-        }
+    # Only display items in room if there are any
+    if (exists $room_data->{items} && @{$room_data->{items}}) {
+        print "Visible items: ", join(", ", @{ $room_data->{items} }), "\n";
+    }
 
-        # Display persons in the room if any
-        if ($room_data->{persons}) {
-            print "Persons here: ", join(", ", @{$room_data->{persons}}), "\n";
-        }    
+    # Display persons in the room if any
+    if ($room_data->{persons}) {
+        print "Persons here: ", join(", ", @{$room_data->{persons}}), "\n";
+    }
 }
 
 # Main game loop
@@ -216,10 +216,12 @@ sub handle_puzzle {
     }
 
     if ($answer eq $game_data{rooms}{$current_room_id}{answer}) {
-        push @inventory, $room_data->{reward_item};
-        print "You've given the correct answer and now have access to this location. As a reward you get a $room_data->{reward_item}!\n";
-        if($inputType eq 'done'){
-            saveNewAction($answer);
+        # Check if reward item is already in inventory
+        unless (grep { $_ eq $room_data->{reward_item} } @inventory) {
+            push @inventory, $room_data->{reward_item};
+            print "You've given the correct answer and now have access to this location. As a reward you get a $room_data->{reward_item}!\n";
+        } else {
+            print "You already received this reward.\n";
         }
 
         # Display contained item description
@@ -269,6 +271,7 @@ sub handle_fight {
     my $room_data = $game_data{rooms}{$current_room_id};
     my $enemy = $room_data->{enemy};
 
+    # Check if item is already in inventory
     if (grep { $_ eq $item } @inventory) {
         if ($item eq $enemy->{required_item}) {
             # Display defeat description in yellow
@@ -277,14 +280,19 @@ sub handle_fight {
             }
             print "You defeated the $enemy->{name}!\n";
 
-            # Add reward item to inventory
+            # Add reward item to inventory if it doesn't exist already
             if (exists $room_data->{reward_item}) {
-                push @inventory, $room_data->{reward_item};
-                print "You received a $room_data->{reward_item} as a reward!\n";
+                my $reward = $room_data->{reward_item};
+                unless (grep { $_ eq $reward } @inventory) {
+                    push @inventory, $reward;
+                    print "You received a $reward as a reward!\n";
 
-                # Display contained item description
-                if (exists $game_data{items}{$room_data->{reward_item}}{description}) {
-                    print "$game_data{items}{$room_data->{reward_item}}{description}\n";
+                    # Display contained item description
+                    if (exists $game_data{items}{$reward}{description}) {
+                        print "$game_data{items}{$reward}{description}\n";
+                    }
+                } else {
+                    print "You already received this reward.\n";
                 }
             }
             delete $room_data->{enemy};  # Remove enemy after defeating
@@ -411,15 +419,20 @@ sub handle_take {
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
-        push @inventory, $item;
-        print "You took the $item.\n";
+        # Check if item is already in inventory
+        unless (grep { $_ eq $item } @inventory) {
+            push @inventory, $item;
+            print "You took the $item.\n";
 
-        # Display item description
-        if (exists $game_data{items}{$item}{description}) {
-            print "$game_data{items}{$item}{description}\n";
+            # Display item description
+            if (exists $game_data{items}{$item}{description}) {
+                print "$game_data{items}{$item}{description}\n";
+            }
+
+            @{$room_data->{items}} = grep { $_ ne $item } @{ $room_data->{items} };
+        } else {
+            print "You already have that item in your inventory.\n";
         }
-
-        @{$room_data->{items}} = grep { $_ ne $item } @{ $room_data->{items} };
     } else {
         print "There is no such item here.\n";
         if ($debug) { die; }
@@ -433,12 +446,17 @@ sub handle_examine {
     if (grep { $_ eq $item } @inventory) {
         if (exists $game_data{items}{$item}{contains}) {
             foreach my $contained_item (@{ $game_data{items}{$item}{contains} }) {
-                push @inventory, $contained_item;
-                print "You found a ", $contained_item, " in the $item.\n";
+                # Only add if not already in inventory
+                unless (grep { $_ eq $contained_item } @inventory) {
+                    push @inventory, $contained_item;
+                    print "You found a ", $contained_item, " in the $item.\n";
 
-                # Display searched item description
-                if (exists $game_data{items}{$contained_item}{description}) {
-                    print "$game_data{items}{$contained_item}{description}\n";
+                    # Display searched item description
+                    if (exists $game_data{items}{$contained_item}{description}) {
+                        print "$game_data{items}{$contained_item}{description}\n";
+                    }
+                } else {
+                    print "You already have the $contained_item in your inventory.\n";
                 }
             }
         } else {
@@ -477,12 +495,17 @@ sub handle_search {
 
     if (exists $room_data->{searchable_items} && exists $room_data->{searchable_items}{$target}) {
         foreach my $item (@{ $room_data->{searchable_items}{$target} }) {
-            push @inventory, $item;
-            print "You found a ", $item, " in the $target.\n";
+            # Only add if not already in inventory
+            unless (grep { $_ eq $item } @inventory) {
+                push @inventory, $item;
+                print "You found a ", $item, " in the $target.\n";
 
-            # Display searched item description
-            if (exists $game_data{items}{$item}{description}) {
-                print "$game_data{items}{$item}{description}\n";
+                # Display searched item description
+                if (exists $game_data{items}{$item}{description}) {
+                    print "$game_data{items}{$item}{description}\n";
+                }
+            } else {
+                print "You already have that item in your inventory.\n";
             }
         }
     } else {
@@ -493,6 +516,7 @@ sub handle_search {
 sub handle_combine {
     my ($item1, $item2) = @_;
 
+    # Check if both items are in inventory
     if ((grep { $_ eq $item1 } @inventory) && (grep { $_ eq $item2 } @inventory)) {
         if (exists $game_data{combine}{$item1}{$item2} || exists $game_data{combine}{$item2}{$item1}) {
             my $new_item;
@@ -502,12 +526,17 @@ sub handle_combine {
                 $new_item = $game_data{combine}{$item2}{$item1};
             }
 
-            push @inventory, $new_item;
-            print "You combined the $item1 and $item2 to create a new item: ", $new_item, ".\n";
+            # Only add if not already in inventory
+            unless (grep { $_ eq $new_item } @inventory) {
+                push @inventory, $new_item;
+                print "You combined the $item1 and $item2 to create a new item: ", $new_item, ".\n";
 
-            # Display new item description
-            if (exists $game_data{items}{$new_item}{description}) {
-                print "$game_data{items}{$new_item}{description}\n";
+                # Display new item description
+                if (exists $game_data{items}{$new_item}{description}) {
+                    print "$game_data{items}{$new_item}{description}\n";
+                }
+            } else {
+                print "You already have that item in your inventory.\n";
             }
 
             # Remove the original items from inventory
@@ -527,11 +556,9 @@ sub handle_drop {
     my $room_data = $game_data{rooms}{$current_room_id};
 
     if (grep { $_ eq $item } @inventory) {
-        push @{ $room_data->{items} }, $item;  # Add the dropped item back to the room's items
-        print "You dropped the $item.\n";
-
-        # Remove the item from inventory
+        # Remove from inventory
         @inventory = grep { $_ ne $item } @inventory;
+        print "You dropped the $item.\n";
     } else {
         print "You don't have a $item in your inventory.\n";
         if ($debug) { die; }
@@ -548,13 +575,19 @@ sub handle_ask {
         foreach my $keyword (keys %{$game_data{persons}{$person}{keywords}}) {
             if ($question =~ /\b$keyword\b/) {
                 my $reward = $game_data{persons}{$person}{keywords}{$keyword};
-                push @inventory, $reward;
-                print "The $person answers: $game_data{persons}{$person}{answers}{$keyword}\n";
-                print "The $person gives you $reward.\n";
 
-                # Display reward item description
-                if (exists $game_data{items}{$reward}{description}) {
-                    print "$game_data{items}{$reward}{description}\n";
+                # Only add if not already in inventory
+                unless (grep { $_ eq $reward } @inventory) {
+                    push @inventory, $reward;
+                    print "The $person answers: $game_data{persons}{$person}{answers}{$keyword}\n";
+                    print "The $person gives you $reward.\n";
+
+                    # Display reward item description
+                    if (exists $game_data{items}{$reward}{description}) {
+                        print "$game_data{items}{$reward}{description}\n";
+                    }
+                } else {
+                    print "You already received that from this person.\n";
                 }
                 $answered = 1;
             }
@@ -578,16 +611,22 @@ sub handle_trade {
         foreach my $trade (keys %{$game_data{persons}{$person}{trades}}) {
             if ($item eq $trade) {
                 my $reward = $game_data{persons}{$person}{trades}{$item};
-                push @inventory, $reward;
-                print "The $person responds: $game_data{persons}{$person}{answers}{$item}\n";
-                print "The $person gives you $reward.\n";
 
-                # Remove the item from inventory
-                @inventory = grep { $_ ne $item } @inventory;
+                # Only add if not already in inventory
+                unless (grep { $_ eq $reward } @inventory) {
+                    push @inventory, $reward;
+                    print "The $person responds: $game_data{persons}{$person}{answers}{$item}\n";
+                    print "The $person gives you $reward.\n";
 
-                # Display reward item description
-                if (exists $game_data{items}{$reward}{description}) {
-                    print "$game_data{items}{$reward}{description}\n";
+                    # Remove the item from inventory
+                    @inventory = grep { $_ ne $item } @inventory;
+
+                    # Display reward item description
+                    if (exists $game_data{items}{$reward}{description}) {
+                        print "$game_data{items}{$reward}{description}\n";
+                    }
+                } else {
+                    print "You already have that item.\n";
                 }
                 $traded = 1;
             }
@@ -603,13 +642,17 @@ sub handle_trade {
 # New subroutine to handle the inventory command
 sub handle_inventory {
     print "\033[36mInventory:\033[0m\n";  # Cyan text followed by reset
-    foreach my $item (sort @inventory) {
-        print "\033[1m$item: \033[0m";
-        if (exists $game_data{items}{$item}{description}) {
-            print "$game_data{items}{$item}{description}\n";
-        } else {
-            print "No description available.\n";
+    if (@inventory) {
+        foreach my $item (sort @inventory) {
+            print "\033[1m$item: \033[0m";
+            if (exists $game_data{items}{$item}{description}) {
+                print "$game_data{items}{$item}{description}\n";
+            } else {
+                print "No description available.\n";
+            }
         }
+    } else {
+        print "Your inventory is empty.\n";
     }
 }
 
