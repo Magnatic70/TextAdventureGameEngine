@@ -151,6 +151,7 @@ sub start_game {
     print "- Trade: Exchange items with persons using 'trade [item] with [person]'.\n";
     print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
     print "- Retreat (Only when in fight): Move back to the previous room with 'retreat'.\n";
+    print "- Inventory: View all items and their descriptions using 'inventory'.\n";  # New command description
     print "- Quit: Exit the game by typing 'quit'.\n";
 
     while (1) {
@@ -202,7 +203,6 @@ sub handle_puzzle {
     } else {
         chomp($answer);
     }
-
     if($debug || $inputType ne 'stdin'){
         print "\033[34m".$answer."\033[0m\n\n";
     }
@@ -346,6 +346,8 @@ sub handle_action {
         handle_ask($1, $2);
     } elsif ($action =~ /^trade (.*) with (.*)$/) {  # New command to trade items with persons
         handle_trade($1, $2);
+    } elsif ($action eq 'inventory') {
+        handle_inventory();  # Handle inventory command
     } elsif ($action eq 'quit') {
         exit;
     } else {
@@ -585,6 +587,18 @@ sub handle_trade {
         }
     } else {
         print "There is no such person here.\n";
+    }
+}
+
+# New subroutine to handle the inventory command
+sub handle_inventory {
+    print "\033[36mInventory:\033[0m\n";  # Cyan text followed by reset
+    foreach my $item (@inventory) {
+        if (exists $game_data{items}{$item}{description}) {
+            print "$item: $game_data{items}{$item}{description}\n";
+        } else {
+            print "$item: No description available.\n";
+        }
     }
 }
 
