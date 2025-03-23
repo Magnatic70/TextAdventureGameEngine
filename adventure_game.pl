@@ -610,7 +610,7 @@ sub handle_inventory {
 sub handle_hint {
     my ($subject) = @_;
     if (exists $game_data{hints}{$subject}) {
-        print "\033[35mHint for '$subject':\033[0m\n$game_data{hints}{$subject}\n";
+        print "Hint for '$subject':\n$game_data{hints}{$subject}\n";
     } else {
         print "No hints available for '$subject'.\n";
     }

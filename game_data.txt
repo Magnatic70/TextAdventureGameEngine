@@ -98,6 +98,8 @@ DiedDescription:The troll swings his large club and hits you on the head. After 
 Item:troll trophy
 ItemDescription:It's a tiny shiny goblet with the text "You've defeated the troll!". It's not even made of metal. Is that all?
 
+Hint:troll:Metal won't do it. You need to combine.
+
 RoomID:Landing
 Name:Landing
 Description:The landing gives access to a lot of closed doors.
