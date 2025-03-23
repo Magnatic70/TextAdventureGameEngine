@@ -355,7 +355,7 @@ sub handle_action {
         exit;
     } else {
         $validAction=0;
-        print "I don't understand that action ($action). Try moving, taking an item, examining something, describing an item, searching, combining items, dropping an item, trading with a person or asking a person a question.\n";
+        print "I don't understand that action ($action). Try moving, taking an item, examining something, describing an item, searching, combining items, dropping an item, trading with a person, asking a person a question or asking for a hint.\n";
         if ($debug) { die; }
     }
     if($inputType eq 'done' && $validAction){
