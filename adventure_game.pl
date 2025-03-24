@@ -10,6 +10,9 @@ use warnings;
 
 require './load-and-validate-game.pl';
 
+my $adventureDir='adventures/';
+my $sessionDir='sessions/';
+
 # 1=Stops when an action results in a failure. Handy during automated testing. 0=Normal behaviour.
 my $debug = 0;
 
@@ -40,6 +43,9 @@ if($ARGV[0] eq 'HauntedMansion'){
     $gameFile='game_data.txt';
     $prefix='haunted-mansion-';
 }
+
+$gameFile=$adventureDir.$gameFile;
+$prefix=$sessionDir.$prefix;
 
 if (!(-e $gameFile)) {
     print "Game $gameFile not found";
