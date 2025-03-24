@@ -268,6 +268,9 @@ sub handle_enemy {
         }
     } else {
         print "I don't understand that action ($action). Try fighting with an item from your inventory or retreating.\n";
+        my $previous_room_id = pop @room_history;
+        $current_room_id = $previous_room_id;
+        showRoomInfo();
         if ($debug) { die; }
     }
 }
