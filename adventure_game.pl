@@ -234,7 +234,11 @@ sub handle_puzzle {
         if (exists $game_data{items}{$room_data->{reward_item}}{description}) {
             print "$game_data{items}{$room_data->{reward_item}}{description}\n";
         }
-        delete $room_data->{puzzle};  # Remove puzzle after solving
+        delete $game_data{rooms}{$current_room_id}->{puzzle};  # Remove puzzle after solving
+	if($inputType eq 'done'){	
+	    saveNewAction($answer);
+	}
+        showRoomInfo();
     } else {
         print "That is not correct. Try again.\n";
     }
@@ -268,9 +272,7 @@ sub handle_enemy {
         }
     } else {
         print "I don't understand that action ($action). Try fighting with an item from your inventory or retreating.\n";
-        my $previous_room_id = pop @room_history;
-        $current_room_id = $previous_room_id;
-        showRoomInfo();
+	exit;
         if ($debug) { die; }
     }
 }

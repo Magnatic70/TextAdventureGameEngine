@@ -10,7 +10,13 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy all application files
-COPY . .
+COPY adventure_game.pl .
+COPY load-and-validate-game.pl .
+COPY app.py .
+RUN mkdir static
+RUN mkdir templates
+COPY static/* static/
+COPY templates/* templates/
 
 # Install Python dependencies
 RUN pip install --no-cache-dir flask
@@ -19,8 +25,8 @@ RUN pip install --no-cache-dir flask
 EXPOSE 5000
 
 # Define volumes
-VOLUME /adventures
-VOLUME /sessions
+VOLUME /app/adventures
+VOLUME /app/sessions
 
 # Command to run the application
 CMD ["python", "app.py"]
