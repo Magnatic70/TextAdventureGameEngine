@@ -24,7 +24,7 @@ my $inputType=$ARGV[1];
 my $INPUT;
 
 if (-p STDIN) {
-    $debug = 1;
+    $debug = 0;
 }
 
 my ($gameFile)='empty';
@@ -569,6 +569,7 @@ sub handle_drop {
     if (grep { $_ eq $item } @inventory) {
         # Remove from inventory
         @inventory = grep { $_ ne $item } @inventory;
+	push(@{$room_data->{items}},$item);
         print "You dropped the $item.\n";
     } else {
         print "You don't have a $item in your inventory.\n";
