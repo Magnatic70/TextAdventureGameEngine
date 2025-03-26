@@ -9,6 +9,14 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/styles.css')
+def styles():
+    return send_from_directory(os.path.join(app.root_path, 'static'),'styles.css')
+
+@app.route('/scripts.js')
+def scripts():
+    return send_from_directory(os.path.join(app.root_path, 'static'),'scripts.js')
+
 @app.route('/favicon.png')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.png', mimetype='image/vnd.microsoft.icon')
