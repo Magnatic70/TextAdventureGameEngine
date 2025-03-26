@@ -69,8 +69,8 @@ function sendAction() {
         document.getElementById('actionInput').disabled=false;
         
         const decodedData = decodeANSItoHTML(data);
-        document.getElementById('response').innerHTML=decodedData+"<br><br><br>";
-        document.getElementById('response').scrollTo(0, document.getElementById('response').scrollHeight);
+        document.getElementById('response').innerHTML=decodedData;
+        document.getElementById('responseDiv').scrollTo(0, document.getElementById('responseDiv').scrollHeight);
         document.getElementById('actionInput').value='';
         document.getElementById('actionInput').focus();
     });

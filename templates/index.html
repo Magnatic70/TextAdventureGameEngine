@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <pre id="response"></pre>
-    
     <!-- Hidden debug controls -->
+    <div class="toggle-container">
+        <span>Options</span>
+        <button onclick="toggleDebugControls()">M</button>
+    </div>
     <div class="debug-controls">
         <select id="gameName" onchange="storeGame()">
             <option value="HauntedMansion">Haunted Mansion</option>
@@ -21,13 +23,13 @@
         <button onclick="generateNewSessionID()">Generate New Session ID</button>
         <input type="text" id="sessionID" size="32" onblur="setSessionID()">
     </div>
+    <div id="responseDiv">
+        <pre id="response"></pre>
+        <input class="actionTextBox" type="text" id="actionInput" placeholder="Enter action here" autocomplete="off">
+    </div>
+    
     
     <!-- Toggle button -->
-    <div class="toggle-container">
-        <span>Options</span>
-        <button onclick="toggleDebugControls()">M</button>
-        <input style="position:relative;left:14%" type="text" id="actionInput" placeholder="Enter action here" size="40" autocomplete="off">
-    </div>
     
     <script src="scripts.js"></script>
 </body>
