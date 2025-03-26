@@ -18,16 +18,15 @@
             <option value="Eldoria">Eldoria (work in progress)</option>
             <!-- Add more games as needed -->
         </select>
-        <button onclick="sendAction()">Send Action</button>
         <button onclick="generateNewSessionID()">Generate New Session ID</button>
-        <input type="text" id="sessionID" size="32" onblur="setSessionID()" style="display: none;">
+        <input type="text" id="sessionID" size="32" onblur="setSessionID()">
     </div>
     
     <!-- Toggle button -->
     <div class="toggle-container">
         <span>Options</span>
         <button onclick="toggleDebugControls()">M</button>
-        <input type="text" id="actionInput" placeholder="Enter action here" size="50" autocomplete="off">
+        <input style="position:relative;left:14%" type="text" id="actionInput" placeholder="Enter action here" size="40" autocomplete="off">
     </div>
     
     <script src="scripts.js"></script>
