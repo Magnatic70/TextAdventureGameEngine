@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('actionInput').focus();
+document.getElementById('tc').style.width = document.getElementById('responseDiv').clientWidth+'px';
+document.getElementById('tc').style.left = document.getElementById('responseDiv').style.left+'px';
 
 // Toggle state for debug controls
 function toggleDebugControls() {

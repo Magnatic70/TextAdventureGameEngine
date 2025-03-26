@@ -13,7 +13,7 @@ body {
   position: fixed;
   top: 0;
   left: 19%;
-  width: 62%; /* Default width, will be overwritten by JS */
+  width: 60px; /* Default width, will be overwritten by JS */
   display: flex;
   align-items: center;
   padding: 10px 5px;
