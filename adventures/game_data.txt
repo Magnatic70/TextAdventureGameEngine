@@ -25,13 +25,20 @@ ItemDescription:The good guest you are, you remove your dirty and slightly blood
 
 RoomID:Library
 Name:Library
-Description:The library is filled with dusty books.
+Description:The library is filled with dusty books. For some reason a red book isn't as dusty as the others.
 Exits:west:Lobby
 Locks:library key
 Puzzle:Solve the riddle to get the book.
 Riddle:What has keys but can't open locks?
 Answer:piano
 RewardItem:book
+SearchableItems:red book:troll pamphlet,blue book:troll anatomy
+
+Item:troll pamphlet
+ItemDescription:This pamphlet describes trolls as almost invincible creatures, but their eyes are particulary sensitive to fluids.
+
+Item:troll anatomy
+ItemDescription:A bookmark in this book on troll anatomy directs you to the chapter about troll eye anatomy. It seems that their eyelids are very thick and protect the eyes against fluid spatter very effectively. It is suggest that in stead of eye droppers, a more forcefull method is needed to administer eye medicins.
 
 Item:book
 Contains:kitchen key,some digits
@@ -45,7 +52,7 @@ ItemDescription:Some random digits. What could they mean?
 
 RoomID:Study
 Name:Study
-Description:This small room contains a desk and a chair.
+Description:This small room contains a desk and a chair. A blue book lies on the desk.
 Items:library key
 Exits:east:Lobby
 
