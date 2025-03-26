@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         gameNameSelect.value = storedGame;
     }
     
+    // Initialize UI state
+    showDebugControls = false;
+    updateUI();
 
     const sessionID = localStorage.getItem('sessionID') || generateSessionID();
     document.getElementById('sessionID').value=sessionID;
@@ -23,6 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('actionInput').focus();
 
+// Toggle state for debug controls
+function toggleDebugControls() {
+    showDebugControls = !showDebugControls;
+    updateUI();
+}
+
+// Update UI based on current state
+function updateUI() {
+    const debugContainer = document.querySelector('.debug-controls');
+    if (debugContainer) {
+        debugContainer.style.display = showDebugControls ? 'flex' : 'none';
+    }
+}
+
+// All other functions remain the same
 function setSessionID(){
     localStorage.setItem('sessionID', document.getElementById('sessionID').value);
 }

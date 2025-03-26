@@ -9,7 +9,9 @@
 </head>
 <body>
     <pre id="response"></pre>
-    <div class="fixed-bottom">
+    
+    <!-- Hidden debug controls -->
+    <div class="debug-controls">
         <select id="gameName" onchange="storeGame()">
             <option value="HauntedMansion">Haunted Mansion</option>
             <option value="PrisonEscape">Prison Escape</option>
@@ -19,8 +21,15 @@
         <input type="text" id="actionInput" placeholder="Enter action here" size="50" autocomplete="off">
         <button onclick="sendAction()">Send Action</button>
         <button onclick="generateNewSessionID()">Generate New Session ID</button>
-        <input type="text" id="sessionID" size="32" onblur="setSessionID()">
+        <input type="text" id="sessionID" size="32" onblur="setSessionID()" style="display: none;">
     </div>
+    
+    <!-- Toggle button -->
+    <div class="toggle-container">
+        <span>Options</span>
+        <button onclick="toggleDebugControls()">M</button>
+    </div>
+    
     <script src="scripts.js"></script>
 </body>
 </html>
