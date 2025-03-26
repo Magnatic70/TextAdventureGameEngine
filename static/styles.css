@@ -8,6 +8,41 @@ body {
   color: #333;
 }
 
+/* Make sure the toggle container is always at the top */
+.toggle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px;
+  background-color: white;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure it's on top */
+}
+
+.toggle-container span {
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.toggle-container button {
+  background-color: #e4e4e4;
+  color: #333;
+  width: 36px;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-container button:hover {
+  background-color: #d0d0d0;
+}
+
+/* Make sure the response div starts after the fixed toggle container */
 #responseDiv {
   flex-grow: 1;
   overflow-y: auto;
@@ -16,7 +51,7 @@ body {
   border-bottom: 1px solid #ddd;
   background-color: white;
   width: 60%; /* Default width for larger screens */
-  margin: 0 auto;
+  margin: 35px auto 0; /* Add top margin to push content down */
   font-size: 16px;
   white-space: pre-wrap;
 }
@@ -32,6 +67,7 @@ body {
 @media screen and (max-width: 767px) {
   #responseDiv {
     width: 90%; /* Mobile width */
+    margin: 25px auto 0;
   }
 }
 
@@ -74,31 +110,6 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
-
-/* Styles for the toggle button */
-.toggle-container {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: white;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.toggle-container span {
-  margin-right: 8px;
-  font-weight: bold;
-}
-
-.toggle-container button {
-  background-color: #e4e4e4;
-  color: #333;
-  width: 36px;
-  padding: 8px;
-}
-
-.toggle-container button:hover {
-  background-color: #d0d0d0;
 }
 
 /* Initially hide the debug controls */
