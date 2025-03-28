@@ -10,7 +10,7 @@ app = Flask(__name__)
 def load_games():
     games = []
     with open('games.cfg', 'r') as file:
-        reader = csv.DictReader(file)
+        reader = csv.DictReader(file, delimiter=';')  # Specify semicolon as delimiter
         for row in reader:
             game_name = row.get('shortName', '')  # Use get() with fallback to avoid KeyError
             if game_name:
