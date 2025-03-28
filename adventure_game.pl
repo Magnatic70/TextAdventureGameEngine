@@ -134,8 +134,19 @@ sub showRoomInfo{
     }
 
     # Only display items in room if there are any
+    my(@visibleItems);
+    my($sourceRoom_data);
+    if(exists $game_data{rooms}{$current_room_id}{sourceroom}){
+        $sourceRoom_data=$game_data{rooms}{$game_data{rooms}{$current_room_id}{sourceroom}};
+    }
+    if (exists $sourceRoom_data->{items} && @{$sourceRoom_data->{items}}) {
+        push(@visibleItems,@{$sourceRoom_data->{items}});
+    }
     if (exists $room_data->{items} && @{$room_data->{items}}) {
-        print "Visible items: ", join(", ", @{ $room_data->{items} }), "\n";
+        push(@visibleItems,@{$room_data->{items}});
+    }
+    if(@visibleItems){
+        print "Visible items: ", join(", ", @visibleItems), "\n";
     }
 
     # Display persons in the room if any
@@ -428,8 +439,12 @@ sub handle_move {
 sub handle_take {
     my ($item) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
-
-    if (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
+    my ($sourceRoom_data);
+    if(exists $game_data{rooms}{$current_room_id}{sourceroom}){
+        $sourceRoom_data=$game_data{rooms}{$game_data{rooms}{$current_room_id}{sourceroom}};
+    }
+    
+    if ((exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) || (exists $sourceRoom_data->{items} && grep { $_ eq $item } @{ $sourceRoom_data->{items} })) {
         # Check if item is already in inventory
         unless (grep { $_ eq $item } @inventory) {
             push @inventory, $item;
@@ -441,6 +456,7 @@ sub handle_take {
             }
 
             @{$room_data->{items}} = grep { $_ ne $item } @{ $room_data->{items} };
+            @{$sourceRoom_data->{items}} = grep { $_ ne $item } @{ $sourceRoom_data->{items} };
         } else {
             print "You already have that item in your inventory.\n";
         }
@@ -564,7 +580,13 @@ sub handle_combine {
 
 sub handle_drop {
     my ($item) = @_;
-    my $room_data = $game_data{rooms}{$current_room_id};
+    my ($room_data);
+    if(exists $game_data{rooms}{$current_room_id}{sourceroom}){
+        $room_data=$game_data{rooms}{$game_data{rooms}{$current_room_id}{sourceroom}};
+    }
+    else{
+        $room_data = $game_data{rooms}{$current_room_id};
+    }
 
     if (grep { $_ eq $item } @inventory) {
         # Remove from inventory

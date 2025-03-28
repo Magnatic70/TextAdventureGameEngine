@@ -33,6 +33,8 @@ sub load_game_data {
                 }
             }
             $game_data{rooms}{$current_room_id}{exits} = \%exit_map;
+        } elsif ($line =~ /^SourceRoomID:(.*)$/){
+            $game_data{rooms}{$current_room_id}{sourceroom} = $1;
         } elsif ($line =~ /^Items:(.*)$/) {
             my @items = split /,/, $1;
             $game_data{rooms}{$current_room_id}{items} = \@items if @items;

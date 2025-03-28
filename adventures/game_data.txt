@@ -212,6 +212,7 @@ Name:Entrance
 Exits:north:Lobby,south:Garden
 
 RoomID:Entrance3
+SourceRoomID:Entrance
 Description:You stepped into a magic portal. A flash of light and then you find yourself at the entrance of the mansion.
 Name:Entrance
 Exits:north:Lobby,south:Garden
