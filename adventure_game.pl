@@ -31,18 +31,26 @@ my ($gameFile)='empty';
 my $prefix='empty';
 my $inputFile;
 
-if($ARGV[0] eq 'Eldoria'){
-    $gameFile='eldoria.txt';
-    $prefix='eldoria-';
+my($CFG,@header,$line,@gameMapping,%gameMapping,$gm);
+open($CFG,'games.cfg');
+while($line=readline($CFG)){
+    chomp($line);
+    if(!@header){
+        @header=split(';',$line);
+        if($header[1] ne 'shortName'){
+            die "ERROR: games.cfg should contain displayName;shortName;fileName as the first line. All following lines should contain this informatie for each game.\n";
+        }
+    }
+    else{
+        @gameMapping=split(';',$line);
+        if($ARGV[0] eq $gameMapping[1]){
+            $gameFile=$gameMapping[2];
+            $prefix=$gameMapping[0].'-';
+            $prefix=~s/ /-/g;
+        }
+    }
 }
-if($ARGV[0] eq 'PrisonEscape'){
-    $gameFile='prison-escape.txt';
-    $prefix='prison-escape-';
-}
-if($ARGV[0] eq 'HauntedMansion'){
-    $gameFile='game_data.txt';
-    $prefix='haunted-mansion-';
-}
+close($CFG);
 
 $gameFile=$adventureDir.$gameFile;
 $prefix=$sessionDir.$prefix;
