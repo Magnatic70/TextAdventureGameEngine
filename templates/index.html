@@ -27,42 +27,6 @@
     
     <!-- Toggle button -->
     
-    <script>
-        // When the page loads, fetch games from server and populate dropdown
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/games') // Create a new route in app.py to serve this
-                .then(response => response.json())
-                .then(data => {
-                    const gameSelect = document.getElementById('gameName');
-                    
-                    // Clear existing options
-                    gameSelect.innerHTML = '';
-                    
-                    // Add default option
-                    const defaultOption = document.createElement('option');
-                    defaultOption.value = '';
-                    defaultOption.text = 'Select a game...';
-                    defaultOption.disabled = true;
-                    defaultOption.selected = true;
-                    gameSelect.appendChild(defaultOption);
-                    
-                    // Add options for each game
-                    data.forEach(game => {
-                        const option = document.createElement('option');
-                        option.value = game.shortName; // Use shortName as value (for backend)
-                        option.text = `${game.displayName} (${game.shortName})`;   // Display both values
-                        gameSelect.appendChild(option);
-                    });
-                    
-                    // Enable controls after games are loaded
-                    document.getElementById('actionInput').disabled = false;
-                })
-                .catch(error => {
-                    console.error('Error loading games:', error);
-                    alert('Failed to load available games.');
-                });
-        });
-    </script>
     <script src="scripts.js"></script>
 </body>
 </html>

@@ -1,20 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const gameNameSelect = document.getElementById('gameName');
-    const storedGame = localStorage.getItem('gameName');
-
-    if (storedGame) {
-        gameNameSelect.value = storedGame;
-    }
-    
-    // Initialize UI state
-    showDebugControls = false;
-    updateUI();
-
-    const sessionID = localStorage.getItem('sessionID') || generateSessionID();
-    document.getElementById('sessionID').value=sessionID;
-    localStorage.setItem('sessionID', sessionID);
-    sendAction();
-
     const actionInput = document.getElementById('actionInput');
     actionInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
@@ -22,6 +6,55 @@ document.addEventListener('DOMContentLoaded', () => {
             sendAction();
         }
     });
+
+    fetch('/games') // Create a new route in app.py to serve this
+        .then(response => response.json())
+        .then(data => {
+            const gameSelect = document.getElementById('gameName');
+            
+            // Clear existing options
+            gameSelect.innerHTML = '';
+            
+            // Add default option
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.text = 'Select a game...';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            gameSelect.appendChild(defaultOption);
+            
+            // Add options for each game
+            data.forEach(game => {
+                const option = document.createElement('option');
+                option.value = game.shortName; // Use shortName as value (for backend)
+                option.text = `${game.displayName}`;
+                gameSelect.appendChild(option);
+            });
+            
+            // Enable controls after games are loaded
+            document.getElementById('actionInput').disabled = false;
+            const gameNameSelect = document.getElementById('gameName');
+            const storedGame = localStorage.getItem('gameName');
+
+            if (storedGame) {
+                gameNameSelect.value = storedGame;
+            }
+            
+            // Initialize UI state
+            showDebugControls = false;
+            updateUI();
+
+            const sessionID = localStorage.getItem('sessionID') || generateSessionID();
+            document.getElementById('sessionID').value=sessionID;
+            localStorage.setItem('sessionID', sessionID);
+            sendAction();
+
+        })
+        .catch(error => {
+            console.error('Error loading games:', error);
+            alert('Failed to load available games.');
+        });
+
 });
 
 document.getElementById('actionInput').focus();
