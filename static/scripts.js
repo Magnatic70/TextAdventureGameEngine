@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    fetch('/games') // Create a new route in app.py to serve this
+    fetch('games') // Create a new route in app.py to serve this
         .then(response => response.json())
         .then(data => {
             const gameSelect = document.getElementById('gameName');

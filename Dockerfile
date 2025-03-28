@@ -13,16 +13,14 @@ RUN apt-get update && \
 COPY adventure_game.pl .
 COPY load-and-validate-game.pl .
 COPY app.py .
+COPY games.cfg .
 RUN mkdir static
 RUN mkdir templates
 COPY static/* static/
 COPY templates/* templates/
 
 # Install Python dependencies
-RUN pip install --no-cache-dir flask
-
-# Expose port 5000 for the Flask app
-EXPOSE 5000
+RUN pip install flask
 
 # Define volumes
 VOLUME /app/adventures
