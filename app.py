@@ -2,21 +2,19 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 import os
 import subprocess
 import re
-import configparser
+import csv
 
 app = Flask(__name__)
 
-# Load games from config file
+# Load games from CSV config file
 def load_games():
-    config = configparser.ConfigParser()
-    config.read('games.cfg')
-    
     games = []
-    for section in config.sections():
-        if section != 'DEFAULT':
-            game_name, _, _ = section.split(';')
-            games.append(game_name)
-    
+    with open('games.cfg', 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            game_name = row['shortName']  # Use shortName as the game identifier
+            if game_name:
+                games.append(game_name)
     return games
 
 # Get list of configured games
@@ -65,6 +63,10 @@ def send_action():
     os.remove(output_file)
     
     return jsonify(game_output)
+
+@app.route('/games')
+def list_games():
+    return jsonify(GAMES)
 
 if __name__ == '__main__':
     app.run(debug=True, port=4545, host='0.0.0.0')
