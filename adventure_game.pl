@@ -24,7 +24,7 @@ my $inputType=$ARGV[1];
 my $INPUT;
 
 if (-p STDIN) {
-    $debug = 0;
+    $debug = 1;
 }
 
 my ($gameFile)='empty';
@@ -68,7 +68,9 @@ else{
 my %game_data = load_game_data($gameFile);
 
 # Validate game data
-validate_game_data(%game_data);
+if($debug){
+    validate_game_data(%game_data);
+}
 
 if($inputType eq 'file' || $inputType eq 'argv'){
     # Output game output to session file

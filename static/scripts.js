@@ -45,10 +45,13 @@ function updateUI() {
 // All other functions remain the same
 function setSessionID(){
     localStorage.setItem('sessionID', document.getElementById('sessionID').value);
+    toggleDebugControls();
+    sendAction();
 }
 
 function storeGame(){
     localStorage.setItem('gameName',document.getElementById('gameName').value);
+    toggleDebugControls();
     sendAction();
 }
     
@@ -91,6 +94,7 @@ function generateNewSessionID() {
     const newSessionID = generateSessionID();
     document.getElementById('sessionID').value=newSessionID;
     localStorage.setItem('sessionID', document.getElementById('sessionID').value);
+    toggleDebugControls();
     sendAction();
 }
 

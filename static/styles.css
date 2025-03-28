@@ -14,11 +14,7 @@ body {
   top: 0;
   left: 19%;
   widthh: 60px; /* Default width, will be overwritten by JS */
-  display: flex;
-  align-items: center;
-  padding: 10px 5px;
-  background-color: white;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
   z-index: 1000; /* Ensure it's on top */
 }
 
