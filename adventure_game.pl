@@ -157,13 +157,7 @@ sub showRoomInfo{
     }
 }
 
-# Main game loop
-sub start_game {
-    print "\n\033[97;1;4m$game_data{title}\033[0m\n";
-    if ($game_data{objective}) {
-        print "$game_data{objective}\n";
-    }
-
+sub handle_help{
     # Explain all possible actions
     print "\nYou can perform the following actions:\n";
     print "- Move: Use directions like 'north', 'south', etc., to move between locations.\n";
@@ -179,7 +173,20 @@ sub start_game {
     print "- Retreat (Only when in a room with an enemy): Move back to the previous room with 'retreat'.\n";
     print "- Inventory: View all items and their descriptions using 'inventory'.\n";  # New command description
     print "- Hint: Ask for hints on a subject using 'hint [subject]'.\n";  # New hint command description
-    print "- Quit: Exit the game by typing 'quit'.\n";
+    print "- Help: Shows this list of available actions.\n";
+    if($inputType eq 'stdin'){
+        print "- Quit: Exit the game by typing 'quit'.\n";
+    }
+}
+
+# Main game loop
+sub start_game {
+    print "\n\033[97;1;4m$game_data{title}\033[0m\n";
+    if ($game_data{objective}) {
+        print "$game_data{objective}\n";
+    }
+
+    handle_help();
 
     while (1) {
         showRoomInfo();
@@ -390,7 +397,9 @@ sub handle_action {
         handle_inventory();  # Handle inventory command
     } elsif ($action =~ /^hint (.*)$/) {  # New hint command
         handle_hint($1);
-    } elsif ($action eq 'quit') {
+    } elsif ($action eq 'help'){
+        handle_help();
+    } elsif ($action eq 'quit' && $inputType eq 'stdin') {
         exit;
     } else {
         $validAction=0;
