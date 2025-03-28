@@ -49,8 +49,8 @@
                     // Add options for each game
                     data.forEach(game => {
                         const option = document.createElement('option');
-                        option.value = game; // Use shortName as value (for backend)
-                        option.text = game;   // Display displayName to user
+                        option.value = game.shortName; // Use shortName as value (for backend)
+                        option.text = `${game.displayName} (${game.shortName})`;   // Display both values
                         gameSelect.appendChild(option);
                     });
                     
