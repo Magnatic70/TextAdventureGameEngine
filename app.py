@@ -12,9 +12,10 @@ def load_games():
     with open('games.cfg', 'r') as file:
         reader = csv.DictReader(file, delimiter=';')  # Specify semicolon as delimiter
         for row in reader:
-            game_name = row.get('shortName', '')  # Use get() with fallback to avoid KeyError
-            if game_name:
-                games.append(game_name)
+            game_name = row.get('shortName', '')  # Use shortName as the game identifier
+            display_name = row.get('displayName', '')
+            if game_name and display_name:
+                games.append({'shortName': game_name, 'displayName': display_name})
     return games
 
 # Get list of configured games
