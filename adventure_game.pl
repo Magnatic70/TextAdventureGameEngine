@@ -45,7 +45,7 @@ while($line=readline($CFG)){
         @gameMapping=split(';',$line);
         if($ARGV[0] eq $gameMapping[1]){
             $gameFile=$gameMapping[2];
-            $prefix=$gameMapping[0].'-';
+            $prefix=lc($gameMapping[0]).'-';
             $prefix=~s/ /-/g;
         }
     }
