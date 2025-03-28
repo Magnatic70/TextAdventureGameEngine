@@ -173,8 +173,8 @@ sub start_game {
     print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
     print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
     print "- Trade: Exchange items with persons using 'trade [item] with [person]'.\n";
-    print "- Fight: Engage enemies with 'fight [enemy] with [item]'.\n";
-    print "- Retreat (Only when in fight): Move back to the previous room with 'retreat'.\n";
+    print "- Fight (Only when in a room with an enemy): Engage enemies with 'fight [enemy] with [item]'.\n";
+    print "- Retreat (Only when in a room with an enemy): Move back to the previous room with 'retreat'.\n";
     print "- Inventory: View all items and their descriptions using 'inventory'.\n";  # New command description
     print "- Hint: Ask for hints on a subject using 'hint [subject]'.\n";  # New hint command description
     print "- Quit: Exit the game by typing 'quit'.\n";
