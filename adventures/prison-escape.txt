@@ -28,6 +28,7 @@ ItemDescription:It contains two keys
 Contains:cell key,guards room key
 
 RoomID:CorridorJustEscaped
+SourceRoomID:Corridor
 Name:Corridor
 Locks:fishing line
 Description:After dozens of attempts and hours of frustration you finally manage to hook the fishing line to the key chain. You carefully haul in the keys and unlock your cell door. Free at last! You hurry out the door, leaving everything behind. You are in a corridor with multiple cells.
@@ -155,11 +156,13 @@ SearchableItems:table:bullits,another table:newspaper
 Locks:sharpened shiv
 
 RoomID:RecArea2
+SourceRoomID:RecArea
 Name:The recreational area.
 Description:Through the bars you can see the sky for the first time in a long time.
 Exits:south:GuardsRoom,north:VisitorRoom2
 
 RoomID:VisitorRoom2
+SourceRoomID:VisitorRoom
 Name:The visitor room
 Description:You fondly remember the visits of your family and chatting with them at many of these tables.
 Exits:south:RecArea2,north:Reception

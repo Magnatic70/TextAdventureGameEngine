@@ -124,6 +124,7 @@ Description:You can't resist the urge to lay down on the bed and you quickly fal
 Exits:wake up:Master bedroom3
 
 RoomID:Master bedroom3
+SourceRoomID:Master bedroom
 Name:Master bedroom
 Description:You wake up fully refreshed and ready for the remainder of your adventure.
 Exits:south:Landing,bed:Bed
@@ -141,6 +142,7 @@ Item:spider leg
 ItemDescription:Yuk! A spider leg! Gross!
 
 RoomID:Landing3
+SourceRoomID:Landing
 Name:Landing
 Description:The landing gives access to a lot of closed doors.
 Items:spider chunk
@@ -168,16 +170,19 @@ Items:rubber duck
 Exits:stand up:Bathroom2
 
 RoomID:Bathroom2
+SourceRoomID:Bathroom
 Name:Bathroom
 Description:You get out of the bath, but you can't find a towel. To your great dismay, your clothes have vanished.
 Exits:east:Landing2
 
 RoomID:Landing2
+SourceRoomID:Landing
 Name:Landing
 Description:You now realize that it is freezing cold while your skin is slowly drying. The door to the master bedroom is slightly ajar.
 Exits:down:Lobby,north:Master bedroom2,east:Nursery,west:Bathroom,up:Attic
 
 RoomID:Master bedroom2
+SourceRoomID:Master bedroom
 Name:Master Bedroom
 Description:A luxurious master bedroom with a large four poster bed.
 Items:your clothes
@@ -207,6 +212,7 @@ Items:fly swatter
 Exits:down:Attic,west:Entrance2,east:Entrance3
 
 RoomID:Entrance2
+SourceRoomID:Entrance
 Description:Oh no! You stepped out of an open window! You fall down, bouncing on the slanted roof of the bathroom, then slide off it to the ground into some lush bushes. Several roof tiles land next to you. You're bruised and battered, but you're still alive. Phew! You look around and find yourself at the entrance.
 Name:Entrance
 Exits:north:Lobby,south:Garden
