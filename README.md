@@ -1,6 +1,9 @@
 # Text Adventure Game Engine
-The Adventure Game Engine (AGE) is a tool for creating classic text-based adventure games. You can create your own adventures by configuring them through simple text files, making it accessible without coding experience 
-readme.txt
+The Adventure Game Engine (AGE) is a program for playing and creating classic text-based adventure games. You can create your own adventures by configuring them through simple text files, making it accessible without coding experience.
+
+It started out as an experiment on how far I could push a local LLM into writing and expanding a more or less complex program. But I also started to have fun with it and wrote a few adventures. Some friends and collegues tried them and had fun playing them. So I decided to publish it on Github, hoping that more people can enjoy it.
+
+If you just want to play a game made with this game engine, go to https://remote.magnatic.com/age/
 
 # Features
 * Create interactive stories with multiple locations and items
