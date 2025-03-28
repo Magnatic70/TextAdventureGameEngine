@@ -2,12 +2,29 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 import os
 import subprocess
 import re
+import configparser
 
 app = Flask(__name__)
 
+# Load games from config file
+def load_games():
+    config = configparser.ConfigParser()
+    config.read('games.cfg')
+    
+    games = []
+    for section in config.sections():
+        if section != 'DEFAULT':
+            game_name, _, _ = section.split(';')
+            games.append(game_name)
+    
+    return games
+
+# Get list of configured games
+GAMES = load_games()
+
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', games=GAMES)
 
 @app.route('/styles.css')
 def styles():
