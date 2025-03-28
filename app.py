@@ -12,7 +12,7 @@ def load_games():
     with open('games.cfg', 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            game_name = row['shortName']  # Use shortName as the game identifier
+            game_name = row.get('shortName', '')  # Use get() with fallback to avoid KeyError
             if game_name:
                 games.append(game_name)
     return games
