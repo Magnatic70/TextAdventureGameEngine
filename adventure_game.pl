@@ -19,7 +19,10 @@ my $debug = 0;
 # 0=don't die when you are defeated by an enemy, 1=die when you are defeated
 my $die = 0;
 
-my $inputType=$ARGV[1];
+my $inputType='stdin';
+if($ARGV[1]){
+    $inputType=$ARGV[1];
+}
 
 my $INPUT;
 

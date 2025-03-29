@@ -38,7 +38,7 @@ Item:troll pamphlet
 ItemDescription:In the book you find a pamphlet that describes trolls as almost invincible creatures, but their eyes are particulary sensitive to fluids.
 
 Item:troll anatomy
-ItemDescription:A bookmark in this book on troll anatomy directs you to the chapter about troll eye anatomy. It seems that their eyelids are very thick and protect the eyes against fluid spatter very effectively. It is suggest that in stead of eye droppers, a more forcefull method is needed to administer eye medicins.
+ItemDescription:In the drawer you find a book on troll anatomy. A bookmark directs you to the chapter about troll eye anatomy. It seems that their eyelids are very thick and protect the eyes against fluid spatter very effectively. It is suggest that in stead of eye droppers, a more forcefull method is needed to administer eye medicins.
 
 Item:book
 Contains:kitchen key,some digits
@@ -54,7 +54,7 @@ RoomID:Study
 Name:Study
 Description:This small room contains a desk and a chair. The drawer of the desk is slightly open.
 Items:library key
-SearchableItems:drawer:blue book
+SearchableItems:drawer:troll anatomy
 Exits:east:Lobby
 
 Item:library key

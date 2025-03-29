@@ -130,6 +130,13 @@ sub validate_game_data {
         if (!exists $game_data{rooms}{$room_id}{description}) {
             warn "Room ID '$room_id' is missing a description.\n";
         }
+        
+        # Check for undefined sourceRoomID
+        if(exists $game_data{rooms}{$room_id}{sourceroom}){
+            unless (exists $game_data{rooms}{$game_data{rooms}{$room_id}{sourceroom}}){
+                warn "SourceRoomID $$game_data{rooms}{$room_id}{sourceroom} for room $room_id does not exist\n";
+            }
+        }
 
         # Check exits for undefined room IDs
         if (exists $game_data{rooms}{$room_id}{exits}) {
