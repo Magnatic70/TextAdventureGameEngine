@@ -86,6 +86,8 @@ sub load_game_data {
         } elsif ($line =~ /^Person:(.*)$/) {
             $current_person = $1;
             $game_data{persons}{$current_person} = {};
+        } elseif ($line =~ /^DisplayName:(.*)$/){
+            $game_data{persons}{$current_person}{displayname}=$1;
         } elsif ($line =~ /^Keywords:(.*)$/) {
             my %keywords_map;
             my %answers_map;
