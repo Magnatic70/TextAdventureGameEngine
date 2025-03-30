@@ -26,7 +26,7 @@ if($ARGV[1]){
 
 my $INPUT;
 
-if (-p STDIN) {
+if (-p STDIN || $ENV{'DEBUG_AGE'}==1) {
     $debug = 1;
 }
 
@@ -164,7 +164,16 @@ sub showRoomInfo{
 
     # Display persons in the room if any
     if ($room_data->{persons}) {
-        print "Persons here: ", join(", ", @{$room_data->{persons}}), "\n";
+        my @roompersons;
+        foreach my $person (@{$room_data->{persons}}){
+            if($game_data{persons}{$person}{displayname}){
+                push(@roompersons,$game_data{persons}{$person}{displayname});
+            }
+            else{
+                push(@roompersons,$person);
+            }
+        }
+        print "Persons here: ". join(", ", @roompersons), "\n";
     }
 }
 
@@ -625,17 +634,26 @@ sub handle_ask {
     my ($person, $question) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
-    if (grep { $_ eq $person } @{$room_data->{persons}}) {
+    my $actualPerson; # We might need to translate from displayname to personID
+    foreach my $testPerson (@{$room_data->{persons}}){
+        if($game_data{persons}{$testPerson}{displayname} && $game_data{persons}{$testPerson}{displayname} eq $person){
+            $actualPerson=$testPerson;
+        }
+        elsif($testPerson eq $person){
+            $actualPerson=$testPerson;
+        }
+    }
+    if ($actualPerson) {
         my $answered = 0;
         # Check for keywords in the question
-        foreach my $keyword (keys %{$game_data{persons}{$person}{keywords}}) {
+        foreach my $keyword (keys %{$game_data{persons}{$actualPerson}{keywords}}) {
             if ($question =~ /\b$keyword\b/) {
-                my $reward = $game_data{persons}{$person}{keywords}{$keyword};
+                my $reward = $game_data{persons}{$actualPerson}{keywords}{$keyword};
 
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "The $person answers: $game_data{persons}{$person}{answers}{$keyword}\n";
+                    print "The $person answers: $game_data{persons}{$actualPerson}{answers}{$keyword}\n";
                     print "The $person gives you $reward.\n";
 
                     # Display reward item description
@@ -660,18 +678,28 @@ sub handle_trade {
     my ($item, $person) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
 
-    if (grep { $_ eq $person } @{$room_data->{persons}}) {
+    my $actualPerson; # We might need to translate from displayname to personID
+    foreach my $testPerson (@{$room_data->{persons}}){
+        if($game_data{persons}{$testPerson}{displayname} && $game_data{persons}{$testPerson}{displayname} eq $person){
+            $actualPerson=$testPerson;
+        }
+        elsif($testPerson eq $person){
+            $actualPerson=$testPerson;
+        }
+    }
+
+    if ($actualPerson) {
         my $traded = 0;
 
         # Check for items
-        foreach my $trade (keys %{$game_data{persons}{$person}{trades}}) {
+        foreach my $trade (keys %{$game_data{persons}{$actualPerson}{trades}}) {
             if ($item eq $trade) {
-                my $reward = $game_data{persons}{$person}{trades}{$item};
+                my $reward = $game_data{persons}{$actualPerson}{trades}{$item};
 
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "The $person responds: $game_data{persons}{$person}{answers}{$item}\n";
+                    print "The $person responds: $game_data{persons}{$actualPerson}{answers}{$item}\n";
                     print "The $person gives you $reward.\n";
 
                     # Remove the item from inventory

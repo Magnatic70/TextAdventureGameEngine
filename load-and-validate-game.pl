@@ -86,7 +86,7 @@ sub load_game_data {
         } elsif ($line =~ /^Person:(.*)$/) {
             $current_person = $1;
             $game_data{persons}{$current_person} = {};
-        } elseif ($line =~ /^DisplayName:(.*)$/){
+        } elsif ($line =~ /^DisplayName:(.*)$/){
             $game_data{persons}{$current_person}{displayname}=$1;
         } elsif ($line =~ /^Keywords:(.*)$/) {
             my %keywords_map;
@@ -190,6 +190,14 @@ sub validate_game_data {
             foreach my $room_item (@{$game_data{rooms}{$room_id}{items}}){
                 unless (exists $game_data{items}{$room_item}){
                     warn "Item '$room_item' in room '$room_id' is not defined.\n";
+                }
+            }
+        }
+        
+        if (exists $game_data{rooms}{$room_id}{persons}){
+            foreach my $person (@{$game_data{rooms}{$room_id}{persons}}){
+                unless (exists $game_data{persons}{$person}){
+                    warn "Person '$person' in room '$room_id' is not defined.\n";
                 }
             }
         }

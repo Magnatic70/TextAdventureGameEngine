@@ -6,15 +6,17 @@ Objective:You have to find your way from the marketplace of Eldergrove through t
 RoomID:Marketplace
 Name:Marketplace
 Description:You are in Eldergrove's bustling marketplace. The air is filled with a mix of spices and laughter from merchants and buyers alike. Stalls display their wares in abundance.
-Persons:butcher,beggar,villager,mayor,baker,blacksmith
+Persons:butcher2,beggar2,villager,mayor,baker,blacksmith
 Exits:north:TownHall,east:ChurchSquare,south:VillageSouth,west:VillageWest
 Items:hammer
 SearchableItems:stall:apple
 
-Person:butcher
+Person:butcher2
+DisplayName:butcher
 Keywords:meat:meat:I've got excellent meat, here try this! I've got excellent pork as well.;pork:pulled pork:This pulled pork is the best in all of Eldoria. I've got excellent meat as well.
 
-Person:beggar
+Person:beggar2
+DisplayName:beggar
 Trades:meat:chronicle 1:Thank you dear! I've got nothing of any worth, but this might be useful.
 
 Person:mayor
