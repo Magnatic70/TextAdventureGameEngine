@@ -70,14 +70,16 @@ Combine:small gear,wire=makeshift lockpick
 Persons can give items based on questions asked and offer trades.
 
 ```
-Person:<short person name>
+Person:<personID or short name>
+DisplayName:<name of person that will be display to player> (optional)
 Keywords:<topic>:<gift item>;<topic2>:<gift item2>;... (optional)
 Trades:<player offered item>:<person gives item>:<response> (optional)
 ```
 
 Example:
 ```
-Person:Old Man Hemlock
+Person:omh
+DisplayName:Old Man Hemlock
 Keywords:secret passage:map;treasure:gold coin
 Trades:apple pie:small potion:Ah, you shouldn't have! But I appreciate the gesture.
 ```
