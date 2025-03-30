@@ -74,6 +74,8 @@ Person:<personID or short name>
 DisplayName:<name of person that will be display to player> (optional)
 Keywords:<topic>:<gift item>;<topic2>:<gift item2>;... (optional)
 Trades:<player offered item>:<person gives item>:<response> (optional)
+NegativeAskResponse:<response when asking about something they don't know about> (optional)
+NegativeTradeResponse:<response for trade they are not interested in> (optional)
 ```
 
 Example:
@@ -82,6 +84,8 @@ Person:omh
 DisplayName:Old Man Hemlock
 Keywords:secret passage:map;treasure:gold coin
 Trades:apple pie:small potion:Ah, you shouldn't have! But I appreciate the gesture.
+NegativeAskResponse:I don't know, but maybe the butcher does.
+NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
 ```
 
 ## Room Configuration

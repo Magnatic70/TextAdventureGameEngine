@@ -667,7 +667,12 @@ sub handle_ask {
             }
         }
         if (!$answered) {
-            print "The $person doesn't know the answer to this question.\n";
+            if($game_data{persons}{$actualPerson}{negativeaskresponse}){
+                print "$person: ".'"'.$game_data{persons}{$actualPerson}{negativeaskresponse}.'"'."\n";
+            }
+            else{
+                print "The $person doesn't know the answer to this question.\n";
+            }
         }
     } else {
         print "There is no such person here.\n";
@@ -716,7 +721,12 @@ sub handle_trade {
             }
         }
         if (!$traded) {
-            print "The $person doesn't want to trade for $item.\n";
+            if($game_data{persons}{$actualPerson}{negativetraderesponse}){
+                print "$person: ".'"'.$game_data{persons}{$actualPerson}{negativetraderesponse}.'"'."\n";
+            }
+            else{
+                print "The $person doesn't want to trade for $item.\n";
+            }
         }
     } else {
         print "There is no such person here.\n";

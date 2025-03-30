@@ -88,6 +88,10 @@ sub load_game_data {
             $game_data{persons}{$current_person} = {};
         } elsif ($line =~ /^DisplayName:(.*)$/){
             $game_data{persons}{$current_person}{displayname}=$1;
+        } elsif ($line =~ /^NegativeAskResponse:(.*)$/){
+            $game_data{persons}{$current_person}{negativeaskresponse}=$1;
+        } elsif ($line =~ /^NegativeTradeResponse:(.*)$/){
+            $game_data{persons}{$current_person}{negativetraderesponse}=$1;
         } elsif ($line =~ /^Keywords:(.*)$/) {
             my %keywords_map;
             my %answers_map;

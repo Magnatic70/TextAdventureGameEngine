@@ -14,6 +14,7 @@ SearchableItems:stall:apple
 Person:butcher2
 DisplayName:butcher
 Keywords:meat:meat:I've got excellent meat, here try this! I've got excellent pork as well.;pork:pulled pork:This pulled pork is the best in all of Eldoria. I've got excellent meat as well.
+NegativeAskResponse:Maybe you should ask the mayor.
 
 Person:beggar2
 DisplayName:beggar
