@@ -63,11 +63,15 @@ body {
   #responseDiv {
     width: 90%; /* Mobile width */
     margin: 25px auto 0;
+    font-size:12px;
   }
   .toggle-container{
     left:0%;
     width:100%;
   }
+  #response{
+    font-size:12px;
+  }    
 }
 
 .actionTextBox{
