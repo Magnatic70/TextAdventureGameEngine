@@ -71,7 +71,7 @@ Persons can give items based on questions asked and offer trades.
 
 ```
 Person:<personID or short name>
-DisplayName:<name of person that will be display to player> (optional)
+DisplayName:<name of person that will be displayed to the player> (optional)
 Keywords:<topic>:<gift item>;<topic2>:<gift item2>;... (optional)
 Trades:<player offered item>:<person gives item>:<response> (optional)
 NegativeAskResponse:<response when asking about something they don't know about> (optional)
@@ -105,7 +105,7 @@ UnlockTexts:<message when first entering with unlock item> (mandatory if Locks i
 Puzzle:<text introduction> (optional, mutually exclusive with Enemy)
 Riddle:<question> (mandatory if Puzzle is defined)
 Answer:<correct answer> (mandatory if Puzzle is defined)
-RewardItem:<item given for correct answer> (mandatory if Puzzle is defined)
+RewardItem:<item given for correct answer> (optional if Puzzle is defined)
 Enemy:<enemy name>:<required weapon> (optional, mutually exclusive with Puzzle)
 DefeatDescription:<message when player wins fight> (mandatory if Enemy is defined)
 DiedDescription:<message when player loses fight> (mandatory if Enemy is defined)
