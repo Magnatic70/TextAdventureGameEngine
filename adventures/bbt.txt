@@ -1,0 +1,137 @@
+# New adventure based on Big Bang theory
+# Sheldon has to be driven to Caltech
+# There's all kinds of set-backs and obstacles
+# A bit of trivia
+# Some puzzles
+# A fight with an alien that comes from a portal Sheldon made
+# Car trouble in Penny's car because of the neglected "Check Engine" light
+# Map of the two apartments
+# Stairs, no elevator
+# Route to Caltech
+# Stops at Amy's, Raj's, the comic book store, Bernadette and Howards's place
+
+Title:The Transport Theorem
+Objective:Leonard has to drive Sheldon to Caltech in time for an urgent lecture on his latest theoretical breakthrough. Although this seems an easy task, trouble is all around.
+FinalDestination:caltechoffice
+
+RoomID:living
+Name:Sheldon and Leonard's living room
+Description:Your familiar living room. How long have you've been living here now? Putting up with Sheldon sure doesn't make time go fast.
+Persons:sheldon
+Exits:north:storage,east:corridor,west:frontdoorin,south:kitchen
+
+Person:sheldon
+DisplayName:sheldon
+NegativeAskResponse:Dr. Hoffstadter, you should know better than to ask me for that at this moment.
+NegativeTradeResponse:I don't have anything to trade right now.
+
+RoomID:storage
+Name:Storage closet
+Description:This is almost like a black hole. You can put anything in here, nobody knows what's inside and nothing ever comes out.
+Puzzle:Solve the riddle to enter the storage closet.
+Riddle:A model of what is placed next to the door of the storage closet?
+Answer:dna
+Exits:south:living
+Persons:sheldon
+
+RoomID:frontdoorin
+Name:The front door
+Description:Left to the front door stands a sidetable with a bowl on it.
+Persons:sheldon
+Exits:west:landing4,east:living
+SearchableItems:bowl:key ring
+
+Item:key ring
+ItemDescription:A ring with a lot of keys.
+Contains:house key,car key
+
+Item:house key
+ItemDescription:The key to your front door
+
+Item:car key
+ItemDescription:The key to your car
+
+Item:key penny
+ItemDescription:The key to Penny's appartment
+
+RoomID:landing4
+Name:4th floor landing
+Description:Stairs going up and down, a broken elevator and two closed front doors
+Exits:down:landing3,west:frontdoorpenny,up:landing5,east:livingopen
+Locks:house key
+Persons:sheldon
+UnlockTexts:You unlock the door, step out and close the door behind you.
+
+RoomID:livingopen
+SourceRoomID:living
+Name:Your living room
+Description:Your familiar living room. How long have you've been living here now? Putting up with Sheldon sure doesn't make time go fast.
+Persons:sheldon
+Exits:north:storage,east:corridor,west:landing4,south:kitchen
+Locks:house key
+Persons:sheldon
+UnlockTexts:You unlock the door and enter your appartment
+
+RoomID:frontdoorpenny
+Name:Penny's front door
+Description:Penny's front door. There's a scuff mark where Sheldon always knocks three times.
+Persons:sheldon
+Exits:east:landing4,west:livingroompenny
+
+RoomID:livingroompenny
+Name:Penny's living room
+Description:Penny's living room is messy as always. You already see Sheldon's pained look while he's holding back to tidy up the place.
+Persons:sheldon
+Exits:east:landing4,south:kitchenpenny,north:bedroompenny,west:couch
+Locks:key penny
+UnlockTexts:You unlock the door and enter Penny's appartment.
+
+RoomID:laundryroom
+Name:Laundry room
+Description:Several washing and drying machines are running unattended. Whe you enter a dryer just stopped spinning and the rattling inside stops.
+SearchableItems:dryer:key penny
+Exits:up:landing1
+
+RoomID:landing1
+Name:Ground floor lobby
+Description:Stairs going up and down, a broken elevator. You hear a rattling noise coming from the laundry room.
+Exits:down:laundryroom,west:street,up:landing2,east:mailboxes
+
+RoomID:landing2
+Name:2nd floor landing
+Description:Stairs going up and down, a broken elevator and two closed front doors
+Exits:down:landing1,west:foreverlocked,up:landing3,east:foreverlocked
+
+RoomID:landing3
+Name:3rd floor landing
+Description:Stairs going up and down, a broken elevator and two closed front doors
+Exits:down:landing2,west:foreverlocked,up:landing4,east:foreverlocked
+
+RoomID:landing5
+Name:5th floor landing
+Description:Stairs going up and down, a broken elevator and two closed front doors
+Exits:down:landing4,west:foreverlocked,up:landing6,east:foreverlocked
+
+RoomID:landing6
+Name:6th floor landing
+Description:Stairs going up and down, a broken elevator and two closed front doors
+Exits:down:landing5,west:foreverlocked,up:roof,east:foreverlocked
+
+RoomID:roof
+Name:The roof
+Description:You've never seen this before, but the roof of the building next door is just a small jump away.
+Exits:down:landing6,west:roofnextdoor
+
+RoomID:roofnextdoor
+Name:The roof of the building next door
+Description:You've never seen this before, but the roof of your building is just a small jump away.
+Exits:east:roof,down:foreverlocked
+
+RoomID:foreverlocked
+Name:You wonder what is behind this door
+Description:This is like hotel Califonia, you can check in, but never leave.
+Locks:unknown
+UnlockTexts:You cheated! This should be impossible.
+
+Item:unknown
+ItemDescription:This item unlocks all doors that should not be unlocked.
