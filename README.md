@@ -38,12 +38,13 @@ Players can use these commands to interact with the game world:
 # Configuration
 ## Configuration Structure
 Adventures are built using a configuration file that defines the game world. The main components are:
+- Title
+- Objective
+- Final Destination
 - Items
 - Persons
 - Rooms (Locations)
 - Hints
-- Final Destination
-- Objective
 
 ## Title
 Define the title of the game.
