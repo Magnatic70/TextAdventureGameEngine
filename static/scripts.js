@@ -20,14 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
             defaultOption.value = '';
             defaultOption.text = 'Select a game...';
             defaultOption.disabled = true;
-            defaultOption.selected = true;
             gameSelect.appendChild(defaultOption);
+
+            let firstGame=true;
             
             // Add options for each game
             data.forEach(game => {
                 const option = document.createElement('option');
                 option.value = game.shortName; // Use shortName as value (for backend)
                 option.text = `${game.displayName}`;
+                if(firstGame){
+                    firstGame=false;
+                    option.selected=true;
+                }
                 gameSelect.appendChild(option);
             });
             
