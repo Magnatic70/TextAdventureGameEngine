@@ -262,22 +262,24 @@ sub handle_puzzle {
     }
 
     if ($answer eq $game_data{rooms}{$current_room_id}{answer}) {
-        # Check if reward item is already in inventory
-        unless (grep { $_ eq $room_data->{reward_item} } @inventory) {
-            push @inventory, $room_data->{reward_item};
-            print "You've given the correct answer and now have access to this location. As a reward you get a $room_data->{reward_item}!\n";
-        } else {
-            print "You already received this reward.\n";
-        }
+        if($room_data->{reward_item}){
+            # Check if reward item is already in inventory
+            unless (grep { $_ eq $room_data->{reward_item} } @inventory) {
+                push @inventory, $room_data->{reward_item};
+                print "You've given the correct answer and now have access to this location. As a reward you get a $room_data->{reward_item}!\n";
+            } else {
+                print "You already received this reward.\n";
+            }
 
-        # Display contained item description
-        if (exists $game_data{items}{$room_data->{reward_item}}{description}) {
-            print "$game_data{items}{$room_data->{reward_item}}{description}\n";
+            # Display contained item description
+            if (exists $game_data{items}{$room_data->{reward_item}}{description}) {
+                print "$game_data{items}{$room_data->{reward_item}}{description}\n";
+            }
         }
         delete $game_data{rooms}{$current_room_id}->{puzzle};  # Remove puzzle after solving
-	if($inputType eq 'done'){	
-	    saveNewAction($answer);
-	}
+        if($inputType eq 'done'){	
+            saveNewAction($answer);
+        }
         showRoomInfo();
     } else {
         print "That is not correct. Try again.\n";
