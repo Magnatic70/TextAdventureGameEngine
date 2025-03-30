@@ -653,8 +653,8 @@ sub handle_ask {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "The $person answers: $game_data{persons}{$actualPerson}{answers}{$keyword}\n";
-                    print "The $person gives you $reward.\n";
+                    print "$person: \"$game_data{persons}{$actualPerson}{answers}{$keyword}\"\n";
+                    print "$person: gives you $reward.\n";
 
                     # Display reward item description
                     if (exists $game_data{items}{$reward}{description}) {
@@ -671,7 +671,7 @@ sub handle_ask {
                 print "$person: ".'"'.$game_data{persons}{$actualPerson}{negativeaskresponse}.'"'."\n";
             }
             else{
-                print "The $person doesn't know the answer to this question.\n";
+                print "$person: \"I don't know the answer to this question.\"\n";
             }
         }
     } else {
@@ -704,8 +704,8 @@ sub handle_trade {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "The $person responds: $game_data{persons}{$actualPerson}{answers}{$item}\n";
-                    print "The $person gives you $reward.\n";
+                    print "$person: \"$game_data{persons}{$actualPerson}{answers}{$item}\"\n";
+                    print "$person: gives you $reward.\n";
 
                     # Remove the item from inventory
                     @inventory = grep { $_ ne $item } @inventory;
@@ -725,7 +725,7 @@ sub handle_trade {
                 print "$person: ".'"'.$game_data{persons}{$actualPerson}{negativetraderesponse}.'"'."\n";
             }
             else{
-                print "The $person doesn't want to trade for $item.\n";
+                print "$person: \"I don't want to trade for $item.\"\n";
             }
         }
     } else {
