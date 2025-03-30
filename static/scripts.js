@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Set initial page title
+    document.getElementById('pageTitle').textContent = 'Text based Adventure';
+
     fetch('games') // Create a new route in app.py to serve this
         .then(response => response.json())
         .then(data => {
@@ -32,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(firstGame){
                     firstGame=false;
                     option.selected=true;
+                    // Set initial page title to the selected game
+                    document.getElementById('pageTitle').textContent = option.text;
                 }
                 gameSelect.appendChild(option);
             });
@@ -43,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (storedGame) {
                 gameNameSelect.value = storedGame;
+                // Update title when a game is selected from storage
+                document.getElementById('pageTitle').textContent = gameSelect.options[gameSelect.selectedIndex].text;
             }
             
             // Initialize UI state
@@ -88,9 +95,12 @@ function setSessionID(){
 }
 
 function storeGame(){
-    localStorage.setItem('gameName',document.getElementById('gameName').value);
+    const selectedOption = document.getElementById('gameName');
+    localStorage.setItem('gameName',selectedOption.value);
     toggleDebugControls();
     sendAction();
+    // Update title when a new game is selected
+    document.getElementById('pageTitle').textContent = selectedOption.options[selectedOption.selectedIndex].text;
 }
     
 function sendAction() {
