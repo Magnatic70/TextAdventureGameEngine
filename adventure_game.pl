@@ -26,7 +26,7 @@ if($ARGV[1]){
 
 my $INPUT;
 
-if (-p STDIN || $ENV{'DEBUG_AGE'}==1) {
+if (-p STDIN || (exists $ENV{'DEBUG_AGE'} && $ENV{'DEBUG_AGE'}==1)) {
     $debug = 1;
 }
 
@@ -227,7 +227,12 @@ sub start_game {
         }
 
         # Prompt for user action with green text
-        print "\033[32mWhat do you want to do? \033[0m\n";  # Green text followed by reset
+        if($game_data{wip} eq 'true'){
+            print "\033[32mWhat do you want to do? (This is a Work in Progress, it might still contain errors)\033[0m\n";  # Green text followed by reset
+        }
+        else{
+            print "\033[32mWhat do you want to do? \033[0m\n";  # Green text followed by reset
+        }
         my $action = readInput();
         if (!$action) {
             die "No more input!\n";

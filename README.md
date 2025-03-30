@@ -45,8 +45,15 @@ Adventures are built using a configuration file that defines the game world. The
 - Final Destination
 - Objective
 
+## Title
+Define the title of the game. Format: `Title:<brief title>`
+
 ## Objective
 Defines the goal of the game, shown at the start. Format: `Objective:<text to brief the player on the adventure they are going to embark on>`
+
+## Work in progress
+When set to true, shows a message to the player that the adventure is work in progress. Format: `WIP:true`.
+Remove the line when your adventure is ready.
 
 ## Item Configuration
 Items can be found by taking, receiving as gifts, trading, or through searching.

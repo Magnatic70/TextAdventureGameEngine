@@ -18,6 +18,8 @@ sub load_game_data {
             }
         } elsif ($line =~ /^Title:(.*)$/) {
             $game_data{title} = $1;
+        } elsif ($line =~ /^WIP:(.*)$/) {
+            $game_data{wip} = $1;
         } elsif ($line =~ /^Objective:(.*)$/) {
             $game_data{objective} = $1;
         } elsif ($line =~ /^Name:(.*)$/) {
@@ -121,6 +123,9 @@ sub load_game_data {
     }
 
     close $fh;
+    if(!exists $game_data{wip}){
+        $game_data{wip}='false';
+    }
     return %game_data;
 }
 
