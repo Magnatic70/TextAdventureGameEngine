@@ -1,2 +1,2 @@
 #!/bin/bash
-docker stop $(docker ps -q -l --filter ancestor=adventure-game-engine )
+docker stop $(docker ps -q --filter ancestor=adventure-game-engine )
