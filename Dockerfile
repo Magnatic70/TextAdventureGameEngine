@@ -1,6 +1,8 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim-buster
 
+# Apply: https://stackoverflow.com/questions/68155641/should-i-run-things-inside-a-docker-container-as-non-root-for-safety
+
 # Set working directory
 WORKDIR /app
 

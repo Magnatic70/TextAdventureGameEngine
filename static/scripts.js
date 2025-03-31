@@ -26,13 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
             gameSelect.appendChild(defaultOption);
 
             let firstGame=true;
+            const storedGame = localStorage.getItem('gameName');
             
             // Add options for each game
             data.forEach(game => {
                 const option = document.createElement('option');
                 option.value = game.shortName; // Use shortName as value (for backend)
                 option.text = `${game.displayName}`;
-                if(firstGame){
+                if(firstGame || storedGame==game.shortName){
                     firstGame=false;
                     option.selected=true;
                     // Set initial page title to the selected game
@@ -44,14 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Enable controls after games are loaded
             document.getElementById('actionInput').disabled = false;
             const gameNameSelect = document.getElementById('gameName');
-            const storedGame = localStorage.getItem('gameName');
 
-            if (storedGame) {
-                gameNameSelect.value = storedGame;
-                // Update title when a game is selected from storage
-                document.getElementById('pageTitle').textContent = gameSelect.options[gameSelect.selectedIndex].text;
-            }
-            
             // Initialize UI state
             showDebugControls = false;
             updateUI();
