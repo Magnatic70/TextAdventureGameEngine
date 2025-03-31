@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add default option
             const defaultOption = document.createElement('option');
             defaultOption.value = '';
-            defaultOption.text = 'Select a game...';
+            defaultOption.text = 'Select an adventure ...';
             defaultOption.disabled = true;
             gameSelect.appendChild(defaultOption);
 
