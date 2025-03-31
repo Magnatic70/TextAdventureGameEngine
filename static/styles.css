@@ -11,9 +11,10 @@ body {
 /* Make sure the toggle container is always at the top */
 .toggle-container {
   position: fixed;
+  height: 5%;
   top: 0;
   left: 19%;
-  widthh: 60px; /* Default width, will be overwritten by JS */
+  width: 60px; /* Default width, will be overwritten by JS */
   background-color: transparent;
   z-index: 1000; /* Ensure it's on top */
 }
@@ -27,7 +28,7 @@ body {
   background-color: #e4e4e4;
   color: #333;
   width: 36px;
-  padding: 8px;
+  padding: 4px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -47,6 +48,7 @@ body {
   background-color: white;
   width: 60%; /* Default width for larger screens */
   margin: 35px auto 0; /* Add top margin to push content down */
+  height: 90%;
   font-size: 16px;
   white-space: pre-wrap;
 }
@@ -71,13 +73,25 @@ body {
   }
   #response{
     font-size:12px;
-  }    
+  }
+  .actionDiv{
+    width:90%;
+  }
+  .actionTextBox{
+      width:100%;
+  }
 }
 
 .actionTextBox{
   position:relative;
-  width:95%;
+  width:98%;
   left:0%;
+}
+
+.actionDiv{
+  height: 5%;
+  width:62%;
+  margin:auto;
 }
 
 .fixed-bottom {
@@ -118,7 +132,9 @@ button:hover {
 /* Initially hide the debug controls */
 .debug-controls {
   position:relative;
-  top:6%;
+  left:19%;
+  width:60%;
+  top:5%;
   display: none;
   flex-direction: column;
   align-items: flex-start;
