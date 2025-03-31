@@ -17,7 +17,7 @@ def load_games():
             if game_name and display_name:
                 games.append({'shortName': game_name, 'displayName': display_name})
     return games
-
+    
 # Get list of configured games
 GAMES = load_games()
 
@@ -67,7 +67,7 @@ def send_action():
 
 @app.route('/games')
 def list_games():
-    return jsonify(GAMES)
+    return jsonify(load_games())
 
 if __name__ == '__main__':
     app.run(debug=False, port=4545, host='0.0.0.0')
