@@ -49,7 +49,7 @@ def send_action():
         return jsonify({'error': 'Invalid session ID format'}), 400
 
     # Create a temporary file for the game output
-    output_file = f"{session_id}"
+    output_file = f"/tmp/{session_id}"
     
     # Call the Perl script with parameters
     result = subprocess.run(

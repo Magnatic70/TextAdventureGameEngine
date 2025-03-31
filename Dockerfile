@@ -33,7 +33,6 @@ ENV SERVICE_NAME="age"
 RUN adduser --system --uid 1001 --group $SERVICE_NAME
 RUN mkdir -p /var/log/$SERVICE_NAME
 RUN chown $SERVICE_NAME:$SERVICE_NAME /var/log/$SERVICE_NAME
-RUN chmod a+w /app
 
 USER $SERVICE_NAME
 

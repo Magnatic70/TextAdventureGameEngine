@@ -86,7 +86,7 @@ if($debug){
 if($inputType eq 'file' || $inputType eq 'argv'){
     # Output game output to session file
     my($GAMEOUT);
-    open($GAMEOUT,'>'.$ARGV[2]);
+    open($GAMEOUT,'>/tmp/'.$ARGV[2]);
     select $GAMEOUT;
 }
 
