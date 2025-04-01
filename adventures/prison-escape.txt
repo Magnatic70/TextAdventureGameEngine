@@ -178,7 +178,7 @@ ItemDescription:Now it is actually useful!
 
 RoomID:Reception
 Name:Reception
-Description:It was years ago that you where checked in right here for a crime you didn't commit. You can see the street through the glass door. You scan the ceiling, but there's nothing special there, just some fluorescent tube lights, a damaged ceiling tile, a motion detector and a fire detector.
+Description:It was years ago that you where checked in right here for a crime you didn't commit. You can see the street through the glass door. You scan the ceiling, but there's nothing special there, just some fluorescent tube lights, a damaged ceiling tile, a motion detector and a fire detector. They sure take security and safety serious here.
 Exits:south:VisitorRoom2,north:Street,east:WardensOffice
 
 Combine:newspaper,contraption=burning newspaper
