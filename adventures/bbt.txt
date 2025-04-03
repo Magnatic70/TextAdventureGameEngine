@@ -58,7 +58,7 @@ ItemDescription:The key to your front door
 Item:car key
 ItemDescription:The key to your car
 
-Item:key penny
+Item:penny's key
 ItemDescription:The key to Penny's appartment
 
 RoomID:landing4
@@ -90,13 +90,13 @@ Name:Penny's living room
 Description:Penny's living room is messy as always. You already see Sheldon's pained look while he's holding back to tidy up the place.
 Persons:sheldon
 Exits:east:landing4,south:kitchenpenny,north:bedroompenny,west:couch
-Locks:key penny
+Locks:penny's key
 UnlockTexts:You unlock the door and enter Penny's appartment.
 
 RoomID:laundryroom
 Name:Laundry room
 Description:Several washing and drying machines are running unattended. Whe you enter a dryer just stopped spinning and the rattling inside stops.
-SearchableItems:dryer:key penny
+SearchableItems:dryer:penny's key
 Exits:up:landing1
 
 RoomID:landing1
@@ -135,7 +135,7 @@ Description:You've never seen this before, but the roof of your building is just
 Exits:east:roof,down:foreverlocked
 
 RoomID:foreverlocked
-Name:You wonder what is behind this door
+Name:Unknown
 Description:This is like hotel Califonia, you can check in, but never leave.
 Locks:unknown
 UnlockTexts:You cheated! This should be impossible.
