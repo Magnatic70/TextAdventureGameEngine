@@ -104,7 +104,7 @@ sub load_game_data {
                 }
             }
             $game_data{persons}{$current_person}{keywords} = \%keywords_map;
-            $game_data{persons}{$current_person}{answers} = \%answers_map;
+            $game_data{persons}{$current_person}{askanswers} = \%answers_map;
         } elsif ($line =~ /^Trades:(.*)$/) {
             my %trades_map;
             my %answers_map;
@@ -115,7 +115,7 @@ sub load_game_data {
                 }
             }
             $game_data{persons}{$current_person}{trades} = \%trades_map;
-            $game_data{persons}{$current_person}{answers} = \%answers_map;
+            $game_data{persons}{$current_person}{tradeanswers} = \%answers_map;
         } elsif ($line =~ /^Hint:(.*)$/) {
             my ($subject, $hint_text) = split /:/, $1, 2;
             $game_data{hints}{$subject} = $hint_text;

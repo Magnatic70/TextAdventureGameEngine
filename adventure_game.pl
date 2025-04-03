@@ -660,7 +660,7 @@ sub handle_ask {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$person: \"$game_data{persons}{$actualPerson}{answers}{$keyword}\"\n";
+                    print "$person: \"$game_data{persons}{$actualPerson}{askanswers}{$keyword}\"\n";
                     print "$person: gives you $reward.\n";
 
                     # Display reward item description
@@ -711,7 +711,7 @@ sub handle_trade {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$person: \"$game_data{persons}{$actualPerson}{answers}{$item}\"\n";
+                    print "$person: \"$game_data{persons}{$actualPerson}{tradeanswers}{$item}\"\n";
                     print "$person: gives you $reward.\n";
 
                     # Remove the item from inventory

@@ -9,6 +9,12 @@
 # Stairs, no elevator
 # Route to Caltech
 # Stops at Amy's, Raj's, the comic book store, Bernadette and Howards's place
+# Met car keys van Leonard instappen lukt, maar starten niet.
+# Dan Penny overtuigen om met haar auto te gaan
+# Die strandt natuurlijk met motorpech
+# Maar wel in de buurt van de comic book store
+# Daar Stuart om hulp vragen en dan krijg je een onderdeel waarmee Penny's auto het weer doet.
+
 
 Title:The Transport Theorem
 Objective:Leonard has to drive Sheldon to Caltech in time for an urgent lecture on his latest theoretical breakthrough. Although this seems an easy task, trouble is all around.
