@@ -105,7 +105,7 @@ NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
 ```
 
 ## Room Configuration
-Rooms define locations with descriptions and connections to other rooms.
+Rooms define locations with descriptions and connections to other rooms. The first location you define in the config will be the location the player starts their adventure.
 
 ```
 RoomID:<unique room identifier>
