@@ -23,12 +23,13 @@ Players can use these commands to interact with the game world:
 * Drop: drop [item]
 * Ask: ask [person] about [topic]
 * Trade: trade [item] with [person]
+* Inventory: inventory - get detailled descriptions of all items in the inventory
 * Fight: fight [enemy] with [item]
 * Retreat (during combat)
 * Get hints: hint [subject]
 
 # Game Modes
-1. **Plain Perl Program**: Run directly from the command line: `./adventure_game.pl <game name>`
+1. **Plain Perl Program**: Run directly from the command line and play an adventure: `./adventure_game.pl <game name>`
 2. **Debug Mode**: Use for automated testing by piping test steps to the engine: `cat <test steps> | ./adventure_game.pl <game name>` (stops at unknown commands/items)
 3. **Browser Frontend**: Run the backend and access through a web browser at `http://<your ip>:4545`
    - First start: `python3 app.py`
@@ -65,7 +66,7 @@ WIP:true
 ```
 
 ## Item Configuration
-Items can be found by taking, receiving as gifts, trading, or through searching.
+Items can be found by taking, receiving as gifts, trading, combining or through searching.
 
 ```
 Item:<short item name>
