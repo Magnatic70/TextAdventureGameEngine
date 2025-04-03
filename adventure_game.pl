@@ -629,7 +629,7 @@ sub handle_drop {
     if (grep { $_ eq $item } @inventory) {
         # Remove from inventory
         @inventory = grep { $_ ne $item } @inventory;
-	push(@{$room_data->{items}},$item);
+        push(@{$room_data->{items}},$item);
         print "You dropped the $item.\n";
     } else {
         print "You don't have a $item in your inventory.\n";
