@@ -169,7 +169,7 @@ Keywords:cabin:cabin key
 NegativeAskResponse:I don't know anything about that.
 ```
 
-The location forest_entrance will now have a pine cone added as an item and a recluse will be available for questions.
+The location forest_entrance will now have a pine cone added as an item, there is a cabin to the east and a recluse will be available for questions.
 
 ## Final Destination
 FinalDestination: (exactly one required)
