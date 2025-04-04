@@ -16,12 +16,6 @@ sub load_game_data {
             if(!exists $game_data{first_room_id}){
                 $game_data{first_room_id}=$current_room_id;
             }
-        } elsif ($line =~ /^Title:(.*)$/) {
-            $game_data{title} = $1;
-        } elsif ($line =~ /^WIP:(.*)$/) {
-            $game_data{wip} = $1;
-        } elsif ($line =~ /^Objective:(.*)$/) {
-            $game_data{objective} = $1;
         } elsif ($line =~ /^Name:(.*)$/) {
             $game_data{rooms}{$current_room_id}{name} = $1;
         } elsif ($line =~ /^Description:(.*)$/) {
@@ -55,6 +49,21 @@ sub load_game_data {
             $game_data{rooms}{$current_room_id}{reward_item} = $1 if (exists $game_data{rooms}{$current_room_id}{riddle} || exists $game_data{rooms}{$current_room_id}{enemy});
         } elsif ($line =~ /^Answer:(.*)$/) {
             $game_data{rooms}{$current_room_id}{answer} = $1;
+        } elsif ($line =~ /^SearchableItems:(.*)$/) {
+            my @searchables = split /,/, $1;
+            my %searchable_map;
+            foreach my $searchable (@searchables) {
+                if ($searchable =~ /^(.*):(.*)$/) {
+                    push @{$searchable_map{$1}}, $2;  # Allow multiple items per searchable target
+                }
+            }
+            $game_data{rooms}{$current_room_id}{searchable_items} = \%searchable_map;
+        } elsif ($line =~ /^Title:(.*)$/) {
+            $game_data{title} = $1;
+        } elsif ($line =~ /^WIP:(.*)$/) {
+            $game_data{wip} = $1;
+        } elsif ($line =~ /^Objective:(.*)$/) {
+            $game_data{objective} = $1;
         } elsif ($line =~ /^FinalDestination:(.*)$/) {
             $game_data{final_destination} = $1;
         } elsif ($line =~ /^Item:(.*)$/) {
@@ -67,15 +76,6 @@ sub load_game_data {
             my ($combine_from, $combine_to) = split /=/, $1;
             my ($item1, $item2) = split /,/, $combine_from;
             $game_data{combine}{$item1}{$item2} = $combine_to;
-        } elsif ($line =~ /^SearchableItems:(.*)$/) {
-            my @searchables = split /,/, $1;
-            my %searchable_map;
-            foreach my $searchable (@searchables) {
-                if ($searchable =~ /^(.*):(.*)$/) {
-                    push @{$searchable_map{$1}}, $2;  # Allow multiple items per searchable target
-                }
-            }
-            $game_data{rooms}{$current_room_id}{searchable_items} = \%searchable_map;
         } elsif ($line =~ /^Enemy:(.*)$/) {
             my ($enemy, $required_item) = split /:/, $1;
             $game_data{rooms}{$current_room_id}{enemy} = { name => $enemy, required_item => $required_item };
