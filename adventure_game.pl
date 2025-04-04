@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-use Data::Dumper;
 
 # $ARGV[0]=filename of game
 # $ARGV[1]=input type (file or stdin)
@@ -79,7 +78,6 @@ else{
 
 my %game_data;
 %game_data=load_game_data($gameFile);
-#print "After: ".Dumper(%game_data)."\n";
 
 # Validate game data
 if($debug){

@@ -141,7 +141,6 @@ sub load_game_data {
     if(!exists $game_data{wip}){
         $game_data{wip}='false';
     }
-    print "Out: ".Dumper(%game_data)."\n";
     return %game_data;
 }
 
