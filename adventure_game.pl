@@ -233,6 +233,9 @@ sub start_game {
                 print "Loading modifier $game_data{rooms}{$current_room_id}{modifier_file}\n";
             }
             %game_data=load_game_data($adventureDir.$game_data{rooms}{$current_room_id}{modifier_file});
+            if($debug){
+                validate_game_data(%game_data);
+            }
         }
 
         # Prompt for user action with green text

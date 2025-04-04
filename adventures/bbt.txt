@@ -87,7 +87,7 @@ Exits:east:landing4,west:livingroompenny
 
 RoomID:livingroompenny
 Name:Penny's living room
-Description:Penny's living room is messy as always. You already see Sheldon's pained look while he's holding back to tidy up the place.
+Description:Penny's living room is messy as always. You already see Sheldon's pained look while he's holding back the urge to tidy up the place.
 Persons:sheldon
 Exits:east:landing4,south:kitchenpenny,north:bedroompenny,west:couch
 Locks:penny's key
@@ -95,8 +95,8 @@ UnlockTexts:You unlock the door and enter Penny's appartment.
 
 RoomID:laundryroom
 Name:Laundry room
-Description:Several washing and drying machines are running unattended. Whe you enter a dryer just stopped spinning and the rattling inside stops.
-SearchableItems:dryer:penny's key
+Description:Several washing and drying machines are running unattended. A dryer just stopped spinning when you entered and the rattling inside stops.
+SearchableItems:dryer:penny's key,dryer:penny's clothes
 Exits:up:landing1
 
 RoomID:landing1
