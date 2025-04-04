@@ -127,6 +127,7 @@ Enemy:<enemy name>:<required weapon> (optional, mutually exclusive with Puzzle)
 DefeatDescription:<message when player wins fight> (mandatory if Enemy is defined)
 DiedDescription:<message when player loses fight> (mandatory if Enemy is defined)
 RewardItem:<item given for winning a fight> (mandatory if Enemy is defined)
+ModifierFile:<filename with modifiers> (optional)
 ```
 
 Example:
@@ -143,10 +144,33 @@ Name:Small Clearing
 Description:A small clearing in the woods with wildflowers growing everywhere.
 SourceRoomID:forest_entrance
 Exits:south:forest_entrance,east:riverbank
+ModifierFile:example-1.txt
 
 Item:worn map
 ItemDescription:An old, faded map showing a portion of the surrounding area. It seems to indicate something valuable is hidden nearby.
 ```
+The ModifierFile option is a very powerful tool. It enables you to load another config file when the player successfully enters a location. The contents of that config file are overlayed on
+the current config. You can add or change all configurable objects. If you change an object, the properties of that object will reflect the values in the modifier file.
+The only exception is for items in a room. Those are added to the items that are already present in the room. This is because players can drop items in a room and you don't want those items to disappear.
+
+Example of a modifier for the config above:
+```
+RoomID:forest_entrance
+Items:pine cone
+Persons:recluse
+Exits:north:clearing,east:path,west:village,east:cabin
+
+Item:pine cone
+ItemDescription:A normal pine cone
+
+Person:recluse
+DisplayName:Recluse
+Keywords:cabin:cabin key
+NegativeAskResponse:I don't know anything about that.
+```
+
+The location forest_entrance will now have a pine cone added as an item and a recluse will be available for questions.
+
 ## Final Destination
 FinalDestination: (exactly one required)
 
