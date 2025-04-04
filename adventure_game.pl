@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use Data::Dumper;
 
 # $ARGV[0]=filename of game
 # $ARGV[1]=input type (file or stdin)
@@ -76,7 +77,9 @@ else{
     }
 }
 
-my %game_data = load_game_data($gameFile);
+my %game_data;
+%game_data=load_game_data($gameFile);
+#print "After: ".Dumper(%game_data)."\n";
 
 # Validate game data
 if($debug){
@@ -224,6 +227,14 @@ sub start_game {
         if ($current_room_id eq $game_data{final_destination}) {
             print "\n\033[92;6mCongratulations! You've won the game!\033[0m\n";
             last;  # Exit game loop
+        }
+        
+        # Check if a modifier file should be loaded
+        if ($game_data{rooms}{$current_room_id}{modifier_file}){
+            if($debug){
+                print "Loading modifier $game_data{rooms}{$current_room_id}{modifier_file}\n";
+            }
+            %game_data=load_game_data($adventureDir.$game_data{rooms}{$current_room_id}{modifier_file});
         }
 
         # Prompt for user action with green text
