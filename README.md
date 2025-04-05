@@ -144,7 +144,7 @@ Name:Small Clearing
 Description:A small clearing in the woods with wildflowers growing everywhere.
 SourceRoomID:forest_entrance
 Exits:south:forest_entrance,east:riverbank
-ModifierFile:example-1.txt
+LoadModifier:example-1.txt
 
 Item:worn map
 ItemDescription:An old, faded map showing a portion of the surrounding area. It seems to indicate something valuable is hidden nearby.
