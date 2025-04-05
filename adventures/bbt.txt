@@ -21,6 +21,14 @@
 #	Dan weer helemaal teruglopen en Stuart wil nu ruilen.
 #	Met dat item kun je nu weer in de auto stappen en wegrijden
 
+# Caltech
+#	Barry ligt natuurlijk dwars
+#	Je moet naar de kelder en daar het wezen uit de andere dimensie verslaan
+#	Amy, Bernadette, Howard en Raj moeten natuurlijk ook nog een rol krijgen
+
+# Na afloop moet je nog weer naar huis. De auto haalt het net en in het appartement zitten alle anderen al te wachten met take-out. Iedereen eet gezellig in de woonkamer.
+
+
 [Adventure]
 Title:The Transport Theorem
 Objective:Leonard has to drive Sheldon to Caltech in time for an urgent lecture on his latest theoretical breakthrough. Although this seems an easy task, trouble is all around.
@@ -55,6 +63,30 @@ Description:Left to the front door stands a sidetable with a bowl on it.
 Persons:sheldon
 Exits:west:landing4,east:living
 SearchableItems:bowl:key ring
+
+RoomID:corridor
+Name:Corridor
+Description:The corridor
+Exits:east:bathroom,south:bedroomsheldon,end of the corridor:bedroomleonard,west:living
+
+RoomID:bathroom
+Name:Bathroom
+Description:The bathroom presents a unique challenge in terms of optimizing space utilization given our differing needs and preferences. While not ideal, we've established certain protocols to maintain acceptable levels of hygiene and organization. Sheldon maintains strict standards regarding cleanliness - requiring daily surface disinfection and precise towel folding techniques that I generally comply with.
+Exits:west:corridor
+
+RoomID:bedroomsheldon
+Name:Sheldon's bedroom
+Description:Stepping into Sheldon's bedroom is like entering a display model rather than a lived-in space - everything is precisely arranged according to established protocols. The walls are painted a neutral beige with minimal decorative elements beyond framed certificates and diagrams related to his academic achievements. The focal point of the room is undoubtedly the bed, which is made with surgical precision. The rest of the room follows a similar pattern: comic books are shelved alphabetically by author then chronologically by publication date; clothing items hang uniformly spaced in the closet; surfaces remain clear of clutter. Even seemingly random objects like desk organizers and charging stations adhere to strict geometric principles. It's not necessarily cozy or inviting in the conventional sense - more like an optimized environment designed for efficiency rather than relaxation - reflecting Sheldon's functional approach to all aspects of his life.
+Exits:north:corridor
+SearchableItems:celestial sentinel squadron:celestial sentinel squadron
+
+Item:celestial sentinel squadron
+ItemDescription:A rare comic book "Celestial Sentinel Squadron". Only 150 were ever printed. This one is in mint condition and sealed in plastic.
+
+RoomID:bedroomleonard
+Name:My bedroom
+Description:My bedroom represents a functional compromise between Sheldon's rigid standards for orderliness and my own more relaxed approach to spatial organization
+Exits:corridor:corridor
 
 Item:key ring
 ItemDescription:A ring with a lot of keys.
@@ -134,16 +166,18 @@ NegativeTradeResponse:That's quite thoughtful of you - I appreciate the gesture.
 
 Person:stuart
 DisplayName:Stuart
-NegativeTradeResponse:That's very kind of you to offer! While it wouldn't quite fit my current goals. But I do appreciate you thinking of me!
+Keywords:fuel:captains wish:Captain Sweatpants is looking for a rare comic.;gas:captains wish:Captain Sweatpants is looking for a rare comic.
 NegativeAskResponse:Oh? Absolutely! Let me think... yes, the key insight there is actually quite straightforward - it all stems from the principles established in... ...wait, no, I'm thinking of something else entirely.
+NegativeTradeResponse:That's very kind of you to offer! While it wouldn't quite fit my current goals. But I do appreciate you thinking of me!
 
 Person:howard's mom
 DisplayName:Howard's mom
 NegativeAskResponse:That's an interesting question - one I'm sure has a very complex answer. Meanwhile, have you eaten yet? You look thin.
 NegativeTradeResponse:That's very sweet of you to offer, but I don't need this. It looks like something from a garage sale.
 
-Person:captiansweatpants
-DisplayName:Captian Sweatpants
+Person:captainsweatpants
+DisplayName:Captain Sweatpants
+Trades:celestial sentinel squadron:can of fuel:I have been looking for this for ages. Here's some fuel to get you to Caltech.
 
 Person:barry
 DisplayName:Barry
@@ -238,7 +272,7 @@ Description:Penny's VW Rabbit is a vehicle with visible history - the kind of ca
 Locks:car keys penny
 UnlockTexts:With some fiddling you manage to open the door lock and get in. The car starts right away! As usual the "Check engine" light starts blinking after a few seconds. Will Penny ever take this car to the shop to get this fixed?
 Persons:sheldon
-Exits:get out:street,north:comicbookstore
+Exits:get out:street,north:onroute
 
 RoomID:carleonard
 Name:Your car
@@ -251,7 +285,78 @@ LoadModifier:bbt-3.txt
 [/Street]
 
 [ComicbookStore]
-RoomID:comicbookstore
+RoomID:onroute
 Name:On route to Caltech
-Description:The Comic Center of Pasadena presents as a specialized retail outlet catering primarily to collectors of vintage and contemporary comic books. The store occupies a modest space featuring densely packed shelving units displaying a wide range of titles across multiple genres.<p>While the selection is undeniably extensive—including several rare issues that would be of interest to serious collectors—the organization system appears somewhat idiosyncratic with categorization based on factors beyond standard publisher or title sequencing. I observed instances where books from different series were grouped together based on cover color schemes rather than chronological order.<p>The lighting could be improved as the current setup casts shadows across certain displays making detailed examination challenging. Additionally, a more robust inventory management system would enhance efficiency and potentially allow customers to locate specific items more quickly.<p>Despite these operational considerations, The Comic Center of Pasadena represents one of the few dedicated comic book stores remaining in our area—providing a valuable service for enthusiasts seeking physical copies rather than digital reproductions.
+Description:Of course this is the time where Penny's car actually has a break-down. With a sputtering noise the engine stops running and the car comes to a stop in front of the comic book store. When you bang the dashboard in frustration the "Fuel low" warning light comes alive.
+Persons:sheldon
+Exits:get out:cbsstreet
+
+RoomID:cbsstreet
+Name:Entrance to the comic book store
+Description:You now stand before Stuart's Comics, a narrow storefront wedged between a vintage record shop and an antique furniture store on Pasadena's South Lake Avenue. The facade is unassuming with faded blue paint peeling slightly around the edges - a visual characteristic that aligns with the establishment's apparent ethos of prioritizing content over curb appeal.<p>A hand-painted sign above the door proclaims "The Comic Center of Pasadena - Since 1997" in a font reminiscent of classic superhero logos. The window display features a haphazard arrangement of vintage comics, action figures, and graphic novels - a curated chaos that suggests both passion and perhaps limited spatial organization capacity.<p>The sidewalk in front is adorned with faded promotional posters for obscure comic book titles and direct market specials dating back several years - evidence of Stuart's commitment to promoting niche publications. A faint aroma of aged paper and plastic mingles with the scent of roasting coffee from a neighboring cafe, creating a unique sensory profile indicative of specialized retail environments catering to dedicated hobbyists.<p>As you approach, you can hear snippets of conversation about variant covers, key issue values, and obscure character backstories emanating from within - a sonic signature identifying this as a sanctuary for comic book enthusiasts rather than casual browsers.
+Persons:sheldon
+Exits:enter:comicbookstore,south:longwayhome1
+
+RoomID:comicbookstore
+Name:The Comic Center of Pasadena
+Description:The Comic Center of Pasadena presents as a specialized retail outlet catering primarily to collectors of vintage and contemporary comic books. The store occupies a modest space featuring densely packed shelving units displaying a wide range of titles across multiple genres.<p>While the selection is undeniably extensive - including several rare issues that would be of interest to serious collectors - the organization system appears somewhat idiosyncratic with categorization based on factors beyond standard publisher or title sequencing. I observed instances where books from different series were grouped together based on cover color schemes rather than chronological order.<p>The lighting could be improved as the current setup casts shadows across certain displays making detailed examination challenging. Additionally, a more robust inventory management system would enhance efficiency and potentially allow customers to locate specific items more quickly.<p>Despite these operational considerations, The Comic Center of Pasadena represents one of the few dedicated comic book stores remaining in our area - providing a valuable service for enthusiasts seeking physical copies rather than digital reproductions.
+Exits:street:cbsstreet
+LoadModifier:bbt-4.txt
+Persons:sheldon,stuart,captainsweatpants
+
+Item:captains wish
+ItemDescription:A note from Captain Sweatpants with the name of a rare comic book "Celestial Sentinel Squadron". Wasn't that Sheldon's prized possession?
 [/ComicbookStore]
+
+[LongWayHome]
+RoomID:longwayhome1
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:cbsstreet,south:longwayhome2
+
+RoomID:longwayhome2
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome1,south:longwayhome3
+
+RoomID:longwayhome3
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome2,south:longwayhome4
+
+RoomID:longwayhome4
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome3,south:longwayhome5
+
+RoomID:longwayhome5
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome4,south:longwayhome6
+
+RoomID:longwayhome6
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome5,south:longwayhome7
+
+RoomID:longwayhome7
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome6,south:longwayhome8
+
+RoomID:longwayhome8
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome7,south:longwayhome9
+
+RoomID:longwayhome9
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome8,south:longwayhome10
+
+RoomID:longwayhome10
+Name:A long walk
+Description:You walk under the burning Californian sun. How many blocks to go?
+Exits:north:longwayhome9,south:street
+[/LongWayHome]
+

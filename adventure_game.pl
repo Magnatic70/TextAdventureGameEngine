@@ -578,11 +578,13 @@ sub handle_search {
             # Only add if not already in inventory
             unless (grep { $_ eq $item } @inventory) {
                 push @inventory, $item;
-                print "You found a ", $item, " in the $target.\n";
 
                 # Display searched item description
                 if (exists $game_data{items}{$item}{description}) {
-                    print "$game_data{items}{$item}{description}\n";
+                    print "Found: $game_data{items}{$item}{description}\n";
+                }
+                else{
+                    print "Found: $item\n";
                 }
             } else {
                 print "You already have that item in your inventory.\n";
@@ -655,14 +657,17 @@ sub handle_drop {
 sub handle_ask {
     my ($person, $question) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
-
+    my $displayName;
+    
     my $actualPerson; # We might need to translate from displayname to personID
     foreach my $testPerson (@{$room_data->{persons}}){
-        if($game_data{persons}{$testPerson}{displayname} && $game_data{persons}{$testPerson}{displayname} eq $person){
+        if($game_data{persons}{$testPerson}{displayname} && lc($game_data{persons}{$testPerson}{displayname}) eq $person){
             $actualPerson=$testPerson;
+            $displayName=$game_data{persons}{$testPerson}{displayname};
         }
         elsif($testPerson eq $person){
             $actualPerson=$testPerson;
+            $displayName=$testPerson;
         }
     }
     if ($actualPerson) {
@@ -675,13 +680,15 @@ sub handle_ask {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$game_data{persons}{$actualPerson}{displayname}: \"$game_data{persons}{$actualPerson}{askanswers}{$keyword}\"\n";
-                    print "$game_data{persons}{$actualPerson}{displayname}: gives you $reward.\n";
-
+                    print "$displayName: \"$game_data{persons}{$actualPerson}{askanswers}{$keyword}\"\n";
                     # Display reward item description
                     if (exists $game_data{items}{$reward}{description}) {
-                        print "$game_data{items}{$reward}{description}\n";
+                        print "Gives you: $game_data{items}{$reward}{description}\n";
                     }
+                    else{
+                        print "Gives you $reward.\n";
+                    }
+
                 } else {
                     print "You already received that from this person.\n";
                 }
@@ -690,10 +697,10 @@ sub handle_ask {
         }
         if (!$answered) {
             if($game_data{persons}{$actualPerson}{negativeaskresponse}){
-                print "$game_data{persons}{$actualPerson}{displayname}: ".'"'.$game_data{persons}{$actualPerson}{negativeaskresponse}.'"'."\n";
+                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativeaskresponse}.'"'."\n";
             }
             else{
-                print "$game_data{persons}{$actualPerson}{displayname}: \"I don't know the answer to this question.\"\n";
+                print "$displayName: \"I don't know the answer to this question.\"\n";
             }
         }
     } else {
@@ -704,14 +711,17 @@ sub handle_ask {
 sub handle_trade {
     my ($item, $person) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
+    my $displayName;
 
     my $actualPerson; # We might need to translate from displayname to personID
     foreach my $testPerson (@{$room_data->{persons}}){
-        if($game_data{persons}{$testPerson}{displayname} && $game_data{persons}{$testPerson}{displayname} eq $person){
+        if($game_data{persons}{$testPerson}{displayname} && lc($game_data{persons}{$testPerson}{displayname}) eq $person){
             $actualPerson=$testPerson;
+            $displayName=$game_data{persons}{$testPerson}{displayname};
         }
         elsif($testPerson eq $person){
             $actualPerson=$testPerson;
+            $displayName=$testPerson;
         }
     }
 
@@ -726,16 +736,18 @@ sub handle_trade {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$game_data{persons}{$actualPerson}{displayname}: \"$game_data{persons}{$actualPerson}{tradeanswers}{$item}\"\n";
-                    print "$game_data{persons}{$actualPerson}{displayname}: gives you $reward.\n";
+                    print "$displayName: \"$game_data{persons}{$actualPerson}{tradeanswers}{$item}\"\n";
+                    # Display reward item description
+                    if (exists $game_data{items}{$reward}{description}) {
+                        print "Gives you: $game_data{items}{$reward}{description}\n";
+                    }
+                    else{
+                        print "Gives you: $reward.\n";
+                    }
 
                     # Remove the item from inventory
                     @inventory = grep { $_ ne $item } @inventory;
 
-                    # Display reward item description
-                    if (exists $game_data{items}{$reward}{description}) {
-                        print "$game_data{items}{$reward}{description}\n";
-                    }
                 } else {
                     print "You already have that item.\n";
                 }
@@ -744,10 +756,10 @@ sub handle_trade {
         }
         if (!$traded) {
             if($game_data{persons}{$actualPerson}{negativetraderesponse}){
-                print "$game_data{persons}{$actualPerson}{displayname}: ".'"'.$game_data{persons}{$actualPerson}{negativetraderesponse}.'"'."\n";
+                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativetraderesponse}.'"'."\n";
             }
             else{
-                print "$game_data{persons}{$actualPerson}{displayname}: \"I don't want to trade for $item.\"\n";
+                print "$displayName: \"I don't want to trade for $item.\"\n";
             }
         }
     } else {

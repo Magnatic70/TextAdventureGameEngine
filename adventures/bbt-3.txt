@@ -4,4 +4,3 @@
 RoomID:livingroompenny
 Description:Entering the room you find Penny. She must have gotten home while you were trying to start your car. You tell her that you need her car to get Sheldon to Caltech, because your car wouldn't start. She starts sobbing that everyone seems to have a bad day and that her clothes have been stolen from the laundy room.
 Persons:sheldon,penny
-Exits:north:storage,east:corridor,west:landing4,south:kitchen
