@@ -127,7 +127,7 @@ Enemy:<enemy name>:<required weapon> (optional, mutually exclusive with Puzzle)
 DefeatDescription:<message when player wins fight> (mandatory if Enemy is defined)
 DiedDescription:<message when player loses fight> (mandatory if Enemy is defined)
 RewardItem:<item given for winning a fight> (mandatory if Enemy is defined)
-ModifierFile:<filename with modifiers> (optional)
+LoadModifier:<filename with modifiers> (optional)
 ```
 
 Example:
