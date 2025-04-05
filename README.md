@@ -152,6 +152,7 @@ ItemDescription:An old, faded map showing a portion of the surrounding area. It 
 The ModifierFile option is a very powerful tool. It enables you to load another config file when the player successfully enters a location. The contents of that config file are overlayed on
 the current config and state of the adventure. You can add or change all configurable objects. If you change an object, the properties of that object will reflect the values in the modifier file.
 The only exception is for items in a room. Those are added to the items that are already present in the room. This is because players can drop items in a room and you don't want those items to disappear.
+With `Locks:-` you can remove all locks from a location.
 
 Example of a modifier for the config above:
 ```

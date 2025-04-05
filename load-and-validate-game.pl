@@ -13,7 +13,10 @@ sub process_config_line{
     } elsif ($line =~ /^Name:(.*)$/) {
         $game_data{rooms}{$current_room_id}{name} = $1;
     } elsif ($line =~ /^Description:(.*)$/) {
-        $game_data{rooms}{$current_room_id}{description} = $1;
+        my $desc=$1;
+        $desc=~s/\<p\>/\n\n/g;
+        $desc=~s/\<br\>/\n/g;
+        $game_data{rooms}{$current_room_id}{description} = $desc;
     } elsif ($line =~ /^Exits:(.*)$/) {
         my @exits = split /,/, $1;
         my %exit_map;
@@ -25,7 +28,7 @@ sub process_config_line{
         $game_data{rooms}{$current_room_id}{exits} = \%exit_map;
     } elsif ($line =~ /^SourceRoomID:(.*)$/){
         $game_data{rooms}{$current_room_id}{sourceroom} = $1;
-    } elsif ($line =~ /^ModifierFile:(.*)$/){
+    } elsif ($line =~ /^LoadModifier:(.*)$/){
         $game_data{rooms}{$current_room_id}{modifier_file} = $1;
     } elsif ($line =~ /^Items:(.*)$/) {
         my @items = split /,/, $1;
@@ -39,7 +42,12 @@ sub process_config_line{
         my @persons = split /,/, $1;
         $game_data{rooms}{$current_room_id}{persons} = \@persons if @persons;
     } elsif ($line =~ /^Locks:(.*)$/) {
-        $game_data{rooms}{$current_room_id}{locks} = [split /,/, $1];
+        if(exists $game_data{rooms}{$current_room_id}{locks} && $1 eq '-'){
+            delete $game_data{rooms}{$current_room_id}{locks};
+        }
+        else{
+            $game_data{rooms}{$current_room_id}{locks} = [split /,/, $1] if $1 ne '-';
+        }
     } elsif ($line =~ /^UnlockTexts:(.*)$/) {
         $game_data{rooms}{$current_room_id}{unlock_texts} = [split /;/, $1];
     } elsif ($line =~ /^Puzzle:(.*)$/) {

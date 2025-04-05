@@ -9,28 +9,36 @@
 # Stairs, no elevator
 # Route to Caltech
 # Stops at Amy's, Raj's, the comic book store, Bernadette and Howards's place
-# Met car keys van Leonard instappen lukt, maar starten niet.
-# Dan Penny overtuigen om met haar auto te gaan
+
+# Op straat staan twee auto's: Die van Leonard (hiervoor heb je sleutels) en die van Penny (nog geen sleutels)
+# Met car keys van Leonard instappen lukt, maar starten niet. (modifier: penny in haar living room, in paniek omdat haar kleren gestolen zijn).
+# Dan Penny overtuigen om met haar auto te mogen gaan (door haar haar kleren te geven krijg je haar autosleutels)
 # Die strandt natuurlijk met motorpech
 # Maar wel in de buurt van de comic book store
 # Daar Stuart om hulp vragen en dan krijg je een onderdeel waarmee Penny's auto het weer doet.
+#	Bij vragen geeft Stuart aan dat hij wel wil helpen, maar dat hij dat niet voor niets doet en wil ruilen voor een zeldzaam stripboek van Sheldon
+#	Na het verlaten van de winkel moet je (en kun je nu ook) helemaal teruglopen naar het appartement en in Sheldon's slaapkamer is nu het stripboek te vinden.
+#	Dan weer helemaal teruglopen en Stuart wil nu ruilen.
+#	Met dat item kun je nu weer in de auto stappen en wegrijden
 
-
+[Adventure]
 Title:The Transport Theorem
 Objective:Leonard has to drive Sheldon to Caltech in time for an urgent lecture on his latest theoretical breakthrough. Although this seems an easy task, trouble is all around.
 FinalDestination:caltechoffice
 WIP:true
+[/Adventure]
 
+[Sheldon and Leonard's]
 RoomID:living
 Name:Sheldon and Leonard's living room
-Description:Your familiar living room. How long have you've been living here now? Putting up with Sheldon sure doesn't make time go fast.
+Description:This is our familiar living room, isn't it? It's remarkable how time seems to warp within these walls. I can barely recall moving in, yet here we still are after all these years.<p>Living with Sheldon certainly doesn't accelerate the passage of time; rather, it feels as though each day stretches on interminably. Some moments expand into what feel like subjective eternities, while entire weeks sometimes vanish without a trace - lost in a fog of meticulously planned routines and unwavering principles.<p>It makes you wonder if certain living arrangements exist outside the normal flow of temporal experience...
 Persons:sheldon
 Exits:north:storage,east:corridor,west:frontdoorin,south:kitchen
 
 Person:sheldon
-DisplayName:sheldon
-NegativeAskResponse:Dr. Hoffstadter, you should know better than to ask me for that at this moment.
-NegativeTradeResponse:I don't have anything to trade right now.
+DisplayName:Sheldon
+NegativeAskResponse:That falls outside my current domain of expertise. If I had been informed this inquiry would be posed, I would have allocated the requisite neural processing power for its consideration. Your failure to provide adequate notice is not a deficiency I am prepared to accept responsibility for.
+NegativeTradeResponse:While I acknowledge the gesture, the item in question lacks characteristics aligned with my acquisition parameters. The transfer would represent a suboptimal allocation of resources - a concept I trust you understand is fundamentally inefficient.
 
 RoomID:storage
 Name:Storage closet
@@ -57,28 +65,9 @@ ItemDescription:The key to your front door
 
 Item:car key
 ItemDescription:The key to your car
+[/Sheldon and Leonard's]
 
-Item:penny's key
-ItemDescription:The key to Penny's appartment
-
-RoomID:landing4
-Name:4th floor landing
-Description:Stairs going up and down, a broken elevator and two closed front doors
-Exits:down:landing3,west:frontdoorpenny,up:landing5,east:livingopen
-Locks:house key
-Persons:sheldon
-UnlockTexts:You unlock the door, step out and close the door behind you.
-
-RoomID:livingopen
-SourceRoomID:living
-Name:Your living room
-Description:Your familiar living room. How long have you've been living here now? Putting up with Sheldon sure doesn't make time go fast.
-Persons:sheldon
-Exits:north:storage,east:corridor,west:landing4,south:kitchen
-Locks:house key
-Persons:sheldon
-UnlockTexts:You unlock the door and enter your appartment
-
+[Penny's]
 RoomID:frontdoorpenny
 Name:Penny's front door
 Description:Penny's front door. There's a scuff mark where Sheldon always knocks three times.
@@ -87,41 +76,132 @@ Exits:east:landing4,west:livingroompenny
 
 RoomID:livingroompenny
 Name:Penny's living room
-Description:Penny's living room is messy as always. You already see Sheldon's pained look while he's holding back the urge to tidy up the place.
+Description:The familiar chaos of Penny's living room greets you - throw pillows scattered like fallen soldiers, a landscape of magazines across the coffee table, and that indefinable layer of comfortable disarray that only comes from truly living in a space.<p>Across the room, Sheldon's face betrayed his internal battle; his eyes darted around cataloging the deviations from perfect alignment while his lips tightened against the instinctive urge to impose order. You could practically hear him calculating the precise trajectory needed to realign each object with maximum efficiency - a silent symphony of control battling a wave of joyful messiness.
 Persons:sheldon
 Exits:east:landing4,south:kitchenpenny,north:bedroompenny,west:couch
 Locks:penny's key
 UnlockTexts:You unlock the door and enter Penny's appartment.
+LoadModifier:bbt-1.txt
 
+RoomID:kitchenpenny
+Name:Kitchen
+Description:Penny's kitchen presented a study in functional minimalism - counters wiped clean, appliances neatly arranged, and cabinets free from clutter. It was undeniably organized, suggesting someone who valued efficiency and order in at least one domain of her life.<p>Yet something felt missing; the space lacked the lived-in warmth that comes with genuine culinary passion. There were no overflowing spice racks, no handwritten recipe cards pinned to the fridge, no evidence of joyful experimentation - just a clean slate awaiting its next utilitarian purpose. It was clear this kitchen served as a means rather than an end in itself, reflecting Penny's approach to cooking as sustenance rather than celebration.
+Persons:sheldon
+Exits:north:livingroompenny
+
+RoomID:bedroompenny
+Name:Bedroom
+Description:The decor was eclectic rather than coordinated - featuring posters from movies and TV shows she loves mixed with gifts from friends and family.<p>Clothes accumulated on chairs rather than being neatly hung in the closet, creating cozy piles that somehow never quite reached critical mass.<p>The sight of the unmade bed and the general disarray appeared to bypass Sheldon's rational faculties entirely, almost initiating a cascade of reflexive responses.
+Persons:sheldon
+Exits:north:bathroompenny,south:livingroompenny
+
+RoomID:bathroompenny
+Name:Bathroom
+Description:The light blue walls create an airy feel while reflecting available natural light effectively.<p>The vintage clawfoot tub is particularly noteworthy; its cast iron construction provides excellent thermal mass retention allowing for extended periods of comfortable water temperature - a property I find quite appealing from a thermodynamic perspective.<p>While the vanity shows signs of wear consistent with regular use, it maintains a certain charm that speaks to the room's history and lived-in quality. The eclectic assortment of personal items - framed prints, candles, soaps - suggest a space curated for comfort rather than strict aesthetic uniformity.
+Persons:sheldon
+Exits:south:bedroompenny
+
+Person:penny
+DisplayName:Penny
+Trades:penny's clothes:car keys penny:You took my clothes to prevent for someone else stealing them? Thank you, sweety! Here take my car keys.
+NegativeAskResponse:Wait, I think I missed that memo... What exactly are we talking about?
+NegativeTradeResponse:Oh wow, that's so thoughtful of you! It's really sweet to think of me, but I actually don't need it right now - it's beautiful though!
+
+Item:car keys penny
+ItemDescription:The keys to Penny's VW Rabbit.
+[/Penny's]
+
+[Cast]
+Person:bernadette
+DisplayName:Bernadette
+NegativeAskResponse:That falls a bit outside my area of expertise, but I appreciate you thinking of me - perhaps we can look into it together sometime?
+NegativeTradeResponse:That's very kind of you to offer! I'm quite particular about what I acquire, though - it really needs to meet specific criteria.
+
+Person:howard
+DisplayName:Howard
+NegativeAskResponse:Oh yeah, that's simple! Let me think... Hmm, actually, I need to recalibrate my knowledge matrix on that one - it's more complex than it appears.
+NegativeTradeResponse:I appreciate the thought, but I'm currently under strict orders not to acquire any items that don't serve a clear purpose.
+
+Person:rajesh
+DisplayName:Rajesh
+NegativeAskResponse:Oh wow, that's... quite specific! Let me think carefully before responding because I wouldn't want to give you inaccurate information...
+NegativeTradeResponse:That's incredibly generous of you to offer! I appreciate the thought, but my options are rather limited at the moment.
+
+Person:amy
+DisplayName:Amy
+NegativeAskResponse:That's an intriguing query - let me first assess its epistemological foundations before determining if a response is warranted.
+NegativeTradeResponse:That's quite thoughtful of you - I appreciate the gesture. However, my acquisitions are governed by a strict utility-based algorithm that this item doesn't satisfy.
+
+Person:stuart
+DisplayName:Stuart
+NegativeTradeResponse:That's very kind of you to offer! While it wouldn't quite fit my current goals. But I do appreciate you thinking of me!
+NegativeAskResponse:Oh? Absolutely! Let me think... yes, the key insight there is actually quite straightforward - it all stems from the principles established in... ...wait, no, I'm thinking of something else entirely.
+
+Person:howard's mom
+DisplayName:Howard's mom
+NegativeAskResponse:That's an interesting question - one I'm sure has a very complex answer. Meanwhile, have you eaten yet? You look thin.
+NegativeTradeResponse:That's very sweet of you to offer, but I don't need this. It looks like something from a garage sale.
+
+Person:captiansweatpants
+DisplayName:Captian Sweatpants
+
+Person:barry
+DisplayName:Barry
+
+[/Cast]
+
+[Laundyroom]
 RoomID:laundryroom
 Name:Laundry room
 Description:Several washing and drying machines are running unattended. A dryer just stopped spinning when you entered and the rattling inside stops.
 SearchableItems:dryer:penny's key,dryer:penny's clothes
 Exits:up:landing1
+Persons:sheldon
+
+Item:penny's key
+ItemDescription:The key to Penny's appartment
+
+Item:penny's clothes
+ItemDescription:Penny's washed and dried clothes
+[/Laundyroom]
+
+[Staircase]
+RoomID:landing4
+Name:4th floor landing
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two familiar front doors.
+Exits:down:landing3,west:frontdoorpenny,up:landing5,east:living
+Locks:house key
+Persons:sheldon
+UnlockTexts:You unlock the door, step out and close the door behind you.
+LoadModifier:bbt-2.txt
 
 RoomID:landing1
 Name:Ground floor lobby
-Description:Stairs going up and down, a broken elevator. You hear a rattling noise coming from the laundry room.
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair. You hear a rattling noise coming from the laundry room downstairs.
+Description:Stairs going up and down, a broken elevator
 Exits:down:laundryroom,west:street,up:landing2,east:mailboxes
+Persons:sheldon
 
 RoomID:landing2
 Name:2nd floor landing
-Description:Stairs going up and down, a broken elevator and two closed front doors
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
 Exits:down:landing1,west:foreverlocked,up:landing3,east:foreverlocked
+Persons:sheldon
 
 RoomID:landing3
 Name:3rd floor landing
-Description:Stairs going up and down, a broken elevator and two closed front doors
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
 Exits:down:landing2,west:foreverlocked,up:landing4,east:foreverlocked
+Persons:sheldon
 
 RoomID:landing5
 Name:5th floor landing
-Description:Stairs going up and down, a broken elevator and two closed front doors
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
 Exits:down:landing4,west:foreverlocked,up:landing6,east:foreverlocked
 
 RoomID:landing6
 Name:6th floor landing
-Description:Stairs going up and down, a broken elevator and two closed front doors
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
 Exits:down:landing5,west:foreverlocked,up:roof,east:foreverlocked
 
 RoomID:roof
@@ -142,3 +222,36 @@ UnlockTexts:You cheated! This should be impossible.
 
 Item:unknown
 ItemDescription:This item unlocks all doors that should not be unlocked.
+[/Staircase]
+
+[Street]
+RoomID:street
+Name:North Los Robles Avenue
+Description:North Los Robles is a pleasant residential street with well-maintained Craftsman homes displaying architectural variation within the style tradition. While lacking the sleek uniformity of modern developments, it possesses a certain charm derived from its historical character and established landscaping. Among the parked cars you spot yours and Penny's.
+Persons:sheldon
+Exits:east:landing1,north:carpenny,south:carleonard
+Locks:unknown
+
+RoomID:carpenny
+Name:Penny's car
+Description:Penny's VW Rabbit is a vehicle with visible history - the kind of car that tells stories through its dents, scratches, and accumulated character marks. The exterior paint job (originally blue) has faded unevenly from sun exposure creating mottled patches across the hood and roof. Several parking dings are evident along the doors and bumpers - each likely representing a memorable anecdote. The interior shows even more signs of lived-in charm:<br>- The seats are upholstered in worn cloth featuring mismatched patterns - a testament to previous repairs or Penny's eclectic taste<br>- A permanent collection of receipts, coins, and random trinkets inhabits the center console<br>- The dashboard is adorned with a vintage air freshener shaped like a daisy
+Locks:car keys penny
+UnlockTexts:With some fiddling you manage to open the door lock and get in. The car starts right away! As usual the "Check engine" light starts blinking after a few seconds. Will Penny ever take this car to the shop to get this fixed?
+Persons:sheldon
+Exits:get out:street,north:comicbookstore
+
+RoomID:carleonard
+Name:Your car
+Description:This is my trusty Saab. A vehicle I selected after extensive research into compact sedans offering a balance of fuel-economy and reliability. The interior exhibits a functional Scandinavian design philosophy - minimalist yet ergonomic with intuitive controls and durable materials. While lacking some of the infotainment features found in newer models, the core functions operate reliably through physical buttons rather than touchscreen interfaces which I find more efficient during operation.
+Locks:car key
+UnlockTexts:With a push of the button the car unlocks and you get in. To your great dismay your car doesn't start! What now? Penny's car?
+Persons:sheldon
+Exits:get out:street
+LoadModifier:bbt-3.txt
+[/Street]
+
+[ComicbookStore]
+RoomID:comicbookstore
+Name:On route to Caltech
+Description:The Comic Center of Pasadena presents as a specialized retail outlet catering primarily to collectors of vintage and contemporary comic books. The store occupies a modest space featuring densely packed shelving units displaying a wide range of titles across multiple genres.<p>While the selection is undeniably extensive—including several rare issues that would be of interest to serious collectors—the organization system appears somewhat idiosyncratic with categorization based on factors beyond standard publisher or title sequencing. I observed instances where books from different series were grouped together based on cover color schemes rather than chronological order.<p>The lighting could be improved as the current setup casts shadows across certain displays making detailed examination challenging. Additionally, a more robust inventory management system would enhance efficiency and potentially allow customers to locate specific items more quickly.<p>Despite these operational considerations, The Comic Center of Pasadena represents one of the few dedicated comic book stores remaining in our area—providing a valuable service for enthusiasts seeking physical copies rather than digital reproductions.
+[/ComicbookStore]

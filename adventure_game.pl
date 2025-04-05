@@ -102,7 +102,13 @@ my %unlocked_rooms;
 
 sub readInput{
     if($inputType eq 'stdin'){
-        return lc(<STDIN>);
+        my $input=<STDIN>;
+        if($input){
+            return lc($input);
+        }
+        else{
+            return;
+        }
     }
     elsif($inputType eq 'file'){
         if(!eof($INPUT)){
@@ -127,7 +133,7 @@ sub showRoomInfo{
 
     # Display room name and description with black text on white background
     print "\n\033[47m\033[30m--- Location: ", $room_data->{name}, " ---\033[0m\n";
-    print "$room_data->{description}\n";
+    print "$room_data->{description}\n\n";
 
     # Simple inventory display in cyan
     if (@inventory) {
@@ -229,9 +235,6 @@ sub start_game {
         
         # Check if a modifier file should be loaded
         if ($game_data{rooms}{$current_room_id}{modifier_file}){
-            if($debug){
-                print "Loading modifier $game_data{rooms}{$current_room_id}{modifier_file}\n";
-            }
             %game_data=load_game_data($adventureDir.$game_data{rooms}{$current_room_id}{modifier_file});
             if($debug){
                 validate_game_data(%game_data);
@@ -239,7 +242,7 @@ sub start_game {
         }
 
         # Prompt for user action with green text
-        if($game_data{wip} eq 'true'){
+        if($game_data{wip} eq 'true' && !$debug){
             print "\033[32mWhat do you want to do? (This is a Work in Progress, it might still contain errors)\033[0m\n";  # Green text followed by reset
         }
         else{
@@ -672,8 +675,8 @@ sub handle_ask {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$person: \"$game_data{persons}{$actualPerson}{askanswers}{$keyword}\"\n";
-                    print "$person: gives you $reward.\n";
+                    print "$game_data{persons}{$actualPerson}{displayname}: \"$game_data{persons}{$actualPerson}{askanswers}{$keyword}\"\n";
+                    print "$game_data{persons}{$actualPerson}{displayname}: gives you $reward.\n";
 
                     # Display reward item description
                     if (exists $game_data{items}{$reward}{description}) {
@@ -687,10 +690,10 @@ sub handle_ask {
         }
         if (!$answered) {
             if($game_data{persons}{$actualPerson}{negativeaskresponse}){
-                print "$person: ".'"'.$game_data{persons}{$actualPerson}{negativeaskresponse}.'"'."\n";
+                print "$game_data{persons}{$actualPerson}{displayname}: ".'"'.$game_data{persons}{$actualPerson}{negativeaskresponse}.'"'."\n";
             }
             else{
-                print "$person: \"I don't know the answer to this question.\"\n";
+                print "$game_data{persons}{$actualPerson}{displayname}: \"I don't know the answer to this question.\"\n";
             }
         }
     } else {
@@ -723,8 +726,8 @@ sub handle_trade {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$person: \"$game_data{persons}{$actualPerson}{tradeanswers}{$item}\"\n";
-                    print "$person: gives you $reward.\n";
+                    print "$game_data{persons}{$actualPerson}{displayname}: \"$game_data{persons}{$actualPerson}{tradeanswers}{$item}\"\n";
+                    print "$game_data{persons}{$actualPerson}{displayname}: gives you $reward.\n";
 
                     # Remove the item from inventory
                     @inventory = grep { $_ ne $item } @inventory;
@@ -741,10 +744,10 @@ sub handle_trade {
         }
         if (!$traded) {
             if($game_data{persons}{$actualPerson}{negativetraderesponse}){
-                print "$person: ".'"'.$game_data{persons}{$actualPerson}{negativetraderesponse}.'"'."\n";
+                print "$game_data{persons}{$actualPerson}{displayname}: ".'"'.$game_data{persons}{$actualPerson}{negativetraderesponse}.'"'."\n";
             }
             else{
-                print "$person: \"I don't want to trade for $item.\"\n";
+                print "$game_data{persons}{$actualPerson}{displayname}: \"I don't want to trade for $item.\"\n";
             }
         }
     } else {
