@@ -2,4 +2,11 @@
 
 # Change the lobby to reflect the succesful lecture
 RoomID:pblobby
-Description:The lobby leading to the lecture hall was bustling in awe - a mix of faculty, students, and what appeared to be visiting academics all are discussing the implications of Sheldon's lecture.
+Description:The lobby leading to the lecture hall was bustling in awe - a mix of faculty, students, and what appeared to be visiting academics all are discussing the far stretching implications of Sheldon's lecture.
+
+# Change the living room
+RoomID:living
+Persons:sheldon,amy,bernadette,howard,rajesh,penny
+Description:The living room exudes warmth as everybody has gathered for their weekly tradition - Chinese takeaway on Friday nights. The aroma of sesame chicken, General Tso's tofu, and fried rice fills the air.
+
+FinalDestination:living

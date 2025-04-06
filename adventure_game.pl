@@ -296,6 +296,9 @@ sub handle_puzzle {
                 print "$game_data{items}{$room_data->{reward_item}}{description}\n";
             }
         }
+        else{
+            print "You answer was correct! You can now perform actions in this location.\n";
+        }
         delete $game_data{rooms}{$current_room_id}->{puzzle};  # Remove puzzle after solving
         if($inputType eq 'done'){	
             saveNewAction($answer);
@@ -376,7 +379,9 @@ sub handle_fight {
             if (exists $game_data{rooms}{$current_room_id}{died_description}) {
                 print "\033[31m$game_data{rooms}{$current_room_id}{died_description}\033[0m\n";
             }
-            print "You have died!\n";
+            else{
+                print "You have died!\n";
+            }
             my $previous_room_id = pop @room_history;
             $current_room_id = $previous_room_id;
             showRoomInfo();
