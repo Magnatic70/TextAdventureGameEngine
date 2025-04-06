@@ -1,0 +1,5 @@
+# Loaded after entering the lecture hall
+
+# Change the lobby to reflect the succesful lecture
+RoomID:pblobby
+Description:The lobby leading to the lecture hall was bustling in awe - a mix of faculty, students, and what appeared to be visiting academics all are discussing the implications of Sheldon's lecture.

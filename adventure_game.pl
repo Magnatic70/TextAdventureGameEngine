@@ -461,16 +461,33 @@ sub handle_move {
     if (exists $game_data{rooms}{$next_room_id}{locks} && !(exists $unlocked_rooms{$next_room_id})) {
         my %inventory_items = map { $_ => 1 } @inventory;
         my $unlocked = 0;
+        my @unlockHints;
+        my $lockIndex=0;
 
         foreach my $lock (@{ $game_data{rooms}{$next_room_id}{locks} }) {
             if (exists $inventory_items{$lock}) {
                 $unlocked = 1;
                 last;
             }
+            else{
+                if(exists $game_data{rooms}{$next_room_id}{unlock_hints}){
+                    push(@unlockHints,${ $game_data{rooms}{$next_room_id}{unlock_hints} }[$lockIndex]);
+                }
+            }
+            $lockIndex++;
         }
 
         unless ($unlocked) {
-            print "\033[31mThe door to ", $game_data{rooms}{$next_room_id}{name}, " is locked. You need a specific item.\033[0m\n";
+            if($#unlockHints>=0){
+                print "\033[31m";
+                foreach my $unlockHint (@unlockHints){
+                    print $unlockHint."\n";
+                }
+                print "\033[0m";
+            }
+            else{
+                print "\033[31mThe door to ", $game_data{rooms}{$next_room_id}{name}, " is locked. You need a specific item.\033[0m\n";
+            }
             return; # Skip this exit
         } else {
             if (!$unlocked_rooms{$next_room_id}) {

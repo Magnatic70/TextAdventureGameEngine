@@ -50,6 +50,8 @@ sub process_config_line{
         }
     } elsif ($line =~ /^UnlockTexts:(.*)$/) {
         $game_data{rooms}{$current_room_id}{unlock_texts} = [split /;/, $1];
+    } elsif ($line =~ /^UnlockHints:(.*)$/) {
+        $game_data{rooms}{$current_room_id}{unlock_hints} = [split /;/, $1];
     } elsif ($line =~ /^Puzzle:(.*)$/) {
         $game_data{rooms}{$current_room_id}{puzzle} = $1;
     } elsif ($line =~ /^Riddle:(.*)$/) {

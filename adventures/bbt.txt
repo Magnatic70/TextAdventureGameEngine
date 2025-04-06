@@ -22,17 +22,20 @@
 #	Met dat item kun je nu weer in de auto stappen en wegrijden
 
 # Caltech
-#	Barry ligt natuurlijk dwars
-#	Je moet naar de kelder en daar het wezen uit de andere dimensie verslaan
-#	Amy, Bernadette, Howard en Raj moeten natuurlijk ook nog een rol krijgen
+#	Sheldon moet perse zijn aanwijsstok hebben, die ligt in de kelder, maar Barry beheert de sleutel daarvan.
+#	Barry ligt natuurlijk dwars en wil iets in ruil hebben
+#	De onderdelen daarvoor moet je eerst vinden in de kantoren/labs van Amy, Howard en Raj
+#	Je moet dan wat trivia vragen beantwoorden. Bernadette is in het lab van Howard
+#	Je moet dan naar de kelder en daar het wezen uit de andere dimensie verslaan en dan heb je de aanwijsstok. 
+#		Aangezien het wezen niet echt is en alleen een projectie, kun je met een sleutel de projectie uitschakelen. Die sleutel vind je in het kantoor van Sheldon.
 
 # Na afloop moet je nog weer naar huis. De auto haalt het net en in het appartement zitten alle anderen al te wachten met take-out. Iedereen eet gezellig in de woonkamer.
 
 
 [Adventure]
-Title:The Transport Theorem
-Objective:Leonard has to drive Sheldon to Caltech in time for an urgent lecture on his latest theoretical breakthrough. Although this seems an easy task, trouble is all around.
-FinalDestination:caltechoffice
+Title:The Transportation Theorem
+Objective:The mission is clear - transport Sheldon to Caltech for an emergency lecture detailing his latest theoretical breakthrough in temporal transportation mechanics. While the objective itself seems straightforward, experience suggests that facilitating even simple logistical tasks involving Sheldon requires meticulous planning and contingency protocols.
+FinalDestination:notyetdefined
 WIP:true
 [/Adventure]
 
@@ -374,12 +377,29 @@ Persons:sheldon
 RoomID:cte
 Name:Caltech Physics Building Entrance
 Description:We finally arrived - a testament to perseverance rather than efficient navigation. As we emerged from the parking labyrinth, I couldn't help but notice a large poster plastered across the Physics building entrance announcing Sheldon's upcoming lecture on temporal transportation mechanics.
-Exits:south:csw1,north:cpbh
+Exits:south:csw1,north:pblobby
 Persons:sheldon
 LoadModifier:bbt-5.txt
+
+RoomID:pblobby
+Name:Caltech Physics Building Hall
+Description:The lobby leading to the lecture hall was unusually crowded - a mix of faculty, students, and what appeared to be visiting academics all vying for seats at Sheldon's lecture. Scanning the line, I spotted Bernadette chatting animatedly with a group near the front.
+Exits:south:cte,up:lecture,west:physics,east:astronomy,north:engineering
+Persons:sheldon,bernadette
+
+RoomID:lecture
+Name:Lecture Hall
+Description:The lecture hall of the Physics Department
+Locks:laserpointer
+UnlockTexts:You give Sheldon the laserpointer. He takes it without even acknowledging the effort it took and walks upon the stage.
+UnlockHints:Sheldon suddenly stops walking and demands his trusty laserpointer. Giving a lecture without is impossible. Do you have my laserpointer? Please find my laserpointer!
+Persons:sheldon,bernadette
+Exits:down:pblobby
+LoadModifier:bbt-6.txt
+
 [/Caltech]
 
-[Maze]
+[Parking Lot Maze]
 RoomID:csw1
 Name:Sidewalk
 Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
@@ -577,4 +597,4 @@ Name:Sidewalk
 Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
 Exits:west:csw46
 Persons:sheldon
-[/Maze]
+[/Parking Lot Maze]
