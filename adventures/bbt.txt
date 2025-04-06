@@ -1,37 +1,3 @@
-# New adventure based on Big Bang theory
-# Sheldon has to be driven to Caltech
-# There's all kinds of set-backs and obstacles
-# A bit of trivia
-# Some puzzles
-# A fight with an alien that comes from a portal Sheldon made
-# Car trouble in Penny's car because of the neglected "Check Engine" light
-# Map of the two apartments
-# Stairs, no elevator
-# Route to Caltech
-# Stops at Amy's, Raj's, the comic book store, Bernadette and Howards's place
-
-# Op straat staan twee auto's: Die van Leonard (hiervoor heb je sleutels) en die van Penny (nog geen sleutels)
-# Met car keys van Leonard instappen lukt, maar starten niet. (modifier: penny in haar living room, in paniek omdat haar kleren gestolen zijn).
-# Dan Penny overtuigen om met haar auto te mogen gaan (door haar haar kleren te geven krijg je haar autosleutels)
-# Die strandt natuurlijk met motorpech
-# Maar wel in de buurt van de comic book store
-# Daar Stuart om hulp vragen en dan krijg je een onderdeel waarmee Penny's auto het weer doet.
-#	Bij vragen geeft Stuart aan dat hij wel wil helpen, maar dat hij dat niet voor niets doet en wil ruilen voor een zeldzaam stripboek van Sheldon
-#	Na het verlaten van de winkel moet je (en kun je nu ook) helemaal teruglopen naar het appartement en in Sheldon's slaapkamer is nu het stripboek te vinden.
-#	Dan weer helemaal teruglopen en Stuart wil nu ruilen.
-#	Met dat item kun je nu weer in de auto stappen en wegrijden
-
-# Caltech
-#	Sheldon moet perse zijn aanwijsstok hebben, die ligt in de kelder, maar Barry beheert de sleutel daarvan.
-#	Barry ligt natuurlijk dwars en wil iets in ruil hebben
-#	De onderdelen daarvoor moet je eerst vinden in de kantoren/labs van Amy, Howard en Raj
-#	Je moet dan wat trivia vragen beantwoorden. Bernadette is in het lab van Howard
-#	Je moet dan naar de kelder en daar het wezen uit de andere dimensie verslaan en dan heb je de aanwijsstok. 
-#		Aangezien het wezen niet echt is en alleen een projectie, kun je met een sleutel de projectie uitschakelen. Die sleutel vind je in het kantoor van Sheldon.
-
-# Na afloop moet je nog weer naar huis. De auto haalt het net en in het appartement zitten alle anderen al te wachten met take-out. Iedereen eet gezellig in de woonkamer.
-
-
 [Adventure]
 Title:The Transportation Theorem
 Objective:The mission is clear - transport Sheldon to Caltech for an important lecture detailing his latest theoretical breakthrough in temporal transportation mechanics. While the objective itself seems straightforward, experience suggests that facilitating even simple logistical tasks involving Sheldon requires meticulous planning and contingency protocols.
