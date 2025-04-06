@@ -1,0 +1,31 @@
+# Loads after getting to Caltech Physics building entrance
+
+# Go directly from the car to the entrance
+RoomID:csw1
+Description:Remarkably, the return journey proved significantly more efficient. Without the pressure of impending deadlines clouding my judgment, I navigated the parking lot with ease - a clear demonstration that emotional state directly impacts spatial reasoning abilities.
+Exits:north:cte,south:cartohome
+
+# Change the text of the entrance
+RoomID:cte
+Description:You're at the entrance to the Physics building. I can't help but notice a large poster plastered across the Physics building entrance announcing Sheldon's upcoming lecture on temporal transportation mechanics.
+
+# Create car to home
+RoomID:cartohome
+SourceRoomID:carpenny
+Name:Penny's car
+Description:Penny's VW Rabbit is a vehicle with visible history - the kind of car that tells stories through its dents, scratches, and accumulated character marks. The exterior paint job (originally blue) has faded unevenly from sun exposure creating mottled patches across the hood and roof. Several parking dings are evident along the doors and bumpers - each likely representing a memorable anecdote. The interior shows even more signs of lived-in charm:<br>- The seats are upholstered in worn cloth featuring mismatched patterns - a testament to previous repairs or Penny's eclectic taste<br>- A permanent collection of receipts, coins, and random trinkets inhabits the center console<br>- The dashboard is adorned with a vintage air freshener shaped like a daisy
+Persons:sheldon
+Exits:south:street,get out:csw1
+
+# Create fast car to caltech
+RoomID:fastcartocaltech
+SourceRoomID:carpenny
+Name:Penny's car
+Description:Penny's VW Rabbit is a vehicle with visible history - the kind of car that tells stories through its dents, scratches, and accumulated character marks. The exterior paint job (originally blue) has faded unevenly from sun exposure creating mottled patches across the hood and roof. Several parking dings are evident along the doors and bumpers - each likely representing a memorable anecdote. The interior shows even more signs of lived-in charm:<br>- The seats are upholstered in worn cloth featuring mismatched patterns - a testament to previous repairs or Penny's eclectic taste<br>- A permanent collection of receipts, coins, and random trinkets inhabits the center console<br>- The dashboard is adorned with a vintage air freshener shaped like a daisy
+Persons:sheldon
+Exits:get out:street,north:caltechparking
+
+# Change street
+RoomID:street
+Exits:east:landing1,north:fastcartocaltech
+

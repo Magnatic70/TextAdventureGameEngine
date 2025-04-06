@@ -86,7 +86,11 @@ ItemDescription:A rare comic book "Celestial Sentinel Squadron". Only 150 were e
 RoomID:bedroomleonard
 Name:My bedroom
 Description:My bedroom represents a functional compromise between Sheldon's rigid standards for orderliness and my own more relaxed approach to spatial organization
+Items:note
 Exits:corridor:corridor
+
+Item:note
+ItemDescription:A rather mysterious note: WWNNNEEEEWWNN
 
 Item:key ring
 ItemDescription:A ring with a lot of keys.
@@ -164,20 +168,10 @@ DisplayName:Amy
 NegativeAskResponse:That's an intriguing query - let me first assess its epistemological foundations before determining if a response is warranted.
 NegativeTradeResponse:That's quite thoughtful of you - I appreciate the gesture. However, my acquisitions are governed by a strict utility-based algorithm that this item doesn't satisfy.
 
-Person:stuart
-DisplayName:Stuart
-Keywords:fuel:captains wish:Captain Sweatpants is looking for a rare comic.;gas:captains wish:Captain Sweatpants is looking for a rare comic.
-NegativeAskResponse:Oh? Absolutely! Let me think... yes, the key insight there is actually quite straightforward - it all stems from the principles established in... ...wait, no, I'm thinking of something else entirely.
-NegativeTradeResponse:That's very kind of you to offer! While it wouldn't quite fit my current goals. But I do appreciate you thinking of me!
-
 Person:howard's mom
 DisplayName:Howard's mom
 NegativeAskResponse:That's an interesting question - one I'm sure has a very complex answer. Meanwhile, have you eaten yet? You look thin.
 NegativeTradeResponse:That's very sweet of you to offer, but I don't need this. It looks like something from a garage sale.
-
-Person:captainsweatpants
-DisplayName:Captain Sweatpants
-Trades:celestial sentinel squadron:can of fuel:I have been looking for this for ages. Here's some fuel to get you to Caltech.
 
 Person:barry
 DisplayName:Barry
@@ -304,8 +298,18 @@ Exits:street:cbsstreet
 LoadModifier:bbt-4.txt
 Persons:sheldon,stuart,captainsweatpants
 
+Person:stuart
+DisplayName:Stuart
+Keywords:fuel:captains wish:Captain Sweatpants is looking for a rare comic.;gas:captains wish:Captain Sweatpants is looking for a rare comic.
+NegativeAskResponse:Oh? Absolutely! Let me think... yes, the key insight there is actually quite straightforward - it all stems from the principles established in... ...wait, no, I'm thinking of something else entirely.
+NegativeTradeResponse:That's very kind of you to offer! While it wouldn't quite fit my current goals. But I do appreciate you thinking of me!
+
+Person:captainsweatpants
+DisplayName:Captain Sweatpants
+Trades:celestial sentinel squadron:can of fuel:I have been looking for this for ages. Here's some fuel to get you to Caltech.
+
 Item:captains wish
-ItemDescription:A note from Captain Sweatpants with the name of a rare comic book "Celestial Sentinel Squadron". Wasn't that Sheldon's prized possession?
+ItemDescription:A note from Captain Sweatpants with the name of a rare comic book: "Celestial Sentinel Squadron". Wasn't that Sheldon's prized possession?
 [/ComicbookStore]
 
 [LongWayHome]
@@ -360,3 +364,217 @@ Description:You walk under the burning Californian sun. How many blocks to go?
 Exits:north:longwayhome9,south:street
 [/LongWayHome]
 
+[Caltech]
+RoomID:caltechparking
+Name:Caltech Parking Lot
+Description:Finding my assigned parking spot felt unexpectedly significant - a concrete manifestation of institutional recognition after years spent navigating unreserved chaos. The location isn't ideal, requiring a walk across several open lots under direct sunlight, but the predictability offers its own form of satisfaction. It's one of those quiet perks that reminds you tenure represents more than just job security; it signifies belonging and investment in this academic ecosystem.
+Exits:get out:csw1,south:cbsstreet
+Persons:sheldon
+
+RoomID:cte
+Name:Caltech Physics Building Entrance
+Description:We finally arrived - a testament to perseverance rather than efficient navigation. As we emerged from the parking labyrinth, I couldn't help but notice a large poster plastered across the Physics building entrance announcing Sheldon's upcoming lecture on temporal transportation mechanics.
+Exits:south:csw1,north:cpbh
+Persons:sheldon
+LoadModifier:bbt-5.txt
+[/Caltech]
+
+[Maze]
+RoomID:csw1
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:get in car:calltechparking,east:csw2,west:csw3,north:csw4,south:csw5
+Persons:sheldon
+
+RoomID:csw2
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Persons:sheldon
+Exits:west:csw1
+
+RoomID:csw4
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Persons:sheldon
+Exits:south:csw1
+
+RoomID:csw5
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Persons:sheldon
+Exits:north:csw1
+
+RoomID:csw3
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw24,east:csw1,north:csw6,south:csw9
+Persons:sheldon
+
+RoomID:csw6
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Persons:sheldon
+Exits:south:csw3
+
+RoomID:csw9
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Persons:sheldon
+Exits:north:csw3
+
+RoomID:csw24
+Name:Sidewalk24
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:east:csw3,west:csw33,north:csw25,south:csw23
+Persons:sheldon
+
+RoomID:csw33
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Persons:sheldon
+Exits:east:csw24
+
+RoomID:csw23
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Persons:sheldon
+Exits:north:csw24
+
+RoomID:csw25
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw34,north:csw10,south:csw24
+Persons:sheldon
+
+RoomID:csw34
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:east:csw25
+Persons:sheldon
+
+RoomID:csw10
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:east:csw11,west:csw35,north:csw26,south:csw25
+Persons:sheldon
+
+RoomID:csw35
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:east:csw10
+Persons:sheldon
+
+RoomID:csw11
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw10
+Persons:sheldon
+
+RoomID:csw26
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:east:csw27,west:csw36,north:csw38,south:csw10
+Persons:sheldon
+
+RoomID:csw36
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:east:csw26
+Persons:sheldon
+
+RoomID:csw38
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:south:csw26
+Persons:sheldon
+
+RoomID:csw27
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw26,east:csw28,north:csw39
+Persons:sheldon
+
+RoomID:csw39
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:south:csw27
+Persons:sheldon
+
+RoomID:csw28
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw27,east:csw29,south:csw12
+Persons:sheldon
+
+RoomID:csw12
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:north:csw28
+Persons:sheldon
+
+RoomID:csw29
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw28,east:csw30,south:csw13
+Persons:sheldon
+
+RoomID:csw13
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:north:csw29
+Persons:sheldon
+
+RoomID:csw30
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw29,north:csw42,south:csw14
+Persons:sheldon
+
+RoomID:csw14
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:north:csw30
+Persons:sheldon
+
+RoomID:csw42
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw41,north:csw48,south:csw30
+Persons:sheldon
+
+RoomID:csw48
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:south:csw42
+Persons:sheldon
+
+RoomID:csw41
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw40,north:csw47,east:csw42
+Persons:sheldon
+
+RoomID:csw47
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:south:csw41
+Persons:sheldon
+
+RoomID:csw40
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:north:csw46,east:csw41
+Persons:sheldon
+
+RoomID:csw46
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw45,north:cte,east:csw47
+Persons:sheldon
+
+RoomID:csw45
+Name:Sidewalk
+Description:Despite countless prior visits to the campus, my spatial awareness has abandoned me in this moment of heightened stress. The familiar grid pattern of Caltech's parking lots seems designed for disorientation rather than navigation - a cruel irony given I'm a physicist. Even Sheldon appears directionally challenged at present, which is both perplexing and somewhat reassuring.
+Exits:west:csw46
+Persons:sheldon
+[/Maze]
