@@ -34,7 +34,7 @@
 
 [Adventure]
 Title:The Transportation Theorem
-Objective:The mission is clear - transport Sheldon to Caltech for an emergency lecture detailing his latest theoretical breakthrough in temporal transportation mechanics. While the objective itself seems straightforward, experience suggests that facilitating even simple logistical tasks involving Sheldon requires meticulous planning and contingency protocols.
+Objective:The mission is clear - transport Sheldon to Caltech for an important lecture detailing his latest theoretical breakthrough in temporal transportation mechanics. While the objective itself seems straightforward, experience suggests that facilitating even simple logistical tasks involving Sheldon requires meticulous planning and contingency protocols.
 FinalDestination:notsetyet
 [/Adventure]
 
