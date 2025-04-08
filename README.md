@@ -37,6 +37,10 @@ Players can use these commands to interact with the game world:
    - You'll find the frontend in your web browser at `http://<your ip>:4546`
 
 # Configuration
+## Line-endings - CR/LF or LF
+When you run the engine from within the Docker-container or directly on Linux, you should use LF/Linux-line-endings.
+If you run the engine on Windows (not WSL), then you should use CRLF/Windows-line-endings.
+
 ## Configuration Structure
 Adventures are built using a configuration file that defines the game world. The main components are:
 - Title
