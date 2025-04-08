@@ -229,7 +229,7 @@ RoomID:carleonard
 Name:Your car
 Description:This is my trusty Saab. A vehicle I selected after extensive research into compact sedans offering a balance of fuel-economy and reliability. The interior exhibits a functional Scandinavian design philosophy - minimalist yet ergonomic with intuitive controls and durable materials. While lacking some of the infotainment features found in newer models, the core functions operate reliably through physical buttons rather than touchscreen interfaces which I find more efficient during operation.
 Locks:car key
-UnlockTexts:With a push of the button the car unlocks and you get in. To your great dismay your car doesn't start! What now? Penny's car?
+UnlockTexts:Using the remote the car unlocks and you get in, but that's were the Saab's reliability falls apart. You turn the key and nothing happens. To your great dismay your car doesn't start! What now? Penny's car?
 Persons:sheldon
 Exits:get out:street
 LoadModifier:bbt-3.txt
@@ -337,9 +337,10 @@ LoadModifier:bbt-5.txt
 
 RoomID:pblobby
 Name:Caltech Physics Lobby
-Description:The lobby leading to the lecture hall was unusually crowded - a mix of faculty, students, and what appeared to be visiting academics all vying for seats at Sheldon's lecture. Scanning the line, I spotted Bernadette chatting animatedly with a group near the front.
+Description:The lobby leading to the lecture hall was unusually crowded - a mix of faculty, students, and what appeared to be visiting academics all vying for seats at Sheldon's lecture. Scanning the line, I spot Bernadette chatting animatedly with a group near the front.
 Exits:south:cte,up:lecture,west:physics,east:astronomyandneuroscience,north:engineering,down:basement
 Persons:sheldon,bernadette
+LoadModifier:bbt-7.txt
 
 Person:bernadette
 DisplayName:Bernadette
