@@ -101,6 +101,13 @@ my $room_data;
 my %unlocked_rooms;
 
 sub readInput{
+    my $input=readRawInput();
+    chomp($input);
+    $input=~s/ +$//g;
+    return lc($input);
+}
+
+sub readRawInput{
     if($inputType eq 'stdin'){
         my $input=<STDIN>;
         if($input){
