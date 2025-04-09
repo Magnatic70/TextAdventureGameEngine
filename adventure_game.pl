@@ -186,23 +186,28 @@ sub showRoomInfo{
 
 sub handle_help{
     # Explain all possible actions
-    print "\nYou can perform the following actions:\n";
-    print "- Move: Use directions like 'north', 'south', etc., to move between locations.\n";
-    print "- Take: Pick up items using 'take [item]'.\n";
-    print "- Examine: Check if items in your inventory contain other items with 'examine [item]'.\n";
-    print "- Describe: Get a description of an item in your inventory using 'describe [item]'.\n";
-    print "- Search: Find hidden items in a location with 'search [target]'.\n";
-    print "- Combine: Create new items by combining two, e.g., 'combine [item1] and [item2]'.\n";
-    print "- Drop: Remove an item from your inventory using 'drop [item]'.\n";
-    print "- Ask: Interact with persons using 'ask [person] about [topic]'.\n";
-    print "- Trade: Exchange items with persons using 'trade [item] with [person]'.\n";
-    print "- Fight (Only when in a room with an enemy): Engage enemies with 'fight [enemy] with [item]'.\n";
-    print "- Retreat (Only when in a room with an enemy): Move back to the previous room with 'retreat'.\n";
-    print "- Inventory: View all items and their descriptions using 'inventory'.\n";  # New command description
-    print "- Hint: Ask for hints on a subject using 'hint [subject]'.\n";  # New hint command description
-    print "- Help: Shows this list of available actions.\n";
+    print "\nMovement actions:\n";
+    print "- Use directions like 'north', 'south', etc., to move between locations.\n";
+    print "     See the options of a location for available movement actions.\n\n";
+    print "Inventory actions:\n";
+    print "- Take:        Pick up items using 'take [item]'.\n";
+    print "- Examine:     Check if items in your inventory contain other items with 'examine [item]'.\n";
+    print "- Combine:     Create new items by combining two, e.g., 'combine [item1] and [item2]'.\n";
+    print "- Deconstruct: Try to split an item in your inventory using 'deconstruct [item]'.\n";
+    print "- Describe:    Get a description of an item in your inventory using 'describe [item]'.\n";
+    print "- Inventory:   View all items and their descriptions using 'inventory'.\n";  # New command description
+    print "- Drop:        Remove an item from your inventory using 'drop [item]'.\n\n";
+    print "Interact with the environment:\n";
+    print "- Search:      Find hidden items in a location with 'search [target]'.\n";
+    print "- Ask:         Interact with persons using 'ask [person] about [topic]'.\n";
+    print "- Trade:       Exchange items with persons using 'trade [item] with [person]'.\n";
+    print "- Fight:       Only when in a room with an enemy. Engage enemies with 'fight [enemy] with [item]'.\n";
+    print "- Retreat:     Only when in a room with an enemy. Move back to the previous room with 'retreat'.\n\n";
+    print "General actions\n";
+    print "- Hint:        Ask for hints on a subject using 'hint [subject]'.\n";  # New hint command description
+    print "- Help:        Shows this list of available actions.\n";
     if($inputType eq 'stdin'){
-        print "- Quit: Exit the game by typing 'quit'.\n";
+        print "- Quit:        Exit the game by typing 'quit'.\n";
     }
 }
 
@@ -428,6 +433,8 @@ sub handle_action {
         handle_take($1);
     } elsif ($action =~ /^examine (.*)$/) {
         handle_examine($1);
+    } elsif ($action =~ /^deconstruct (.*)$/) {
+        handle_deconstruct($1);
     } elsif ($action =~ /^describe (.*)$/) {  # New command to describe an item
         handle_describe($1);
     } elsif ($action =~ /^search (.*)$/) {
@@ -563,6 +570,37 @@ sub handle_examine {
             }
         } else {
             print "The $item doesn't seem to contain anything special.\n";
+        }
+    } else {
+        print "You don't have a $item in your inventory.\n";
+        if ($debug) { die; }
+    }
+}
+
+sub handle_deconstruct {
+    my ($item) = @_;
+    my $room_data = $game_data{rooms}{$current_room_id};
+
+    if (grep { $_ eq $item } @inventory) {
+        if (exists $game_data{items}{$item}{splits_into}) {
+            foreach my $split_item (@{ $game_data{items}{$item}{splits_into} }) {
+                # Only add if not already in inventory
+                unless (grep { $_ eq $split_item } @inventory) {
+                    push @inventory, $split_item;
+                    print "You deconstructed ", $split_item, " from the $item.\n";
+
+                    # Display searched item description
+                    if (exists $game_data{items}{$split_item}{description}) {
+                        print "  $game_data{items}{$split_item}{description}\n";
+                    }
+                } else {
+                    print "You already have the $split_item in your inventory.\n";
+                }
+            }
+            # Remove split item from inventory
+            @inventory = grep { $_ ne $item } @inventory;
+        } else {
+            print "The $item doesn't deconstruct into parts.\n";
         }
     } else {
         print "You don't have a $item in your inventory.\n";

@@ -83,6 +83,9 @@ sub process_config_line{
     } elsif ($line =~ /^Contains:(.*)$/) {
         my @contains_items = split /,/, $1;
         $game_data{items}{$current_item}{contains} = \@contains_items if @contains_items;
+    } elsif ($line =~ /^SplitsInto:(.*)$/) {
+        my @split_items = split /,/, $1;
+        $game_data{items}{$current_item}{splits_into} = \@split_items if @split_items;
     } elsif ($line =~ /^Combine:(.*)$/) {
         my ($combine_from, $combine_to) = split /=/, $1;
         my ($item1, $item2) = split /,/, $combine_from;

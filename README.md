@@ -17,8 +17,9 @@ Players can use these commands to interact with the game world:
 * Move: north, south, east, west, etc.
 * Take: take [item]
 * Examine: examine [item] - check items in inventory for hidden contents
+* Deconstruct: deconstruct [item] - try to deconstruct an item into parts 
 * Describe: describe [item] - get a detailed description of an item
-* Search: search [target] - find hidden objects
+* Search: search [target] - find hidden objects in locations
 * Combine: combine [item1] and [item2]
 * Drop: drop [item]
 * Ask: ask [person] about [topic]
@@ -85,6 +86,10 @@ Item:rusty key
 ItemDescription:A tarnished iron key, covered in rust. It looks like it might fit an old lock.
 Contains:small gear
 Combine:small gear,wire=makeshift lockpick
+
+Item:makeshift lockpick
+ItemDescription:A lockpick, maybe good enough to pick one lock?
+SplitsInto:small gear,wire
 ```
 
 ## Person Configuration

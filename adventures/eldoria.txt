@@ -216,6 +216,7 @@ Combine:dagger,blue potion=blue dagger
 
 Item:blue dagger
 ItemDescription:A dagger coated in a thick blue potion
+SplitsInto:dagger,blue potion
 [/CabinetMaze]
 
 [VillageEast]
