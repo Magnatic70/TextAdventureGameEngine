@@ -169,24 +169,24 @@ Exits:west:landing1
 
 RoomID:landing2
 Name:2nd floor landing
-Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which will remain stubbornly closed at all times.
 Exits:down:landing1,west:foreverlocked,up:landing3,east:foreverlocked
 Persons:sheldon
 
 RoomID:landing3
 Name:3rd floor landing
-Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which will remain stubbornly closed at all times.
 Exits:down:landing2,west:foreverlocked,up:landing4,east:foreverlocked
 Persons:sheldon
 
 RoomID:landing5
 Name:5th floor landing
-Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which will remain stubbornly closed at all times.
 Exits:down:landing4,west:foreverlocked,up:landing6,east:foreverlocked
 
 RoomID:landing6
 Name:6th floor landing
-Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which remain stubbornly closed at different times.
+Description:Stairs leading both up and down (as if the distinction wasn't already inherent), a perpetually broken elevator that defies any reasonable timeline for repair, and two front doors - both of which will remain stubbornly closed at all times.
 Exits:down:landing5,west:foreverlocked,up:roof,east:foreverlocked
 
 RoomID:roof
