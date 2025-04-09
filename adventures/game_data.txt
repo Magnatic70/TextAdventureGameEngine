@@ -48,7 +48,7 @@ Item:kitchen key
 ItemDescription:Another key, how many keys are there?
 
 Item:some digits
-ItemDescription:Some random digits. What could they mean?
+ItemDescription:Some random digits (numbers). What could they mean?
 
 RoomID:Study
 Name:Study
