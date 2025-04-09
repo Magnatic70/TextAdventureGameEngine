@@ -96,6 +96,7 @@ my $current_room_id = $game_data{first_room_id};
 my @inventory;
 my @room_history;  # Stack to track room history
 my $room_data;
+my $loadedModFile; # Keep track of all loaded modifiers
 
 # Track unlocked rooms
 my %unlocked_rooms;
@@ -218,6 +219,17 @@ sub handle_help{
     }
 }
 
+sub loadModifier{
+    my($modFile)=@_;
+    unless (grep { $_ eq $modFile } @loadedModFiles){
+        %game_data=load_game_data($adventureDir.$modFile);
+        if($debug){
+            validate_game_data(%game_data);
+        }
+        push($modFile,@loadedModFiles);
+    }
+}
+
 # Main game loop
 sub start_game {
     print "\n\033[97;1;4m$game_data{title}\033[0m\n";
@@ -247,10 +259,7 @@ sub start_game {
         
         # Check if a modifier file should be loaded
         if ($game_data{rooms}{$current_room_id}{modifier_file}){
-            %game_data=load_game_data($adventureDir.$game_data{rooms}{$current_room_id}{modifier_file});
-            if($debug){
-                validate_game_data(%game_data);
-            }
+            loadModifier($game_data{rooms}{$current_room_id}{modifier_file});
         }
 
         # Prompt for user action with green text
