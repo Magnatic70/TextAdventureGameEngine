@@ -71,13 +71,14 @@ WIP:true
 ```
 
 ## Item Configuration
-Items can be found by taking, receiving as gifts, trading, combining or through searching.
+Items can be found by taking, receiving as gifts, trading, combining, deconstructing or through searching.
 
 ```
 Item:<short item name>
 ItemDescription:<detailed description when acquired>
-Contains:<item to find when examined> (optional)
-Combine:<item1>,<item2>=<resulting item> (optional)
+Contains:<item to find when examined> (optional). The original item remains in the player's inventory
+Combine:<item1>,<item2>=<resulting item> (optional). The original items are removed from the player's inventory
+SplitsInto:<item1>,<item2>,etc. (optional). The original item is removed from the player's inventory
 ```
 
 Example:
