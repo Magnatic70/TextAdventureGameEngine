@@ -156,7 +156,7 @@ ItemDescription:A normal pine cone
 
 Person:recluse
 DisplayName:Recluse
-Keywords:cabin:cabin key
+Keywords:cabin:cabin key:Here's a key to my old cabin. It's got a leaky roof, but it is better than nothing.
 NegativeAskResponse:I don't know anything about that.
 ```
 
