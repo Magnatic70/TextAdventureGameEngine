@@ -1,4 +1,0 @@
-# Loads after stepping out the appartment
-# Step directly into the corridor and not stop at the bowl
-RoomID:living
-Exits:north:storage,east:corridor,west:landing4,south:kitchen

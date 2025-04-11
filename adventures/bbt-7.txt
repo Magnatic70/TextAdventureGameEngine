@@ -1,5 +1,0 @@
-# Loads after entering the Caltech Physics lobby for the first time
-
-# Remove Bernadette from the description, as she will follow you from now on
-RoomID:pblobby
-Description:The lobby leading to the lecture hall was unusually crowded - a mix of faculty, students, and what appeared to be visiting academics all vying for seats at Sheldon's lecture.

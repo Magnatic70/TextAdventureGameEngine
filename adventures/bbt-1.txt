@@ -1,9 +1,0 @@
-# Loads after entering Penny's living room
-
-# No longer stop at the front door
-RoomID:landing4
-Exits:down:landing3,west:livingroompenny,up:landing5,east:living
-
-# Now permit the guys to leave the building
-RoomID:street
-Locks:-
