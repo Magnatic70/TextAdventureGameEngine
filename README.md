@@ -107,7 +107,7 @@ Persons:<person1>,<person2>,... (optional)
 Items:<item1>,<item2>,... (optional)
 SearchableItems:<target>:<item>,... (optional)
 Locks:<required item> (optional)
-UnlockTexts:<message when first entering with unlock item> (mandatory if Locks is defined)
+UnlockTexts:<message when first entering with unlock item> (optional if Locks is defined, optionally contains {LoadModifier:<modifier filename>})
 UnlockHints:<message that provides the user a hint on what is needed to unlock the door> (optional if Locks is defined)
 Puzzle:<text introduction> (optional, mutually exclusive with Enemy)
 Riddle:<question> (mandatory if Puzzle is defined)
@@ -139,7 +139,7 @@ LoadModifier:example-1.txt
 Item:worn map
 ItemDescription:An old, faded map showing a portion of the surrounding area. It seems to indicate something valuable is hidden nearby.
 ```
-The LoadModifier option is a very powerful tool. It enables you to load another config file when the player successfully enters a location for the first time. All subsequent entries into the location will not load the modifier again. The contents of that config file are overlayed on
+The LoadModifier option is a very powerful tool. It enables you to load another config file when the player successfully enters or unlocks a location for the first time. All subsequent entries into the location will not load the modifier again. The contents of that config file are overlayed on
 the current config and state of the adventure. You can add or change all configurable objects. It basically is a complete adventure configuration file. If you change an object, the properties of that object will reflect the values in the modifier file.
 The only exception is for items in a room. Those are added to the items that are already present in the room. This is because players can drop items in a room and you don't want those items to disappear.
 With `Locks:-` you can remove all locks from a location.

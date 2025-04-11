@@ -525,7 +525,8 @@ sub handle_move {
         } else {
             if (!$unlocked_rooms{$next_room_id}) {
                 if($game_data{rooms}{$next_room_id}{unlock_texts}[0]){
-                    print "\033[92m$game_data{rooms}{$next_room_id}{unlock_texts}[0]\033[0m\n";
+                    my $unlockText=filterAndLoadModifier($game_data{rooms}{$next_room_id}{unlock_texts}[0]);
+                    print "\033[92m$unlockText\033[0m\n";
                 }
                 else{
                     print "You used the $game_data{rooms}{$next_room_id}{locks}[0] to unlock the door.\n";
