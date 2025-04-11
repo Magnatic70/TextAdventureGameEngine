@@ -22,9 +22,9 @@ Players can use these commands to interact with the game world:
 * Search: search [target] - find hidden objects in locations
 * Combine: combine [item1] and [item2]
 * Drop: drop [item]
-* Ask: ask [person] about [topic] - They might respond by giving you an item or perform an action
+* Ask: ask [person] about [topic] - They might respond by giving you an item and maybe perform an action
 * Trade: trade [item] with [person]
-* Give: give [item] to [person] - They might respond with information or perform an action
+* Give: give [item] to [person] - They might respond with information and maybe perform an action
 * Inventory: inventory - get detailled descriptions of all items in the inventory
 * Fight: fight [enemy] with [item]
 * Retreat (during combat)
@@ -94,31 +94,6 @@ ItemDescription:A lockpick, maybe good enough to pick one lock?
 SplitsInto:small gear,wire
 ```
 
-## Person Configuration
-Persons can give items based on questions asked and offer trades.
-
-```
-Person:<personID or short name>
-DisplayName:<name of person that will be displayed to the player> (optional)
-Keywords:<topic>:<gift item>:<response>;<topic2>:<gift item2>:<response2>;... (optional)
-Trades:<player offered item>:<person gives item>:<response> (optional)
-Accepts:<player gifted item>:<response>;<player gifted item2>:<response2>l... (optional)
-NegativeAskResponse:<response when asking about something they don't know about> (optional)
-NegativeTradeResponse:<response for trade they are not interested in> (optional)
-NegativeGiveResponse:<response for a gift they are not interested in> (optional)
-```
-
-Example:
-```
-Person:omh
-DisplayName:Old Man Hemlock
-Keywords:secret passage:map:Here's a map that could be useful;treasure:gold coin:Here's some gold. Spend it wisely.
-Trades:apple pie:small potion:Ah, you shouldn't have! But I appreciate the gesture.
-NegativeAskResponse:I don't know, but maybe the butcher does.
-NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
-NegativeGiftResonse:Sorry, I can't accept your gift.
-```
-
 ## Room Configuration
 Rooms define locations with descriptions and connections to other rooms. The first location you define in the config will be the location the player starts their adventure.
 
@@ -165,7 +140,7 @@ Item:worn map
 ItemDescription:An old, faded map showing a portion of the surrounding area. It seems to indicate something valuable is hidden nearby.
 ```
 The LoadModifier option is a very powerful tool. It enables you to load another config file when the player successfully enters a location for the first time. All subsequent entries into the location will not load the modifier again. The contents of that config file are overlayed on
-the current config and state of the adventure. You can add or change all configurable objects. If you change an object, the properties of that object will reflect the values in the modifier file.
+the current config and state of the adventure. You can add or change all configurable objects. It basically is a complete adventure configuration file. If you change an object, the properties of that object will reflect the values in the modifier file.
 The only exception is for items in a room. Those are added to the items that are already present in the room. This is because players can drop items in a room and you don't want those items to disappear.
 With `Locks:-` you can remove all locks from a location.
 
@@ -186,6 +161,32 @@ NegativeAskResponse:I don't know anything about that.
 ```
 
 The location forest_entrance will now have a pine cone added as an item, there is a cabin to the east and a recluse will be available for questions.
+
+## Person Configuration
+Persons can give items based on questions asked, offer trades or accept gifts.
+In the positive response for an ask or an accept you can trigger a modifier by embedding `{LoadModifier:<modifier filename>}` in the response text.
+```
+Person:<personID or short name>
+DisplayName:<name of person that will be displayed to the player> (optional)
+Keywords:<topic>:<gift item>:<response>;<topic2>:<gift item2>:<response2>;... (optional)
+Trades:<player offered item>:<person gives item>:<response> (optional)
+Accepts:<player gifted item>:<response>;<player gifted item2>:<response2>l... (optional)
+NegativeAskResponse:<response when asking about something they don't know about> (optional)
+NegativeTradeResponse:<response for trade they are not interested in> (optional)
+NegativeGiveResponse:<response for a gift they are not interested in> (optional)
+```
+
+Example:
+```
+Person:omh
+DisplayName:Old Man Hemlock
+Keywords:secret passage:map:Here's a map that could be useful;treasure:gold coin:Here's some gold. Spend it wisely.
+Trades:apple pie:small potion:Ah, you shouldn't have! But I appreciate the gesture.
+Accepts:pine cone:Thank you for this pine cone. I've unlocked the barn for you.{LoadModifier:unlock-barn.txt}
+NegativeAskResponse:I don't know, but maybe the butcher does.
+NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
+NegativeGiftResonse:Sorry, I can't accept your gift.
+```
 
 ## Final Destination
 FinalDestination: (exactly one required)

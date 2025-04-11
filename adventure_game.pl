@@ -205,11 +205,11 @@ sub handle_help{
     print "- Describe:    Get a description of an item in your inventory using 'describe [item]'.\n";
     print "- Inventory:   View all items and their descriptions using 'inventory'.\n";
     print "- Drop:        Remove an item from your inventory using 'drop [item]'.\n\n";
-    print "Interact with the persons:\n";
+    print "Interact with persons or the environment:\n";
     print "- Search:      Find hidden items in a location with 'search [target]'.\n";
-    print "- Ask:         Interact with persons using 'ask [person] about [topic]'.\n";
+    print "- Ask:         Interact with persons using 'ask [person] about [topic]'. They may respond by giving you an item and maybe perform an action.\n";
     print "- Trade:       Exchange items with persons using 'trade [item] with [person]'.\n";
-    print "- Give:        Offer items to person using 'give [item] to [person]'. They may respond with information or perform an action.\n\n";
+    print "- Give:        Offer items to person using 'give [item] to [person]'. They may respond with information and maybe perform an action.\n\n";
     print "When confronted with an enemy:\n"; 
     print "- Fight:       Only when in a room with an enemy. Engage enemies with 'fight [enemy] with [item]'.\n";
     print "- Retreat:     Only when in a room with an enemy. Move back to the previous room with 'retreat'.\n\n";
@@ -750,6 +750,14 @@ sub determineActualPerson{
     return ($actualPerson,$displayName);
 }
 
+sub filterAndLoadModifier{
+    my($response)=@_;
+    if($response=~s/\{LoadModifier:(.*?)\}//){
+        loadModifier($1);
+    }
+    return $response;
+}
+
 sub handle_ask {
     my ($person, $question) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
@@ -765,7 +773,8 @@ sub handle_ask {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$displayName: \"$game_data{persons}{$actualPerson}{askanswers}{$keyword}\"\n";
+                    my $response=filterAndLoadModifier($game_data{persons}{$actualPerson}{askanswers}{$keyword});
+                    print "$displayName: \"$response\"\n";
                     # Display reward item description
                     if (exists $game_data{items}{$reward}{description}) {
                         print "Gives you: $game_data{items}{$reward}{description}\n";
@@ -853,7 +862,7 @@ sub handle_give {
         # Check for items
         foreach my $accept (keys %{$game_data{persons}{$actualPerson}{accept_responses}}) {
             if ($item eq $accept) {
-                my $response = $game_data{persons}{$actualPerson}{accept_responses}{$item};
+                my $response = filterAndLoadModifier($game_data{persons}{$actualPerson}{accept_responses}{$item});
 
                 print "$displayName: \"$response\"\n";
 

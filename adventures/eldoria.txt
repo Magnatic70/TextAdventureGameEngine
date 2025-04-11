@@ -29,7 +29,7 @@ Trades:hammer:dagger:Thank you! I've been searching for it all day. Here, take t
 
 Person:villager
 DisplayName:Villager
-Accepts:apple:Thank  you so much! You're welcome in my home anytime. I live in the house with the red door in the west part of Eldergrove.
+Accepts:apple:Thank  you so much! You're welcome in my home anytime. I live in the house with the red door in the west part of Eldergrove.{LoadModifier:eldoria-1.txt}
 
 Item:meat
 ItemDescription:A piece of meat of very high quality
