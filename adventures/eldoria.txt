@@ -3,6 +3,9 @@ FinalDestination:MagicGrotto
 Objective:You have to find your way from the marketplace of Eldergrove through the Eldorian forest into the Magic Grotto.
 WIP:true
 
+AddToInventory:map of eldoria
+RemoveFromInventory:test
+
 [Marketplace]
 RoomID:Marketplace
 Name:Marketplace

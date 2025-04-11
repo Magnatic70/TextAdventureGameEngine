@@ -76,9 +76,10 @@ else{
     }
 }
 
-my @inventory;
-my %game_data;
-%game_data=load_game_data($gameFile);
+# Declared @inventory and %game_data with our to enable manipulation from load-and-validate-game.pl
+our @inventory;
+our %game_data;
+load_game_data($gameFile);
 
 # Validate game data
 if($debug){
@@ -224,7 +225,7 @@ sub handle_help{
 sub loadModifier{
     my($modFile)=@_;
     unless (grep { $_ eq $modFile } @loadedModFiles){
-        %game_data=load_game_data($adventureDir.$modFile);
+        load_game_data($adventureDir.$modFile);
         if($debug){
             validate_game_data(%game_data);
         }

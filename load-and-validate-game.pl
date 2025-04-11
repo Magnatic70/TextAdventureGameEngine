@@ -174,7 +174,6 @@ sub load_game_data {
     if(!exists $game_data{wip}){
         $game_data{wip}='false';
     }
-    return %game_data;
 }
 
 # Validate game data for missing descriptions and undefined exits
