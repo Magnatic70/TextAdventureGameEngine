@@ -27,6 +27,10 @@ Keywords:town hall:town hall key:I'm busy for the rest of the day, but here's th
 Person:blacksmith
 Trades:hammer:dagger:Thank you! I've been searching for it all day. Here, take this dagger as a small token of my gratitude.
 
+Person:villager
+DisplayName:Villager
+Accepts:apple:Thank  you so much! You're welcome in my home anytime. I live in the house with the red door in the west part of Eldergrove.
+
 Item:meat
 ItemDescription:A piece of meat of very high quality
 
@@ -48,6 +52,17 @@ ItemDescription:A shiny apple
 Item:pulled pork
 ItemDescription:Delicious pulled pork.
 [/Marketplace]
+
+RoomID:VillageWest
+Name:West-Eldergrove
+Description:Lots of tiny cottages.
+Exits:east:Marketplace,west:reddoorcottage
+
+RoomID:reddoorcottage
+Name:Cottage with a bright red door
+Description:The cottage looks both brand new and eons old. The owner must be taking good care of it.
+Locks:unlockable
+Exits:east:VillageWest
 
 [TownHall]
 RoomID:TownHall

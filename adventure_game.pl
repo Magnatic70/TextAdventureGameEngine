@@ -203,16 +203,18 @@ sub handle_help{
     print "- Combine:     Create new items by combining two, e.g., 'combine [item1] and [item2]'.\n";
     print "- Deconstruct: Try to split an item in your inventory using 'deconstruct [item]'.\n";
     print "- Describe:    Get a description of an item in your inventory using 'describe [item]'.\n";
-    print "- Inventory:   View all items and their descriptions using 'inventory'.\n";  # New command description
+    print "- Inventory:   View all items and their descriptions using 'inventory'.\n";
     print "- Drop:        Remove an item from your inventory using 'drop [item]'.\n\n";
-    print "Interact with the environment:\n";
+    print "Interact with the persons:\n";
     print "- Search:      Find hidden items in a location with 'search [target]'.\n";
     print "- Ask:         Interact with persons using 'ask [person] about [topic]'.\n";
     print "- Trade:       Exchange items with persons using 'trade [item] with [person]'.\n";
+    print "- Give:        Offer items to person using 'give [item] to [person]'. They may respond with information or perform an action.\n\n";
+    print "When confronted with an enemy:\n"; 
     print "- Fight:       Only when in a room with an enemy. Engage enemies with 'fight [enemy] with [item]'.\n";
     print "- Retreat:     Only when in a room with an enemy. Move back to the previous room with 'retreat'.\n\n";
     print "General actions\n";
-    print "- Hint:        Ask for hints on a subject using 'hint [subject]'.\n";  # New hint command description
+    print "- Hint:        Ask for hints on a subject using 'hint [subject]'.\n";
     print "- Help:        Shows this list of available actions.\n";
     if($inputType eq 'stdin'){
         print "- Quit:        Exit the game by typing 'quit'.\n";
@@ -463,6 +465,8 @@ sub handle_action {
         handle_ask($1, $2);
     } elsif ($action =~ /^trade (.*) with (.*)$/) {  # New command to trade items with persons
         handle_trade($1, $2);
+    } elsif ($action =~ /^give (.*) to (.*)$/) {  # New command to trade items with persons
+        handle_give($1, $2);
     } elsif ($action eq 'inventory') {
         handle_inventory();  # Handle inventory command
     } elsif ($action =~ /^hint (.*)$/) {  # New hint command
@@ -792,7 +796,6 @@ sub handle_ask {
 sub handle_trade {
     my ($item, $person) = @_;
     my $room_data = $game_data{rooms}{$current_room_id};
-    my $displayName;
 
     my($actualPerson,$displayName)=determineActualPerson($room_data,$person); # We might need to translate from displayname to personID
 
@@ -831,6 +834,41 @@ sub handle_trade {
             }
             else{
                 print "$displayName: \"I don't want to trade for $item.\"\n";
+            }
+        }
+    } else {
+        print "There is no such person here.\n";
+    }
+}
+
+sub handle_give {
+    my ($item, $person) = @_;
+    my $room_data = $game_data{rooms}{$current_room_id};
+
+    my($actualPerson,$displayName)=determineActualPerson($room_data,$person); # We might need to translate from displayname to personID
+
+    if ($actualPerson) {
+        my $accepted = 0;
+
+        # Check for items
+        foreach my $accept (keys %{$game_data{persons}{$actualPerson}{accept_responses}}) {
+            if ($item eq $accept) {
+                my $response = $game_data{persons}{$actualPerson}{accept_responses}{$item};
+
+                print "$displayName: \"$response\"\n";
+
+                # Remove the item from inventory
+                @inventory = grep { $_ ne $item } @inventory;
+
+                $accepted = 1;
+            }
+        }
+        if (!$accepted) {
+            if($game_data{persons}{$actualPerson}{negativegiftresponse}){
+                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativegiftresponse}.'"'."\n";
+            }
+            else{
+                print "$displayName: \"I have no use for $item.\"\n";
             }
         }
     } else {

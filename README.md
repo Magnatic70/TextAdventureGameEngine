@@ -22,8 +22,9 @@ Players can use these commands to interact with the game world:
 * Search: search [target] - find hidden objects in locations
 * Combine: combine [item1] and [item2]
 * Drop: drop [item]
-* Ask: ask [person] about [topic]
+* Ask: ask [person] about [topic] - They might respond by giving you an item or perform an action
 * Trade: trade [item] with [person]
+* Give: give [item] to [person] - They might respond with information or perform an action
 * Inventory: inventory - get detailled descriptions of all items in the inventory
 * Fight: fight [enemy] with [item]
 * Retreat (during combat)
@@ -101,8 +102,10 @@ Person:<personID or short name>
 DisplayName:<name of person that will be displayed to the player> (optional)
 Keywords:<topic>:<gift item>:<response>;<topic2>:<gift item2>:<response2>;... (optional)
 Trades:<player offered item>:<person gives item>:<response> (optional)
+Accepts:<player gifted item>:<response>;<player gifted item2>:<response2>l... (optional)
 NegativeAskResponse:<response when asking about something they don't know about> (optional)
 NegativeTradeResponse:<response for trade they are not interested in> (optional)
+NegativeGiveResponse:<response for a gift they are not interested in> (optional)
 ```
 
 Example:
@@ -113,6 +116,7 @@ Keywords:secret passage:map:Here's a map that could be useful;treasure:gold coin
 Trades:apple pie:small potion:Ah, you shouldn't have! But I appreciate the gesture.
 NegativeAskResponse:I don't know, but maybe the butcher does.
 NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
+NegativeGiftResonse:Sorry, I can't accept your gift.
 ```
 
 ## Room Configuration

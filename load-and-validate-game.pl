@@ -119,6 +119,14 @@ sub process_config_line{
         }
         $game_data{persons}{$current_person}{keywords} = \%keywords_map;
         $game_data{persons}{$current_person}{askanswers} = \%answers_map;
+    } elsif ($line =~ /^Accepts:(.*)$/) {
+        my %gift_responses_map;
+        foreach my $accept_double (split /;/, $1) {
+            if ($accept_double =~ /^(.*?):(.*?)$/) {
+                $gift_responses_map{$1} = $2;
+            }
+        }
+        $game_data{persons}{$current_person}{accept_responses} = \%gift_responses_map;
     } elsif ($line =~ /^Trades:(.*)$/) {
         my %trades_map;
         my %answers_map;
