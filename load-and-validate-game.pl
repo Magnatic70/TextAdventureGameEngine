@@ -141,6 +141,18 @@ sub process_config_line{
     } elsif ($line =~ /^Hint:(.*)$/) {
         my ($subject, $hint_text) = split /:/, $1, 2;
         $game_data{hints}{$subject} = $hint_text;
+    } elsif ($line =~ /^AddToInventory:(.*)$/) {
+        my @items=split(',',$1);
+        foreach my $item (@items){
+            unless (grep { $_ eq $item } @inventory) {
+                push(@inventory,$item);
+            }
+        }
+    } elsif ($line =~ /^RemoveFromInventory:(.*)$/) {
+        my @items=split(',',$1);
+        foreach my $item (@items){
+            @inventory = grep { $_ ne $item } @inventory;
+        }
     }
 }
 

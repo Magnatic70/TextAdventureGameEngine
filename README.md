@@ -188,6 +188,15 @@ NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
 NegativeGiftResonse:Sorry, I can't accept your gift.
 ```
 
+## Inventory
+You can add items to the inventory of the player. This might be useful if you want the player to have some items to start with.
+It is also possible to remove items from the inventory. This is useful when loading a modifier during the game.
+
+```
+AddToInventory:<item1>,<item2>,...
+RemoveFromInventory:<item1>,<item2>,...
+```
+
 ## Final Destination
 FinalDestination: (exactly one required)
 

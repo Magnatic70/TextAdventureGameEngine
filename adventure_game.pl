@@ -76,6 +76,7 @@ else{
     }
 }
 
+my @inventory;
 my %game_data;
 %game_data=load_game_data($gameFile);
 
@@ -93,7 +94,6 @@ if($inputType eq 'file' || $inputType eq 'argv'){
 
 # Initial setup
 my $current_room_id = $game_data{first_room_id};
-my @inventory;
 my @room_history;  # Stack to track room history
 my $room_data;
 my @loadedModFiles; # Keep track of all loaded modifiers
@@ -215,7 +215,7 @@ sub handle_help{
     print "- Retreat:     Only when in a room with an enemy. Move back to the previous room with 'retreat'.\n\n";
     print "General actions\n";
     print "- Hint:        Ask for hints on a subject using 'hint [subject]'.\n";
-    print "- Help:        Shows this list of available actions.\n";
+    print "- Help:        Shows this list of available actions 'help'.\n";
     if($inputType eq 'stdin'){
         print "- Quit:        Exit the game by typing 'quit'.\n";
     }
