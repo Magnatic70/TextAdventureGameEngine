@@ -96,7 +96,7 @@ my $current_room_id = $game_data{first_room_id};
 my @inventory;
 my @room_history;  # Stack to track room history
 my $room_data;
-my $loadedModFile; # Keep track of all loaded modifiers
+my @loadedModFiles; # Keep track of all loaded modifiers
 
 # Track unlocked rooms
 my %unlocked_rooms;
@@ -226,7 +226,7 @@ sub loadModifier{
         if($debug){
             validate_game_data(%game_data);
         }
-        push($modFile,@loadedModFiles);
+        push(@loadedModFiles,$modFile);
     }
 }
 
@@ -730,12 +730,9 @@ sub handle_drop {
     }
 }
 
-sub handle_ask {
-    my ($person, $question) = @_;
-    my $room_data = $game_data{rooms}{$current_room_id};
-    my $displayName;
-    
-    my $actualPerson; # We might need to translate from displayname to personID
+sub determineActualPerson{
+    my($room_data,$person)=@_;
+    my($actualPerson,$displayName);
     foreach my $testPerson (@{$room_data->{persons}}){
         if($game_data{persons}{$testPerson}{displayname} && lc($game_data{persons}{$testPerson}{displayname}) eq $person){
             $actualPerson=$testPerson;
@@ -746,6 +743,14 @@ sub handle_ask {
             $displayName=$testPerson;
         }
     }
+    return ($actualPerson,$displayName);
+}
+
+sub handle_ask {
+    my ($person, $question) = @_;
+    my $room_data = $game_data{rooms}{$current_room_id};
+    
+    my ($actualPerson,$displayName)=determineActualPerson($room_data,$person); # We might need to translate from displayname to personID
     if ($actualPerson) {
         my $answered = 0;
         # Check for keywords in the question
@@ -789,17 +794,7 @@ sub handle_trade {
     my $room_data = $game_data{rooms}{$current_room_id};
     my $displayName;
 
-    my $actualPerson; # We might need to translate from displayname to personID
-    foreach my $testPerson (@{$room_data->{persons}}){
-        if($game_data{persons}{$testPerson}{displayname} && lc($game_data{persons}{$testPerson}{displayname}) eq $person){
-            $actualPerson=$testPerson;
-            $displayName=$game_data{persons}{$testPerson}{displayname};
-        }
-        elsif($testPerson eq $person){
-            $actualPerson=$testPerson;
-            $displayName=$testPerson;
-        }
-    }
+    my($actualPerson,$displayName)=determineActualPerson($room_data,$person); # We might need to translate from displayname to personID
 
     if ($actualPerson) {
         my $traded = 0;
