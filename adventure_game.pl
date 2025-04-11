@@ -208,9 +208,12 @@ sub handle_help{
     print "- Drop:        Remove an item from your inventory using 'drop [item]'.\n\n";
     print "Interact with persons or the environment:\n";
     print "- Search:      Find hidden items in a location with 'search [target]'.\n";
-    print "- Ask:         Interact with persons using 'ask [person] about [topic]'. They may respond by giving you an item and maybe perform an action.\n";
+    print "               Tip: Try searching objects described in the location\n";
+    print "- Ask:         Interact with persons using 'ask [person] about [topic]'.\n";
+    print "               They may respond by giving you an item and maybe perform an action.\n";
     print "- Trade:       Exchange items with persons using 'trade [item] with [person]'.\n";
-    print "- Give:        Offer items to person using 'give [item] to [person]'. They may respond with information and maybe perform an action.\n\n";
+    print "- Give:        Offer items to person using 'give [item] to [person]'.\n";
+    print "               They may respond with information and maybe perform an action.\n\n";
     print "When confronted with an enemy:\n"; 
     print "- Fight:       Only when in a room with an enemy. Engage enemies with 'fight [enemy] with [item]'.\n";
     print "- Retreat:     Only when in a room with an enemy. Move back to the previous room with 'retreat'.\n\n";
