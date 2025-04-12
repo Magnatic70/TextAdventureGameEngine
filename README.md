@@ -30,7 +30,7 @@ Players can use these commands to interact with the game world:
 * Retreat (during combat)
 * Get hints: hint [subject]
 
-# Game Modes
+# Running the program
 1. **Plain Perl Program**: Run directly from the command line and play an adventure: `./adventure_game.pl <game name>`
 2. **Debug Mode**: Use for automated testing by piping test steps to the engine: `cat <test steps> | ./adventure_game.pl <game name>` (stops at unknown commands/items)
 3. **Browser Frontend**: Run the backend and access through a web browser at `http://<your ip>:4545`
@@ -40,8 +40,15 @@ Players can use these commands to interact with the game world:
 
 # Configuration
 ## Line-endings - CR/LF or LF
-When you run the engine from within the Docker-container or directly on Linux, you should use LF/Linux-line-endings.
-If you run the engine on Windows (not WSL), then you should use CRLF/Windows-line-endings.
+When you run the engine from within the Docker-container or directly on Linux, you should use LF / Linux-line-endings.
+If you run the engine on Windows (not WSL), then you should use CRLF / Windows-line-endings.
+
+## Game config file mapping
+The file games.cfg contains a mapping between the displayed name, the game alias and the game config file.
+```
+displayName;shortName;fileName
+<display name in webpage>;<game alias used in command line>;<game config filename>
+```
 
 ## Configuration Structure
 Adventures are built using a configuration file that defines the game world. The main components are:
@@ -54,7 +61,7 @@ Adventures are built using a configuration file that defines the game world. The
 - Hints
 
 ## Title
-Define the title of the game.
+Define the title of the game. This will be visible as the webpage title.
 ```
 Title:<brief title>
 ```
