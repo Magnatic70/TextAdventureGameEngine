@@ -215,8 +215,8 @@ sub handle_help{
     print "- Give:        Offer items to person using 'give [item] to [person]'.\n";
     print "               They may respond with information and maybe perform an action.\n\n";
     print "When confronted with an enemy:\n"; 
-    print "- Fight:       Only when in a room with an enemy. Engage enemies with 'fight [enemy] with [item]'.\n";
-    print "- Retreat:     Only when in a room with an enemy. Move back to the previous room with 'retreat'.\n\n";
+    print "- Fight:       Engage enemies with 'fight [enemy] with [item]'.\n";
+    print "- Retreat:     Move back to the previous room with 'retreat'.\n\n";
     print "General actions\n";
     print "- Hint:        Ask for hints on a subject using 'hint [subject]'.\n";
     print "- Help:        Shows this list of available actions 'help'.\n";
