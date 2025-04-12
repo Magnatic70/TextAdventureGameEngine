@@ -774,22 +774,28 @@ sub handle_ask {
         foreach my $keyword (keys %{$game_data{persons}{$actualPerson}{keywords}}) {
             if ($question =~ /\b$keyword\b/) {
                 my $reward = $game_data{persons}{$actualPerson}{keywords}{$keyword};
+                
+                if($reward){
+                    # Only add if not already in inventory
+                    unless (grep { $_ eq $reward } @inventory) {
+                        push @inventory, $reward;
+                        my $response=filterAndLoadModifier($game_data{persons}{$actualPerson}{askanswers}{$keyword});
+                        print "$displayName: \"$response\"\n";
+                        # Display reward item description
+                        if (exists $game_data{items}{$reward}{description}) {
+                            print "Gives you: $game_data{items}{$reward}{description}\n";
+                        }
+                        else{
+                            print "Gives you $reward.\n";
+                        }
 
-                # Only add if not already in inventory
-                unless (grep { $_ eq $reward } @inventory) {
-                    push @inventory, $reward;
+                    } else {
+                        print "You already received that from this person.\n";
+                    }
+                }
+                else{
                     my $response=filterAndLoadModifier($game_data{persons}{$actualPerson}{askanswers}{$keyword});
                     print "$displayName: \"$response\"\n";
-                    # Display reward item description
-                    if (exists $game_data{items}{$reward}{description}) {
-                        print "Gives you: $game_data{items}{$reward}{description}\n";
-                    }
-                    else{
-                        print "Gives you $reward.\n";
-                    }
-
-                } else {
-                    print "You already received that from this person.\n";
                 }
                 $answered = 1;
             }
