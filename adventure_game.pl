@@ -209,11 +209,12 @@ sub handle_help{
     print "Interact with persons or the environment:\n";
     print "- Search:      Find hidden items in a location with 'search [target]'.\n";
     print "               Tip: Try searching objects described in the location\n";
-    print "- Ask:         Interact with persons using 'ask [person] about [topic]'.\n";
-    print "               They may respond by giving you an item and maybe perform an action.\n";
+    print "- Ask:         Ask a person a question 'ask [person] about [topic]'.\n";
+    print "- Ask:         Ask a person to perform an action 'ask [person] to [action]'.\n";
+    print "               If they know or can, they respond by giving you an item and/or perform an action.\n";
     print "- Trade:       Exchange items with persons using 'trade [item] with [person]'.\n";
     print "- Give:        Offer items to person using 'give [item] to [person]'.\n";
-    print "               They may respond with information and maybe perform an action.\n\n";
+    print "               If they want it, they respond with information and maybe perform an action.\n\n";
     print "When confronted with an enemy:\n"; 
     print "- Fight:       Engage enemies with 'fight [enemy] with [item]'.\n";
     print "- Retreat:     Move back to the previous room with 'retreat'.\n\n";
@@ -466,6 +467,8 @@ sub handle_action {
     } elsif ($action =~ /^drop (.*)$/) {  # New command to drop an item
         handle_drop($1);
     } elsif ($action =~ /^ask (.*) about (.*)$/) {  # New command to ask persons questions
+        handle_ask($1, $2);
+    } elsif ($action =~ /^ask (.*) to (.*)$/) {  # New command to ask persons to do something
         handle_ask($1, $2);
     } elsif ($action =~ /^trade (.*) with (.*)$/) {  # New command to trade items with persons
         handle_trade($1, $2);
