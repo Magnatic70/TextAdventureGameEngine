@@ -62,7 +62,7 @@ Adventures are built using a configuration file that defines the game world. The
 - Hints
 
 ## Title
-Define the title of the game. This will be visible as the webpage title.
+Define the title of the game.
 ```
 Title:<brief title>
 ```
