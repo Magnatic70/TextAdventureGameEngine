@@ -81,6 +81,8 @@ sub process_config_line{
         $game_data{objective} = $1;
     } elsif ($line =~ /^FinalDestination:(.*)$/) {
         $game_data{final_destination} = $1;
+    } elsif ($line =~ /^FinalMessage:(.*)$/) {
+        $game_data{final_message} = $1;
     } elsif ($line =~ /^Item:(.*)$/) {
         $current_item = $1;
         $game_data{items}{$current_item} = {};

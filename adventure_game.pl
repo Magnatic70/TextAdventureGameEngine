@@ -260,7 +260,12 @@ sub start_game {
 
         # Check if current room is the final destination
         if ($current_room_id eq $game_data{final_destination}) {
-            print "\n\033[92;6mCongratulations! You've won the game!\033[0m\n";
+            if($game_data{final_message}){
+                print "\n\033[92;6m$game_data{final_message}\033[0m\n";
+            }
+            else{
+                print "\n\033[92;6mCongratulations! You've won the game!\033[0m\n";
+            }
             last;  # Exit game loop
         }
         

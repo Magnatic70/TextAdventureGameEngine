@@ -216,11 +216,12 @@ AddToInventory:<item1>,<item2>,...
 RemoveFromInventory:<item1>,<item2>,...
 ```
 
-## Final Destination
+## Final Destination and FinalMessage
 FinalDestination: (exactly one required)
-
+FinalMessage: (optional)
 ```
 FinalDestination:<RoomID of winning location>
+FinalMessage:<message to be shown to the player at the end of the game>
 ```
 
 
