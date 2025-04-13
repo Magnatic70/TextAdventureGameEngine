@@ -189,7 +189,7 @@ sub showRoomInfo{
                 push(@roompersons,$person);
             }
         }
-        print "Persons here: ". join(", ", @roompersons), "\n";
+        print "Interact with: ". join(", ", @roompersons), "\n";
     }
 }
 
@@ -206,14 +206,15 @@ sub handle_help{
     print "- Describe:    Get a description of an item in your inventory using 'describe [item]'.\n";
     print "- Inventory:   View all items and their descriptions using 'inventory'.\n";
     print "- Drop:        Remove an item from your inventory using 'drop [item]'.\n\n";
-    print "Interact with persons or the environment:\n";
+    print "Search for items:\n";
     print "- Search:      Find hidden items in a location with 'search [target]'.\n";
-    print "               Tip: Try searching objects described in the location\n";
-    print "- Ask:         Ask a person a question 'ask [person] about [topic]'.\n";
-    print "- Ask:         Ask a person to perform an action 'ask [person] to [action]'.\n";
+    print "               Tip: Try searching objects described in the location\n\n";
+    print "Interact:\n";
+    print "- Ask:         Ask a question 'ask [person] about [topic]'.\n";
+    print "- Ask:         Ask to perform an action 'ask [person] to [action]'.\n";
     print "               If they know or can, they respond by giving you an item and/or perform an action.\n";
-    print "- Trade:       Exchange items with persons using 'trade [item] with [person]'.\n";
-    print "- Give:        Offer items to person using 'give [item] to [person]'.\n";
+    print "- Trade:       Exchange items using 'trade [item] with [person]'.\n";
+    print "- Give:        Offer items using 'give [item] to [person]'.\n";
     print "               If they want it, they respond with information and maybe perform an action.\n\n";
     print "When confronted with an enemy:\n"; 
     print "- Fight:       Engage enemies with 'fight [enemy] with [item]'.\n";
@@ -290,7 +291,7 @@ sub start_game {
             chomp($action);
         }
         if($debug || $inputType ne 'stdin'){
-            print "\033[34m".$action."\033[0m\n\n";
+            print "\033[34m".$action."\033[0m\n------------------------------------\n";
         }
 
         handle_action($action);
@@ -593,7 +594,7 @@ sub handle_examine {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $contained_item } @inventory) {
                     push @inventory, $contained_item;
-                    print "You found a ", $contained_item, " in the $item.\n";
+                    print "$item contains: $contained_item\n";
 
                     # Display searched item description
                     if (exists $game_data{items}{$contained_item}{description}) {

@@ -22,10 +22,10 @@ Players can use these commands to interact with the game world:
 * Search: search [target] - find hidden objects in locations
 * Combine: combine [item1] and [item2]
 * Drop: drop [item]
-* Ask: ask [person] about [topic] - If they know they respond by giving you an item and/or perform an action
-* Ask: ask [person] to [action] - If they can they respond by giving you an item and/or perform an action
-* Trade: trade [item] with [person]
-* Give: give [item] to [person] - They might respond with information and maybe perform an action
+* Ask: ask [person/thing] about [topic] - If they know they respond by giving you an item and/or perform an action
+* Ask: ask [person/thing] to [action] - If they can they respond by giving you an item and/or perform an action
+* Trade: trade [item] with [person/thing]
+* Give: give [item] to [person/thing] - They might respond with information and maybe perform an action
 * Inventory: inventory - get detailled descriptions of all items in the inventory
 * Fight: fight [enemy] with [item]
 * Retreat (during combat)
