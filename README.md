@@ -36,7 +36,10 @@ Players can use these commands to interact with the game world:
 2. **Debug Mode**: Use for automated testing by piping test steps to the engine: `cat <test steps> | ./adventure_game.pl <game name>` (stops at unknown commands/items)
 3. **Browser Frontend**: Run the backend and access through a web browser at `http://<your ip>:4545`
    - First start: `python3 app.py`
-4. **Docker Container**: Create with `./build-docker.sh` and run with `./start-docker.sh`
+4. **Docker Container**: Create with `./build-docker.sh` and run with
+```
+docker run -d --restart unless-stopped -p 4546:4545 -v <dir where your adventures are stored>:/app/adventures -v <dir where the session files will be stored>:/app/sessions adventure-game-engine
+```
    - You'll find the frontend in your web browser at `http://<your ip>:4546`
 
 # Configuration
