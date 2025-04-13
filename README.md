@@ -119,7 +119,8 @@ SearchableItems:<target>:<item>,... (optional)
 Locks:<required item> (optional)
 UnlockTexts:<message when first entering with unlock item> 
             (optional if Locks is defined, optionally contains {LoadModifier:<modifier name>})
-UnlockHints:<message that provides the user a hint on what is needed to unlock the door> (optional if Locks is defined)
+UnlockHints:<message that provides the user a hint on what is needed to unlock the door>
+            (optional if Locks is defined)
 Puzzle:<text introduction> (optional, mutually exclusive with Enemy)
 Riddle:<question> (mandatory if Puzzle is defined)
 Answer:<correct answer> (mandatory if Puzzle is defined)
@@ -181,9 +182,11 @@ In the positive response for an ask or an accept you can trigger a modifier by e
 ```
 Person:<personID or short name>
 DisplayName:<name of person that will be displayed to the player> (optional)
-Keywords:<topic>:<gift item>:<response>;<topic2>:<gift item2>:<response2>;... (optional)
+Keywords:<topic>:<gift item>:<response>;<topic2>:<gift item2>:<response2>;... 
+         (optional, optionally contains {LoadModifier:<modifier name>})
 Trades:<player offered item>:<person gives item>:<response> (optional)
-Accepts:<player gifted item>:<response>;<player gifted item2>:<response2>l... (optional)
+Accepts:<player gifted item>:<response>;<player gifted item2>:<response2>;... 
+         (optional, optionally contains {LoadModifier:<modifier name>})
 NegativeAskResponse:<response when asking about something they don't know about> (optional)
 NegativeTradeResponse:<response for trade they are not interested in> (optional)
 NegativeGiveResponse:<response for a gift they are not interested in> (optional)
