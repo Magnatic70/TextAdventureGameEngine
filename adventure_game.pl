@@ -97,7 +97,7 @@ if($inputType eq 'file' || $inputType eq 'argv'){
 my $current_room_id = $game_data{first_room_id};
 my @room_history;  # Stack to track room history
 my $room_data;
-my @loadedModFiles; # Keep track of all loaded modifiers
+my @loadedModifiers; # Keep track of all loaded modifiers
 
 # Track unlocked rooms
 my %unlocked_rooms;
@@ -227,13 +227,13 @@ sub handle_help{
 }
 
 sub loadModifier{
-    my($modFile)=@_;
-    unless (grep { $_ eq $modFile } @loadedModFiles){
-        load_game_data($adventureDir.$modFile);
+    my($modifierName)=@_;
+    unless (grep { $_ eq $modifierName } @loadedModifiers){
+        load_modifier_array($modifierName);
         if($debug){
             validate_game_data(%game_data);
         }
-        push(@loadedModFiles,$modFile);
+        push(@loadedModifiers,$modifierName);
     }
 }
 

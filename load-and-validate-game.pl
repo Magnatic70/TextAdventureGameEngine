@@ -71,6 +71,10 @@ sub process_config_line{
         $game_data{rooms}{$current_room_id}{searchable_items} = \%searchable_map;
     } elsif ($line =~ /^Title:(.*)$/) {
         $game_data{title} = $1;
+    } elsif ($line =~ /^\{Modifier:(.*)\}$/) {
+        print "Created a new modifier $1\n";
+        $current_modifier = $1;
+        @{$game_data{modifiers}{$current_modifier}}=();
     } elsif ($line =~ /^WIP:(.*)$/) {
         $game_data{wip} = $1;
     } elsif ($line =~ /^Objective:(.*)$/) {
@@ -161,13 +165,23 @@ sub load_game_data {
     open my $fh, '<', $filename or die "Cannot open '$filename': $!";
 
     my ($current_room_id, $current_item, $current_person);  # Temporary variables to hold the current room ID and item/person names
+    our($current_modifier);
+    $current_modifier='--root--';
 
     while (my $line = <$fh>) {
         chomp($line);
         next if $line =~ /^\s*$/;  # Skip empty lines
-
-        process_config_line($line);
         
+        if ($line =~ /^\{\/Modifier\}$/) {
+            $current_modifier = '--root--';
+            next;
+        }
+        if($current_modifier eq '--root--'){
+            process_config_line($line);
+        }
+        else{
+            push(@{$game_data{modifiers}{$current_modifier}},$line);
+        }
     }
 
     close $fh;
@@ -175,6 +189,16 @@ sub load_game_data {
         $game_data{wip}='false';
     }
 }
+
+sub load_modifier_array {
+    my $modifierName=shift;
+    my ($current_room_id, $current_item, $current_person, $current_modifier);  # Temporary variables to hold the current room ID and item/person names
+
+    foreach my $line (@{$game_data{modifiers}{$modifierName}}){
+        process_config_line($line);
+    }
+}
+    
 
 # Validate game data for missing descriptions and undefined exits
 sub validate_game_data {
