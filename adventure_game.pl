@@ -270,8 +270,10 @@ sub start_game {
         }
         
         # Check if a modifier file should be loaded
-        if ($game_data{rooms}{$current_room_id}{modifier_file}){
-            loadModifier($game_data{rooms}{$current_room_id}{modifier_file});
+        if ($game_data{rooms}{$current_room_id}{modifiers}){
+            foreach my $modifier (@{$game_data{rooms}{$current_room_id}{modifiers}}){
+                loadModifier($modifier);
+            }
         }
 
         # Prompt for user action with green text
@@ -765,7 +767,7 @@ sub determineActualPerson{
 
 sub filterAndLoadModifier{
     my($response)=@_;
-    if($response=~s/\{LoadModifier:(.*?)\}//){
+    while($response=~s/\{LoadModifier:(.*?)\}//){
         loadModifier($1);
     }
     return $response;

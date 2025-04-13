@@ -29,7 +29,7 @@ sub process_config_line{
     } elsif ($line =~ /^SourceRoomID:(.*)$/){
         $game_data{rooms}{$current_room_id}{sourceroom} = $1;
     } elsif ($line =~ /^LoadModifier:(.*)$/){
-        $game_data{rooms}{$current_room_id}{modifier_file} = $1;
+        @{$game_data{rooms}{$current_room_id}{modifiers}} = split(',',$1);
     } elsif ($line =~ /^Items:(.*)$/) {
         my @items = split /,/, $1;
         if(exists $game_data{rooms}{$current_room_id}{items}){
@@ -72,7 +72,6 @@ sub process_config_line{
     } elsif ($line =~ /^Title:(.*)$/) {
         $game_data{title} = $1;
     } elsif ($line =~ /^\{Modifier:(.*)\}$/) {
-        print "Created a new modifier $1\n";
         $current_modifier = $1;
         @{$game_data{modifiers}{$current_modifier}}=();
     } elsif ($line =~ /^WIP:(.*)$/) {
