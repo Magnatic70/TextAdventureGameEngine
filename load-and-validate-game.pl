@@ -61,6 +61,7 @@ sub process_config_line{
     } elsif ($line =~ /^Answer:(.*)$/) {
         $game_data{rooms}{$current_room_id}{answer} = $1;
     } elsif ($line =~ /^SearchableItems:(.*)$/) {
+        $game_data{help}{search}=1;
         my @searchables = split /,/, $1;
         my %searchable_map;
         foreach my $searchable (@searchables) {
@@ -83,19 +84,24 @@ sub process_config_line{
     } elsif ($line =~ /^FinalMessage:(.*)$/) {
         $game_data{final_message} = $1;
     } elsif ($line =~ /^Item:(.*)$/) {
+        $game_data{help}{item}=1;
         $current_item = $1;
         $game_data{items}{$current_item} = {};
     } elsif ($line =~ /^Contains:(.*)$/) {
+        $game_data{help}{examine}=1;
         my @contains_items = split /,/, $1;
         $game_data{items}{$current_item}{contains} = \@contains_items if @contains_items;
     } elsif ($line =~ /^SplitsInto:(.*)$/) {
+        $game_data{help}{deconstruct}=1;
         my @split_items = split /,/, $1;
         $game_data{items}{$current_item}{splits_into} = \@split_items if @split_items;
     } elsif ($line =~ /^Combine:(.*)$/) {
+        $game_data{help}{combine}=1;
         my ($combine_from, $combine_to) = split /=/, $1;
         my ($item1, $item2) = split /,/, $combine_from;
         $game_data{combine}{$item1}{$item2} = $combine_to;
     } elsif ($line =~ /^Enemy:(.*)$/) {
+        $game_data{help}{enemy}=1;
         my ($enemy, $required_item) = split /:/, $1;
         $game_data{rooms}{$current_room_id}{enemy} = { name => $enemy, required_item => $required_item };
     } elsif ($line =~ /^DefeatDescription:(.*)$/) {
@@ -114,6 +120,7 @@ sub process_config_line{
     } elsif ($line =~ /^NegativeTradeResponse:(.*)$/){
         $game_data{persons}{$current_person}{negativetraderesponse}=$1;
     } elsif ($line =~ /^Keywords:(.*)$/) {
+        $game_data{help}{ask}=1;
         my %keywords_map;
         my %answers_map;
         foreach my $keyword_tripple (split /;/, $1) {
@@ -125,6 +132,7 @@ sub process_config_line{
         $game_data{persons}{$current_person}{keywords} = \%keywords_map;
         $game_data{persons}{$current_person}{askanswers} = \%answers_map;
     } elsif ($line =~ /^Accepts:(.*)$/) {
+        $game_data{help}{give}=1;
         my %gift_responses_map;
         foreach my $accept_double (split /;/, $1) {
             if ($accept_double =~ /^(.*?):(.*?)$/) {
@@ -133,6 +141,7 @@ sub process_config_line{
         }
         $game_data{persons}{$current_person}{accept_responses} = \%gift_responses_map;
     } elsif ($line =~ /^Trades:(.*)$/) {
+        $game_data{help}{trade}=1;
         my %trades_map;
         my %answers_map;
         foreach my $trade_tripple (split /;/, $1) {
