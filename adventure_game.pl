@@ -895,8 +895,8 @@ sub handle_give {
             }
         }
         if (!$accepted) {
-            if($game_data{persons}{$actualPerson}{negativegiftresponse}){
-                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativegiftresponse}.'"'."\n";
+            if($game_data{persons}{$actualPerson}{negativegiveresponse}){
+                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativegiveresponse}.'"'."\n";
             }
             else{
                 print "$displayName: \"I have no use for $item.\"\n";

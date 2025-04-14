@@ -119,6 +119,8 @@ sub process_config_line{
         $game_data{persons}{$current_person}{negativeaskresponse}=$1;
     } elsif ($line =~ /^NegativeTradeResponse:(.*)$/){
         $game_data{persons}{$current_person}{negativetraderesponse}=$1;
+    } elsif ($line =~ /^NegativeGiveResponse:(.*)$/){
+        $game_data{persons}{$current_person}{negativegiveresponse}=$1;
     } elsif ($line =~ /^Keywords:(.*)$/) {
         $game_data{help}{ask}=1;
         my %keywords_map;
