@@ -329,7 +329,7 @@ sub handle_puzzle {
 
             # Display contained item description
             if (exists $game_data{items}{$room_data->{reward_item}}{description}) {
-                print "$game_data{items}{$room_data->{reward_item}}{description}\n";
+                print filterAndLoadModifier($game_data{items}{$room_data->{reward_item}}{description})."\n";
             }
         }
         else{
@@ -528,7 +528,7 @@ sub handle_move {
             if($#unlockHints>=0){
                 print "\033[31m";
                 foreach my $unlockHint (@unlockHints){
-                    print $unlockHint."\n";
+                    print filterAndLoadModifier($unlockHint)."\n";
                 }
                 print "\033[0m";
             }
@@ -570,7 +570,7 @@ sub handle_take {
 
             # Display item description
             if (exists $game_data{items}{$item}{description}) {
-                print "$game_data{items}{$item}{description}\n";
+                print filterAndLoadModifier($game_data{items}{$item}{description})."\n";
             }
 
             @{$room_data->{items}} = grep { $_ ne $item } @{ $room_data->{items} };
@@ -598,7 +598,7 @@ sub handle_examine {
 
                     # Display searched item description
                     if (exists $game_data{items}{$contained_item}{description}) {
-                        print "$game_data{items}{$contained_item}{description}\n";
+                        print filterAndLoadModifier($game_data{items}{$contained_item}{description})."\n";
                     }
                 } else {
                     print "You already have the $contained_item in your inventory.\n";
@@ -627,7 +627,7 @@ sub handle_deconstruct {
 
                     # Display searched item description
                     if (exists $game_data{items}{$split_item}{description}) {
-                        print "  $game_data{items}{$split_item}{description}\n";
+                        print "  ".filterAndLoadModifier($game_data{items}{$split_item}{description})."\n";
                     }
                 } else {
                     print "You already have the $split_item in your inventory.\n";
@@ -650,13 +650,13 @@ sub handle_describe {
 
     if (grep { $_ eq $item } @inventory) {
         if (exists $game_data{items}{$item}{description}) {
-            print "$game_data{items}{$item}{description}\n";
+            print filterAndLoadModifier($game_data{items}{$item}{description})."\n";
         } else {
             print "You don't have a description for the $item.\n";
         }
     } elsif (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
         if (exists $game_data{items}{$item}{description}) {
-            print "$game_data{items}{$item}{description}\n";
+            print filterAndLoadModifier($game_data{items}{$item}{description})."\n";
         } else {
             print "You don't have a description for the $item.\n";
         }
@@ -677,7 +677,7 @@ sub handle_search {
 
                 # Display searched item description
                 if (exists $game_data{items}{$item}{description}) {
-                    print "Found: $game_data{items}{$item}{description}\n";
+                    print "Found: ".filterAndLoadModifier($game_data{items}{$item}{description})."\n";
                 }
                 else{
                     print "Found: $item\n";
@@ -711,7 +711,7 @@ sub handle_combine {
 
                 # Display new item description
                 if (exists $game_data{items}{$new_item}{description}) {
-                    print "$game_data{items}{$new_item}{description}\n";
+                    print filterAndLoadModifier($game_data{items}{$new_item}{description})."\n";
                 }
             } else {
                 print "You already have that item in your inventory.\n";
@@ -794,7 +794,7 @@ sub handle_ask {
                         print "$displayName: \"$response\"\n";
                         # Display reward item description
                         if (exists $game_data{items}{$reward}{description}) {
-                            print "Gives you: $game_data{items}{$reward}{description}\n";
+                            print "Gives you: ".filterAndLoadModifier($game_data{items}{$reward}{description})."\n";
                         }
                         else{
                             print "Gives you $reward.\n";
@@ -813,7 +813,7 @@ sub handle_ask {
         }
         if (!$answered) {
             if($game_data{persons}{$actualPerson}{negativeaskresponse}){
-                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativeaskresponse}.'"'."\n";
+                print "$displayName: ".'"'.filterAndLoadModifier($game_data{persons}{$actualPerson}{negativeaskresponse}).'"'."\n";
             }
             else{
                 print "$displayName: \"I don't know the answer to this question.\"\n";
@@ -841,10 +841,10 @@ sub handle_trade {
                 # Only add if not already in inventory
                 unless (grep { $_ eq $reward } @inventory) {
                     push @inventory, $reward;
-                    print "$displayName: \"$game_data{persons}{$actualPerson}{tradeanswers}{$item}\"\n";
+                    print "$displayName: \"".filterAndLoadModifier($game_data{persons}{$actualPerson}{tradeanswers}{$item})."\"\n";
                     # Display reward item description
                     if (exists $game_data{items}{$reward}{description}) {
-                        print "Gives you: $game_data{items}{$reward}{description}\n";
+                        print "Gives you: ".filterAndLoadModifier($game_data{items}{$reward}{description})."\n";
                     }
                     else{
                         print "Gives you: $reward.\n";
@@ -861,7 +861,7 @@ sub handle_trade {
         }
         if (!$traded) {
             if($game_data{persons}{$actualPerson}{negativetraderesponse}){
-                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativetraderesponse}.'"'."\n";
+                print "$displayName: ".'"'.filterAndLoadModifier($game_data{persons}{$actualPerson}{negativetraderesponse}).'"'."\n";
             }
             else{
                 print "$displayName: \"I don't want to trade for $item.\"\n";
@@ -896,7 +896,7 @@ sub handle_give {
         }
         if (!$accepted) {
             if($game_data{persons}{$actualPerson}{negativegiveresponse}){
-                print "$displayName: ".'"'.$game_data{persons}{$actualPerson}{negativegiveresponse}.'"'."\n";
+                print "$displayName: ".'"'.filterAndLoadModifier($game_data{persons}{$actualPerson}{negativegiveresponse}).'"'."\n";
             }
             else{
                 print "$displayName: \"I have no use for $item.\"\n";
@@ -914,7 +914,7 @@ sub handle_inventory {
         foreach my $item (sort @inventory) {
             print "\033[1m$item: \033[0m";
             if (exists $game_data{items}{$item}{description}) {
-                print "$game_data{items}{$item}{description}\n";
+                print filterAndLoadModifier($game_data{items}{$item}{description})."\n";
             } else {
                 print "No description available.\n";
             }
@@ -928,7 +928,7 @@ sub handle_inventory {
 sub handle_hint {
     my ($subject) = @_;
     if (exists $game_data{hints}{$subject}) {
-        print "Hint for '$subject': \n$game_data{hints}{$subject}\n";
+        print "Hint for '$subject': \n".filterAndLoadModifier($game_data{hints}{$subject})."\n";
     } else {
         print "No hints available for '$subject'.\n";
     }
