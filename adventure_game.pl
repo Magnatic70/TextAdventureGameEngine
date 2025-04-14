@@ -652,16 +652,10 @@ sub handle_describe {
         if (exists $game_data{items}{$item}{description}) {
             print filterAndLoadModifier($game_data{items}{$item}{description})."\n";
         } else {
-            print "You don't have a description for the $item.\n";
-        }
-    } elsif (exists $room_data->{items} && grep { $_ eq $item } @{ $room_data->{items} }) {
-        if (exists $game_data{items}{$item}{description}) {
-            print filterAndLoadModifier($game_data{items}{$item}{description})."\n";
-        } else {
-            print "You don't have a description for the $item.\n";
+            print "No description for: $item.\n";
         }
     } else {
-        print "There is no such item here or in your inventory.\n";
+        print "There is no such item in your inventory.\n";
     }
 }
 
