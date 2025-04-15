@@ -229,7 +229,11 @@ sub handle_help{
 
 sub loadModifier{
     my($modifierName)=@_;
-    unless (grep { $_ eq $modifierName } @loadedModifiers){
+    my $alwaysLoad;
+    if($modifierName=~s/\!$//){
+        $alwaysLoad=1;
+    }
+    if (!(grep { $_ eq $modifierName } @loadedModifiers) || $alwaysLoad){
         load_modifier_array($modifierName);
         if($debug){
             validate_game_data(%game_data);

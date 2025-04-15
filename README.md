@@ -102,11 +102,18 @@ Item:rusty key
 ItemDescription:A tarnished iron key, covered in rust. It looks like it might fit an old lock.
 Contains:small gear
 Combine:small gear,wire=makeshift lockpick
-DropLocation:postoffice:Thank you! We will deliver your package as soon as possible.{LoadModifier=sendKeyAsPackage}
+DropLocation:postoffice:Thank you! We will deliver your package as soon as possible.{LoadModifier=sendKeyAsPackage!}
 
 Item:makeshift lockpick
 ItemDescription:A lockpick, maybe good enough to pick one lock?
 SplitsInto:small gear,wire
+
+{Modifier:sendKeyAsPackage}
+RemoveItemFromLocation:rusty key:postoffice
+
+RoomID:myhome
+Items:rusty key
+{/Modifier}
 ```
 
 ## Room and Modifier Configuration
@@ -157,8 +164,8 @@ LoadModifier:example-1
 Item:worn map
 ItemDescription:An old, faded map showing a portion of the surrounding area. It seems to indicate something valuable is hidden nearby.
 ```
-The LoadModifier option is a very powerful tool. It enables you to load a part of the config when the player successfully enters or unlocks a location for the first time. All subsequent entries into the location will not load the modifier again. The contents of the modifier are overlayed on
-the current config and state of the adventure. You can add or change all configurable objects. A modifier basically is a complete adventure configuration file. If you change an object, the properties of that object will reflect the values in the modifier.
+The LoadModifier option is a very powerful tool. It enables you to load a part of the config when the Modifier is triggered for the first time. All subsequent entries into the location will not load the modifier again, unless you end the call to the modifier with a '!'. See the example above with the postoffice and the rusty key, where the key will be teleported to your home every time.
+The contents of the modifier are overlayed on the current config and state of the adventure. You can add or change all configurable objects. A modifier basically is a complete adventure configuration file. If you change an object, the properties of that object will reflect the values in the modifier.
 The only exception is for items in a room. Those are added to the items that are already present in the room. This is because players can drop items in a room and you don't want those items to disappear.
 With `Locks:-` you can remove all locks from a location.
 
@@ -184,7 +191,7 @@ The location forest_entrance will now have a pine cone added as an item, there i
 
 ## Person Configuration
 Persons can give items based on questions asked, offer trades or accept gifts.
-In the positive response for an ask or an accept you can trigger a modifier by embedding `{LoadModifier=<modifier name>}` in the response text.
+In the responses you can trigger a modifier by embedding `{LoadModifier=<modifier name>}` in the response text.
 ```
 Person:<personID or short name>
 DisplayName:<name of person that will be displayed to the player> (optional)
