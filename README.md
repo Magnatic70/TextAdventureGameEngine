@@ -102,7 +102,7 @@ Item:rusty key
 ItemDescription:A tarnished iron key, covered in rust. It looks like it might fit an old lock.
 Contains:small gear
 Combine:small gear,wire=makeshift lockpick
-DropLocations:postoffice:Thank you! We will deliver your package as soon as possible.{LoadModifier=sendKeyAsPackage}
+DropLocation:postoffice:Thank you! We will deliver your package as soon as possible.{LoadModifier=sendKeyAsPackage}
 
 Item:makeshift lockpick
 ItemDescription:A lockpick, maybe good enough to pick one lock?
