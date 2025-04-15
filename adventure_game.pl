@@ -725,19 +725,26 @@ sub handle_combine {
 
 sub handle_drop {
     my ($item) = @_;
-    my ($room_data);
+    my ($room_data,$dropRoomID);
     if(exists $game_data{rooms}{$current_room_id}{sourceroom}){
         $room_data=$game_data{rooms}{$game_data{rooms}{$current_room_id}{sourceroom}};
+        $dropRoomID=$game_data{rooms}{$current_room_id}{sourceroom};
     }
     else{
         $room_data = $game_data{rooms}{$current_room_id};
+        $dropRoomID=$current_room_id;
     }
 
     if (grep { $_ eq $item } @inventory) {
         # Remove from inventory
         @inventory = grep { $_ ne $item } @inventory;
         push(@{$room_data->{items}},$item);
-        print "You dropped the $item.\n";
+        if($game_data{items}{$item}{droplocations}{$dropRoomID}){ # There is a text to show when the item is dropped in this location
+            print filterAndLoadModifier($game_data{items}{$item}{droplocations}{$dropRoomID})."\n";
+        }
+        else{
+            print "You dropped the $item.\n";
+        }
     } else {
         print "You don't have a $item in your inventory.\n";
         if ($debug) { die; }
@@ -762,7 +769,7 @@ sub determineActualPerson{
 
 sub filterAndLoadModifier{
     my($response)=@_;
-    while($response=~s/\{LoadModifier:(.*?)\}//){
+    while($response=~s/\{LoadModifier=(.*?)\}//){
         loadModifier($1);
     }
     return $response;

@@ -100,6 +100,18 @@ sub process_config_line{
         my ($combine_from, $combine_to) = split /=/, $1;
         my ($item1, $item2) = split /,/, $combine_from;
         $game_data{combine}{$item1}{$item2} = $combine_to;
+    } elsif ($line =~ /^DropLocation:(.*)$/) {
+        my($roomID,$dropText)=split(':',$1);
+        $game_data{items}{$current_item}{droplocations}{$roomID}=$dropText;
+    } elsif ($line =~ /^RemoveItemFromLocation:(.*)$/) {
+        my($item,$roomID)=split(':',$1);
+        my $room_data = $game_data{rooms}{$roomID};
+        my ($sourceRoom_data);
+        if(exists $game_data{rooms}{$current_room_id}{sourceroom}){
+            $sourceRoom_data=$game_data{rooms}{$game_data{rooms}{$current_room_id}{sourceroom}};
+        }
+        @{$room_data->{items}} = grep { $_ ne $item } @{ $room_data->{items} };
+        @{$sourceRoom_data->{items}} = grep { $_ ne $item } @{ $sourceRoom_data->{items} };
     } elsif ($line =~ /^Enemy:(.*)$/) {
         $game_data{help}{enemy}=1;
         my ($enemy, $required_item) = split /:/, $1;

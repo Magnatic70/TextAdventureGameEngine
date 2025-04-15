@@ -88,10 +88,12 @@ Items can be found by taking, receiving as gifts, trading, combining, deconstruc
 
 ```
 Item:<short item name>
-ItemDescription:<detailed description when acquired>
+ItemDescription:<detailed description when acquired, optionally contains {LoadModifier=<modifier name>}>
 Contains:<item to find when examined> (optional). The original item remains in the player's inventory
 Combine:<item1>,<item2>=<resulting item> (optional). The original items are removed from the player's inventory
 SplitsInto:<item1>,<item2>,etc. (optional). The original item is removed from the player's inventory
+DropLocation:<sourceRoomID>:<dropText> (optional, can be used multiple times). dropText optionally contains {LoadModifier=<modName>}
+RemoveItemFromLocation:<roomID>:<item> (optional). For use in Modifier: removes an item from a location
 ```
 
 Example:
@@ -100,6 +102,7 @@ Item:rusty key
 ItemDescription:A tarnished iron key, covered in rust. It looks like it might fit an old lock.
 Contains:small gear
 Combine:small gear,wire=makeshift lockpick
+DropLocations:postoffice:Thank you! We will deliver your package as soon as possible.{LoadModifier=sendKeyAsPackage}
 
 Item:makeshift lockpick
 ItemDescription:A lockpick, maybe good enough to pick one lock?
@@ -108,7 +111,7 @@ SplitsInto:small gear,wire
 
 ## Room and Modifier Configuration
 Rooms define locations with descriptions and connections to other rooms. The first location you define in the config will be the location the player starts their adventure.
-Modifiers change part of the game during game play, depending on actions of the player.
+Modifiers change any part of the game during game play, depending on the actions of the player.
 
 ```
 RoomID:<unique room identifier>
@@ -121,9 +124,9 @@ Items:<item1>,<item2>,... (optional)
 SearchableItems:<target>:<item>,... (optional)
 Locks:<required item> (optional)
 UnlockTexts:<message when first entering with unlock item> 
-            (optional if Locks is defined, optionally contains {LoadModifier:<modifier name>})
+            (optional if Locks is defined, optionally contains {LoadModifier=<modifier name>})
 UnlockHints:<message that provides the user a hint on what is needed to unlock the door>
-            (optional if Locks is defined)
+            (optional if Locks is defined, optionally contains {LoadModifier=<modifier name>})
 Puzzle:<text introduction> (optional, mutually exclusive with Enemy)
 Riddle:<question> (mandatory if Puzzle is defined)
 Answer:<correct answer> (mandatory if Puzzle is defined)
@@ -181,18 +184,18 @@ The location forest_entrance will now have a pine cone added as an item, there i
 
 ## Person Configuration
 Persons can give items based on questions asked, offer trades or accept gifts.
-In the positive response for an ask or an accept you can trigger a modifier by embedding `{LoadModifier:<modifier name>}` in the response text.
+In the positive response for an ask or an accept you can trigger a modifier by embedding `{LoadModifier=<modifier name>}` in the response text.
 ```
 Person:<personID or short name>
 DisplayName:<name of person that will be displayed to the player> (optional)
 Keywords:<topic>:<gift item>:<response>;<topic2>:<gift item2>:<response2>;... 
-         (optional, optionally contains {LoadModifier:<modifier name>})
+         (optional, optionally contains {LoadModifier=<modifier name>})
 Trades:<player offered item>:<person gives item>:<response> (optional)
 Accepts:<player gifted item>:<response>;<player gifted item2>:<response2>;... 
-         (optional, optionally contains {LoadModifier:<modifier name>})
-NegativeAskResponse:<response when asking about something they don't know about> (optional)
-NegativeTradeResponse:<response for trade they are not interested in> (optional)
-NegativeGiveResponse:<response for a gift they are not interested in> (optional)
+         (optional, optionally contains {LoadModifier=<modifier name>})
+NegativeAskResponse:<response when asking about something they don't know about> (optional, optionally contains {LoadModifier=<modifier name>})
+NegativeTradeResponse:<response for trade they are not interested in> (optional, optionally contains {LoadModifier=<modifier name>})
+NegativeGiveResponse:<response for a gift they are not interested in> (optional, optionally contains {LoadModifier=<modifier name>})
 ```
 
 Example:
@@ -201,7 +204,7 @@ Person:omh
 DisplayName:Old Man Hemlock
 Keywords:secret passage:map:Here's a map that could be useful;treasure:gold coin:Here's some gold. Spend it wisely.
 Trades:apple pie:small potion:Ah, you shouldn't have! But I appreciate the gesture.
-Accepts:pine cone:Thank you for this pine cone. I've unlocked the barn for you.{LoadModifier:unlock-barn}
+Accepts:pine cone:Thank you for this pine cone. I've unlocked the barn for you.{LoadModifier=unlock-barn}
 NegativeAskResponse:I don't know, but maybe the butcher does.
 NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
 NegativeGiftResonse:Sorry, I can't accept your gift.
