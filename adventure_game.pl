@@ -220,7 +220,7 @@ sub handle_help{
     print "- Fight:       Engage enemies with 'fight [enemy] with [item]'.\n" if $game_data{help}{enemy};
     print "- Retreat:     Move back to the previous room with 'retreat'.\n" if $game_data{help}{enemy};
     print "\nGeneral actions\n";
-    print "- Hint:        Ask for hints on a subject using 'hint [subject]'.\n";
+    print "- Hint:        Ask for hints on a subject using 'hint [subject]'.\n" if $game_data{help}{hint};
     print "- Help:        Shows this list of available actions 'help'.\n";
     if($inputType eq 'stdin'){
         print "- Quit:        Exit the game by typing 'quit'.\n";

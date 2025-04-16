@@ -167,6 +167,7 @@ sub process_config_line{
         $game_data{persons}{$current_person}{trades} = \%trades_map;
         $game_data{persons}{$current_person}{tradeanswers} = \%answers_map;
     } elsif ($line =~ /^Hint:(.*)$/) {
+        $game_data{help}{hint}=1;
         my ($subject, $hint_text) = split /:/, $1, 2;
         $game_data{hints}{$subject} = $hint_text;
     } elsif ($line =~ /^AddToInventory:(.*)$/) {
