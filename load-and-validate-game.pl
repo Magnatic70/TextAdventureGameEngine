@@ -86,7 +86,6 @@ sub process_config_line{
     } elsif ($line =~ /^Item:(.*)$/) {
         $game_data{help}{item}=1;
         $current_item = $1;
-        $game_data{items}{$current_item} = {};
     } elsif ($line =~ /^Contains:(.*)$/) {
         $game_data{help}{examine}=1;
         my @contains_items = split /,/, $1;
@@ -124,7 +123,6 @@ sub process_config_line{
         $game_data{items}{$current_item}{description} = $1;
     } elsif ($line =~ /^Person:(.*)$/) {
         $current_person = $1;
-        $game_data{persons}{$current_person} = {};
     } elsif ($line =~ /^DisplayName:(.*)$/){
         $game_data{persons}{$current_person}{displayname}=$1;
     } elsif ($line =~ /^NegativeAskResponse:(.*)$/){
