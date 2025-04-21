@@ -631,10 +631,11 @@ sub handle_deconstruct {
 
                     # Display searched item description
                     if (exists $game_data{items}{$split_item}{description}) {
-                        print "  ".filterAndLoadModifier($game_data{items}{$split_item}{description})."\n";
+                        print " - ".filterAndLoadModifier($game_data{items}{$split_item}{description})."\n";
                     }
+                    print "\n";
                 } else {
-                    print "You already have the $split_item in your inventory.\n";
+                    print "You already have the $split_item in your inventory.\n\n";
                 }
             }
             # Remove split item from inventory
@@ -839,38 +840,43 @@ sub handle_trade {
         my $traded = 0;
 
         # Check for items
-        foreach my $trade (keys %{$game_data{persons}{$actualPerson}{trades}}) {
-            if ($item eq $trade) {
-                my $reward = $game_data{persons}{$actualPerson}{trades}{$item};
+        if(grep {$_ eq $item} @inventory){
+            foreach my $trade (keys %{$game_data{persons}{$actualPerson}{trades}}) {
+                if ($item eq $trade) {
+                    my $reward = $game_data{persons}{$actualPerson}{trades}{$item};
 
-                # Only add if not already in inventory
-                unless (grep { $_ eq $reward } @inventory) {
-                    push @inventory, $reward;
-                    print "$displayName: \"".filterAndLoadModifier($game_data{persons}{$actualPerson}{tradeanswers}{$item})."\"\n";
-                    # Display reward item description
-                    if (exists $game_data{items}{$reward}{description}) {
-                        print "Gives you: ".filterAndLoadModifier($game_data{items}{$reward}{description})."\n";
+                    # Only add if not already in inventory
+                    unless (grep { $_ eq $reward } @inventory) {
+                        push @inventory, $reward;
+                        print "$displayName: \"".filterAndLoadModifier($game_data{persons}{$actualPerson}{tradeanswers}{$item})."\"\n";
+                        # Display reward item description
+                        if (exists $game_data{items}{$reward}{description}) {
+                            print "Gives you: ".filterAndLoadModifier($game_data{items}{$reward}{description})."\n";
+                        }
+                        else{
+                            print "Gives you: $reward.\n";
+                        }
+
+                        # Remove the item from inventory
+                        @inventory = grep { $_ ne $item } @inventory;
+
+                    } else {
+                        print "You already have that item.\n";
                     }
-                    else{
-                        print "Gives you: $reward.\n";
-                    }
-
-                    # Remove the item from inventory
-                    @inventory = grep { $_ ne $item } @inventory;
-
-                } else {
-                    print "You already have that item.\n";
+                    $traded = 1;
                 }
-                $traded = 1;
+            }
+            if (!$traded) {
+                if($game_data{persons}{$actualPerson}{negativetraderesponse}){
+                    print "$displayName: ".'"'.filterAndLoadModifier($game_data{persons}{$actualPerson}{negativetraderesponse}).'"'."\n";
+                }
+                else{
+                    print "$displayName: \"I don't want to trade for $item.\"\n";
+                }
             }
         }
-        if (!$traded) {
-            if($game_data{persons}{$actualPerson}{negativetraderesponse}){
-                print "$displayName: ".'"'.filterAndLoadModifier($game_data{persons}{$actualPerson}{negativetraderesponse}).'"'."\n";
-            }
-            else{
-                print "$displayName: \"I don't want to trade for $item.\"\n";
-            }
+        else{
+            print "You don't have $item in your inventory!\n";
         }
     } else {
         print "There is no such person here.\n";
