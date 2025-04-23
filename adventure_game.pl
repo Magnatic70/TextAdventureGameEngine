@@ -234,6 +234,7 @@ sub loadModifier{
         $alwaysLoad=1;
     }
     if (!(grep { $_ eq $modifierName } @loadedModifiers) || $alwaysLoad){
+        #print "---- Loading modifier $modifierName ----\n";
         load_modifier_array($modifierName);
         if($debug){
             validate_game_data(%game_data);
