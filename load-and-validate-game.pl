@@ -133,8 +133,8 @@ sub process_config_line{
         $game_data{persons}{$current_person}{negativegiveresponse}=$1;
     } elsif ($line =~ /^Keywords:(.*)$/) {
         $game_data{help}{ask}=1;
-        my %keywords_map;
-        my %answers_map;
+        my %keywords_map=$game_data{persons}{$current_person}{keywords};
+        my %answers_map=$game_data{persons}{$current_person}{askanswers};
         foreach my $keyword_tripple (split /;/, $1) {
             if ($keyword_tripple =~ /^(.*?):(.*?):(.*?)$/) {
                 $keywords_map{$1} = $2;
@@ -145,7 +145,7 @@ sub process_config_line{
         $game_data{persons}{$current_person}{askanswers} = \%answers_map;
     } elsif ($line =~ /^Accepts:(.*)$/) {
         $game_data{help}{give}=1;
-        my %gift_responses_map;
+        my %gift_responses_map=$game_data{persons}{$current_person}{accept_responses};
         foreach my $accept_double (split /;/, $1) {
             if ($accept_double =~ /^(.*?):(.*?)$/) {
                 $gift_responses_map{$1} = $2;
@@ -154,8 +154,8 @@ sub process_config_line{
         $game_data{persons}{$current_person}{accept_responses} = \%gift_responses_map;
     } elsif ($line =~ /^Trades:(.*)$/) {
         $game_data{help}{trade}=1;
-        my %trades_map;
-        my %answers_map;
+        my %trades_map=$game_data{persons}{$current_person}{trades};
+        my %answers_map=$game_data{persons}{$current_person}{tradeanswers};
         foreach my $trade_tripple (split /;/, $1) {
             if ($trade_tripple =~ /^(.*?):(.*?):(.*?)$/) {
                 $trades_map{$1} = $2;
