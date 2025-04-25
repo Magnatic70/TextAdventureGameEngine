@@ -63,7 +63,7 @@ sub process_config_line{
     } elsif ($line =~ /^SearchableItems:(.*)$/) {
         $game_data{help}{search}=1;
         my @searchables = split /,/, $1;
-        my %searchable_map;
+        my %searchable_map=$game_data{rooms}{$current_room_id}{searchable_items};
         foreach my $searchable (@searchables) {
             if ($searchable =~ /^(.*):(.*)$/) {
                 push @{$searchable_map{$1}}, $2;  # Allow multiple items per searchable target
