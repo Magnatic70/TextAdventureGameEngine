@@ -143,6 +143,7 @@ DefeatDescription:<message when player wins fight> (mandatory if Enemy is define
 DiedDescription:<message when player loses fight> (mandatory if Enemy is defined)
 RewardItem:<item given for winning a fight> (mandatory if Enemy is defined)
 LoadModifier:<modifier name> (optional)
+RemoveSearchableItems:<target1>;<target2>,... (optional)
 ```
 
 Example:
@@ -152,7 +153,7 @@ Name:Forest Entrance
 Description:You stand at the edge of a dark forest. The trees loom tall and silent.
 Exits:north:clearing,east:path,west:village
 Items:worn map
-SearchableItems:ground:berries
+SearchableItems:ground:berries,tree:leaf
 
 RoomID:clearing
 Name:Small Clearing
@@ -176,6 +177,7 @@ RoomID:forest_entrance
 Items:pine cone
 Persons:recluse
 Exits:north:clearing,east:path,west:village,east:cabin
+RemoveSearchableItems:ground;tree
 
 Item:pine cone
 ItemDescription:A normal pine cone
@@ -203,6 +205,9 @@ Accepts:<player gifted item>:<response>;<player gifted item2>:<response2>;...
 NegativeAskResponse:<response when asking about something they don't know about> (optional, optionally contains {LoadModifier=<modifier name>})
 NegativeTradeResponse:<response for trade they are not interested in> (optional, optionally contains {LoadModifier=<modifier name>})
 NegativeGiveResponse:<response for a gift they are not interested in> (optional, optionally contains {LoadModifier=<modifier name>})
+RemoveKeywords:<topic1>;<topic2>;... (optional)
+RemoveTrades:<player offered item1>;<player offered item2>;... (optional)
+RemoveAccepts:<player gifted item1>;<player gifted item2>;... (optional)
 ```
 
 Example:
@@ -215,6 +220,11 @@ Accepts:pine cone:Thank you for this pine cone. I've unlocked the barn for you.{
 NegativeAskResponse:I don't know, but maybe the butcher does.
 NegativeTradeResonse:Sorry, I'm not interested in that right now. Maybe later.
 NegativeGiftResonse:Sorry, I can't accept your gift.
+
+{Modifier:unlock-barn}
+Person:omh
+RemoveAccepts:pine cone
+{/Modifier}
 ```
 
 ## Inventory

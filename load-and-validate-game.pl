@@ -70,6 +70,15 @@ sub process_config_line{
             }
         }
         $game_data{rooms}{$current_room_id}{searchable_items} = \%searchable_map;
+    } elsif ($line =~ /^RemoveSearchableItems:(.*)$/) {
+        $game_data{help}{search}=1;
+        my %searchable_map=$game_data{rooms}{$current_room_id}{searchable_items};
+        foreach my $searchable (split(';',$1)){
+            if (exists $searchable_map{$searchable}) {
+                delete $searchable_map{$searchable};
+            }
+        }
+        $game_data{rooms}{$current_room_id}{searchable_items} = \%searchable_map;
     } elsif ($line =~ /^Title:(.*)$/) {
         $game_data{title} = $1;
     } elsif ($line =~ /^\{Modifier:(.*)\}$/) {
@@ -143,12 +152,33 @@ sub process_config_line{
         }
         $game_data{persons}{$current_person}{keywords} = \%keywords_map;
         $game_data{persons}{$current_person}{askanswers} = \%answers_map;
+    } elsif ($line =~ /^RemoveKeywords:(.*)$/) {
+        $game_data{help}{ask}=1;
+        my %keywords_map=$game_data{persons}{$current_person}{keywords};
+        my %answers_map=$game_data{persons}{$current_person}{askanswers};
+        foreach my $keyword (split /;/, $1) {
+            if (exists $keywords_map{$keyword}) {
+                delete $keywords_map{$keyword};
+                delete $answers_map{$keyword};
+            }
+        }
+        $game_data{persons}{$current_person}{keywords} = \%keywords_map;
+        $game_data{persons}{$current_person}{askanswers} = \%answers_map;
     } elsif ($line =~ /^Accepts:(.*)$/) {
         $game_data{help}{give}=1;
         my %gift_responses_map=$game_data{persons}{$current_person}{accept_responses};
         foreach my $accept_double (split /;/, $1) {
             if ($accept_double =~ /^(.*?):(.*?)$/) {
                 $gift_responses_map{$1} = $2;
+            }
+        }
+        $game_data{persons}{$current_person}{accept_responses} = \%gift_responses_map;
+    } elsif ($line =~ /^RemoveAccepts:(.*)$/) {
+        $game_data{help}{ask}=1;
+        my %gift_responses_map=$game_data{persons}{$current_person}{accept_responses};
+        foreach my $accept_item (split /;/, $1) {
+            if (exists $gift_responses_map{$accept_item}) {
+                delete $gift_responses_map{$accept_item};
             }
         }
         $game_data{persons}{$current_person}{accept_responses} = \%gift_responses_map;
@@ -160,6 +190,18 @@ sub process_config_line{
             if ($trade_tripple =~ /^(.*?):(.*?):(.*?)$/) {
                 $trades_map{$1} = $2;
                 $answers_map{$1} = $3;
+            }
+        }
+        $game_data{persons}{$current_person}{trades} = \%trades_map;
+        $game_data{persons}{$current_person}{tradeanswers} = \%answers_map;
+    } elsif ($line =~ /^RemoveTrades:(.*)$/) {
+        $game_data{help}{trade}=1;
+        my %trades_map=$game_data{persons}{$current_person}{trades};
+        my %answers_map=$game_data{persons}{$current_person}{tradeanswers};
+        foreach my $trade_item (split /;/, $1) {
+            if (exists $trades_map{$trade_item}) {
+                delete $trades_map{$trade_item};
+                delete $answers_map{$trade_item};
             }
         }
         $game_data{persons}{$current_person}{trades} = \%trades_map;
